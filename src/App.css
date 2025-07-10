@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.modal.fade.show {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.page-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: #333;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.page-btn.active {
+  background-color: #e57c66;
+  color: white;
+  font-weight: bold;
+}
+
+.page-ellipsis {
+  font-size: 18px;
+  color: #999;
+  padding: 0 8px;
+}

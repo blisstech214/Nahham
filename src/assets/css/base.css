@@ -1,0 +1,1027 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.top {
+  margin-top: 100px !important;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden !important;
+}
+body {
+  overflow-x: hidden;
+}
+a {
+  text-decoration: none !important;
+}
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400&display=swap');
+
+/* 1️⃣  import the Inter font somewhere global */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* 2️⃣  target everything inside your MultiSelect */
+.inter-font .rmsc,           /* root container  */
+.inter-font .dropdown-content,
+.inter-font .search,
+.inter-font .option,         /* each option row */
+.inter-font .panel-content,
+.inter-font .chip {          /* selected-value chips */
+  font-family: 'Inter', sans-serif;
+}
+
+
+/* Navbar container */
+.sticky {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+body {
+   font-family: 'Tajawal', sans-serif;
+   background-color: rgb(240, 240, 240);
+}
+
+.main-bg {
+  background-image: url(../images/Ellipse\ 1.png), url(../images/Ellipse\ 2.png);
+  background-position: center, top right; 
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, contain;
+}
+#howItWorks {
+  background-image: url(../images/Ellipse\ 1.png), url(../images/Ellipse\ 2.png);
+  background-position: top center, bottom center; 
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, contain;
+}
+
+.border-layer1 {
+  background-image: url(../images/Ellipse\ 2.png);
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.btn-base {
+  background-color: rgb(255, 98, 55) !important;
+  color: #fff !important;
+  transition: background-position 0.4s ease-in-out, transform 0.2s ease-in-out;
+  /* background-size: 200% 100%; */
+  background-position: left;
+  margin-top: -5px;
+  font-size: 15px;
+  padding: 12px 25px;
+  border-radius: 1rem !important;
+  transition: all 0.3s ease-in-out;
+}
+.btn-base:hover {
+  background-color: rgb(220, 75, 40) !important;
+}
+.btn-op-base {
+  background: linear-gradient(to right, rgb(255, 98, 55) 50%, #fff 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  color: rgb(255, 98, 55);
+  font-size: 15px;
+  padding: 10px;
+  border-radius: 1rem;
+  margin-top: -5px;
+  transition: background-position 0.4s ease-in-out, color 0.4s ease-in-out;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-op-base:hover {
+  background-position: left bottom;
+  color: #fff;
+}
+
+.logo {
+  margin-left: -5rem;
+}
+.p-size {
+  font-size: 1.2rem;
+}
+h1, h2, h3, h4 ,h5, h6, p, a, small, strong, li, button, span, input::placeholder, .form-control {
+  font-family: auto !important;
+}
+/* .h1, h1 {
+  font-size: 2.4rem !important;
+} */
+.nav-link {
+  font-size: 17px;
+  font-weight: 600;
+  color: black;
+  transition: color 0.3s ease;
+}
+.nav-item {
+  margin: 3px 5px 0px 5px;
+}
+
+.nav-link:hover {
+  color: black;
+}
+
+.nav-link.active {
+  color: black !important;
+  font-weight: 600;
+}
+
+/* Header */
+@keyframes floatY {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
+.rocket-animation {
+  animation: floatY 1s ease-in-out infinite;
+}
+.anta-habibi .image-wrapper {
+  position: relative;
+  width: 295px;
+  height: 345px;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.anta-habibi .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+}
+
+/* Gradient overlay at the bottom */
+.anta-habibi .image-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 70%;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, #A7B0C1, #E9826600, transparent);
+  border-radius: 0 0 40px 40px;
+  pointer-events: none;
+}
+.anta-habibi .image-wrapper2::after {
+  background: linear-gradient(to top, #E98266, #E9826600, transparent);
+}
+.anta-habibi .image-wrapper3::after {
+  background: linear-gradient(to top, #6D5F27, #E9826600, transparent);
+}
+.anta-habibi .image-wrapper4::after {
+  background: linear-gradient(to top, #EBC6DE, #E9826600 , transparent);
+}
+
+
+/* Who Are We */
+.border-layer1 {
+  border-bottom: 20px solid rgb(233, 130, 102);
+  padding: 0px;
+}
+.border-layer2 {
+  border-bottom: 20px solid #411318;
+}
+.whoAreWe-img-size {
+  width: 90%;
+}
+
+/* Privacy Policy */
+.privacy-bg {
+  background: linear-gradient(to right, #59f2d7, #44d5f9);
+}
+.heading-policy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+.heading-policy h1 {
+  font-size: 6rem;
+  color: #fff;
+}
+.privacy-heading p {
+  color: #6b6b6b;
+  font-size: 1.3rem;
+}
+
+/* Language Converter */
+.lang-name {
+  font-size: 1rem;
+  margin: 0 5px;
+}
+.lang-item i {
+  margin-right: 7px;
+}
+.collapse.show {
+  max-height: 500px;
+}
+
+.lang-select {
+  width: 50px;
+  margin-left: 50px;
+  margin-right: 10px;
+  color: gray;
+}
+.lang-border {
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  background: #fff;
+}
+
+.lang-item {
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.lang-item.active-lang {
+  background-color: #181515;
+  color: #fff;
+}
+
+.design img{
+  position: absolute;
+  top: 0px;
+  right: 1px;
+}
+.design-i img{
+  position: absolute;
+  top: 0px;
+  right: 13px;
+}
+.social-icons li{
+  padding: 10px;
+}
+.social-icons li img {
+  width: 30px;
+}
+
+/* Talents */
+.talents .person1{
+  position: absolute;
+  right: 160px;
+  top: 0px;
+}
+.talents .person2{
+  position: absolute;
+  right: 0px;
+  top: 135px;
+}
+.talents .person3{
+  position: absolute;
+  right: 160px;
+  top: 270px;
+}
+.tabs-size {
+  padding: 12px 25px !important;
+}
+.talent-name-size {
+  font-size: 1.4rem;
+}
+
+/* Decoration Strip */
+.layout-wrapper {
+  position: relative;
+}
+
+.left-strip {
+  position: fixed;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+  flex-shrink: 0;
+  margin-left: 4%;
+}
+
+.strip-icon {
+  width: 24px;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.footer-img img{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+
+.container.footer-main {
+  --bs-gutter-x: 0;
+}
+
+/* Partner */
+.heading-policy {
+  margin-top: 100px;
+}
+.privacy-bg {
+  background-image: linear-gradient(to right, #59f2d7, #44d5f9);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+}
+
+.partner-txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.partner-heading h1 {
+  font-weight: 700;
+}
+.partner-heading span {
+  background-image: linear-gradient(to right, #59f2d7, #44d5f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.form-control {
+  border-radius: 10px;
+  height: 50px;
+  padding-left: 20px;
+  color: gray;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+  appearance: none !important;
+}
+
+.btn-success {
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.yes-btn {
+  margin-left: 10px !important;
+}
+.yes-btn,
+.no-btn {
+  accent-color: #34b35c;
+}
+.attach-inp {
+  width: 30%;
+}
+.regBtn {
+  padding: 15px 0px;
+  background: #34b35c !important;
+  border-radius: 30px;
+  color: #ffff !important;
+}
+
+.attachImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  margin-bottom: 50px;
+  height: auto;
+  width: 50%;
+  border: 1.5008px solid rgba(128, 128, 128, 0.163);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+.docImg {
+  width: 40%;
+}
+
+/* Dropzone CSS */
+.dropzone {
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.previews {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.preview-item {
+  position: relative;
+  margin: 10px;
+}
+
+.preview-image {
+  width: 100%;
+  height: auto;
+  /* object-fit: cover; */
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.remove-button {
+  position: absolute;
+    top: 0px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgb(255, 98, 55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    background: white;
+    color: rgb(255, 98, 55);
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif !important;
+
+}
+.NaNpxove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.search-card {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+}
+.search-card > a {
+  color: #333;
+  padding: 5px;
+}
+
+.search-card > a:hover {
+  background-color: #f5f8fa;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background-color: white !important;
+  }
+  .banner-txt {
+    margin-left: 5px;
+  }
+  .social-icons {
+    display: block !important;
+    margin-left: 50px;
+  }
+  .strip-icon {
+    width: 13px;
+  }
+  .break {
+    display: none;
+  }
+  .left-strip {
+    margin-left: -2%;
+  }
+  .res-size {
+    font-size: 50px !important;
+    font-family: auto !important;
+  }
+  .whoAreWe-img-size {
+    width: 90% !important;
+  }
+  .rocket-animation,
+  .image-wrapper3,
+  .image-wrapper4,
+  .talent3,
+  .talent4,
+  .line,
+  .person1,
+  .person2,
+  .person3 {
+    display: none;
+  }
+  .image-wrapper2 {
+    margin-left: 5px !important;
+    margin-right: 0px !important;
+  }
+  .p-size {
+    font-size: 20px;
+  }
+  .faq {
+    width: 92% !important;
+    margin-left: 15px !important;
+  }
+  .anta-habibi .image-wrapper {
+    width: 165px;
+    height: 205px;
+  }
+  .design-i img {
+    width: 40%;
+    right: 1px;
+  }
+  .border-layer1 {
+    margin: 0 17px;
+    width: 91.5% !important;
+  }
+  .talent1 img,
+  .talent2 img {
+    width: 85% !important;
+    height: 85% !important;
+  }
+  .howItWorks {
+    background: radial-gradient(circle, rgb(240, 240, 240), rgb(240, 240, 240), rgb(240, 240, 240)) !important;
+  }
+  .logo {
+    margin-left: 0px;
+    width: 85%;
+  }
+  .faq {
+    height: auto !important;
+    padding-bottom: 20px;
+  }
+  .footer-main {
+    height: 580px !important;
+  }
+  .footer-logo {
+    width: 70px;
+  }
+  .footer-list {
+    flex-direction: column;
+  }
+  .footer-list .second-list{
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  .footer-bottom .container {
+    flex-direction: column;
+  }
+  .classes {
+    display: flex;
+  }
+  .footer-nav {
+    margin-left: 50px;
+  }
+  .footer-bottom .copyright {
+    font-weight: 900;
+  }
+  #howItWorks {
+    background-image: none;
+  }
+  .tabs-size {
+    padding: 10px 12px !important;
+  }
+  .footer-main,
+  .want-hire,
+  .faq {
+    margin: 0 10px;
+  }
+  .footer-img img {
+    width: 100%;
+  }
+  .footer-res {
+    margin-left: 70px;
+    margin-top: -70px;
+  }
+  .social-icons-main {
+    margin-top: -60px;
+  }
+  .main-faq {
+    padding: 25px !important;
+  }
+  .faq-heading {
+    font-size: 3rem;
+  }
+  .left-space {
+    padding-left: 20px;
+  }
+  /* About Us*/
+  .vision-box {
+    padding: 25px !important;
+    margin: 25px !important;
+  }
+  .about-us-content {
+    padding: 25px !important;
+  }
+  .no-longer {
+    display: none;
+  }
+  .talents-found {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+  .alignCenter,
+  .chooseUs {
+    text-align: center !important;
+  }
+  .ticks {
+    margin-left: 5px;
+  }
+  .meetOurTeam {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .team-container .card-person:nth-child(n+3) {
+    display: none !important;
+  }
+  .team-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 1rem;
+  }
+  .talent-name-size {
+    font-size: 0.9rem;
+  }
+}
+
+/* About Us */
+/* Talents */
+.hireTalents .person1{
+  position: absolute;
+  left: 160px;
+  top: 0px;
+}
+.hireTalents .person2{
+  position: absolute;
+  left: 0px;
+  top: 135px;
+}
+.hireTalents .person3{
+  position: absolute;
+  left: 160px;
+  top: 270px;
+}
+
+/* Banner */
+.arrows .arrow1,
+.arrows .arrow2 {
+  background-color: white;
+  width: 28px;
+  height: 28px;
+  padding: 7px;
+} 
+.ticks .tick {
+  width: 25px;
+  height: 25px;
+}
+.talents-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.talents-found h2 {
+  font-weight: bold;
+}
+.card-person {
+  background: linear-gradient(to top, rgb(254, 164, 134), transparent);
+}
+
+/* Register */
+.company-border {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.company img {
+  background: #EBE6D8;
+  padding: 10px;
+  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+}
+.talent img {
+  background: #F5EBED;
+  padding: 10px;
+  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+}
+.btn-bg,
+.btn-bg:hover {
+  background: #522A30 !important;
+}
+.doc1 {
+  width: 30%;
+  margin-right: 10px;
+  border: 3px dotted rgba(0, 0, 0, 0.1);
+}
+.inp-login input {
+  padding: 10px 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 300px;
+}
+.inp-login input:focus {
+  outline: none;
+  border: 1px solid rgb(255, 98, 55) !important;
+  box-shadow: 0 0 5px 2px rgba(255, 98, 55, 0.4) !important;
+}
+.inp-login:focus {
+  outline: none;
+  border: 1px solid rgb(255, 98, 55) !important;
+  box-shadow: 0 0 5px 2px rgba(255, 98, 55, 0.4) !important;
+}
+
+.inp-login label {
+  font-size: 12px;
+}
+.login-btn button {
+  padding: 10px 30px;
+}
+.login-left {
+  margin-right: -12px;
+}
+.login-left img {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.login-right {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* Add to your stylesheet */
+.sidebar-link {
+  transition: all 0.3s ease;
+  padding: 8px 0;
+}
+
+.sidebar-link:hover {
+  color: #fff !important;
+  padding-left: 5px;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(65, 19, 24, 0.05);
+}
+
+.text-size {
+  font-size: 13px;
+}
+.inp-bg {
+  background: rgba(250, 250, 250, 1);
+}
+.sofia-font {
+  font-family: 'Sofia Sans', sans-serif !important;
+}
+.inter-font {
+  font-family: 'Inter', sans-serif !important;
+}
+.inter-font::placeholder {
+  font-family: 'Inter', sans-serif !important;
+}
+.sofia-font::placeholder {
+  font-family: 'Sofia Sans', sans-serif !important;
+}
+.attachImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    margin-bottom: 50px;
+    height: auto;
+    width: 50%;
+    border: 3px dotted rgba(128, 128, 128, 0.163);
+    box-shadow: none;
+    background: rgba(252, 252, 252, 1);
+}
+.inp-plc::placeholder {
+  color: #171717;
+}
+
+/* User Dashboard */
+.card-heading {
+  font-size: 16px !important;
+}
+.t-heading {
+  color: rgba(149, 149, 149, 1) !important;
+}
+
+/* Pagination */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.pagination-list {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.page-item {
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+  padding: 0.5rem 0.8rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.page-item.active {
+  background-color: #E26A52;
+  color: white;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-item.arrow {
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.view-all-btn {
+  background-color: #FF6237;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.7rem 1.5rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background-color: #e46618;
+}
+/* Footer */
+.social-icons-dashboard img{
+  width: 25px;
+  margin-right: 10px;
+}
+
+/* Sidebar */
+.active-nav-item {
+  position: relative;
+}
+
+.active-nav-item .icon-wrapper {
+  color: rgba(231, 142, 123, 1);
+}
+.active-nav-item .talent-icon-wrapper {
+  color: white;
+}
+
+.active-nav-item span {
+  font-weight: 500 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* Company Profile */
+.profile-details-dashboard h6 {
+  color: rgba(89, 89, 89, 1);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px;
+}
+.profile-details-dashboard p {
+  color: rgba(147, 147, 147, 1);
+  font-family: 'Inter', sans-serif !important;
+  font-size: 14px;
+}
+
+/* Dashboard */
+.dashboard-btn {
+  border-radius: 7px !important;
+}
+
+/* Talent */
+.tick-dashboard {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.clear-btn {
+  border: 1px solid rgba(82, 42, 48, 1) !important;
+}
+
+/* Recruitment */
+.recruitment-table {
+  color: rgba(154, 154, 154, 1);
+}
+
+@media (max-width: 768px) {
+  .talent-reg-form {
+    min-width: 200px !important;
+  }
+  .agree-font-size {
+    font-size: 11px;
+  }
+  .main-registration-box {
+    width: 352px !important;
+    height: 320px !important;
+  }
+  .company img,
+  .talent img {
+    width: 50px;
+    height: 50px;
+  }
+  .company-font,
+  .talent-font {
+    font-size: 18px;
+  }
+  .company-font-para,
+  .talent-font-para,
+  .arrow-top-right {
+    font-size: 13px;
+  }
+  .btns-for-signUp-SignIn {
+    padding: 18px 15px !important;
+  }
+  .btns-for-signUp-SignIn,
+  .company-registration-form-para {
+    font-size: 10px;
+  }
+  .left-strip {
+    right: -7.75px !important;
+  }
+  .talent-login {
+    width: 352px !important;
+    height: auto !important;
+  }
+  .talent-login-heading {
+    font-size: 23px !important;
+  }
+  .num-circle {
+    width: 25px !important;
+    height: 25px !important;
+    font-size: 12px !important;
+  }
+  .fs-count {
+    font-size: 10px;
+  }
+  .company-registration-form {
+    margin-top: 140px;
+  }
+  .welcome-txt-company-registration-form {
+    font-size: 16px;
+  }
+  .doc-font {
+    font-size: 13px;
+  }
+  .upload-doc-coontainer {
+    width: 352px !important;
+  }
+}
+/* In your CSS or global style file */
+.content::-webkit-scrollbar {
+  display: none;
+}
+.content {
+  padding-bottom: 0px !important;
+}
+
+/* Drop Zone Talent Profile*/
+.plus-img {
+  width: 60px;
+  height: 60px;
+  background: #F1F1F1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plus-img img{
+  width: 19px;
+  height: 19px;
+}
+
+/* Edit Profile */
+.custom-input{
+  color: #909090;
+}
+.custom-input::placeholder {
+  color: #909090;
+}
+.custom-input:focus {
+  outline: none;
+  border: 1px solid rgb(255, 98, 55) !important;
+  box-shadow: 0 0 5px 2px rgba(255, 98, 55, 0.4) !important;
+}
