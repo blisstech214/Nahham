@@ -46,3 +46,10 @@
   color: #999;
   padding: 0 8px;
 }
+
+.custom-input.form-control:focus {
+  /* border-color: #f30428 !important; Your custom color */
+  border-color: rgb(255, 131, 96) !important; /* Your custom color */
+  box-shadow: none !important; /* Remove default blue glow (optional) */
+  box-shadow: 0 0 5px 2px rgba(255, 98, 55, 0.2) !important;
+}

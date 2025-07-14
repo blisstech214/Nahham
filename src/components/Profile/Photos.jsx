@@ -80,8 +80,9 @@ const Photos = () => {
       pages.push(
         <li
           key={i}
-          className={`page-item inter-font ${currentPage === i ? "active" : ""
-            }`}
+          className={`page-item inter-font ${
+            currentPage === i ? "active" : ""
+          }`}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -148,7 +149,12 @@ const Photos = () => {
                   alt={m.name || "photo"}
                   crossOrigin="anonymous"
                   className="rounded-3 mb-2"
-                  style={{ width: 220, height: 200, objectFit: "cover", cursor: "pointer" }}
+                  style={{
+                    width: 220,
+                    height: 200,
+                    objectFit: "cover",
+                    cursor: "pointer",
+                  }}
                   onClick={() => openModal(index)}
                   onError={(e) => (e.currentTarget.src = "/placeholder.png")}
                 />
@@ -197,9 +203,14 @@ const Photos = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            style={{ position: "relative", maxWidth: "90%", maxHeight: "90%" }}
+            style={{
+              position: "relative",
+              maxWidth: "90%",
+              maxHeight: "90%",
+              height: "70%",
+              width: "60%",
+            }}
           >
-
             {/* Close Icon */}
             <button
               onClick={closeModal}
@@ -226,7 +237,12 @@ const Photos = () => {
             <img
               src={mediaFiles[selectedImageIndex]?.file || "/placeholder.png"}
               alt="Selected"
-              style={{ maxHeight: "80vh", maxWidth: "100%", borderRadius: "10px" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                borderRadius: "10px",
+              }}
               onError={(e) => (e.currentTarget.src = "/placeholder.png")}
             />
 
@@ -272,13 +288,8 @@ const Photos = () => {
           </div>
         </div>
       )}
-
     </div>
-
   );
-
-
-
 };
 
 export default Photos;

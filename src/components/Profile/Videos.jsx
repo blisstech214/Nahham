@@ -58,10 +58,20 @@ const Video = () => {
 
     if (startPage > 1) {
       pages.push(
-        <li key={1} className="page-item inter-font" onClick={() => handlePageChange(1)}>1</li>
+        <li
+          key={1}
+          className="page-item inter-font"
+          onClick={() => handlePageChange(1)}
+        >
+          1
+        </li>
       );
       if (startPage > 2) {
-        pages.push(<li key="ellipsis-start" className="page-item inter-font">...</li>);
+        pages.push(
+          <li key="ellipsis-start" className="page-item inter-font">
+            ...
+          </li>
+        );
       }
     }
 
@@ -69,7 +79,9 @@ const Video = () => {
       pages.push(
         <li
           key={i}
-          className={`page-item inter-font ${currentPage === i ? "active" : ""}`}
+          className={`page-item inter-font ${
+            currentPage === i ? "active" : ""
+          }`}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -79,10 +91,18 @@ const Video = () => {
 
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
-        pages.push(<li key="ellipsis-end" className="page-item inter-font">...</li>);
+        pages.push(
+          <li key="ellipsis-end" className="page-item inter-font">
+            ...
+          </li>
+        );
       }
       pages.push(
-        <li key={totalPages} className="page-item inter-font" onClick={() => handlePageChange(totalPages)}>
+        <li
+          key={totalPages}
+          className="page-item inter-font"
+          onClick={() => handlePageChange(totalPages)}
+        >
           {totalPages}
         </li>
       );
@@ -132,7 +152,13 @@ const Video = () => {
             {mediaFiles.length === 0 && <p>No videos found.</p>}
             {mediaFiles.map((m, index) => (
               <div key={m._id} className="col-md-4 position-relative">
-                <div style={{ position: "relative", width: "100%", maxWidth: "100%" }}>
+                <div
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    maxWidth: "100%",
+                  }}
+                >
                   <video
                     id={`video-${m._id}`}
                     src={m.file}
@@ -213,9 +239,14 @@ const Video = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            style={{ position: "relative", maxWidth: "90%", maxHeight: "90%" }}
+            style={{
+              position: "relative",
+              maxWidth: "90%",
+              maxHeight: "90%",
+              height: "70%",
+              width: "60%",
+            }}
           >
-
             {/* Close Icon */}
             <button
               onClick={closeModal}
@@ -249,6 +280,8 @@ const Video = () => {
                 maxHeight: "80vh",
                 borderRadius: "12px",
                 backgroundColor: "#000",
+                width: "100%",
+                height: "100%",
               }}
               onError={(e) => (e.currentTarget.src = "/placeholder.png")}
             />

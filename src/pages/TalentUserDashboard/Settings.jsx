@@ -14,6 +14,9 @@ import Notification from "../../components/Settings/Notification";
 import Security from "../../components/Settings/Security";
 import PaymentMethod from "../../components/Settings/PaymentMethod";
 import DeleteAccount from "../../components/Settings/DeleteAccount";
+import TermsAndConditions from "../../components/Settings/TermsAndConditions";
+import Support from "../../components/Settings/Support";
+import PrivacyAndPolicy from "../../components/Settings/PrivacyAndPolicy";
 
 const Settings = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -52,6 +55,9 @@ const Settings = () => {
                 { id: "notification", label: "Notification" },
                 // { id: "security", label: "Security" },
                 { id: "paymentMethod", label: "Payment Method" },
+                { id: "privacyAndPolicy", label: "Privacy and Policy" },
+                { id: "termsAndConditions", label: "Terms & Conditions" },
+                { id: "support", label: "Support" },
                 // { id: "deleteAccount", label: "Delete Account" },
               ].map((tab) => (
                 <div
@@ -66,7 +72,7 @@ const Settings = () => {
                     width: "fit-content",
                   }}
                 >
-                    {tab.label}
+                  {tab.label}
                 </div>
               ))}
             </div>
@@ -79,6 +85,9 @@ const Settings = () => {
               {activeTab === "notification" && <Notification />}
               {/* {activeTab === "security" && <Security />} */}
               {activeTab === "paymentMethod" && <PaymentMethod />}
+              {activeTab === "privacyAndPolicy" && <PrivacyAndPolicy />}
+              {activeTab === "termsAndConditions" && <TermsAndConditions />}
+              {activeTab === "support" && <Support />}
               {/* {activeTab === "deleteAccount" && <DeleteAccount />} */}
             </div>
           </div>

@@ -760,7 +760,7 @@ const Earnings = () => {
 
   return (
     <div className="main-bg d-flex flex-column" style={{ height: "100vh" }}>
-      <div className="flex-grow-1 px-5 inp-login">
+      <div className="px-5 inp-login">
         <Navbar />
       </div>
 

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
-import { BsCalendar2Check } from "react-icons/bs";
+import { BsCalendar2Check, BsInfoCircleFill } from "react-icons/bs";
 import flag from "../../assets/images/UAE flag.jpeg";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
@@ -10,94 +10,232 @@ import countries from "world-countries";
 import { MultiSelect } from "react-multi-select-component";
 import ImageUpload from "../../components/ImageUpload";
 import { useDropzone } from "react-dropzone";
-import plus from "../../assets/images/plus.png"
+import plus from "../../assets/images/plus.png";
+import { Plus } from "lucide-react";
 
 // Placeholder ImageDropzone1 component
 const ImageDropzone1 = ({ onUpload }) => {
+  const [images, setImages] = useState([]);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { "image/*": [".jpeg", ".jpg", ".png"] },
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        console.log("ImageDropzone1: File uploaded", acceptedFiles[0]);
-        onUpload(acceptedFiles[0]);
-      } else {
-        console.log("ImageDropzone1: No valid file selected");
-      }
+      const newImages = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      );
+
+      const updatedImages = [...images, ...newImages];
+
+      setImages(updatedImages);
+      onUpload(updatedImages); // Pass updated images to parent
     },
-    maxFiles: 1,
+    maxFiles: 10, // Set your limit here
   });
 
+  // Cleanup memory (prevent memory leaks)
+  useEffect(() => {
+    return () => {
+      images.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [images]);
+
+  const removeImage = (file) => {
+    const updated = images.filter((img) => img !== file);
+    setImages(updated);
+    onUpload(updated); // Update parent with new list
+  };
+
   return (
-    <div
-      {...getRootProps()}
-      className={`border p-3 text-center rounded-2 ${
-        isDragActive ? "bg-light" : ""
-      }`}
-    >
-      <input {...getInputProps()} />
-      <img src={plus} style={{ padding: "20px", background: "#F1F1F1", borderRadius: "50%", width: "60px" }} />
-      <p className="inter-font mt-3">Upload Photos</p>
-      <button
-        className="btn text-white inter-font"
-        style={{
-          background: "#522A30",
-          borderRadius: "15px",
-          height: "44px",
-          width: "107px",
-          fontSize: "12px",
-        }}
+    <div>
+      {/* Dropzone Box */}
+      <div
+        {...getRootProps()}
+        className={`border p-3 text-center rounded-2 ${
+          isDragActive ? "bg-light" : ""
+        }`}
+        style={{ cursor: "pointer" }}
       >
-        Browse Files
-      </button>
+        <input {...getInputProps()} />
+        <img
+          src={plus}
+          style={{
+            padding: "20px",
+            background: "#F1F1F1",
+            borderRadius: "50%",
+            width: "60px",
+          }}
+        />
+        <p className="inter-font mt-3">Upload Photos</p>
+        <button
+          className="btn text-white inter-font"
+          style={{
+            background: "#522A30",
+            borderRadius: "15px",
+            height: "44px",
+            width: "107px",
+            fontSize: "12px",
+          }}
+        >
+          Browse Files
+        </button>
+      </div>
+
+      {/* Image Previews */}
+      <div className="d-flex flex-wrap mt-3 gap-2">
+        {images.map((file, index) => (
+          <div
+            key={index}
+            className="position-relative border rounded"
+            style={{
+              width: "80px",
+              height: "80px",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={file.preview}
+              alt="preview"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+            {/* Remove Button */}
+            <button
+              type="button"
+              onClick={() => removeImage(file)}
+              className="btn btn-sm btn-danger rounded-circle position-absolute"
+              style={{
+                top: "5px",
+                right: "5px",
+                width: "20px",
+                height: "20px",
+                padding: "0",
+                fontSize: "12px",
+                lineHeight: "18px",
+              }}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-const ImageDropzone2 = ({ onUpload }) => {
+const VideoDropzone = ({ onUpload }) => {
+  const [videos, setVideos] = useState([]);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { "video/*": [".mp4", ".mov"] },
+    maxFiles: 10, // Adjust the limit as needed
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles.length > 0) {
-        console.log("ImageDropzone2: File uploaded", acceptedFiles[0]); // Debug log
-        onUpload(acceptedFiles[0]);
-      } else {
-        console.log("ImageDropzone2: No valid file selected");
-      }
+      const newVideos = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      );
+      const updatedVideos = [...videos, ...newVideos];
+      setVideos(updatedVideos);
+      onUpload(updatedVideos);
     },
-    maxFiles: 1,
   });
 
-  return (
-    <div
-      {...getRootProps()}
-      className={`border p-3 text-center rounded-2 ${
-        isDragActive ? "bg-light" : ""
-      }`}
-    >
-      <input {...getInputProps()} />
-      <img
-        src={plus}
-        style={{
-          padding: "20px",
-          background: "#F1F1F1",
-          borderRadius: "50%",
-          width: "60px",
-        }}
-      />
+  // Cleanup previews on unmount
+  useEffect(() => {
+    return () => {
+      videos.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [videos]);
 
-      <p className="inter-font mt-3">Upload Videos</p>
-      <button
-        className="btn text-white inter-font"
-        style={{
-          background: "#522A30",
-          borderRadius: "15px",
-          height: "44px",
-          width: "107px",
-          fontSize: "12px",
-        }}
+  const removeVideo = (fileToRemove) => {
+    const updated = videos.filter((file) => file !== fileToRemove);
+    setVideos(updated);
+    onUpload(updated);
+    URL.revokeObjectURL(fileToRemove.preview);
+  };
+
+  return (
+    <div>
+      {/* Dropzone Box */}
+      <div
+        {...getRootProps()}
+        className={`border p-3 text-center rounded-2 ${
+          isDragActive ? "bg-light" : ""
+        }`}
+        style={{ cursor: "pointer" }}
       >
-        Browse Files
-      </button>
+        <input {...getInputProps()} />
+        <img
+          src={plus}
+          style={{
+            padding: "20px",
+            background: "#F1F1F1",
+            borderRadius: "50%",
+            width: "60px",
+          }}
+        />
+        <p className="inter-font mt-3">Upload Videos</p>
+        <button
+          className="btn text-white inter-font"
+          style={{
+            background: "#522A30",
+            borderRadius: "15px",
+            height: "44px",
+            width: "107px",
+            fontSize: "12px",
+          }}
+        >
+          Browse Files
+        </button>
+      </div>
+
+      {/* Video Previews */}
+      <div className="d-flex flex-wrap mt-3 gap-2">
+        {videos.map((file, index) => (
+          <div
+            key={index}
+            className="position-relative border rounded"
+            style={{
+              width: "150px",
+              height: "100px",
+              overflow: "hidden",
+            }}
+          >
+            <video
+              src={file.preview}
+              controls
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+
+            {/* Remove Button */}
+            <button
+              type="button"
+              onClick={() => removeVideo(file)}
+              className="btn btn-danger btn-sm rounded-circle position-absolute"
+              style={{
+                top: "5px",
+                right: "5px",
+                width: "24px",
+                height: "24px",
+                padding: "0",
+                fontSize: "14px",
+                lineHeight: "20px",
+              }}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -288,6 +426,21 @@ const EditProfile = ({ onBack }) => {
     }
   };
 
+  const [imageUrl, setImageUrl] = useState("");
+
+  const fileInputRef = useRef();
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      handleImageUpload(e.target.files[0]);
+      setImageUrl(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
   return (
     <div
       className="container p-5 bg-white rounded-4 shadow mt-4"
@@ -320,18 +473,67 @@ const EditProfile = ({ onBack }) => {
       <Row className="mb-4">
         <Col md={2} className="text-center position-relative">
           <div
-            className="rounded-circle position-relative"
-            style={{
-              width: "90px",
-              height: "90px",
-              overflow: "hidden",
-              margin: "0 auto",
-              backgroundColor: "#000",
-            }}
+            className="position-relative text-center mb-3"
+            style={{ width: "90px", margin: "0 auto" }}
           >
-            <ImageUpload onUpload={handleImageUpload} />
+            {/* Profile Image Circle */}
+            <div
+              className="rounded-circle bg-dark d-flex align-items-center justify-content-center border"
+              style={{
+                width: "90px",
+                height: "90px",
+                overflow: "hidden",
+              }}
+            >
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt="Profile"
+                  className="w-100 h-100"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <i
+                  className="bi bi-person-circle text-white"
+                  style={{ fontSize: "50px" }}
+                ></i>
+              )}
+            </div>
+
+            {/* + Icon Button OUTSIDE the circle */}
+            <button
+              type="button"
+              className="btn btn-success btn-sm rounded-circle position-absolute"
+              style={{
+                top: "0px",
+                right: "0px",
+                width: "30px",
+                height: "30px",
+                padding: "0",
+                fontSize: "14px",
+                lineHeight: "24px",
+                zIndex: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+              onClick={handleFileClick}
+            >
+              <Plus />
+            </button>
+
+            {/* Hidden File Input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+
+            {/* Error message */}
             {errors.picture && (
-              <div className="text-danger small">{errors.picture}</div>
+              <div className="text-danger small mt-1">{errors.picture}</div>
             )}
           </div>
         </Col>
@@ -410,15 +612,33 @@ const EditProfile = ({ onBack }) => {
       <Row className="mb-4">
         <Col md={12} className="inp-login">
           <label style={{ fontSize: "16px" }}>Bio</label>
-          <Form.Control
-            as="textarea"
-            rows={6}
-            name="about"
-            value={formData.about}
-            onChange={handleTextChange}
-            isInvalid={!!errors.about}
-            className="rounded-2 inter-font custom-input"
-          />
+
+          <div style={{ position: "relative" }}>
+            <Form.Control
+              as="textarea"
+              rows={20}
+              style={{ height: "100px" }}
+              name="about"
+              value={formData.about}
+              onChange={(e) => {
+                const value = e.target.value.slice(0, 400); // Limit to 400 chars
+                setFormData({ ...formData, about: value });
+              }}
+              isInvalid={!!errors.about}
+              className="rounded-2 inter-font custom-input"
+            />
+            <span
+              style={{
+                position: "absolute",
+                bottom: "8px",
+                right: "12px",
+                fontSize: "15px",
+                color: "#6c757d", // Bootstrap muted color
+              }}
+            >
+              {formData.about.length}/400
+            </span>
+          </div>
           <Form.Control.Feedback type="invalid">
             {errors.about}
           </Form.Control.Feedback>
@@ -442,27 +662,6 @@ const EditProfile = ({ onBack }) => {
           </Form.Control.Feedback>
         </Col>
 
-        <Col md={6} className="mt-3">
-          <Form.Group>
-            <Form.Label className="text-size">Skills</Form.Label>
-            <MultiSelect
-              className="inter-font"
-              options={subCategoryOptions}
-              value={subCategoryOptions.filter((option) =>
-                formData.subCategory.includes(option.value)
-              )}
-              onChange={(selected) =>
-                handleSelectChange("subCategory", selected || [])
-              }
-              labelledBy="Select Skills"
-              isMulti
-            />
-            {errors.subCategory && (
-              <div className="text-danger small mt-1">{errors.subCategory}</div>
-            )}
-          </Form.Group>
-        </Col>
-
         <Col md={6}>
           <label>Education</label>
           <Form.Control
@@ -478,9 +677,31 @@ const EditProfile = ({ onBack }) => {
             {errors.education}
           </Form.Control.Feedback>
         </Col>
+
+        <Col md={6} className="mt-3">
+          <Form.Group>
+            <Form.Label className="text-size">Skills</Form.Label>
+            <MultiSelect
+              className="inter-font"
+              options={subCategoryOptions}
+              value={subCategoryOptions.filter((option) =>
+                formData.subCategory.includes(option.value)
+              )}
+              onChange={(selected) =>
+                handleSelectChange("subCategory", selected || [])
+              }
+              labelledBy="Select Skills"
+              isMulti
+              ClearSelectedIcon={false}
+            />
+            {errors.subCategory && (
+              <div className="text-danger small mt-1">{errors.subCategory}</div>
+            )}
+          </Form.Group>
+        </Col>
       </Row>
 
-      <h5 className="mb-3 inter-font">My Jobs</h5>
+      <h5 className="my-3 inter-font">My Jobs</h5>
       <Row className="mb-5">
         <Col md={6}>
           <label>Address</label>
@@ -535,8 +756,19 @@ const EditProfile = ({ onBack }) => {
         <Col md={6}>
           <h4 className="inter-font" style={{ fontSize: "18px" }}>
             Add Photo
+            <span
+              className="mx-2"
+              title="Please upload jpej, jpg, png, webp files"
+            >
+              <BsInfoCircleFill />
+            </span>
           </h4>
-          <ImageDropzone1 onUpload={handlePhotoUpload} />
+          <ImageDropzone1
+            onUpload={(files) => {
+              console.log("Uploaded images:", files);
+              handlePhotoUpload(files);
+            }}
+          />
           {errors.photos && (
             <div className="text-danger small mt-1">{errors.photos}</div>
           )}
@@ -544,8 +776,20 @@ const EditProfile = ({ onBack }) => {
         <Col md={6}>
           <h4 className="inter-font" style={{ fontSize: "18px" }}>
             Upload Video
+            <span
+              className="mx-2"
+              title="Please upload .mp4, .mov, .webm, .mkv, .m4v. files"
+            >
+              <BsInfoCircleFill />
+            </span>
           </h4>
-          <ImageDropzone2 onUpload={handleVideoUpload} />
+          {/* <ImageDropzone2 onUpload={handleVideoUpload} /> */}
+          <VideoDropzone
+            onUpload={(files) => {
+              console.log("Uploaded videos:", files);
+              handleVideoUpload(files);
+            }}
+          />
           {errors.videos && (
             <div className="text-danger small mt-1">{errors.videos}</div>
           )}

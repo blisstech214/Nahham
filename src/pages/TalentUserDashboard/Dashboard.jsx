@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import { CiSearch } from "react-icons/ci";
 
@@ -13,13 +13,13 @@ import { Table } from "react-bootstrap";
 
 import dollar from "../../assets/images/dollar.png";
 
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
 
-import talentUser from "../../assets/images/talent-user.png"
-import allTimeHires from "../../assets/images/all-time-hires.png"
-import earnings from "../../assets/images/earnings.png"
+import talentUser from "../../assets/images/talent-user.png";
+import allTimeHires from "../../assets/images/all-time-hires.png";
+import earnings from "../../assets/images/earnings.png";
 
-import DashboardFooter from './DashboardFooter';
+import DashboardFooter from "./DashboardFooter";
 
 import fb from "../../assets/images/fb.png";
 import x from "../../assets/images/x.png";
@@ -100,9 +100,7 @@ const Dashboard = () => {
         {/* Stats Cards */}
         <div className="row my-5">
           <div className="col-md-4">
-            <h4 className="inter-font card-heading mb-4">
-              Views
-            </h4>
+            <h4 className="inter-font card-heading mb-4">Views</h4>
             <div
               className="card border-0 shadow-sm p-3 rounded-3"
               style={{
@@ -298,82 +296,91 @@ const Dashboard = () => {
             className="bg-white rounded-3 p-4 shadow"
             style={{ height: "auto", overflow: "auto" }}
           >
-            <table className="table align-middle mb-0">
-              <thead>
-                <tr>
-                  <th scope="col">Employe Company</th>
-                  <th scope="col">Job Name</th>
-                  <th scope="col">Start Date</th>
-                  <th scope="col">End Date</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Project</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {hireProjects.map((item, index) => (
-                  <tr key={index}>
-                    <td>
-                      <div className="d-flex align-items-center gap-3">
-                        <img
-                          src={item.logo}
-                          alt="logo"
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50%",
-                            objectFit: "cover",
-                          }}
-                        />
-                        <span
-                          className="inter-font"
-                          style={{ color: "#959595" }}
-                        >
-                          {item.company}
-                        </span>
-                      </div>
-                    </td>
-                    <td style={{ color: "#959595" }}>{item.job}</td>
-                    <td style={{ color: "#959595" }}>{item.start}</td>
-                    <td style={{ color: "#959595" }}>{item.end}</td>
-                    <td
-                      style={{ color: "rgba(54, 190, 92, 1)", fontWeight: 500 }}
-                    >
-                      {item.status}
-                    </td>
-                    <td style={{ color: "#959595" }}>{item.project}</td>
-                    <td style={{ color: "#959595" }}>{item.amount}</td>
+            {hireProjects?.length !== 0 ? (
+              <table className="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Employe Company</th>
+                    <th scope="col">Job Name</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Project</th>
+                    <th scope="col">Amount</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {hireProjects.map((item, index) => (
+                    <tr key={index}>
+                      <td>
+                        <div className="d-flex align-items-center gap-3">
+                          <img
+                            src={item.logo}
+                            alt="logo"
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "50%",
+                              objectFit: "cover",
+                            }}
+                          />
+                          <span
+                            className="inter-font"
+                            style={{ color: "#959595" }}
+                          >
+                            {item.company}
+                          </span>
+                        </div>
+                      </td>
+                      <td style={{ color: "#959595" }}>{item.job}</td>
+                      <td style={{ color: "#959595" }}>{item.start}</td>
+                      <td style={{ color: "#959595" }}>{item.end}</td>
+                      <td
+                        style={{
+                          color: "rgba(54, 190, 92, 1)",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {item.status}
+                      </td>
+                      <td style={{ color: "#959595" }}>{item.project}</td>
+                      <td style={{ color: "#959595" }}>{item.amount}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="text-center">Data not found</div>
+            )}
           </div>
         </div>
 
         {/* Pagination */}
-        <div className="pagination-container">
-          <ul className="pagination-list">
-            <li className="page-item active inter-font">1</li>
-            <li className="page-item inter-font">2</li>
-            <li className="page-item inter-font">3</li>
-            <li className="page-item inter-font">4</li>
-            <li className="page-item inter-font">5</li>
-            <li className="page-item inter-font">...</li>
-            <li className="page-item inter-font">26</li>
-            <li className="page-item inter-font arrow">{">"}</li>
-          </ul>
-          <button className="view-all-btn inter-font fw-lighter py-3">
-            View All
-          </button>
-        </div>
+        {hireProjects?.length !== 0 && (
+          <div className="pagination-container">
+            <ul className="pagination-list">
+              <li className="page-item active inter-font">1</li>
+              <li className="page-item inter-font">2</li>
+              <li className="page-item inter-font">3</li>
+              <li className="page-item inter-font">4</li>
+              <li className="page-item inter-font">5</li>
+              <li className="page-item inter-font">...</li>
+              <li className="page-item inter-font">26</li>
+              <li className="page-item inter-font arrow">{">"}</li>
+            </ul>
+            <button className="view-all-btn inter-font fw-lighter py-3">
+              View All
+            </button>
+          </div>
+        )}
       </div>
 
-      <div style={{ height: '30px' }}></div>
+      <div style={{ height: "30px" }}></div>
 
       {/* Footer */}
       <DashboardFooter />
     </div>
   );
-}
+};
 
 export default Dashboard;
