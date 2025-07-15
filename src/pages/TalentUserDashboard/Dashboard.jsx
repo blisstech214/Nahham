@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { CiSearch } from "react-icons/ci";
 
@@ -28,9 +28,13 @@ import linkedIn from "../../assets/images/linkedIn.png";
 import yt from "../../assets/images/yt.png";
 import tiktok from "../../assets/images/tiktok.png";
 import snapchat from "../../assets/images/snapchat.png";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  const [isLoadingHireProjects, setIsLoadingHireProjects] = useState(true);
 
   const hireProjects = [
     {
@@ -64,6 +68,12 @@ const Dashboard = () => {
       amount: "3500 AED",
     },
   ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoadingHireProjects(false);
+    }, 2000);
+  }, []);
 
   return (
     <div
@@ -106,7 +116,9 @@ const Dashboard = () => {
               style={{
                 background: "#6D5E2B",
                 color: "white",
+                cursor: "pointer",
               }}
+              onClick={() => navigate("/talent/dashboard?tab=talents")}
             >
               <div className="d-flex align-items-center gap-3">
                 <div
@@ -152,7 +164,9 @@ const Dashboard = () => {
               style={{
                 background: "#E26A52",
                 color: "white",
+                cursor: "pointer",
               }}
+              onClick={() => navigate("/talent/dashboard?tab=transactions")}
             >
               <div className="d-flex align-items-center gap-3">
                 <div
@@ -198,7 +212,9 @@ const Dashboard = () => {
               style={{
                 background: "#AF516F",
                 color: "white",
+                cursor: "pointer",
               }}
+              onClick={() => navigate("/talent/dashboard?tab=recruitment")}
             >
               <div className="d-flex align-items-center gap-3">
                 <div
@@ -296,7 +312,16 @@ const Dashboard = () => {
             className="bg-white rounded-3 p-4 shadow"
             style={{ height: "auto", overflow: "auto" }}
           >
-            {hireProjects?.length !== 0 ? (
+            {isLoadingHireProjects ? (
+              <div className="d-flex justify-content-center">
+                <div
+                  className="spinner-border align-items-center"
+                  role="status"
+                >
+                  {/* <span class="sr-only">Loading...</span> */}
+                </div>
+              </div>
+            ) : hireProjects?.length !== 0 ? (
               <table className="table align-middle mb-0">
                 <thead>
                   <tr>

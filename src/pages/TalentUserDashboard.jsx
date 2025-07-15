@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 import decoration from "../assets/images/decoration.png";
 import Sidebar from "./TalentUserDashboard/Sidebar";
 import DashboardContent from "./TalentUserDashboard/Dashboard";
@@ -17,7 +17,9 @@ const UserDashboard = () => {
     return new URLSearchParams(location.search).get(key);
   };
 
-  const [activeTab, setActiveTab] = useState(getQueryParam("tab") || "dashboard");
+  const [activeTab, setActiveTab] = useState(
+    getQueryParam("tab") || "dashboard"
+  );
 
   useEffect(() => {
     const currentTab = getQueryParam("tab");
@@ -26,7 +28,7 @@ const UserDashboard = () => {
     }
   }, [location.search]);
 
-    // Enhanced setter that also updates the URL
+  // Enhanced setter that also updates the URL
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
     navigate(`/talent/dashboard?tab=${tabName}`);
@@ -81,18 +83,23 @@ const UserDashboard = () => {
         </div>
 
         <div className="container-fluid">
-          <div className="row" style={{ height: "100vh", overflow: "hidden" }}>
+          <div
+            className="row"
+            // style={{ height: "100vh", overflow: "auto" }}
+          >
             <div className="col-md-2 p-0">
               <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
             </div>
             <div
-              className="col-md-10 content mt-2"
+              className="col-md-10 content mt-2 d-flex flex-column inter-font overflow-y-auto overflow-x-hidden"
               style={{
-                height: "100vh",
-                overflowY: "scroll",
-                overflowX: "hidden",
+                height: "100%",
+                // overflowY: "scroll",
+                // overflowX: "hidden",
                 scrollbarWidth: "none", // Firefox
                 msOverflowStyle: "none", // IE & Edge
+                marginBottom: "50px",
+                paddingLeft: "40px"
               }}
             >
               {renderContent()}

@@ -51,7 +51,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         background: "rgba(231, 142, 123, 1)",
         width: "280px",
         color: "white",
-        height: "100vh",
+        height: "100%",
       }}
     >
       {/* Decoration strips */}

@@ -30,13 +30,13 @@ const Projects = () => {
                   alt="Profile"
                 />
                 <div className="mt-3 ms-3">
-                  <h5 className="inter-font" style={{ fontSize: "17px" }}>
+                  <h5 className="inter-font fw-bold" style={{ fontSize: "18px" }}>
                     Web Series Leading Role plus Singer
                   </h5>
-                  <p className="m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
+                  <p className="m-0 mb-2 inter-font" style={{ color: "gray", fontSize: "16px" }}>
                     Movie Center Company
                   </p>
-                  <p className="inter-font" style={{ color: "gray" }}>
+                  <p className="inter-font" style={{ color: "gray", fontSize: "16px" }}>
                     <FaLocationDot className="me-1 text-dark" />
                     Sharjah, UAE
                   </p>
@@ -45,12 +45,12 @@ const Projects = () => {
             </div>
             <div className="col-md-2 my-3">
               <div className="mt-3">
-                <h5 className=" inter-font" style={{ fontSize: "18px" }}>
+                <h5 className=" inter-font fw-bold" style={{ fontSize: "18px" }}>
                   Project Dates
                 </h5>
                 <p
                   className="inter-font"
-                  style={{ fontSize: "14px", color: "#777474" }}
+                  style={{ fontSize: "16px", color: "#777474" }}
                 >
                   10 May - 15 May
                 </p>

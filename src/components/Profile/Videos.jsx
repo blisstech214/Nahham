@@ -149,46 +149,43 @@ const Video = () => {
       ) : (
         <>
           <div className="row g-3">
-            {mediaFiles.length === 0 && <p>No videos found.</p>}
-            {mediaFiles.map((m, index) => (
-              <div key={m._id} className="col-md-4 position-relative">
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    maxWidth: "100%",
-                  }}
-                >
-                  <video
-                    id={`video-${m._id}`}
-                    src={m.file}
-                    crossOrigin="anonymous"
-                    className="rounded-3 mb-2"
-                    style={{
-                      width: "100%",
-                      height: 200,
-                      objectFit: "cover",
-                    }}
-                    onError={(e) => (e.currentTarget.src = "/placeholder.png")}
-                    controls={false}
-                  />
+            {mediaFiles.length === 0 && (
+              <p className="text-center">No videos found.</p>
+            )}
 
+            {mediaFiles.map((m, index) => (
+              <div key={m._id} className="col-md-4">
+                <div className="card border-0 shadow-sm position-relative rounded-3 overflow-hidden">
+                  {/* Responsive video wrapper */}
+                  <div className="ratio ratio-16x9">
+                    <video
+                      id={`video-${m._id}`}
+                      src={m.file}
+                      crossOrigin="anonymous"
+                      className="w-100 h-100"
+                      style={{ objectFit: "cover", borderRadius: "12px" }}
+                      onError={(e) =>
+                        (e.currentTarget.src = "/placeholder.png")
+                      }
+                      controls={false}
+                    />
+                  </div>
+
+                  {/* Overlay Play Icon */}
                   <div
-                    id={`overlay-${m._id}`}
-                    onClick={() => openModal(index)} // updated to use modal logic
+                    className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+                    onClick={() => openModal(index)}
                     style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
                       background: "rgba(0, 0, 0, 0.3)",
-                      borderRadius: "12px",
                       cursor: "pointer",
+                      transition: "background 0.3s",
                     }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.background = "rgba(0,0,0,0.5)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = "rgba(0,0,0,0.3)")
+                    }
                   >
                     <FaPlay size={30} color="white" />
                   </div>

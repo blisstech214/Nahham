@@ -106,6 +106,9 @@ const Navbar = () => {
             style={{ cursor: "pointer", listStyle: "none" }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() =>
+              navigate("/talent/dashboard?tab=settings&subTab=notification")
+            }
           >
             {/* Notification Icon */}
             <HiOutlineBell
@@ -161,6 +164,7 @@ const Navbar = () => {
                   <button
                     className="btn btn-sm mt-2 w-100 inter-font text-white py-2"
                     style={{ backgroundColor: "rgb(231, 142, 123)" }}
+                    onClick={() => navigate("/talent/dashboard?tab=profile")}
                   >
                     View Profile
                   </button>
@@ -179,8 +183,6 @@ const Navbar = () => {
                       {" "}
                       Settings & Privacy{" "}
                     </li>
-                    <li className="inter-font my-2">Help </li>
-                    <li className="inter-font">Language </li>
                   </ul>
                 </div>
 

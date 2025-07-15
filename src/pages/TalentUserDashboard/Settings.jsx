@@ -17,9 +17,18 @@ import DeleteAccount from "../../components/Settings/DeleteAccount";
 import TermsAndConditions from "../../components/Settings/TermsAndConditions";
 import Support from "../../components/Settings/Support";
 import PrivacyAndPolicy from "../../components/Settings/PrivacyAndPolicy";
+import { useLocation } from "react-router-dom";
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState("account");
+  const location = useLocation();
+
+  const getQueryParam = (key) => {
+    return new URLSearchParams(location.search).get(key);
+  };
+
+  const [activeTab, setActiveTab] = useState(
+    getQueryParam("subTab") || "account"
+  );
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEditClick = () => {

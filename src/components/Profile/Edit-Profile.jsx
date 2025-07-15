@@ -52,7 +52,7 @@ const ImageDropzone1 = ({ onUpload }) => {
       {/* Dropzone Box */}
       <div
         {...getRootProps()}
-        className={`border p-3 text-center rounded-2 ${
+        className={`border p-3 mb-5 text-center rounded-2 ${
           isDragActive ? "bg-light" : ""
         }`}
         style={{ cursor: "pointer" }}
@@ -441,6 +441,16 @@ const EditProfile = ({ onBack }) => {
     }
   };
 
+  const handleRemoveSkill = (idToRemove) => {
+    const updatedSkills = formData.subCategory.filter(
+      (id) => id !== idToRemove
+    );
+    handleSelectChange(
+      "subCategory",
+      subCategoryOptions.filter((opt) => updatedSkills.includes(opt.value))
+    );
+  };
+
   return (
     <div
       className="container p-5 bg-white rounded-4 shadow mt-4"
@@ -681,6 +691,33 @@ const EditProfile = ({ onBack }) => {
         <Col md={6} className="mt-3">
           <Form.Group>
             <Form.Label className="text-size">Skills</Form.Label>
+
+            <div className="mb-2">
+              {subCategoryOptions
+                .filter((option) => formData.subCategory.includes(option.value))
+                .map((selected) => (
+                  <span
+                    key={selected.value}
+                    className="badge bg-secondary me-2 mb-1 position-relative"
+                    style={{ paddingRight: "24px" }} // Extra space for close icon
+                  >
+                    {selected.label}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveSkill(selected.value)}
+                      className="btn-close btn-close-white btn-sm position-absolute"
+                      style={{
+                        top: "50%",
+                        right: "4px",
+                        transform: "translateY(-50%)",
+                        fontSize: "0.6rem",
+                      }}
+                      aria-label="Remove"
+                    ></button>
+                  </span>
+                ))}
+            </div>
+
             <MultiSelect
               className="inter-font"
               options={subCategoryOptions}
@@ -778,7 +815,7 @@ const EditProfile = ({ onBack }) => {
             Upload Video
             <span
               className="mx-2"
-              title="Please upload .mp4, .mov, .webm, .mkv, .m4v. files"
+              title="Please upload .mp4, .mov, .webm, .mkv, .m4v. files & Max size is 100 MB"
             >
               <BsInfoCircleFill />
             </span>
