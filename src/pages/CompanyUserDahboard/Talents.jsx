@@ -7,19 +7,58 @@ import { MdArrowOutward } from "react-icons/md";
 import UAE from "../../assets/images/UAE flag.jpeg";
 import { FaLocationDot } from "react-icons/fa6";
 import { LiaDownloadSolid } from "react-icons/lia";
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import dashboardTalent2 from "../../assets/images/dashboardTalent2.png";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { MultiSelect } from "react-multi-select-component";
+import { useNavigate } from "react-router-dom";
+
+// --- STATIC TALENTS FALLBACK ---
+const STATIC_TALENTS = [
+  {
+    _id: "1",
+    first_name: "Abdullah",
+    last_name: "Jamal",
+    country: "Abu Dhabi, UAE",
+    education: "Camera man, Photographer",
+    year_experience: "7",
+    about:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque",
+  },
+  {
+    _id: "2",
+    first_name: "Shamim",
+    last_name: "Bin Saad",
+    country: "Sharjah UAE",
+    education: "Actor, Producer",
+    year_experience: "7",
+    about:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque",
+  },
+  {
+    _id: "3",
+    first_name: "Mansoor",
+    last_name: "Al Masoori",
+    country: "Ajman UAE",
+    education: "Writer, Musician",
+    year_experience: "7",
+    about:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque",
+  },
+  {
+    _id: "4",
+    first_name: "Ahmed",
+    last_name: "Bin Tamimi",
+    country: "Abu Dhabi, UAE",
+    education: "Casting Actor, Musician",
+    year_experience: "7",
+    about:
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque",
+  },
+];
 
 const Talents = () => {
-
   const [talents, setTalents] = useState([]);
   const [pagination, setPagination] = useState({
     current_page: 1,
@@ -32,6 +71,8 @@ const Talents = () => {
     category: null,
     subCategory: [],
   });
+  const [selectedTalentIds, setSelectedTalentIds] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (hasFetchedProfile.current) return;
@@ -99,16 +140,24 @@ const Talents = () => {
       });
 
       const data = response.data;
-      if (data.status) {
-        // toast.success(data.message);
+      if (
+        data.status &&
+        data.data &&
+        data.data.talents &&
+        data.data.talents.length > 0
+      ) {
         setTalents(data.data.talents);
         setPagination(data.data.pagination);
       } else {
-        toast.error(data.message);
-        console.error("Failed to fetch talents:", data.message);
+        // Fallback to static data if API returns no data
+        setTalents(STATIC_TALENTS);
+        setPagination({ current_page: 1, total_pages: 1 });
       }
     } catch (error) {
-      console.error("Error fetching talents:", error);
+      // Fallback to static data if API fails
+      setTalents(STATIC_TALENTS);
+      setPagination({ current_page: 1, total_pages: 1 });
+      console.error("Error fetching talents, using static fallback:", error);
     }
   };
 
@@ -151,6 +200,15 @@ const Talents = () => {
       return next;
     });
   };
+
+  const toggleTalent = (id) => {
+    setSelectedTalentIds((prev) =>
+      prev.includes(id) ? prev.filter((tid) => tid !== id) : [...prev, id]
+    );
+  };
+  const selectedTalents = talents.filter((t) =>
+    selectedTalentIds.includes(t._id)
+  );
 
   return (
     <div className="main-bg py-5" style={{ height: "100vh" }}>
@@ -212,13 +270,13 @@ const Talents = () => {
                 <Select
                   options={categoryOptions}
                   value={
-                    categoryOptions.find((o) => o.value === formData.category) ||
-                    null
+                    categoryOptions.find(
+                      (o) => o.value === formData.category
+                    ) || null
                   }
                   onChange={(opt) => handleSelectChange("category", opt)}
                   placeholder="Select"
                 />
-
               </div>
               <div style={{ width: "170px", marginRight: "8px" }}>
                 <MultiSelect
@@ -278,6 +336,10 @@ const Talents = () => {
                   width: "88px",
                   height: "44px",
                 }}
+                disabled={selectedTalentIds.length === 0}
+                onClick={() =>
+                  navigate("/hire", { state: { selectedTalents } })
+                }
               >
                 Hire
                 <MdArrowOutward fontSize={20} />
@@ -300,7 +362,11 @@ const Talents = () => {
                     src={dashboardTalent2}
                     // src={talent?.picture}
                     alt="Profile"
-                    style={{ width: "88px", height: "88px", objectFit: "cover" }}
+                    style={{
+                      width: "88px",
+                      height: "88px",
+                      objectFit: "cover",
+                    }}
                   />
                   <div className="ms-3 mt-2">
                     <h5 className="inter-font">
@@ -333,7 +399,7 @@ const Talents = () => {
                           fontSize: "9px",
                         }}
                       >
-                        {talent?.year_experience || '0'} Y Ex
+                        {talent?.year_experience || "0"} Y Ex
                       </div>
                     </div>
                   </div>
@@ -363,7 +429,13 @@ const Talents = () => {
                 <input
                   type="checkbox"
                   className="cursor-pointer"
-                  style={{ width: "17px", height: "17px", borderRadius: "50px" }}
+                  style={{
+                    width: "17px",
+                    height: "17px",
+                    borderRadius: "50px",
+                  }}
+                  checked={selectedTalentIds.includes(talent._id)}
+                  onChange={() => toggleTalent(talent._id)}
                 />
               </div>
             </div>
@@ -389,9 +461,9 @@ const Talents = () => {
               Next
             </button>
           </div>
-
         </div>
-        <br /><br />
+        <br />
+        <br />
       </Container>
 
       {/* Footer */}
