@@ -1024,22 +1024,23 @@ const HireTheTalent = () => {
 
   return (
     <div className="main-bg" style={{ minHeight: "100vh" }}>
-      <div className="container-fluid">
-        <div className="row" style={{ height: "100vh", overflow: "hidden" }}>
-          <div className="col-md-2 p-0">
+      {/* <div className="container-fluid"> */}
+        <div className="row" style={{ height: "100vh", overflow: "auto", width:'100%', justifyContent:'center' }}>
+          {/* <div className="col-md-2 p-0">
             <Sidebar activeTab={"talents"} setActiveTab={() => {}} />
-          </div>
+          </div> */}
           <div
             className="col-md-10 content px-4 py-3"
             style={{
               height: "100vh",
+              width: "100%",
               overflowY: "scroll",
               overflowX: "hidden",
               scrollbarWidth: "none",
               msOverflowStyle: "none",
             }}
           >
-            <Navbar />
+            {/* <Navbar /> */}
             {/* Stepper */}
             <HorizontalStepper step={step} setStep={setStep} />
             {step === 1 && (
@@ -1087,10 +1088,10 @@ const HireTheTalent = () => {
               />
             )}
             {/* Footer */}
-            <div>
+            {/* <div>
               <DashboardFooter />
-            </div>
-          </div>
+            </div> */}
+          {/* </div> */}
         </div>
       </div>
     </div>

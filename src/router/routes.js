@@ -38,7 +38,7 @@ const AppRouter = () => {
         <Route path="/talent/dashboard" element={<TalentUserDashboard />} />
         <Route path="/talent/verify-otp" element={<TalentVerifyOTP />} />
 
-        <Route path="/talent/hire" element={<HireTheTalent />} />
+        <Route path="/company/talent/hire" element={<HireTheTalent />} />
 
         <Route path="/UploadDocuments" element={<UploadDocuments />} />
       </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import decoration from "../assets/images/decoration.png";
 import DashboardFooter from "./CompanyUserDahboard/DashboardFooter";
 import Sidebar from "./CompanyUserDahboard/Sidebar";
@@ -9,9 +9,34 @@ import TransactionsContent from "./CompanyUserDahboard/Transactions";
 import SettingsContent from "./CompanyUserDahboard/Settings";
 import ProfileContent from "./CompanyUserDahboard/Profile";
 import RecruitmentContent from "./CompanyUserDahboard/Recruitment";
+import HireTheTalent from "./CompanyUserDahboard/HireTheTalent";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  // const [activeTab, setActiveTab] = useState("dashboard");
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const getQueryParam = (key) => {
+    return new URLSearchParams(location.search).get(key);
+  };
+
+  const [activeTab, setActiveTab] = useState(
+    getQueryParam("tab") || "dashboard"
+  );
+
+  useEffect(() => {
+    const currentTab = getQueryParam("tab");
+    if (currentTab && currentTab !== activeTab) {
+      setActiveTab(currentTab);
+    }
+  }, [location.search]);
+
+  const handleTabChange = (tabName) => {
+    setActiveTab(tabName);
+    navigate(`/company-dashboard?tab=${tabName}`);
+  };
 
   const renderContent = () => {
     switch (activeTab) {
@@ -64,7 +89,7 @@ const UserDashboard = () => {
         <div className="container-fluid">
           <div className="row" style={{ height: "100vh", overflow: "hidden" }}>
             <div className="col-md-2 p-0">
-              <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+              <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
             </div>
             <div
               className="col-md-10 content px-4 py-3"

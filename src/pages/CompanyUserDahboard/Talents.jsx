@@ -12,7 +12,8 @@ import dashboardTalent2 from "../../assets/images/dashboardTalent2.png";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { MultiSelect } from "react-multi-select-component";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import HireTheTalent from "./HireTheTalent";
 
 // --- STATIC TALENTS FALLBACK ---
 const STATIC_TALENTS = [
@@ -79,6 +80,23 @@ const Talents = () => {
     hasFetchedProfile.current = true;
     fetchTalents(1); // Fetch first page initially
   }, []);
+
+  const location = useLocation();
+
+  const getQueryParam = (key) => {
+    return new URLSearchParams(location.search).get(key);
+  };
+
+  const [activeTab, setActiveTab] = useState("");
+
+  useEffect(() => {
+    const currentTab = getQueryParam("subTab");
+    if (currentTab && currentTab !== activeTab) {
+      setActiveTab(currentTab);
+    }
+
+    console.log("curentTab --- ", currentTab);
+  }, [location.search]);
 
   useEffect(() => {
     (async () => {
@@ -215,256 +233,263 @@ const Talents = () => {
       {/* Navbar */}
       <Navbar />
 
-      {/* Body */}
-      <Container className="my-5 px-5">
-        {/* Search Section */}
-        <div className="d-flex position-relative mb-4 align-items-center">
-          <div style={{ width: "1065px" }}>
-            <input
-              type="text"
-              placeholder="Search by Keywords"
-              className="w-100 p-2 rounded-3 ps-5 inter-font"
-              style={{
-                paddingLeft: "2.5rem",
-                border: "none",
-                height: "44px",
-              }}
-            />
-            <CiSearch
-              className="position-absolute"
-              style={{
-                left: "25px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                pointerEvents: "none",
-              }}
-              size={20}
-            />
-          </div>
-          <div
-            className="d-flex justify-content-end align-items-center"
-            style={{ marginLeft: "12px" }}
-          >
-            <Button
-              className="btn btn-base border-0 inter-font dashboard-btn"
-              style={{
-                outline: "none",
-                width: "88px",
-                height: "44px",
-                padding: "12px 18px",
-              }}
-            >
-              Search
-            </Button>
-          </div>
-        </div>
-
-        {/* Filter Section */}
-        <div className="container mb-4 pe-0">
-          <div className="d-flex align-items-center flex-wrap">
-            <div className="d-flex" style={{ width: "850px" }}>
-              <div style={{ width: "170px", marginRight: "8px" }}>
-                <Select options={yearOptions} />
-              </div>
-              <div style={{ width: "170px", marginRight: "8px" }}>
-                <Select
-                  options={categoryOptions}
-                  value={
-                    categoryOptions.find(
-                      (o) => o.value === formData.category
-                    ) || null
-                  }
-                  onChange={(opt) => handleSelectChange("category", opt)}
-                  placeholder="Select"
-                />
-              </div>
-              <div style={{ width: "170px", marginRight: "8px" }}>
-                <MultiSelect
-                  className="inter-font"
-                  options={subCategoryOptions}
-                  value={subCategoryOptions.filter((option) =>
-                    formData.subCategory.includes(option.value)
-                  )}
-                  onChange={(selected) =>
-                    handleSelectChange("subCategory", selected || [])
-                  }
-                  labelledBy="Select Sub Category"
-                  isMulti
-                />
-              </div>
-              <div style={{ width: "170px", marginRight: "8px" }}>
-                <Select options={ageOptions} />
-              </div>
-              <div style={{ width: "170px", marginRight: "10px" }}>
-                <Select options={availabilityOptions} />
-              </div>
+      {activeTab === "hire" ? (
+        <HireTheTalent />
+      ) : (
+        <Container className="my-5 px-5">
+          {/* Search Section */}
+          <div className="d-flex position-relative mb-4 align-items-center">
+            <div style={{ width: "1065px" }}>
+              <input
+                type="text"
+                placeholder="Search by Keywords"
+                className="w-100 p-2 rounded-3 ps-5 inter-font"
+                style={{
+                  paddingLeft: "2.5rem",
+                  border: "none",
+                  height: "44px",
+                }}
+              />
+              <CiSearch
+                className="position-absolute"
+                style={{
+                  left: "25px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  pointerEvents: "none",
+                }}
+                size={20}
+              />
             </div>
-
-            <div className="d-flex justify-content-end align-items-center position-relative">
-              <button
-                className="btn inter-font d-flex align-items-center justify-content-center"
-                style={{
-                  background: "rgba(205, 73, 109, 1)",
-                  color: "white",
-                  width: "88px",
-                  height: "44px",
-                  marginLeft: "0px",
-                }}
-              >
-                <CiSearch className=" text-white" size={18} />
-                Filter
-              </button>
-            </div>
-          </div>
-          <Row className="mt-3">
-            <Col className="px-0 d-flex justify-content-end align-items-center gap-2">
-              <Button
-                className="bg-transparent border inter-font clear-btn"
-                style={{
-                  color: "rgba(82, 42, 48, 1)",
-                  width: "88px",
-                  height: "44px",
-                }}
-              >
-                Clear
-              </Button>
-              <Button
-                className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1"
-                style={{
-                  background: "rgba(82, 42, 48, 1)",
-                  color: "white",
-                  width: "88px",
-                  height: "44px",
-                }}
-                disabled={selectedTalentIds.length === 0}
-                onClick={() =>
-                  navigate("/hire", { state: { selectedTalents } })
-                }
-              >
-                Hire
-                <MdArrowOutward fontSize={20} />
-              </Button>
-            </Col>
-          </Row>
-        </div>
-
-        {/* Talent Listings */}
-        <div style={{ overflowY: "auto" }}>
-          {talents.map((talent) => (
             <div
-              key={talent?._id}
-              className="bg-white rounded-4 p-3 mb-3 position-relative"
-              style={{ width: "100%", height: "auto" }}
+              className="d-flex justify-content-end align-items-center"
+              style={{ marginLeft: "12px" }}
             >
-              <div className="d-flex">
-                <div className="d-flex">
-                  <img
-                    src={dashboardTalent2}
-                    // src={talent?.picture}
-                    alt="Profile"
-                    style={{
-                      width: "88px",
-                      height: "88px",
-                      objectFit: "cover",
-                    }}
+              <Button
+                className="btn btn-base border-0 inter-font dashboard-btn"
+                style={{
+                  outline: "none",
+                  width: "88px",
+                  height: "44px",
+                  padding: "12px 18px",
+                }}
+              >
+                Search
+              </Button>
+            </div>
+          </div>
+
+          {/* Filter Section */}
+          <div className="container mb-4 pe-0">
+            <div className="d-flex align-items-center flex-wrap">
+              <div className="d-flex" style={{ width: "850px" }}>
+                <div style={{ width: "170px", marginRight: "8px" }}>
+                  <Select options={yearOptions} />
+                </div>
+                <div style={{ width: "170px", marginRight: "8px" }}>
+                  <Select
+                    options={categoryOptions}
+                    value={
+                      categoryOptions.find(
+                        (o) => o.value === formData.category
+                      ) || null
+                    }
+                    onChange={(opt) => handleSelectChange("category", opt)}
+                    placeholder="Select"
                   />
-                  <div className="ms-3 mt-2">
-                    <h5 className="inter-font">
-                      {talent?.first_name} {talent?.last_name}
-                    </h5>
-                    <p
-                      className="inter-font"
-                      style={{ color: "rgba(147, 147, 147, 1)" }}
-                    >
-                      <FaLocationDot className="text-dark" /> {talent?.country}
-                    </p>
-                    <div className="d-flex">
-                      <div
-                        className="d-flex justify-content-center align-items-center rounded-1"
-                        style={{
-                          background: "rgba(242, 242, 242, 1)",
-                          width: "69px",
-                          height: "23px",
-                          fontSize: "9px",
-                        }}
+                </div>
+                <div style={{ width: "170px", marginRight: "8px" }}>
+                  <MultiSelect
+                    className="inter-font"
+                    options={subCategoryOptions}
+                    value={subCategoryOptions.filter((option) =>
+                      formData.subCategory.includes(option.value)
+                    )}
+                    onChange={(selected) =>
+                      handleSelectChange("subCategory", selected || [])
+                    }
+                    labelledBy="Select Sub Category"
+                    isMulti
+                  />
+                </div>
+                <div style={{ width: "170px", marginRight: "8px" }}>
+                  <Select options={ageOptions} />
+                </div>
+                <div style={{ width: "170px", marginRight: "10px" }}>
+                  <Select options={availabilityOptions} />
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-end align-items-center position-relative">
+                <button
+                  className="btn inter-font d-flex align-items-center justify-content-center"
+                  style={{
+                    background: "rgba(205, 73, 109, 1)",
+                    color: "white",
+                    width: "88px",
+                    height: "44px",
+                    marginLeft: "0px",
+                  }}
+                >
+                  <CiSearch className=" text-white" size={18} />
+                  Filter
+                </button>
+              </div>
+            </div>
+            <Row className="mt-3">
+              <Col className="px-0 d-flex justify-content-end align-items-center gap-2">
+                <Button
+                  className="bg-transparent border inter-font clear-btn"
+                  style={{
+                    color: "rgba(82, 42, 48, 1)",
+                    width: "88px",
+                    height: "44px",
+                  }}
+                >
+                  Clear
+                </Button>
+                <Button
+                  className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1"
+                  style={{
+                    background: "rgba(82, 42, 48, 1)",
+                    color: "white",
+                    width: "88px",
+                    height: "44px",
+                  }}
+                  disabled={selectedTalentIds.length === 0}
+                  onClick={() =>
+                    // navigate("/company/talent/hire", { state: { selectedTalents } })
+                    navigate("/company-dashboard?tab=talents&subTab=hire")
+                  }
+                >
+                  Hire
+                  <MdArrowOutward fontSize={20} />
+                </Button>
+              </Col>
+            </Row>
+          </div>
+
+          {/* Talent Listings */}
+          <div style={{ overflowY: "auto" }}>
+            {talents.map((talent) => (
+              <div
+                key={talent?._id}
+                className="bg-white rounded-4 p-3 mb-3 position-relative"
+                style={{ width: "100%", height: "auto" }}
+              >
+                <div className="d-flex">
+                  <div className="d-flex">
+                    <img
+                      src={dashboardTalent2}
+                      // src={talent?.picture}
+                      alt="Profile"
+                      style={{
+                        width: "88px",
+                        height: "88px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div className="ms-3 mt-2">
+                      <h5 className="inter-font">
+                        {talent?.first_name} {talent?.last_name}
+                      </h5>
+                      <p
+                        className="inter-font"
+                        style={{ color: "rgba(147, 147, 147, 1)" }}
                       >
-                        {talent?.education || "No Title"}
-                      </div>
-                      <div
-                        className="d-flex justify-content-center align-items-center rounded-1 mx-2"
-                        style={{
-                          background: "rgba(242, 242, 242, 1)",
-                          width: "49px",
-                          height: "23px",
-                          fontSize: "9px",
-                        }}
-                      >
-                        {talent?.year_experience || "0"} Y Ex
+                        <FaLocationDot className="text-dark" />{" "}
+                        {talent?.country}
+                      </p>
+                      <div className="d-flex">
+                        <div
+                          className="d-flex justify-content-center align-items-center rounded-1"
+                          style={{
+                            background: "rgba(242, 242, 242, 1)",
+                            width: "69px",
+                            height: "23px",
+                            fontSize: "9px",
+                          }}
+                        >
+                          {talent?.education || "No Title"}
+                        </div>
+                        <div
+                          className="d-flex justify-content-center align-items-center rounded-1 mx-2"
+                          style={{
+                            background: "rgba(242, 242, 242, 1)",
+                            width: "49px",
+                            height: "23px",
+                            fontSize: "9px",
+                          }}
+                        >
+                          {talent?.year_experience || "0"} Y Ex
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div>
-                  <p className="inter-font" style={{ width: "85%" }}>
-                    {talent?.about?.slice(0, 90) || "No description"}...
-                    <span className="text-danger inter-font">Read More...</span>
-                  </p>
-                  <div className="d-flex justify-content-end align-items-center">
-                    <button
-                      className="btn me-2 text-white inter-font"
-                      style={{ background: "rgba(82, 42, 48, 1)" }}
-                    >
-                      <LiaDownloadSolid /> Download
-                    </button>
-                    <button
-                      className="btn text-white inter-font"
-                      style={{ background: "rgba(82, 42, 48, 1)" }}
-                    >
-                      View Profile
-                    </button>
+                  <div>
+                    <p className="inter-font" style={{ width: "85%" }}>
+                      {talent?.about?.slice(0, 90) || "No description"}...
+                      <span className="text-danger inter-font">
+                        Read More...
+                      </span>
+                    </p>
+                    <div className="d-flex justify-content-end align-items-center">
+                      <button
+                        className="btn me-2 text-white inter-font"
+                        style={{ background: "rgba(82, 42, 48, 1)" }}
+                      >
+                        <LiaDownloadSolid /> Download
+                      </button>
+                      <button
+                        className="btn text-white inter-font"
+                        style={{ background: "rgba(82, 42, 48, 1)" }}
+                      >
+                        View Profile
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <div className="tick-dashboard">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer"
+                    style={{
+                      width: "17px",
+                      height: "17px",
+                      borderRadius: "50px",
+                    }}
+                    checked={selectedTalentIds.includes(talent._id)}
+                    onChange={() => toggleTalent(talent._id)}
+                  />
+                </div>
               </div>
-              <div className="tick-dashboard">
-                <input
-                  type="checkbox"
-                  className="cursor-pointer"
-                  style={{
-                    width: "17px",
-                    height: "17px",
-                    borderRadius: "50px",
-                  }}
-                  checked={selectedTalentIds.includes(talent._id)}
-                  onChange={() => toggleTalent(talent._id)}
-                />
-              </div>
-            </div>
-          ))}
+            ))}
 
-          {/* Pagination Controls */}
-          <div className="d-flex justify-content-center align-items-center my-4">
-            <button
-              className="btn btn-sm btn-outline-dark me-2"
-              disabled={pagination.current_page === 1}
-              onClick={() => handlePageChange(pagination.current_page - 1)}
-            >
-              Previous
-            </button>
-            <span className="mx-2">
-              Page {pagination.current_page} of {pagination.total_pages}
-            </span>
-            <button
-              className="btn btn-sm btn-outline-dark ms-2"
-              disabled={pagination.current_page === pagination.total_pages}
-              onClick={() => handlePageChange(pagination.current_page + 1)}
-            >
-              Next
-            </button>
+            {/* Pagination Controls */}
+            <div className="d-flex justify-content-center align-items-center my-4">
+              <button
+                className="btn btn-sm btn-outline-dark me-2"
+                disabled={pagination.current_page === 1}
+                onClick={() => handlePageChange(pagination.current_page - 1)}
+              >
+                Previous
+              </button>
+              <span className="mx-2">
+                Page {pagination.current_page} of {pagination.total_pages}
+              </span>
+              <button
+                className="btn btn-sm btn-outline-dark ms-2"
+                disabled={pagination.current_page === pagination.total_pages}
+                onClick={() => handlePageChange(pagination.current_page + 1)}
+              >
+                Next
+              </button>
+            </div>
           </div>
-        </div>
-        <br />
-        <br />
-      </Container>
+          <br />
+          <br />
+        </Container>
+      )}
 
       {/* Footer */}
       <div className="mt-5">
