@@ -9,90 +9,81 @@ import snapchat from "../../assets/images/snapchat.png";
 
 const DashboardFooter = () => {
   return (
-    <div
-      className="w-100 content"
+    <footer
+      className=" text-white px-3 py-2"
       style={{
-        height: "5vh",
-        overflowY: "scroll",
-        overflowX: "hidden",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
+        background: "#7B6E43",
       }}
     >
-      <footer
-        className="d-flex justify-content-between align-items-center text-muted"
-        style={{
-          background: "#7B6E43",
-          width: "100%",
-          height: "50px",
-          position: "absolute",
-          bottom: "0px",
-          left: "0px",
-        }}
-      >
-        <div className="text-white ms-3">
-          @2025 Nahham, All rights reserved.
+      <div className="container-fluid">
+        <div className="row align-items-center text-center text-md-start">
+          {/* Left: Copyright */}
+          <div className="col-12 col-md-4 mb-2 mb-md-0">
+            <div>@2025 Nahham, All rights reserved.</div>
+          </div>
+
+          {/* Center: Links */}
+          <div className="col-12 col-md-4 mb-2 mb-md-0">
+            <div>Privacy Policy | Terms and Conditions</div>
+          </div>
+
+          {/* Right: Social Icons */}
+          <div className="col-12 col-md-4">
+            <div className="social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={fb} alt="Facebook" className="mx-1" />
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={x} alt="Twitter / X" className="mx-1" />
+              </a>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={instagram} alt="Instagram" className="mx-1" />
+              </a>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={linkedIn} alt="LinkedIn" className="mx-1" />
+              </a>
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={yt} alt="YouTube" className="mx-1" />
+              </a>
+              <a
+                href="https://www.tiktok.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={tiktok} alt="TikTok" className="mx-1" />
+              </a>
+              <a
+                href="https://www.snapchat.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={snapchat} alt="Snapchat" className="mx-1" />
+              </a>
+            </div>
+          </div>
         </div>
-        <div className="text-white">Privacy Policy | Terms and Conditions</div>
-        <div className="social-icons-dashboard d-flex justify-content-center align-items-center">
-          <a
-            href="https://www.facebook.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={fb} alt="Facebook" className="mx-2" />
-          </a>
-
-          <a
-            href="https://twitter.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={x} alt="Twitter / X" className="mx-2" />
-          </a>
-
-          <a
-            href="https://www.instagram.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={instagram} alt="Instagram" className="mx-2" />
-          </a>
-
-          <a
-            href="https://www.linkedin.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={linkedIn} alt="LinkedIn" className="mx-2" />
-          </a>
-
-          <a
-            href="https://www.youtube.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={yt} alt="YouTube" className="mx-2" />
-          </a>
-
-          <a
-            href="https://www.tiktok.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={tiktok} alt="TikTok" className="mx-2" />
-          </a>
-
-          <a
-            href="https://www.snapchat.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={snapchat} alt="Snapchat" className="mx-2 me-5" />
-          </a>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   );
 };
 

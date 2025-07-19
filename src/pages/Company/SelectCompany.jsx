@@ -63,30 +63,30 @@ const CompanyForm = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.5 }}
-          className="main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center"
+          className="main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center px-3"
         >
-          <Container className="position-absolute top-0 mt-3">
+          <Container fluid className="position-absolute top-0 mt-3 px-3">
             <Row className="align-items-center">
               {/* Logo */}
               <Col
                 xs={12}
                 md={1}
-                className="text-center text-md-start mb-2 mb-md-0"
+                className="text-center text-md-start mb-3 mb-md-0"
               >
                 <img src={logo} alt="Logo" style={{ height: "50px" }} />
               </Col>
 
               {/* Steps */}
-              <Col xs={12} md={11} className="text-center mt-4">
-                <div className="d-flex flex-md-row align-items-center justify-content-center gap-2">
-                  <div className="d-flex align-items-center justify-content-center mb-md-0">
+              <Col xs={12} md={11} className="text-center">
+                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+                  <div className="d-flex align-items-center justify-content-center">
                     <Step active>1</Step>
                     <span className="sofia-font fs-count ms-2">
                       Select your company
                     </span>
                   </div>
                   <Arrow />
-                  <div className="d-flex align-items-center justify-content-center mb-md-0">
+                  <div className="d-flex align-items-center justify-content-center">
                     <Step>2</Step>
                     <span className="sofia-font fs-count ms-2">
                       Add its information
@@ -104,21 +104,24 @@ const CompanyForm = () => {
             </Row>
           </Container>
 
-          <div className="text-center mt-5 pt-5" style={{ maxWidth: "600px" }}>
+          <div
+            className="text-center mt-5 pt-5 px-3 w-100"
+            style={{ maxWidth: "600px" }}
+          >
             <div
               className="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-3"
               style={{ width: "60px", height: "60px" }}
             >
-              <img src={building} className="w-100" alt="Building" />
+              <img src={building} className="w-75" alt="Building" />
             </div>
             <h2 className="fw-bold inter-font">
               What is the name of your company?
             </h2>
-            <p className="sofia-font mb-5" style={{ color: "#929292" }}>
+            <p className="sofia-font mb-4" style={{ color: "#929292" }}>
               Select an entity, or create a new one, to list it on NAHHAM
             </p>
 
-            <Form onSubmit={handleLocalSubmit}>
+            <Form onSubmit={handleLocalSubmit} className="w-100">
               <Form.Group className="mb-4" controlId="companyName">
                 <Form.Control
                   type="text"
@@ -126,9 +129,8 @@ const CompanyForm = () => {
                   onChange={(e) => setCompanyName(e.target.value)}
                   name="company_name"
                   placeholder="Enter your company name"
-                  className="py-3 rounded-3 sofia-font inp-login"
+                  className="py-3 rounded-3 sofia-font inp-login w-100"
                   required
-                  style={{ margin: "0 22px", width: "90%" }}
                 />
               </Form.Group>
               <Button

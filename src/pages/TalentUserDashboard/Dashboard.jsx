@@ -77,19 +77,20 @@ const Dashboard = () => {
 
   return (
     <div
-      className="w-100 content"
-      style={{
-        height: "100vh",
-        overflowY: "scroll",
-        overflowX: "hidden",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
-      }}
+      className=""
+      style={
+        {
+          // height: "100vh",
+          // overflowY: "scroll",
+          // overflowX: "hidden",
+          // scrollbarWidth: "none",
+          // msOverflowStyle: "none",
+        }
+      }
     >
-      {/* Main Content */}
-      <div className="flex-grow-1 px-5 main-bg inp-login">
-        <Navbar />
-        <div className="position-relative mb-3">
+      <div className="flex-grow-1 px-3 px-md-5 main-bg inp-login">
+        {/* Search Input */}
+        <div className="position-relative my-3">
           <input
             type="text"
             placeholder="Search by Keywords"
@@ -107,12 +108,13 @@ const Dashboard = () => {
             size={20}
           />
         </div>
+
         {/* Stats Cards */}
-        <div className="row my-5">
-          <div className="col-md-4">
-            <h4 className="inter-font card-heading mb-4">Views</h4>
+        <div className="row my-4">
+          <div className="col-12 col-md-4 mb-3">
+            <h4 className="inter-font card-heading mb-3">Views</h4>
             <div
-              className="card border-0 shadow-sm p-3 rounded-3"
+              className="card border-0 shadow-sm p-3 rounded-3 "
               style={{
                 background: "#6D5E2B",
                 color: "white",
@@ -123,11 +125,7 @@ const Dashboard = () => {
               <div className="d-flex align-items-center gap-3">
                 <div
                   className="rounded-circle bg-white d-flex align-items-center justify-content-center"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    minWidth: "50px",
-                  }}
+                  style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
                     src={talentUser}
@@ -156,9 +154,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
-            <h4 className="inter-font card-heading mb-4">Job History</h4>
 
+          <div className="col-12 col-md-4 mb-3">
+            <h4 className="inter-font card-heading mb-3">Job History</h4>
             <div
               className="card border-0 shadow-sm p-3 rounded-3"
               style={{
@@ -171,11 +169,7 @@ const Dashboard = () => {
               <div className="d-flex align-items-center gap-3">
                 <div
                   className="rounded-circle bg-white d-flex align-items-center justify-content-center"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    minWidth: "50px",
-                  }}
+                  style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
                     src={allTimeHires}
@@ -204,9 +198,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
-            <h4 className="inter-font card-heading mb-4">Earnings</h4>
 
+          <div className="col-12 col-md-4 mb-3">
+            <h4 className="inter-font card-heading mb-3">Earnings</h4>
             <div
               className="card border-0 shadow-sm p-3 rounded-3"
               style={{
@@ -219,11 +213,7 @@ const Dashboard = () => {
               <div className="d-flex align-items-center gap-3">
                 <div
                   className="rounded-circle bg-white d-flex align-items-center justify-content-center"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    minWidth: "50px",
-                  }}
+                  style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
                     src={earnings}
@@ -254,91 +244,37 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Current Hires Section */}
-        {/* <div className="p-4 rounded-4">
-          <h5 className="mb-4 inter-font" style={{ fontSize: "16px" }}>
-            Hire Projects
-          </h5>
-          <Table className="align-middle borderless responsive rounded-4 shadow">
-            <thead>
-              <tr>
-                <th className="fw-light border-bottom-0">Employe Company</th>
-                <th className="fw-light border-bottom-0">Job Name</th>
-                <th className="fw-light border-bottom-0">Start Date</th>
-                <th className="fw-light border-bottom-0">End Date</th>
-                <th className="fw-light border-bottom-0">Status</th>
-                <th className="fw-light border-bottom-0">Project</th>
-                <th className="fw-light border-bottom-0">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {hireProjects.map((item, index) => (
-                <tr key={index}>
-                  <td className="d-flex align-items-center gap-3 border-bottom-0">
-                    <img
-                      src={item.logo}
-                      alt="logo"
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <span className="inter-font t-heading">{item.company}</span>
-                  </td>
-                  <td className="t-heading border-bottom-0">{item.job}</td>
-                  <td className="t-heading border-bottom-0">{item.start}</td>
-                  <td className="t-heading border-bottom-0">{item.end}</td>
-                  <td
-                    className="border-bottom-0"
-                    style={{ color: "rgba(54, 190, 92, 1)" }}
-                  >
-                    {item.status}
-                  </td>
-                  <td className="t-heading border-bottom-0">{item.project}</td>
-                  <td className="t-heading border-bottom-0">{item.amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div> */}
-
+        {/* Hire Projects Table */}
         <div>
-          <h5 className="mb-4 inter-font" style={{ fontSize: "16px" }}>
+          <h5 className="mb-3 inter-font" style={{ fontSize: "16px" }}>
             Hire Projects
           </h5>
           <div
-            className="bg-white rounded-3 p-4 shadow"
-            style={{ height: "auto", overflow: "auto" }}
+            className="bg-white rounded-3 p-3 shadow"
+            style={{ overflowX: "auto", width: "100%" }}
           >
             {isLoadingHireProjects ? (
-              <div className="d-flex justify-content-center">
-                <div
-                  className="spinner-border align-items-center"
-                  role="status"
-                >
-                  {/* <span class="sr-only">Loading...</span> */}
-                </div>
+              <div className="d-flex justify-content-center py-5">
+                <div className="spinner-border" role="status"></div>
               </div>
             ) : hireProjects?.length !== 0 ? (
               <table className="table align-middle mb-0">
                 <thead>
                   <tr>
-                    <th scope="col">Employe Company</th>
-                    <th scope="col">Job Name</th>
-                    <th scope="col">Start Date</th>
-                    <th scope="col">End Date</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Project</th>
-                    <th scope="col">Amount</th>
+                    <th>Employe Company</th>
+                    <th>Job Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Project</th>
+                    <th>Amount</th>
                   </tr>
                 </thead>
                 <tbody>
                   {hireProjects.map((item, index) => (
                     <tr key={index}>
                       <td>
-                        <div className="d-flex align-items-center gap-3">
+                        <div className="d-flex align-items-center gap-2">
                           <img
                             src={item.logo}
                             alt="logo"
@@ -375,35 +311,32 @@ const Dashboard = () => {
                 </tbody>
               </table>
             ) : (
-              <div className="text-center">Data not found</div>
+              <div className="text-center py-5">Data not found</div>
             )}
           </div>
         </div>
 
         {/* Pagination */}
         {hireProjects?.length !== 0 && (
-          <div className="pagination-container">
-            <ul className="pagination-list">
-              <li className="page-item active inter-font">1</li>
-              <li className="page-item inter-font">2</li>
-              <li className="page-item inter-font">3</li>
-              <li className="page-item inter-font">4</li>
-              <li className="page-item inter-font">5</li>
-              <li className="page-item inter-font">...</li>
-              <li className="page-item inter-font">26</li>
-              <li className="page-item inter-font arrow">{">"}</li>
+          <div className="d-flex flex-column align-items-center my-4">
+            <ul className="pagination justify-content-center flex-wrap mb-2">
+              <li className="page-item active inter-font mx-1">1</li>
+              <li className="page-item inter-font mx-1">2</li>
+              <li className="page-item inter-font mx-1">3</li>
+              <li className="page-item inter-font mx-1">4</li>
+              <li className="page-item inter-font mx-1">5</li>
+              <li className="page-item inter-font mx-1">...</li>
+              <li className="page-item inter-font mx-1">26</li>
+              <li className="page-item inter-font mx-1">{">"}</li>
             </ul>
-            <button className="view-all-btn inter-font fw-lighter py-3">
+            <button className="btn btn-outline-secondary inter-font fw-light py-2 px-4">
               View All
             </button>
           </div>
         )}
+
+        <div style={{ height: "30px" }}></div>
       </div>
-
-      <div style={{ height: "30px" }}></div>
-
-      {/* Footer */}
-      <DashboardFooter />
     </div>
   );
 };

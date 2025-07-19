@@ -8,6 +8,8 @@ import TransactionsContent from "./TalentUserDashboard/History";
 import SettingsContent from "./TalentUserDashboard/Settings";
 import ProfileContent from "./TalentUserDashboard/Profile";
 import RecruitmentContent from "./TalentUserDashboard/Earnings";
+import Navbar from "./TalentUserDashboard/Navbar";
+import DashboardFooter from "./TalentUserDashboard/DashboardFooter";
 
 const UserDashboard = () => {
   const location = useLocation();
@@ -55,11 +57,10 @@ const UserDashboard = () => {
 
   return (
     <>
-      <div
+      {/* <div
         className="layout-wrapper d-flex flex-column inter-font overflow-y-hidden overflow-x-hidden"
         style={{ minHeight: "100vh" }}
       >
-        {/* Decoration strip */}
         <div
           className="left-strip"
           style={{
@@ -104,6 +105,77 @@ const UserDashboard = () => {
             >
               {renderContent()}
             </div>
+          </div>
+        </div>
+      </div> */}
+
+      <div
+        className="layout-wrapper inter-font"
+        style={{
+          width: "100%",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          height: "100vh",
+        }}
+      >
+        {/* Sidebar */}
+        <div
+          style={{
+            flexBasis: "25%",
+            flexGrow: 1,
+            maxWidth: "300px",
+            minWidth: "250px",
+            width: "100%",
+          }}
+        >
+          <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
+        </div>
+
+        {/* Content + Decoration Row */}
+        <div
+          style={{
+            flexBasis: "75%",
+            flexGrow: 1,
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            padding: "20px",
+          }}
+        >
+          {/* Main Content Area */}
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "100vh",
+            }}
+          >
+            <Navbar />
+            <div style={{ flexGrow: 1 }}>{renderContent()}</div>
+            <DashboardFooter />
+          </div>
+
+          {/* Decoration Image (Right Side) */}
+          <div
+            className="d-none d-lg-flex"
+            style={{
+              width: "40px",
+              marginLeft: "10px",
+              alignItems: "center",
+            }}
+          >
+            <img
+              src={decoration}
+              alt="Decoration"
+              style={{
+                width: "30px",
+                height: "100%",
+                objectFit: "contain",
+              }}
+            />
           </div>
         </div>
       </div>

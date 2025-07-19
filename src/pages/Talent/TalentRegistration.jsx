@@ -104,10 +104,10 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
 
   return (
     <div className="container">
-      <div className="d-flex flex-column justify-content-center align-items-center position-relative w-100 min-vh-100">
+      <div className="d-flex flex-column justify-content-center align-items-center position-relative w-100 min-vh-100 px-3">
         <form
-          className="bg-white p-4 rounded-4 shadow talent-reg-form"
-          style={{ minWidth: "605px" }}
+          className="bg-white p-4 rounded-4 shadow talent-reg-form w-100"
+          style={{ maxWidth: "605px" }}
           onSubmit={handleSubmit}
         >
           <div className="d-flex flex-column justify-content-center align-items-center">
@@ -116,135 +116,129 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
             </h2>
 
             <div className="row w-100">
-              <div className="col-md-6 d-flex flex-column pe-md-2 inp-login">
+              <div className="col-12 col-md-6 d-flex flex-column pe-md-2 mb-3">
                 <label>First Name</label>
                 <input
                   type="text"
                   name="first_name"
-                  className="p-1 rounded-2 w-100 fw-light"
+                  className="p-2 rounded-2 w-100 fw-light"
                   value={formData.first_name}
                   onChange={handleChange}
                   required
+                  style={{ backgroundColor: "#f8f8f8" }}
                 />
               </div>
-              <div className="col-md-6 d-flex flex-column ps-md-2 inp-login">
+              <div className="col-12 col-md-6 d-flex flex-column ps-md-2 mb-3">
                 <label>Last Name</label>
                 <input
                   type="text"
                   name="last_name"
-                  className="p-1 rounded-2 w-100 fw-light"
+                  className="p-2 rounded-2 w-100 fw-light"
                   value={formData.last_name}
                   onChange={handleChange}
                   required
+                  style={{ backgroundColor: "#f8f8f8" }}
                 />
               </div>
             </div>
 
-            <div className="row w-100 mt-3">
-              <div className="col-md-12 d-flex flex-column inp-login">
-                <label>Email</label>
+            <div className="mb-3 w-100">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                className="p-2 rounded-2 w-100"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                style={{ backgroundColor: "#f8f8f8" }}
+              />
+            </div>
+
+            <div className="mb-3 w-100">
+              <label>Password</label>
+              <div className="position-relative">
                 <input
-                  type="email"
-                  name="email"
-                  className="p-1 rounded-2 w-100"
-                  value={formData.email}
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  className="p-2 rounded-2 w-100 pe-5"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  style={{ backgroundColor: "#f8f8f8" }}
+                />
+                <span
+                  onClick={togglePasswordVisibility}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    cursor: "pointer",
+                    color: "#aaa",
+                  }}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+            </div>
+
+            <div className="mb-3 w-100">
+              <label>Phone Number</label>
+              <InputGroupWithFlag
+                placeholder=""
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="p-2 rounded-2 w-100"
+              />
+              {formErrors.phone && (
+                <span className="text-danger small">{formErrors.phone}</span>
+              )}
+            </div>
+
+            <div className="mb-3 w-100">
+              <label>Nationality</label>
+              <Select
+                options={countryOptions}
+                value={formData.country}
+                onChange={handleCountryChange}
+              />
+            </div>
+
+            <div className="mb-3 w-100">
+              <div className="d-flex align-items-start">
+                <input
+                  type="checkbox"
+                  name="terms"
+                  className="me-2 mt-1"
+                  checked={formData.terms}
                   onChange={handleChange}
                   required
                 />
-              </div>
-            </div>
-
-            <div className="row w-100 mt-3">
-              <div className="col-md-12 d-flex flex-column position-relative inp-login">
-                <label>Password</label>
-                <div className="position-relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    className="p-1 rounded-2 w-100 pe-5"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
+                <span
+                  className="sofia-font text-size"
+                  style={{ fontSize: "14px" }}
+                >
+                  I agree with Nahham’s
                   <span
-                    onClick={togglePasswordVisibility}
-                    style={{
-                      position: "absolute",
-                      right: "10px",
-                      top: "50%",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                      color: "#aaa",
-                    }}
+                    className="ms-1 text-decoration-underline"
+                    style={{ color: "rgb(255, 98, 55)", cursor: "pointer" }}
                   >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    Terms of Services, Privacy Policy
                   </span>
-                </div>
+                </span>
               </div>
+              {formErrors.terms && (
+                <div className="text-danger small mt-1">{formErrors.terms}</div>
+              )}
             </div>
 
-            <div className="row w-100 mt-3">
-              <div className="col-md-12 d-flex flex-column inp-login">
-                <label>Phone Number</label>
-
-                <InputGroupWithFlag
-                  placeholder=""
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="p-1 rounded-2 w-100"
-                />
-                {formErrors.phone && (
-                  <span className="text-danger small">{formErrors.phone}</span>
-                )}
-              </div>
-            </div>
-
-            <div className="row w-100 mt-3">
-              <div className="col-md-12 d-flex flex-column inp-login">
-                <label>Nationality</label>
-                <Select
-                  options={countryOptions}
-                  value={formData.country}
-                  onChange={handleCountryChange}
-                />
-              </div>
-            </div>
-
-            <div className="row w-100 mt-3">
-              <div className="d-flex flex-column">
-                <div className="d-flex">
-                  <input
-                    type="checkbox"
-                    name="terms"
-                    className="me-2"
-                    checked={formData.terms}
-                    onChange={handleChange}
-                    required
-                  />
-                  <span className="sofia-font text-size agree-font-size">
-                    I agree with Nahham’s
-                    <span
-                      className="ms-1 sofia-font text-decoration-underline"
-                      style={{ color: "rgb(255, 98, 55)" }}
-                    >
-                      Terms of Services, Privacy Policy
-                    </span>
-                  </span>
-                </div>
-                {formErrors.terms && (
-                  <div className="text-danger small mt-1">
-                    {formErrors.terms}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="login-btn text-center mt-4">
+            <div className="text-center mt-4 w-100">
               <button
                 type="submit"
-                className="btn btn-base inter-font"
-                style={{ width: "270px", height: "50px" }}
+                className="btn btn-base inter-font w-100"
+                style={{ maxWidth: "270px", height: "50px" }}
                 disabled={isLoader}
               >
                 {isLoader ? "Creating..." : "Create Account"}

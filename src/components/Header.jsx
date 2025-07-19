@@ -52,7 +52,7 @@ const Navbar = () => {
   return (
     <nav
       className={`navbar navbar-expand-lg sticky ${
-        scrolled ? "navbar-light bg-white shadow" : "bg-transparent"
+        scrolled ? "navbar-light md-bg-white bg-white shadow" : "bg-transparent"
       }`}
     >
       <div className="container">

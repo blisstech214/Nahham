@@ -20,18 +20,18 @@ const Video = () => {
   const fetchMedia = async (page) => {
     if (hasFetchedOnce.current && page === currentPage) return;
     hasFetchedOnce.current = true;
+
     try {
       setIsLoading(true);
       const res = await ApiService.request({
         method: "GET",
-        url: `/getMedia`,
+        url: "/getMedia",
         params: { type: "video", page },
       });
 
       const payload = res.data?.data;
       setMediaFiles(payload?.media_files || []);
       setTotalPages(payload?.pagination?.total_pages || 1);
-      // toast.success(res.data.message);
     } catch (err) {
       console.error(err);
       toast.error(err.response?.data?.message || "Failed to load videos");
@@ -43,6 +43,25 @@ const Video = () => {
   const handlePageChange = (page) => {
     if (page !== currentPage && page > 0 && page <= totalPages) {
       setCurrentPage(page);
+    }
+  };
+
+  const openModal = (index) => {
+    setSelectedVideoIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
+
+  const showPrevVideo = () => {
+    if (selectedVideoIndex > 0) {
+      setSelectedVideoIndex(selectedVideoIndex - 1);
+    }
+  };
+
+  const showNextVideo = () => {
+    if (selectedVideoIndex < mediaFiles.length - 1) {
+      setSelectedVideoIndex(selectedVideoIndex + 1);
     }
   };
 
@@ -58,17 +77,13 @@ const Video = () => {
 
     if (startPage > 1) {
       pages.push(
-        <li
-          key={1}
-          className="page-item inter-font"
-          onClick={() => handlePageChange(1)}
-        >
+        <li key={1} className="page-item" onClick={() => handlePageChange(1)}>
           1
         </li>
       );
       if (startPage > 2) {
         pages.push(
-          <li key="ellipsis-start" className="page-item inter-font">
+          <li key="ellipsis-start" className="page-item">
             ...
           </li>
         );
@@ -79,9 +94,7 @@ const Video = () => {
       pages.push(
         <li
           key={i}
-          className={`page-item inter-font ${
-            currentPage === i ? "active" : ""
-          }`}
+          className={`page-item ${currentPage === i ? "active" : ""}`}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -92,7 +105,7 @@ const Video = () => {
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         pages.push(
-          <li key="ellipsis-end" className="page-item inter-font">
+          <li key="ellipsis-end" className="page-item">
             ...
           </li>
         );
@@ -100,7 +113,7 @@ const Video = () => {
       pages.push(
         <li
           key={totalPages}
-          className="page-item inter-font"
+          className="page-item"
           onClick={() => handlePageChange(totalPages)}
         >
           {totalPages}
@@ -109,37 +122,6 @@ const Video = () => {
     }
 
     return pages;
-  };
-
-  const handlePlay = (videoId) => {
-    const videoElement = document.getElementById(`video-${videoId}`);
-    if (videoElement) {
-      videoElement.play();
-      videoElement.controls = true;
-      const overlay = document.getElementById(`overlay-${videoId}`);
-      if (overlay) overlay.style.display = "none";
-    }
-  };
-
-  const openModal = (index) => {
-    setSelectedVideoIndex(index);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const showPrevVideo = () => {
-    if (selectedVideoIndex > 0) {
-      setSelectedVideoIndex(selectedVideoIndex - 1);
-    }
-  };
-
-  const showNextVideo = () => {
-    if (selectedVideoIndex < mediaFiles.length - 1) {
-      setSelectedVideoIndex(selectedVideoIndex + 1);
-    }
   };
 
   return (
@@ -156,22 +138,19 @@ const Video = () => {
             {mediaFiles.map((m, index) => (
               <div key={m._id} className="col-md-4">
                 <div className="card border-0 shadow-sm position-relative rounded-3 overflow-hidden">
-                  {/* Responsive video wrapper */}
                   <div className="ratio ratio-16x9">
                     <video
                       id={`video-${m._id}`}
                       src={m.file}
-                      crossOrigin="anonymous"
                       className="w-100 h-100"
                       style={{ objectFit: "cover", borderRadius: "12px" }}
+                      controls={false}
                       onError={(e) =>
                         (e.currentTarget.src = "/placeholder.png")
                       }
-                      controls={false}
                     />
                   </div>
 
-                  {/* Overlay Play Icon */}
                   <div
                     className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
                     onClick={() => openModal(index)}
@@ -217,6 +196,8 @@ const Video = () => {
           )}
         </>
       )}
+
+      {/* Modal */}
       {isModalOpen && (
         <div
           className="modal-backdrop"
@@ -240,11 +221,11 @@ const Video = () => {
               position: "relative",
               maxWidth: "90%",
               maxHeight: "90%",
-              height: "70%",
               width: "60%",
+              height: "70%",
+              marginTop: "80px",
             }}
           >
-            {/* Close Icon */}
             <button
               onClick={closeModal}
               style={{
@@ -283,7 +264,6 @@ const Video = () => {
               onError={(e) => (e.currentTarget.src = "/placeholder.png")}
             />
 
-            {/* Left Arrow */}
             {selectedVideoIndex > 0 && (
               <button
                 onClick={showPrevVideo}
@@ -303,7 +283,6 @@ const Video = () => {
               </button>
             )}
 
-            {/* Right Arrow */}
             {selectedVideoIndex < mediaFiles.length - 1 && (
               <button
                 onClick={showNextVideo}

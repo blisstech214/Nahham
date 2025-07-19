@@ -64,69 +64,75 @@ const TalentLogin = () => {
   }, []);
 
   return (
-    <div className="main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center position-relative w-100">
-      <div className="position-absolute top-0 start-0 mt-5 ms-5">
-        <img src={logo} alt="Logo" style={{ height: "50px" }} />
+    <div className="main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center position-relative w-100 px-3">
+      <div className="position-absolute top-0 start-0 mt-4 ms-4">
+        <img
+          src={logo}
+          alt="Logo"
+          style={{ height: "50px", maxWidth: "100%" }}
+        />
       </div>
 
       {!showSignup ? (
-        <div className="container talent-login" style={{ width: "850px" }}>
+        <div
+          className="container talent-login px-0"
+          style={{ maxWidth: "850px" }}
+        >
           <div className="row justify-content-center">
             <div className="col-lg-10">
               <div className="row g-0 shadow-lg rounded-4 overflow-hidden">
-                <div
-                  className="col-md-6 d-none d-md-block"
-                  style={{ height: "550px" }}
-                >
+                {/* Left Image */}
+                <div className="col-md-6 d-none d-md-block">
                   <img
                     src={login_img}
                     className="w-100 h-100 object-fit-cover"
                     alt="Login visual"
+                    style={{ height: "550px", objectFit: "cover" }}
                   />
                 </div>
 
-                {/* Right side content */}
-                <div className="col-md-6 bg-white p-4">
+                {/* Right Form */}
+                <div className="col-12 col-md-6 bg-white p-4 p-md-5">
                   <form onSubmit={handleSubmit}>
                     <div className="text-center text-md-start">
                       <h3
-                        className="fw-bold mt-5 mb-2 inter-font talent-login-heading"
-                        style={{ fontSize: "25px" }}
+                        className="fw-bold mb-2 inter-font"
+                        style={{ fontSize: "25px", marginTop: "30px" }}
                       >
                         Sign in to your account
                       </h3>
-                      <p className="text-muted mb-5 inter-font">
+                      <p className="text-muted mb-4 inter-font">
                         Login in to talent
                       </p>
                     </div>
 
-                    <div className="group d-flex flex-column inp-login">
-                      <label className="fs-5">Email</label>
+                    <div className="mb-3">
+                      <label className="fs-6 mb-1 inter-font">Email</label>
                       <input
                         type="email"
-                        className="p-2 rounded-2"
-                        style={{ width: "283px" }}
+                        className="form-control p-3 rounded-2 inter-font"
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
                         required
+                        style={{ backgroundColor: "#f8f8f8" }}
                       />
                     </div>
 
-                    <div className="group d-flex flex-column inp-login mt-3">
-                      <label className="fs-5">Password</label>
+                    <div className="mb-4">
+                      <label className="fs-6 mb-1 inter-font">Password</label>
                       <input
                         type="password"
-                        className="p-2 rounded-2"
+                        className="form-control p-3 rounded-2 inter-font"
                         name="password"
                         value={formData.password}
                         onChange={handleInputChange}
                         required
-                        style={{ width: "283px" }}
+                        style={{ backgroundColor: "#f8f8f8" }}
                       />
                     </div>
 
-                    <div className="login-btn text-center mt-4">
+                    <div className="text-center mt-4">
                       <button
                         type="submit"
                         className="btn btn-base px-5 sofia-font"
@@ -142,7 +148,7 @@ const TalentLogin = () => {
                     >
                       Don’t have an account?
                       <span
-                        className="text-decoration-underline ms-1 sofia-font"
+                        className="text-decoration-underline ms-1"
                         style={{ cursor: "pointer", color: "#FF6237" }}
                         onClick={() => setShowSignup(true)}
                       >
@@ -151,13 +157,13 @@ const TalentLogin = () => {
                     </p>
 
                     <p
-                      className="small text-start mt-3 inter-font text-size"
-                      style={{ color: "rgba(0, 0, 0, 0.4)" }}
+                      className="small text-start mt-3 inter-font"
+                      style={{ color: "rgba(0, 0, 0, 0.4)", fontSize: "12px" }}
                     >
                       By joining, you agree to the Nahham
                       <strong
                         className="mx-1 sofia-font"
-                        style={{ color: "rgb(255, 98, 55)" }}
+                        style={{ color: "#FF6237" }}
                       >
                         Terms of Service
                       </strong>
@@ -165,7 +171,7 @@ const TalentLogin = () => {
                       our
                       <strong
                         className="mx-1 sofia-font"
-                        style={{ color: "rgb(255, 98, 55)" }}
+                        style={{ color: "#FF6237" }}
                       >
                         Privacy Policy
                       </strong>

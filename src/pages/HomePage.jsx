@@ -269,18 +269,18 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="anta-habibi d-flex justify-content-center align-items-center mt-5">
-            <div className="image-wrapper">
-              <img src={banner1} />
+          <div className="d-flex flex-wrap justify-content-center align-items-center mt-5">
+            <div className="p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner1} className="img-fluid" />
             </div>
-            <div className="image-wrapper image-wrapper2 mx-4">
-              <img src={banner2} />
+            <div className="p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner2} className="img-fluid" />
             </div>
-            <div className="image-wrapper image-wrapper3 me-4 p-size">
-              <img src={banner3} />
+            <div className="p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner3} className="img-fluid" />
             </div>
-            <div className="image-wrapper image-wrapper4">
-              <img src={banner4} />
+            <div className="p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner4} className="img-fluid" />
             </div>
           </div>
         </div>
@@ -379,15 +379,16 @@ const HomePage = () => {
                   <div className="text-center">
                     <div
                       className="rounded-circle overflow-hidden mx-auto mb-2"
-                      style={{ width: "200px", height: "200px" }}
+                      style={{ width: "150px", height: "150px" }}
                     >
                       <img
                         src={talent.img}
                         alt={talent.name}
+                        className="img-fluid"
                         style={{
+                          objectFit: "cover",
                           width: "100%",
                           height: "100%",
-                          objectFit: "cover",
                         }}
                       />
                     </div>
@@ -431,17 +432,14 @@ const HomePage = () => {
                 </p>
               </div>
             </div>
-            <img
-              src={works1}
-              className="d-block d-md-none mt-3"
-              style={{ width: "100%" }}
-            />
-            <br />
-            <img
-              src={line}
-              className="ms-4 line"
-              style={{ marginTop: "-125px" }}
-            />
+            <div className="d-flex flex-column flex-md-row">
+              <img src={works1} className="img-fluid d-block d-md-none mb-3" />
+              <img
+                src={works1}
+                className="d-none d-md-block"
+                style={{ width: "90%" }}
+              />
+            </div>
             <br />
 
             <div className="d-flex">
@@ -503,7 +501,10 @@ const HomePage = () => {
         className="container top rounded-5 faq"
         id="faq"
         data-aos="zoom-in"
-        style={{ backgroundColor: "#E98266", height: "690px" }}
+        style={{
+          backgroundColor: "#E98266",
+          height: "690px",
+        }}
       >
         <div className="row">
           <div className="col-md-4">
@@ -515,8 +516,8 @@ const HomePage = () => {
           </div>
           <div className="col-md-8">
             <div
-              className="bg-white mt-5 rounded-5 main-faq"
-              style={{ maxWidth: "800px", padding: "60px" }}
+              className="bg-white mt-5 rounded-5 main-faq p-3 p-md-5"
+              style={{ maxWidth: "800px" }}
             >
               <div
                 className="accordion border-bottom-0"
@@ -642,9 +643,13 @@ const HomePage = () => {
         }}
         id="places"
       >
-        <div>
-          <h1 className="fw-bolder text-center" style={{ fontSize: "3.5rem" }}>
-            Want To Hire Talent <br className="break" /> People from Us!
+        <div
+          className="text-center w-100"
+          style={{ padding: "2rem", minHeight: "auto" }}
+        >
+          <h1 className="fw-bold display-6 d-md-none">Want To Hire Talent?</h1>
+          <h1 className="fw-bold display-3 d-none d-md-block">
+            Want To Hire Talent?
           </h1>
         </div>
 

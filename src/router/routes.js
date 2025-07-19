@@ -23,23 +23,29 @@ const AppRouter = () => {
     // <Router basename={basePath}>
     <Router>
       <Routes>
+        {/* D */}
         <Route path="/" element={<HomePage />} />
+        {/* D */}
         <Route path="/becomePartner" element={<BecomePartner />} />
         <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/termsCondition" element={<TermsCondition />} />
         <Route path="/about-us" element={<Aboutus />} />
+        {/* D */}
         <Route path="/register" element={<Register />} />
         <Route path="/company-dashboard" element={<CompanyUserDashboard />} />
-
+{/* D */}
         <Route path="/company" element={<SelectCompany />} />
+        {/* D */}
         <Route path="/company/login" element={<Login />} />
+        {/* D */}
         <Route path="/company/verify-otp" element={<CompanyVerifyOTP />} />
 
         <Route path="/talent/dashboard" element={<TalentUserDashboard />} />
+        {/* D */}
         <Route path="/talent/verify-otp" element={<TalentVerifyOTP />} />
 
         <Route path="/company/talent/hire" element={<HireTheTalent />} />
-
+{/* D */}
         <Route path="/UploadDocuments" element={<UploadDocuments />} />
       </Routes>
     </Router>

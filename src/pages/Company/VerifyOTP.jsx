@@ -15,8 +15,8 @@ const VerifyOTP = () => {
   const [resendTimer, setResendTimer] = useState(0);
 
   const company_id = localStorage.getItem("company_id");
-  console.log(company_id)
-  
+  console.log(company_id);
+
   const deviceToken = localStorage.getItem("deviceToken");
 
   const phone = localStorage.getItem("phone");
@@ -164,32 +164,32 @@ const VerifyOTP = () => {
 
         <div
           className="container upload-doc-coontainer bg-white p-4 d-flex flex-column justify-content-center align-items-center rounded-4"
-          style={{ width: "700px" }}
+          style={{ width: "90%", maxWidth: "700px" }}
         >
-          <h2 className="fw-bold inter-font mt-4" style={{ fontSize: "25px" }}>
-            Verify OTP
-          </h2>
-          <p className="inter-font" style={{ color: "rgba(0, 0, 0, 0.3)" }}>
+          <h2 className="fw-bold inter-font mt-4 fs-4 fs-md-3">Verify OTP</h2>
+          <p
+            className="inter-font text-center"
+            style={{ color: "rgba(0, 0, 0, 0.3)" }}
+          >
             Enter the 6‑digit code we just sent you.
           </p>
 
           <Form onSubmit={handleSubmit}>
-            <div className="d-flex flex-column align-items-start">
-              <div className="d-flex gap-5 mb-3">
+            <div className="d-flex flex-column align-items-center">
+              <div className="d-flex gap-2 gap-md-4 mb-3 flex-wrap justify-content-center">
                 {[...Array(6)].map((_, i) => (
                   <Form.Control
                     key={i}
                     type="text"
                     maxLength="1"
-                    className="text-center fs-4 inter-font my-4"
+                    className="text-center fs-4 inter-font my-2"
                     style={{
-                      width: "61px",
-                      height: "61px",
+                      width: "50px",
+                      height: "50px",
                       backgroundColor: "#f5f5f5",
                       border: "none",
                       boxShadow: "inset 0 0 0 1px #ccc",
                       borderRadius: "5px",
-                      paddingLeft: "12px",
                     }}
                     onChange={(e) => handleChange(e, i)}
                     onKeyDown={(e) => handleKeyDown(e, i)}
@@ -199,7 +199,7 @@ const VerifyOTP = () => {
                 ))}
               </div>
 
-              <p className="mb-0 text-start inter-font">
+              <p className="mb-0 text-center inter-font">
                 Didn’t receive it?
                 <span
                   className="inter-font ms-2"
@@ -218,7 +218,7 @@ const VerifyOTP = () => {
             <Button
               type="submit"
               className="btn btn-base mt-4 inter-font border-0"
-              style={{ width: "130px", height: "60px" }}
+              style={{ width: "100%", maxWidth: "200px", height: "55px" }}
               disabled={isLoader}
             >
               {isLoader ? "Verifying…" : "Continue"}

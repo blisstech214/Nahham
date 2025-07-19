@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 import { CiSearch } from "react-icons/ci";
 
@@ -13,8 +13,8 @@ import { Table } from "react-bootstrap";
 
 import dollar from "../../assets/images/dollar.png";
 
-import Navbar from "../CompanyUserDahboard/Navbar"
-import DashboardFooter from './DashboardFooter';
+import Navbar from "../CompanyUserDahboard/Navbar";
+import DashboardFooter from "./DashboardFooter";
 
 import fb from "../../assets/images/fb.png";
 import x from "../../assets/images/x.png";
@@ -62,18 +62,18 @@ const Dashboard = () => {
 
   return (
     <div
-      className="w-100 content"
+      className=""
       style={{
-        height: "100vh",
-        overflowY: "scroll",
-        overflowX: "hidden",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
+        // height: "100vh",
+        // overflowY: "scroll",
+        // overflowX: "hidden",
+        // scrollbarWidth: "none",
+        // msOverflowStyle: "none",
       }}
     >
       {/* Main Content */}
       <div className="flex-grow-1 px-5 main-bg inp-login">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="position-relative mb-3">
           <input
             type="text"
@@ -315,7 +315,7 @@ const Dashboard = () => {
       </div>
 
       {/* Footer */}
-      <div>
+      {/* <div>
         <footer
           className="d-flex justify-content-between align-items-center text-muted"
           style={{
@@ -343,9 +343,9 @@ const Dashboard = () => {
             <img src={snapchat} className="me-5" />
           </div>
         </footer>
-      </div>
+      </div> */}
     </div>
   );
-}
+};
 
 export default Dashboard;

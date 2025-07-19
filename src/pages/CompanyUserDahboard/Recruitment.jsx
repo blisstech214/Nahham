@@ -1,13 +1,9 @@
 import React, { useState } from "react";
-
 import Navbar from "./Navbar";
 import DashboardFooter from "../CompanyUserDahboard/DashboardFooter";
-
 import { CiSearch } from "react-icons/ci";
-
 import Select from "react-select";
-
-import { Container, Row, Col, Badge, Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 
 const Recruitment = () => {
   const yearOptions = [
@@ -98,17 +94,15 @@ const Recruitment = () => {
   ];
 
   return (
-    <div className="main-bg py-5" style={{ height: "100vh" }}>
-      <div className="d-flex justify-content-between align-items-center">
+    <div className="" style={{ minHeight: "100vh" }}>
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3">
         <h2 className="inter-font" style={{ fontSize: "19px" }}>
           Recruitment History
         </h2>
-        {/* Navbar */}
-        <Navbar />
       </div>
 
-      {/* Body */}
-      <div className="px-5">
+      {/* Filters */}
+      <div className="px-3 mt-4">
         <div className="position-relative mb-3">
           <input
             type="text"
@@ -127,55 +121,57 @@ const Recruitment = () => {
             size={20}
           />
         </div>
-      </div>
 
-      <div className="d-flex px-5">
-        <div className="d-flex" style={{ width: "1025px" }}>
-          <div style={{ width: "206px", marginRight: "8px" }}>
+        <div className="d-flex flex-wrap gap-2">
+          <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
             <Select options={yearOptions} />
           </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
+          <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
             <Select options={categoryOptions} />
           </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
+          <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
             <Select options={subCategoryOptions} />
           </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
+          <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
             <Select options={ageOptions} />
           </div>
-          <div style={{ width: "206px", marginRight: "10px" }}>
+          <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
             <Select options={availabilityOptions} />
           </div>
-        </div>
 
-        <div className="d-flex justify-content-center align-items-center">
           <button
             className="btn inter-font d-flex align-items-center justify-content-center gap-1"
             style={{
               background: "rgba(205, 73, 109, 1)",
               color: "white",
-              width: "88px",
-              height: "44px",
-              padding: 0,
+              padding: "8px 18px",
               border: "none",
-              marginLeft: "33px",
+              borderRadius: "8px",
             }}
           >
-            <CiSearch size={18} style={{ marginBottom: "2px" }} />
+            <CiSearch size={18} />
             Search
           </button>
         </div>
       </div>
 
-      {/*  */}
-      <Container className="bg-white rounded-4 mt-4 p-0 overflow-hidden mx-5">
+      {/* Recruitment Table */}
+      <Container
+        className="bg-white rounded-4 mt-4 p-0 overflow-hidden"
+        style={{ marginTop: "30px" }}
+      >
         {data.map((person, idx) => (
           <Row
             key={idx}
-            className="align-items-center py-3 px-4 border-bottom"
+            className="align-items-center py-3 px-3 border-bottom"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            <Col md={3} className="d-flex align-items-center gap-3">
+            <Col
+              xs={12}
+              sm={6}
+              md={3}
+              className="d-flex align-items-center gap-3 mb-3 mb-md-0"
+            >
               <Image
                 src={person.img}
                 roundedCircle
@@ -191,94 +187,73 @@ const Recruitment = () => {
               </div>
             </Col>
 
-            <Col md={2}>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
               <div className="fw-semibold">Category</div>
-              <div className="mt-2 recruitment-table fw-lighter">
+              <div style={{ fontSize: "14px", color: "#555" }}>
                 {person.category}
               </div>
             </Col>
 
-            <Col md={2}>
-              <div className="fw-semibold mb-2">Contract Status</div>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+              <div className="fw-semibold mb-1">Contract</div>
               <span
-                className="inter-font"
                 style={{
                   background:
                     person.contract === "Active"
-                      ? "rgba(0, 194, 95, 1)"
-                      : "rgba(233, 123, 110, 1)",
+                      ? "rgba(0,194,95,1)"
+                      : "rgba(233,123,110,1)",
                   color: "white",
                   borderRadius: "10px",
                   padding: "4px 12px",
-                  fontSize: "14px",
-                  height: "23px",
+                  fontSize: "13px",
                 }}
               >
                 {person.contract === "Active" ? "Active" : "Expired/Closed"}
               </span>
             </Col>
 
-            <Col md={2}>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
               {person.period ? (
                 <>
-                  <div className="fw-semibold mb-2">Period</div>
-                  <div className="recruitment-table fw-lighter">
+                  <div className="fw-semibold mb-1">Period</div>
+                  <div style={{ fontSize: "14px", color: "#555" }}>
                     {person.period}
                   </div>
                 </>
               ) : (
                 <>
-                  <div className="fw-semibold">Experience</div>
-                  <div className="recruitment-table fw-lighter">
+                  <div className="fw-semibold mb-1">Experience</div>
+                  <div style={{ fontSize: "14px", color: "#555" }}>
                     {person.experience}
                   </div>
                 </>
               )}
             </Col>
 
-            <Col md={1}>
-              {person.duration ? (
-                <>
-                  <div className="fw-semibold mb-2">Duration</div>
-                  <div className="recruitment-table fw-lighter">
-                    {person.duration}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="fw-semibold mb-2">Nationality</div>
-                  <div className="recruitment-table fw-lighter">
-                    {person.nationality}
-                  </div>
-                </>
-              )}
-            </Col>
-
-            <Col md={2}>
+            <Col xs={12} sm={6} md={3}>
               {person.amount ? (
-                <div className="ms-4">
-                  <div className="fw-semibold mb-2">Amount Paid</div>
+                <>
+                  <div className="fw-semibold mb-1">Amount Paid</div>
                   <div className="fw-bold" style={{ color: "#999" }}>
                     {person.amount}
                   </div>
-                </div>
+                </>
               ) : (
-                <div className="ms-4">
-                  <div className="fw-semibold" style={{ marginTop: "-25px" }}>
-                    Contact
-                  </div>
-                  <div className="recruitment-table fw-lighter">
+                <>
+                  <div className="fw-semibold mb-1">Contact</div>
+                  <div style={{ fontSize: "14px", color: "#555" }}>
                     {person.contact}
                   </div>
-                </div>
+                </>
               )}
             </Col>
           </Row>
         ))}
       </Container>
 
-      <div className="pagination-container">
-        <ul className="pagination-list">
+      {/* Pagination */}
+      <div className="d-flex justify-content-center my-5">
+        <ul className="pagination-list d-flex gap-2 list-unstyled">
           <li className="page-item active inter-font">1</li>
           <li className="page-item inter-font">2</li>
           <li className="page-item inter-font">3</li>
@@ -286,15 +261,11 @@ const Recruitment = () => {
           <li className="page-item inter-font">5</li>
           <li className="page-item inter-font">...</li>
           <li className="page-item inter-font">26</li>
-          <li className="page-item inter-font arrow">{">"}</li>
+          <li className="page-item inter-font">{">"}</li>
         </ul>
-        {/* <button className="view-all-btn inter-font fw-lighter py-3">
-          View All
-        </button> */}
       </div>
 
-      {/* Footer */}
-      <DashboardFooter />
+    
     </div>
   );
 };

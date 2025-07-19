@@ -9,12 +9,10 @@ import TransactionsContent from "./CompanyUserDahboard/Transactions";
 import SettingsContent from "./CompanyUserDahboard/Settings";
 import ProfileContent from "./CompanyUserDahboard/Profile";
 import RecruitmentContent from "./CompanyUserDahboard/Recruitment";
-import HireTheTalent from "./CompanyUserDahboard/HireTheTalent";
 import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "./CompanyUserDahboard/Navbar";
 
 const UserDashboard = () => {
-  // const [activeTab, setActiveTab] = useState("dashboard");
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -58,56 +56,76 @@ const UserDashboard = () => {
   };
 
   return (
-    <>
+    <div
+      className="layout-wrapper inter-font"
+      style={{
+        width: "100%",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        height:'100vh'
+      }}
+    >
+      {/* Sidebar */}
       <div
-        className="layout-wrapper d-flex flex-column inter-font overflow-y-hidden overflow-x-hidden"
-        style={{ minHeight: "100vh" }}
+        style={{
+          flexBasis: "25%",
+          flexGrow: 1,
+          maxWidth: "300px",
+          minWidth: "250px",
+          width: "100%",
+        }}
       >
-        {/* Decoration strip */}
+        <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
+      </div>
+
+      {/* Content + Decoration Row */}
+      <div
+        style={{
+          flexBasis: "75%",
+          flexGrow: 1,
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          padding: "20px",
+        }}
+      >
+        {/* Main Content Area */}
         <div
-          className="left-strip"
           style={{
-            position: "absolute",
-            right: "-12px",
-            top: "0px",
-            opacity: "0.3",
-            zIndex: 1,
-            paddingTop: "0px",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
           }}
         >
-          {[...Array(4)].map((_, i) => (
-            <img
-              key={i}
-              src={decoration}
-              alt="Decoration"
-              className="strip-icon"
-              style={{ width: "30px" }}
-            />
-          ))}
+          <Navbar />
+          <div style={{ flexGrow: 1 }}>{renderContent()}</div>
+          <DashboardFooter />
         </div>
 
-        <div className="container-fluid">
-          <div className="row" style={{ height: "100vh", overflow: "hidden" }}>
-            <div className="col-md-2 p-0">
-              <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
-            </div>
-            <div
-              className="col-md-10 content px-4 py-3"
-              style={{
-                height: "100vh",
-                overflowY: "scroll",
-                overflowX: "hidden",
-                scrollbarWidth: "none", // Firefox
-                msOverflowStyle: "none", // IE & Edge
-              }}
-            >
-              {renderContent()}
-              {/* <DashboardFooter /> */}
-            </div>
-          </div>
+        {/* Decoration Image (Right Side) */}
+        <div
+          className="d-none d-lg-flex"
+          style={{
+            width: "40px",
+            marginLeft: "10px",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src={decoration}
+            alt="Decoration"
+            style={{
+              width: "30px",
+              height: "100%",
+              objectFit: "contain",
+            }}
+          />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

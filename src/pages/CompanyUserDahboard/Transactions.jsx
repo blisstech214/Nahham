@@ -1,17 +1,11 @@
 import React from "react";
-
 import Navbar from "./Navbar";
 import DashboardFooter from "../CompanyUserDahboard/DashboardFooter";
-
 import { CiSearch } from "react-icons/ci";
-
 import Select from "react-select";
-
-import { Container, Row, Col, Image } from "react-bootstrap";
-
+import { Container, Row, Col } from "react-bootstrap";
 import { LuDownload } from "react-icons/lu";
 import { FaEye } from "react-icons/fa";
-
 
 const Transaction = () => {
   const yearOptions = [
@@ -61,7 +55,7 @@ const Transaction = () => {
     },
     {
       date: "10 April",
-      invoiceNo: "NH00112",
+      invoiceNo: "NH00113",
       name: "Nadeem Tamimi",
       contract: "Expired",
       project: "NGI Film",
@@ -71,7 +65,7 @@ const Transaction = () => {
     },
     {
       date: "10 April",
-      invoiceNo: "NH00112",
+      invoiceNo: "NH00114",
       name: "Nadeem Tamimi",
       contract: "Expired",
       project: "NGI Film",
@@ -81,7 +75,7 @@ const Transaction = () => {
     },
     {
       date: "10 April",
-      invoiceNo: "NH00112",
+      invoiceNo: "NH00115",
       name: "Nadeem Tamimi",
       contract: "Expired",
       project: "NGI Film",
@@ -91,7 +85,7 @@ const Transaction = () => {
     },
     {
       date: "10 April",
-      invoiceNo: "NH00112",
+      invoiceNo: "NH00116",
       name: "Nadeem Tamimi",
       contract: "Expired",
       project: "NGI Film",
@@ -101,150 +95,148 @@ const Transaction = () => {
     },
   ];
 
-
   return (
-    <div className="main-bg py-5" style={{ height: "100vh" }}>
-      <div className="d-flex justify-content-between align-items-center px-5">
+    <div className="" style={{ minHeight: "100vh" }}>
+      <div className="d-flex justify-content-between align-items-center flex-wrap px-3">
         <h2 className="inter-font" style={{ fontSize: "19px" }}>
           Transactions History
         </h2>
-        {/* Navbar */}
-        <Navbar />
       </div>
 
-      {/* Body */}
-      <div>
-        <div className="position-relative mb-3 mx-5">
-          <input
-            type="text"
-            placeholder="Search by Keywords"
-            className="w-100 p-2 rounded-3 ps-5 py-3 inter-font"
-            style={{ paddingLeft: "2.5rem", border: "none" }}
-          />
-          <CiSearch
-            className="position-absolute"
-            style={{
-              left: "12px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              pointerEvents: "none",
-            }}
-            size={20}
-          />
-        </div>
+      {/* Search */}
+      <div className="position-relative mb-3">
+        <input
+          type="text"
+          placeholder="Search by Keywords"
+          className="w-100 p-2 rounded-3 ps-5 py-3 inter-font"
+          style={{ paddingLeft: "2.5rem", border: "none" }}
+        />
+        <CiSearch
+          className="position-absolute"
+          style={{
+            left: "12px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            pointerEvents: "none",
+          }}
+          size={20}
+        />
       </div>
 
-      <div className="d-flex mx-5">
-        <div className="d-flex" style={{ width: "1030px" }}>
-          <div style={{ width: "206px", marginRight: "8px" }}>
-            <Select options={yearOptions} />
-          </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
-            <Select options={categoryOptions} />
-          </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
-            <Select options={subCategoryOptions} />
-          </div>
-          <div style={{ width: "206px", marginRight: "8px" }}>
-            <Select options={ageOptions} />
-          </div>
-          <div style={{ width: "206px", marginRight: "10px" }}>
-            <Select options={availabilityOptions} />
-          </div>
+      {/* Filters */}
+      <div className="d-flex flex-wrap gap-2 px-3">
+        <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
+          <Select options={yearOptions} />
+        </div>
+        <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
+          <Select options={categoryOptions} />
+        </div>
+        <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
+          <Select options={subCategoryOptions} />
+        </div>
+        <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
+          <Select options={ageOptions} />
+        </div>
+        <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
+          <Select options={availabilityOptions} />
         </div>
 
-        <div className="d-flex justify-content-center align-items-center">
-          <button
-            className="btn inter-font d-flex align-items-center justify-content-center gap-1"
-            style={{
-              background: "rgba(205, 73, 109, 1)",
-              color: "white",
-              width: "88px",
-              height: "44px",
-              padding: 0,
-              border: "none",
-              marginLeft: "33px"
-            }}
-          >
-            <CiSearch size={18} style={{ marginBottom: "2px" }} />
-            Search
-          </button>
-        </div>
+        <button
+          className="btn inter-font d-flex align-items-center justify-content-center gap-1"
+          style={{
+            background: "rgba(205, 73, 109, 1)",
+            color: "white",
+            padding: "8px 18px",
+            border: "none",
+            borderRadius: "8px",
+          }}
+        >
+          <CiSearch size={18} />
+          Search
+        </button>
       </div>
 
-      {/*  */}
-      <Container className="bg-white rounded-4 mt-4 p-0 mx-5 overflow-hidden">
+      {/* Table */}
+      <Container className="bg-white rounded-4 mt-4 p-0 px-0 overflow-hidden">
         {data.map((item, idx) => (
           <Row
             key={idx}
-            className="align-items-center py-3 px-4 border-bottom"
+            className="align-items-center py-3 px-3 border-bottom"
             style={{ fontFamily: "Inter, sans-serif" }}
           >
-            <Col md={1}>
-              <div className="fw-semibold mt-2 mb-3">Date</div>
-              <div className="recruitment-table">{item.date}</div>
+            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Date</div>
+              <div>{item.date}</div>
             </Col>
 
-            <Col md={2}>
-              <div className="fw-semibold mt-2 mb-3">Invoice No</div>
-              <div className="recruitment-table">{item.invoiceNo}</div>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Invoice No</div>
+              <div>{item.invoiceNo}</div>
             </Col>
 
-            <Col md={2}>
-              <div className="fw-semibold mt-2 mb-3">Talent Name</div>
-              <div className="recruitment-table">{item.name}</div>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Talent Name</div>
+              <div>{item.name}</div>
             </Col>
 
-            <Col md={2}>
-              <div className="fw-semibold mt-2 mb-3">Contract Status</div>
+            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Contract</div>
               <span
-                className="inter-font"
                 style={{
                   background:
                     item.contract === "Active" ? "#00C25F" : "#E97B6E",
                   color: "white",
                   borderRadius: "10px",
                   padding: "4px 12px",
-                  fontSize: "14px",
-                  height: "23px"
+                  fontSize: "13px",
                 }}
               >
                 {item.contract === "Active" ? "Active" : "Expired/Closed"}
               </span>
             </Col>
 
-            <Col md={1}>
-              <div className="fw-semibold mt-2 mb-3">Project</div>
-              <div className="recruitment-table">{item.project}</div>
+            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Project</div>
+              <div>{item.project}</div>
             </Col>
 
-            <Col md={1}>
-              <div className="fw-semibold mt-2 mb-3">Duration</div>
-              <div className="recruitment-table">{item.duration}</div>
+            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Duration</div>
+              <div>{item.duration}</div>
             </Col>
 
-            <Col md={1}>
-              <div className="fw-semibold mt-2 mb-3">Amount</div>
-              <div
-                style={{ fontSize: "14px", color: "rgba(154, 154, 154, 1)" }}
-              >
+            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+              <div className="fw-semibold">Amount</div>
+              <div style={{ fontSize: "14px", color: "#999" }}>
                 {item.amount}
               </div>
             </Col>
 
-            <Col md={2}>
-              <div className="fw-semibold mt-2 mb-3">Status</div>
-              <div className="d-flex align-items-center gap-3 text-white">
-                <span className="inter-font d-flex justify-content-center align-items-center rounded-3" style={{ background: "#00C25F", fontWeight: 500, width: "45px", height: "20px", fontSize: "9px" }}>
+            <Col xs={12} sm={6} md={2}>
+              <div className="fw-semibold">Status / Actions</div>
+              <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
+                <span
+                  style={{
+                    background: "#00C25F",
+                    fontWeight: 500,
+                    width: "50px",
+                    height: "22px",
+                    fontSize: "10px",
+                    color: "white",
+                    borderRadius: "4px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   {item.status}
                 </span>
                 <LuDownload
-                  className="ms-4"
-                  fontSize={23}
+                  fontSize={20}
                   style={{ cursor: "pointer", color: "gray" }}
                 />
                 <FaEye
-                  fontSize={23}
+                  fontSize={20}
                   style={{ cursor: "pointer", color: "gray" }}
                 />
               </div>
@@ -253,8 +245,9 @@ const Transaction = () => {
         ))}
       </Container>
 
-      <div className="pagination-container">
-        <ul className="pagination-list">
+      {/* Pagination */}
+      <div className="d-flex justify-content-center my-5">
+        <ul className="pagination-list d-flex gap-2 list-unstyled">
           <li className="page-item active inter-font">1</li>
           <li className="page-item inter-font">2</li>
           <li className="page-item inter-font">3</li>
@@ -262,15 +255,11 @@ const Transaction = () => {
           <li className="page-item inter-font">5</li>
           <li className="page-item inter-font">...</li>
           <li className="page-item inter-font">26</li>
-          <li className="page-item inter-font arrow">{">"}</li>
+          <li className="page-item inter-font">{">"}</li>
         </ul>
-        {/* <button className="view-all-btn inter-font fw-lighter py-3">
-          View All
-        </button> */}
       </div>
 
       {/* Footer */}
-      <DashboardFooter />
     </div>
   );
 };

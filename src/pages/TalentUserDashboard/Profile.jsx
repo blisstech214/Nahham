@@ -3,11 +3,14 @@ import { FaLocationDot } from "react-icons/fa6";
 import { HiPencil } from "react-icons/hi2";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
+
 import profile from "../../assets/images/Abdulluah-Talent.png";
 import UAE from "../../assets/images/UAE flag.jpeg";
-import { useLocation } from 'react-router-dom';
+
 import Navbar from "./Navbar";
 import DashboardFooter from "../TalentUserDashboard/DashboardFooter";
+
 import AboutTab from "../../components/Profile/About";
 import MyJob from "../../components/Profile/MyJob";
 import Photos from "../../components/Profile/Photos";
@@ -15,7 +18,6 @@ import Videos from "../../components/Profile/Videos";
 import EditProfile from "../../components/Profile/Edit-Profile";
 
 const Profile = () => {
-
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState(null);
   const [skillsData, setSkillsData] = useState(null);
@@ -27,7 +29,9 @@ const Profile = () => {
     return new URLSearchParams(location.search).get(key);
   };
 
-  const [activeTab, setActiveTab] = useState(getQueryParam("subTab") || "about");
+  const [activeTab, setActiveTab] = useState(
+    getQueryParam("subTab") || "about"
+  );
 
   useEffect(() => {
     const currentTab = getQueryParam("subTab");
@@ -50,16 +54,14 @@ const Profile = () => {
         url: `getProfile`,
       });
       const data = response.data;
+
       if (data.status) {
-        // toast.success(data.message);
         setProfileData(data.data.talent);
       } else {
         toast.error(data.message);
-        console.error("Failed to fetch profile:", data.message);
       }
     } catch (error) {
       console.error("Error fetching profile:", error);
-    } finally {
     }
   };
 
@@ -70,18 +72,14 @@ const Profile = () => {
         url: `getSkills`,
       });
       const data = response.data;
-      console.log("datadata", data);
 
       if (data.status) {
-        // toast.success(data.message);
         setSkillsData(data.data.skills);
       } else {
         toast.error(data.message);
-        console.error("Failed to fetch Skills Data:", data.message);
       }
     } catch (error) {
-      console.error("Error fetching Skills Data:", error);
-    } finally {
+      console.error("Error fetching skills data:", error);
     }
   };
 
@@ -95,15 +93,7 @@ const Profile = () => {
   };
 
   return (
-    <div
-      className="main-bg"
-      style={{ minHeight: "100vh", background: "#f8f9fa" }}
-    >
-     <div className="flex-grow-1 px-5 inp-login">
-        <Navbar />
-      </div>
-
-      {/* If editing mode is active, render EditProfile */}
+    <div className="" style={{ minHeight: "100vh" }}>
       {isEditing ? (
         <EditProfile onBack={handleBack} />
       ) : (
@@ -112,7 +102,7 @@ const Profile = () => {
           style={{ maxWidth: "900px" }}
         >
           <div className="row align-items-start">
-            {/* Left column: Image + Tabs */}
+            {/* Left: Profile + Tabs */}
             <div className="col-md-2 text-center">
               <img
                 src={profile}
@@ -130,18 +120,16 @@ const Profile = () => {
                   <div
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    /* ① align-items‑start keeps everything left‑aligned */
-                    className={`my-5 d-flex flex-column align-items-start ${activeTab === tab.id ? "text-dark" : "text-muted"
-                      }`}
+                    className={`my-5 d-flex flex-column align-items-start ${
+                      activeTab === tab.id ? "text-dark" : "text-muted"
+                    }`}
                     style={{
                       cursor: "pointer",
                       width: "fit-content",
                     }}
                   >
                     {tab.label}
-
                     {activeTab === tab.id && (
-                      /* ② alignSelf:'flex-start' is a safe guard if you ever centre the parent again */
                       <div
                         style={{
                           marginTop: "6px",
@@ -158,15 +146,16 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Right column: Info & Content */}
+            {/* Right: Content */}
             <div className="col-md-10">
               <div className="d-flex align-items-start justify-content-between">
                 <div>
-                  <h3 className="fw-bold inter-font"> {profileData?.first_name} {profileData?.last_name} </h3>
+                  <h3 className="fw-bold inter-font">
+                    {profileData?.first_name} {profileData?.last_name}
+                  </h3>
                   <p className="inter-font" style={{ color: "gray" }}>
                     <FaLocationDot className="me-1 text-dark" />
                     {profileData?.country}
-                    {/* Abu Dhabi, UAE */}
                     <img
                       src={UAE}
                       className="ms-2 rounded-1"
@@ -193,9 +182,10 @@ const Profile = () => {
                 )}
               </div>
 
-              {/* Dynamic Tab Content */}
               <div className="tab-content mt-4">
-                {activeTab === "about" && <AboutTab profileData={profileData} skillsData={skillsData} />}
+                {activeTab === "about" && (
+                  <AboutTab profileData={profileData} skillsData={skillsData} />
+                )}
                 {activeTab === "jobs" && <MyJob />}
                 {activeTab === "photos" && <Photos />}
                 {activeTab === "videos" && <Videos />}
@@ -204,10 +194,6 @@ const Profile = () => {
           </div>
         </div>
       )}
-
-      <div className="mt-5">
-        <DashboardFooter />
-      </div>
     </div>
   );
 };

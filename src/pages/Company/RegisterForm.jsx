@@ -12,7 +12,6 @@ import ApiService from "../../services/ApiService";
 import { useNavigate } from "react-router-dom";
 
 const CompanyInfoForm = () => {
-
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -148,8 +147,8 @@ const CompanyInfoForm = () => {
         email: formData.email,
         password: formData.password,
         location: formData.location,
-        phone: "971"+formData.phone,
-        secondary_phone: "971"+formData.secondary_phone,
+        phone: "971" + formData.phone,
+        secondary_phone: "971" + formData.secondary_phone,
         website: formData.website,
         license_no: formData.license_no,
         reg_year: formData.reg_year,
@@ -276,7 +275,7 @@ const CompanyInfoForm = () => {
               <Form.Label className="text-size">Select Sub Category</Form.Label>
               {/* <pre>{JSON.stringify(formData.subCategory)}</pre> */}
               <MultiSelect
-              className="inter-font"
+                className="inter-font"
                 options={subCategoryOptions}
                 value={subCategoryOptions.filter((option) =>
                   formData.subCategory.includes(option.value)
