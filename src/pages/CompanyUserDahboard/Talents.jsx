@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { MultiSelect } from "react-multi-select-component";
 import { useLocation, useNavigate } from "react-router-dom";
 import HireTheTalent from "./HireTheTalent";
+import { ChevronRight } from "lucide-react";
 
 const STATIC_TALENTS = [
   {
@@ -187,16 +188,52 @@ const Talents = () => {
     }
   };
 
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
+
   return (
-    <div className="py-4">
+    <div className="py-4 inter-font">
       {activeTab === "hire" ? (
         <HireTheTalent />
       ) : (
         <Container fluid className="px-4">
           {/* Search & Filter */}
-          <Row className="mb-4 align-items-center gx-3 flex-wrap">
-            <Col xs={12} md={8}>
-              <div className="position-relative" style={{}}>
+          <Row
+            className="mb-4 align-items-center gx-3 d-flex flex-wrap"
+            style={{ justifyContent: "center" }}
+          >
+            <Col xs={12} md={10}>
+              <div className="position-relative" style={{ width: "100%" }}>
                 <input
                   type="text"
                   placeholder="Search by Keywords"
@@ -219,7 +256,7 @@ const Talents = () => {
                 />
               </div>
             </Col>
-            <Col xs={12} md={4} className="mt-3 mt-md-0 text-md-end">
+            <Col xs={12} md={2} className="mt-3 mt-md-0 text-md-end">
               <div
                 className="d-flex justify-content-end align-items-center"
                 style={{ marginLeft: "12px" }}
@@ -239,7 +276,7 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="mb-4 gx-3 flex-wrap">
+          <Row className="mb-4 gx-3 flex-wrap inter-font">
             <Col xs={6} md={2}>
               <Select options={yearOptions} placeholder="Year Exp" />
             </Col>
@@ -254,7 +291,7 @@ const Talents = () => {
                 placeholder="Category"
               />
             </Col>
-            <Col xs={12} md={3} className="mt-3 mt-md-0">
+            <Col xs={12} md={2} className="mt-3 mt-md-0">
               <MultiSelect
                 options={subCategoryOptions}
                 value={subCategoryOptions.filter((o) =>
@@ -275,21 +312,21 @@ const Talents = () => {
                 placeholder="Availability"
               />
             </Col>
-            <Col xs={12} md={1} className="mt-3 mt-md-0 text-md-end ">
-              <div className="d-flex justify-content-end align-items-center position-relative">
-                <Button
-                  className="btn inter-font px-2 d-flex align-items-center justify-content-center"
-                  style={{
-                    background: "#cd496d",
-                    color: "white",
-                    // width: "88px",
-                    // height: "40px",
-                    marginLeft: "10px",
-                  }}
-                >
-                  <CiSearch size={18} /> Filter
-                </Button>
-              </div>
+            <Col xs={12} md={2} className="mt-3 mt-md-0 text-md-end ">
+              {/* <div className="d-flex align-items-center position-relative"> */}
+              <Button
+                className="btn inter-font px-2 d-flex align-items-center justify-content-center"
+                style={{
+                  background: "#cd496d",
+                  color: "white",
+                  // width: "88px",
+                  // height: "40px",
+                  gap: "2px",
+                }}
+              >
+                <CiSearch size={18} /> Filter
+              </Button>
+              {/* </div> */}
             </Col>
           </Row>
 
@@ -325,11 +362,28 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="gx-3">
+          
+
+          <Row className="gx-3 inter-font">
             {talents.map((talent) => (
               <Col xs={12} key={talent._id} className="mb-3">
-                <div className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between">
-                  <div className="d-flex">
+                <div className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between align-items-start position-relative shadow-sm">
+                  {/* Checkbox in top right */}
+                  <input
+                    type="checkbox"
+                    checked={selectedTalentIds.includes(talent._id)}
+                    onChange={() => toggleTalent(talent._id)}
+                    style={{
+                      position: "absolute",
+                      top: "15px",
+                      right: "15px",
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
+
+                  {/* Left Side: Image + Name + Location + Tags */}
+                  <div className="d-flex inter-font">
                     <img
                       src={dashboardTalent2}
                       alt="Talent"
@@ -337,53 +391,143 @@ const Talents = () => {
                         width: "88px",
                         height: "88px",
                         objectFit: "cover",
+                        borderRadius: "50%",
+                        border: "2px solid #ddd",
                       }}
                     />
                     <div className="ms-3">
-                      <h5>
+                      <h5 className="mb-1 fw-bold inter-font">
                         {talent.first_name} {talent.last_name}
                       </h5>
-                      <p style={{ color: "#939393" }}>
-                        <FaLocationDot /> {talent.country}
+                      <p className="mb-2 text-muted d-flex align-items-center inter-font">
+                        <FaLocationDot className="me-1" />
+                        {talent.city}, {talent.country}
+                        {/* <img
+                          src={flagUAE}
+                          alt="Flag"
+                          style={{
+                            width: "20px",
+                            height: "15px",
+                            marginLeft: "8px",
+                          }}
+                        /> */}
                       </p>
-                      <div className="d-flex gap-2">
-                        <span className="bg-light px-2 py-1 rounded">
-                          {talent.education}
-                        </span>
-                        <span className="bg-light px-2 py-1 rounded">
+                      <div className="d-flex gap-2 flex-wrap inter-font">
+                        {talent.skills?.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
                           {talent.year_experience} Y Ex
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-3 mt-md-0">
-                    <p style={{ maxWidth: "400px" }}>
-                      {talent?.about?.slice(0, 90)}...
-                      <span className="text-danger">Read More</span>
+
+                  {/* Right Side: About + Buttons */}
+                  <div className="mt-3 mt-md-0 d-flex flex-column justify-content-between inter-font">
+                    <p style={{ maxWidth: "600px", fontSize: "14px" }}>
+                      {talent.about?.slice(0, 90)}...
+                      <span
+                        className="text-danger fw-semibold inter-font"
+                        style={{ cursor: "pointer" }}
+                      >
+                        {" "}
+                        Read More...
+                      </span>
                     </p>
-                    <div className="d-flex gap-2 justify-content-md-end">
+                    <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
                       <Button
                         size="sm"
-                        style={{ background: "#522a30", color: "#fff" }}
+                        style={{
+                          background: "#522a30",
+                          color: "#fff",
+                          radius: "5px",
+                        }}
+                        className="inter-font"
                       >
                         <LiaDownloadSolid /> Download
                       </Button>
                       <Button
                         size="sm"
                         style={{ background: "#522a30", color: "#fff" }}
+                        className="inter-font"
                       >
                         View Profile
                       </Button>
-                      <input
-                        type="checkbox"
-                        checked={selectedTalentIds.includes(talent._id)}
-                        onChange={() => toggleTalent(talent._id)}
-                      />
                     </div>
                   </div>
                 </div>
               </Col>
             ))}
+          </Row>
+
+          <Row className="mt-4">
+            <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap">
+              {/* Pagination Numbers */}
+              {pages.map((page, index) => (
+                <Button
+                  key={index}
+                  size="sm"
+                  variant={page === current_page ? "danger" : "link"}
+                  style={{
+                    borderRadius: "50%",
+                    width: "36px",
+                    height: "36px",
+                    padding: 0,
+                    backgroundColor:
+                      page === current_page ? "#E46D54" : "transparent",
+                    color: page === current_page ? "#fff" : "#666",
+                    fontWeight: page === current_page ? "600" : "400",
+                    border: "none",
+                    fontSize: "14px",
+                  }}
+                  disabled={page === "..."}
+                  onClick={() => page !== "..." && handlePageChange(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+
+              {/* Next Arrow */}
+              <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === total_pages}
+                onClick={() => handlePageChange(current_page + 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                <ChevronRight size={18} />
+              </Button>
+
+              {/* View All Button */}
+              <Button
+                size="sm"
+                style={{
+                  backgroundColor: "#E46D54",
+                  border: "none",
+                  padding: "6px 20px",
+                  borderRadius: "10px",
+                  color: "#fff",
+                  marginLeft: "10px",
+                }}
+                // onClick={handleViewAll}
+              >
+                View All
+              </Button>
+            </Col>
           </Row>
 
           <Row className="mt-4">

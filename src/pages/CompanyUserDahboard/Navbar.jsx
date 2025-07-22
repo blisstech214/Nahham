@@ -28,8 +28,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className="navbar navbar-expand-md px-3 py-2"
-      style={{ background: "transparent" }}
+      className="navbar navbar-expand-md px-3 py-2 bg-transparent"
+      // style={{ background: "transparent" }}
     >
       <button
         className="navbar-toggler"

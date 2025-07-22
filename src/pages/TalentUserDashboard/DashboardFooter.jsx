@@ -45,7 +45,7 @@ const DashboardFooter = () => {
                 <img src={x} alt="Twitter / X" className="mx-1" />
               </a>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/nahhamuae?igsh=cjdvNjljbXcza2sw"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -66,7 +66,7 @@ const DashboardFooter = () => {
                 <img src={yt} alt="YouTube" className="mx-1" />
               </a>
               <a
-                href="https://www.tiktok.com/"
+                href="https://www.tiktok.com/@nahhamuae?_t=ZS-8y6OUT4PWkM&_r=1"
                 target="_blank"
                 rel="noopener noreferrer"
               >

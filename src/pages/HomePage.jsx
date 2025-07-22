@@ -580,11 +580,11 @@ const HomePage = () => {
               </li>
               <li className="my-2">
                 <FaEnvelope fontSize={17} />
-                <span className="ms-2 fw-bolder">Info@trufit.com</span>
+                <span className="ms-2 fw-bolder">info@nahham.ae</span>
               </li>
               <li>
                 <MdCall fontSize={20} />
-                <span className="ms-1 fw-bolder">(208) 964-6992</span>
+                <span className="ms-1 fw-bolder">(+971) 54 365 5595</span>
               </li>
             </ul>
           </div>

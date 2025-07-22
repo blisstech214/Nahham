@@ -38,7 +38,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       className=""
       style={{
         background: "#411318",
-        width: "280px",
+        width: "100%",
         color: "white",
         height: "100%",
         paddingLeft: "1.5rem",
@@ -46,7 +46,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     >
       {/* Decoration strips (only show on desktop) */}
 
-      <div className="d-flex">
+      <div className="d-flex" style={{ height: "100%" }}>
         <div className="py-4">
           {/* Logo */}
           <div className="text-center mb-5">
@@ -96,7 +96,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         <div
           className="d-none d-md-block"
           style={{
-            width: "20%",
+            // width: "20%",
             // position: "absolute",
             // top: "0px",
             // left: "13%",
@@ -107,7 +107,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
             // key={i}
             src={decorationPiece}
             alt="Decoration"
-            style={{ width: "35px", height: "100%" }}
+            style={{ width: "30px", height: "100%" }}
           />
           {/* {[...Array(1)].map((_, i) => (
             <img

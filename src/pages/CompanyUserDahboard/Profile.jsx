@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import profile from "../../assets/images/Abdulluah-Talent.png";
 import UAE from "../../assets/images/UAE flag.jpeg";
 import { FaLocationDot } from "react-icons/fa6";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import ApiService from '../../services/ApiService';
-import { toast } from 'react-toastify';
+import ApiService from "../../services/ApiService";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [locationName, setLocationName] = useState("Abu Dhabi, UAE");
@@ -57,7 +57,10 @@ const Profile = () => {
 
   if (!profileData) {
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "100vh" }}
+      >
         <h4>Loading...</h4>
       </div>
     );
@@ -72,7 +75,11 @@ const Profile = () => {
         <div className="row align-items-start">
           {/* Profile Image */}
           <div className="col-12 col-md-2 text-center mb-3 mb-md-0">
-            <img src={profile} className="img-fluid rounded-circle" alt="Profile" />
+            <img
+              src={profile}
+              className="img-fluid rounded-circle"
+              alt="Profile"
+            />
           </div>
 
           {/* Profile Info */}
@@ -81,7 +88,12 @@ const Profile = () => {
             <p className="inter-font text-muted d-flex align-items-center flex-wrap">
               <FaLocationDot className="me-2 text-dark" />
               {profileData?.location}
-              <img src={UAE} className="rounded-1 ms-2" style={{ width: "30px", height: "20px" }} alt="UAE" />
+              <img
+                src={UAE}
+                className="rounded-1 ms-2"
+                style={{ width: "30px", height: "20px" }}
+                alt="UAE"
+              />
             </p>
 
             <p className="inter-font text-muted" style={{ fontSize: "15px" }}>
@@ -92,11 +104,13 @@ const Profile = () => {
             <div className="row">
               {/* Left Column */}
               <div className="col-12 col-md-6 mb-4">
-                <h6>Email Address</h6>
-                <p>{profileData?.email}</p>
+                <h6 style={{ color: "#595959" }}>Email Address</h6>
+                <p style={{ color: "#939393" }}>{profileData?.email}</p>
 
-                <h6 className="mt-3">Address</h6>
-                <p>{locationName}</p>
+                <h6 style={{ color: "#595959" }} className="mt-3">
+                  Address
+                </h6>
+                <p style={{ color: "#939393" }}>{locationName}</p>
 
                 <MapContainer
                   center={[24.4539, 54.3773]}
@@ -120,21 +134,26 @@ const Profile = () => {
 
               {/* Right Column */}
               <div className="col-12 col-md-6">
-                <h6>Phone Number</h6>
-                <p>
+                <h6 style={{ color: "#595959" }}>Phone Number</h6>
+                <p style={{ color: "#939393" }}>
                   +{profileData?.phone}
                   {profileData?.secondary_phone && (
                     <>
-                      <span className="mx-2">|</span> +{profileData?.secondary_phone}
+                      <span className="mx-2">|</span> +
+                      {profileData?.secondary_phone}
                     </>
                   )}
                 </p>
 
-                <h6 className="mt-3">Type of Business</h6>
-                <p>Production House, Studio</p>
+                <h6 className="mt-3" style={{ color: "#595959" }}>
+                  Type of Business
+                </h6>
+                <p style={{ color: "#939393" }}>Production House, Studio</p>
 
-                <h6 className="mt-3">Categories</h6>
-                <p>Acting, Production, Casting</p>
+                <h6 style={{ color: "#595959" }} className="mt-3">
+                  Categories
+                </h6>
+                <p style={{ color: "#939393" }}>Acting, Production, Casting</p>
               </div>
             </div>
           </div>

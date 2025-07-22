@@ -44,8 +44,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className="py-2 px-3 bg-transparent shadow-sm"
-      style={{ zIndex: 10000 }}
+      className="py-2 px-3 bg-transparent"
+      // style={{ zIndex: 10000 }}
     >
       <ul className="list-unstyled d-flex justify-content-end align-items-center m-0">
         {/* Language Selector */}

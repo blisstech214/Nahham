@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import decoration from "../assets/images/decoration.png";
+import decoration from "../assets/images/decorationPiece.png";
 import DashboardFooter from "./CompanyUserDahboard/DashboardFooter";
 import Sidebar from "./CompanyUserDahboard/Sidebar";
 
@@ -64,7 +64,7 @@ const UserDashboard = () => {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        height:'100vh'
+        height: "100vh",
       }}
     >
       {/* Sidebar */}
@@ -75,6 +75,9 @@ const UserDashboard = () => {
           maxWidth: "300px",
           minWidth: "250px",
           width: "100%",
+          minHeight: "100%",
+          display: "flex",
+          flexDirection: "row",
         }}
       >
         <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
@@ -88,7 +91,9 @@ const UserDashboard = () => {
           width: "100%",
           display: "flex",
           flexDirection: "row",
-          padding: "20px",
+          // padding: "20px",
+          background:
+            "linear-gradient(to left, rgba(255, 245, 241, 1), rgba(241, 239, 235, 1))",
         }}
       >
         {/* Main Content Area */}
@@ -99,9 +104,17 @@ const UserDashboard = () => {
             flexDirection: "column",
             minHeight: "100vh",
           }}
+          className="pt-3"
         >
           <Navbar />
-          <div style={{ flexGrow: 1 }}>{renderContent()}</div>
+          <div
+          className="px-5"
+            style={{
+              flexGrow: 1,
+            }}
+          >
+            {renderContent()}
+          </div>
           <DashboardFooter />
         </div>
 
@@ -109,18 +122,18 @@ const UserDashboard = () => {
         <div
           className="d-none d-lg-flex"
           style={{
-            width: "40px",
-            marginLeft: "10px",
-            alignItems: "center",
+            // width: "10%",
+            // marginLeft: "10px",
+            // alignItems: "center",
           }}
         >
           <img
             src={decoration}
             alt="Decoration"
             style={{
-              width: "30px",
+              width: "20px",
               height: "100%",
-              objectFit: "contain",
+              // objectFit: "contain",
             }}
           />
         </div>

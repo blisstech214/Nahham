@@ -53,7 +53,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       className=""
       style={{
         background: "rgba(231, 142, 123, 1)",
-        width: "280px",
+        width: "100%",
         color: "white",
         height: "100%",
         paddingLeft: "1.5rem",
@@ -61,7 +61,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     >
       {/* Decoration strips (only show on desktop) */}
 
-      <div className="d-flex">
+      <div className="d-flex" style={{ height: "100%" }}>
         <div className="py-4">
           {/* Logo */}
           <div className="text-center mb-5">
@@ -113,19 +113,21 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         </div>
         <div
           className="d-none d-md-block"
-          style={{
-            width: "20%",
-            // position: "absolute",
-            // top: "0px",
-            // left: "13%",
-            // marginLeft: "5px",
-          }}
+          style={
+            {
+              // width: "20%",
+              // position: "absolute",
+              // top: "0px",
+              // left: "13%",
+              // marginLeft: "5px",
+            }
+          }
         >
           <img
             // key={i}
             src={decorationPiece}
             alt="Decoration"
-            style={{ width: "35px", height: "100%" }}
+            style={{ width: "30px", height: "100%" }}
           />
           {/* {[...Array(1)].map((_, i) => (
             <img

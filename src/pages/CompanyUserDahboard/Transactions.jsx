@@ -212,8 +212,8 @@ const Transaction = () => {
               </div>
             </Col>
 
-            <Col xs={12} sm={6} md={2}>
-              <div className="fw-semibold">Status / Actions</div>
+            <Col xs={12} sm={6} md={1}>
+              <div className="fw-semibold">Status</div>
               <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
                 <span
                   style={{
@@ -231,6 +231,11 @@ const Transaction = () => {
                 >
                   {item.status}
                 </span>
+              </div>
+            </Col>
+
+            <Col xs={12} sm={6} md={1}>
+              <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
                 <LuDownload
                   fontSize={20}
                   style={{ cursor: "pointer", color: "gray" }}

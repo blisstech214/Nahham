@@ -12,6 +12,8 @@ import ImageUpload from "../../components/ImageUpload";
 import { useDropzone } from "react-dropzone";
 import plus from "../../assets/images/plus.png";
 import { Plus } from "lucide-react";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 // Placeholder ImageDropzone1 component
 const ImageDropzone1 = ({ onUpload }) => {
@@ -242,6 +244,8 @@ const VideoDropzone = ({ onUpload }) => {
 
 const EditProfile = ({ onBack }) => {
   const navigate = useNavigate();
+
+  const [value, setValue] = useState();
 
   const [subCategoryOptions, setSubCategoryOptions] = useState([]);
   const countryOptions = countries.map((c) => ({
@@ -584,7 +588,22 @@ const EditProfile = ({ onBack }) => {
           <Form.Control.Feedback type="invalid">
             {errors.email}
           </Form.Control.Feedback>
+
           <label>Phone Number</label>
+
+          <div style={{ maxWidth: "400px", margin: "20px auto" }}>
+            <div style={{ marginTop: "20px" }}>
+              <PhoneInput
+                placeholder="Enter phone number"
+                value={value}
+                onChange={setValue}
+                defaultCountry="US" // Set a default country
+                international // Enable international input
+                countryCallingCodeEditable={false}
+              />
+            </div>
+          </div>
+
           <InputGroup className="inp-login" style={{ width: "94%" }}>
             <InputGroup.Text
               className="inter-font bg-transparent"
@@ -616,6 +635,59 @@ const EditProfile = ({ onBack }) => {
               {errors.phone}
             </Form.Control.Feedback>
           </InputGroup>
+
+          <div style={{ maxWidth: "400px", margin: "20px auto" }}>
+            <label className="mb-2">Phone Number</label>
+
+            <PhoneInput
+              value={value}
+              // onChange={handlePhoneChange}
+              defaultCountry="AE"
+              international
+              countryCallingCodeEditable={false}
+              style={{ display: "none" }} // Hide default UI
+            />
+
+            <InputGroup className="inp-login" style={{ width: "100%" }}>
+              <InputGroup.Text
+                className="inter-font bg-transparent"
+                style={{ fontSize: "16px" }}
+              >
+                <img
+                  // src={flagUAE}
+                  alt="flag"
+                  width="25"
+                  className="me-2 rounded-1"
+                />
+                <span className="custom-input inter-font"> +971 </span>
+              </InputGroup.Text>
+
+              <Form.Control
+                type="tel"
+                value={
+                  value
+                    ? value.replace(/^\+971/, "") // Remove country code for display
+                    : ""
+                }
+                onChange={(e) => {
+                  const newValue = "+971" + e.target.value;
+                  // handlePhoneChange(newValue);
+                }}
+                // isInvalid={!!error}
+                className="inter-font px-3"
+                style={{
+                  borderTopLeftRadius: "0px",
+                  borderBottomLeftRadius: "0px",
+                  borderTopRightRadius: "5px",
+                  borderBottomRightRadius: "5px",
+                }}
+              />
+
+              <Form.Control.Feedback type="invalid">
+                {/* {error} */}
+              </Form.Control.Feedback>
+            </InputGroup>
+          </div>
         </Col>
       </Row>
 

@@ -63,13 +63,15 @@ const Dashboard = () => {
   return (
     <div
       className=""
-      style={{
-        // height: "100vh",
-        // overflowY: "scroll",
-        // overflowX: "hidden",
-        // scrollbarWidth: "none",
-        // msOverflowStyle: "none",
-      }}
+      style={
+        {
+          // height: "100vh",
+          // overflowY: "scroll",
+          // overflowX: "hidden",
+          // scrollbarWidth: "none",
+          // msOverflowStyle: "none",
+        }
+      }
     >
       {/* Main Content */}
       <div className="flex-grow-1 px-5 main-bg inp-login">
@@ -238,7 +240,7 @@ const Dashboard = () => {
         {/* Current Hires Section */}
         <div>
           <h5 className="mb-4 inter-font" style={{ fontSize: "16px" }}>
-            Hire Projects
+            Current Hires
           </h5>
           <div
             className="bg-white rounded-3 p-4 shadow"
@@ -247,13 +249,14 @@ const Dashboard = () => {
             <table className="table align-middle mb-0">
               <thead>
                 <tr>
-                  <th scope="col">Employe Company</th>
-                  <th scope="col">Job Name</th>
+                  <th scope="col">Profile</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
                   <th scope="col">Start Date</th>
                   <th scope="col">End Date</th>
                   <th scope="col">Status</th>
                   <th scope="col">Project</th>
-                  <th scope="col">Amount</th>
+                  <th scope="col">Payment</th>
                 </tr>
               </thead>
               <tbody>
@@ -271,6 +274,10 @@ const Dashboard = () => {
                             objectFit: "cover",
                           }}
                         />
+                      </div>
+                    </td>
+                    <td>
+                      <div className="d-flex align-items-center gap-3">
                         <span
                           className="inter-font"
                           style={{ color: "#959595" }}

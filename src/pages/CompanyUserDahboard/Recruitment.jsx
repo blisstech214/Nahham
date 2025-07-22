@@ -49,6 +49,7 @@ const Recruitment = () => {
       period: "10 April - 15 April",
       duration: "5 Days",
       amount: "2500 AED",
+      project: "Film Production",
       img: "https://randomuser.me/api/portraits/men/75.jpg",
     },
     {
@@ -59,6 +60,7 @@ const Recruitment = () => {
       experience: "4 years",
       nationality: "Dubai, UAE",
       contact: "+971 25 365 6589",
+      project: "Film Production",
       img: "https://randomuser.me/api/portraits/men/77.jpg",
     },
     {
@@ -69,6 +71,7 @@ const Recruitment = () => {
       experience: "2.5 years",
       nationality: "Dubai, UAE",
       contact: "+971 25 365 6589",
+      project: "Film Production",
       img: "https://randomuser.me/api/portraits/women/65.jpg",
     },
     {
@@ -79,6 +82,7 @@ const Recruitment = () => {
       experience: "4 years",
       nationality: "Dubai, UAE",
       contact: "+971 25 365 6589",
+      project: "Film Production",
       img: "https://randomuser.me/api/portraits/men/15.jpg",
     },
     {
@@ -89,6 +93,7 @@ const Recruitment = () => {
       experience: "4 years",
       nationality: "Dubai, UAE",
       contact: "+971 25 365 6589",
+      project: "Film Production",
       img: "https://randomuser.me/api/portraits/men/75.jpg",
     },
   ];
@@ -212,6 +217,11 @@ const Recruitment = () => {
               </span>
             </Col>
 
+            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+              <div className="fw-semibold mb-1">Duration</div>
+              <span style={{ fontSize: "14px", color: "#555" }}>5 Days</span>
+            </Col>
+
             <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
               {person.period ? (
                 <>
@@ -230,12 +240,12 @@ const Recruitment = () => {
               )}
             </Col>
 
-            <Col xs={12} sm={6} md={3}>
-              {person.amount ? (
+            <Col xs={12} sm={6} md={2}>
+              {person.project ? (
                 <>
-                  <div className="fw-semibold mb-1">Amount Paid</div>
+                  <div className="fw-semibold mb-1">Project</div>
                   <div className="fw-bold" style={{ color: "#999" }}>
-                    {person.amount}
+                    {person.project}
                   </div>
                 </>
               ) : (
@@ -244,6 +254,7 @@ const Recruitment = () => {
                   <div style={{ fontSize: "14px", color: "#555" }}>
                     {person.contact}
                   </div>
+                  project:'Film Production',
                 </>
               )}
             </Col>
@@ -264,8 +275,6 @@ const Recruitment = () => {
           <li className="page-item inter-font">{">"}</li>
         </ul>
       </div>
-
-    
     </div>
   );
 };
