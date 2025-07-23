@@ -242,6 +242,119 @@ const VideoDropzone = ({ onUpload }) => {
   );
 };
 
+const ResumeDropzone = ({ onUpload }) => {
+  const [images, setImages] = useState([]);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    accept: { "image/*": [".jpeg", ".jpg", ".png"] },
+    onDrop: (acceptedFiles) => {
+      const newImages = acceptedFiles.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      );
+
+      const updatedImages = [...images, ...newImages];
+
+      setImages(updatedImages);
+      onUpload(updatedImages); // Pass updated images to parent
+    },
+    maxFiles: 10, // Set your limit here
+  });
+
+  // Cleanup memory (prevent memory leaks)
+  useEffect(() => {
+    return () => {
+      images.forEach((file) => URL.revokeObjectURL(file.preview));
+    };
+  }, [images]);
+
+  const removeImage = (file) => {
+    const updated = images.filter((img) => img !== file);
+    setImages(updated);
+    onUpload(updated); // Update parent with new list
+  };
+
+  return (
+    <div>
+      {/* Dropzone Box */}
+      <div
+        {...getRootProps()}
+        className={`border p-3 mb-5 text-center rounded-2 ${
+          isDragActive ? "bg-light" : ""
+        }`}
+        style={{ cursor: "pointer" }}
+      >
+        <input {...getInputProps()} />
+        <img
+          src={plus}
+          style={{
+            padding: "20px",
+            background: "#F1F1F1",
+            borderRadius: "50%",
+            width: "60px",
+          }}
+        />
+        <p className="inter-font mt-3">Upload Resume</p>
+        <button
+          className="btn text-white inter-font"
+          style={{
+            background: "#522A30",
+            borderRadius: "15px",
+            height: "44px",
+            width: "107px",
+            fontSize: "12px",
+          }}
+        >
+          Browse Files
+        </button>
+      </div>
+
+      {/* Image Previews */}
+      <div className="d-flex flex-wrap mt-3 gap-2">
+        {images.map((file, index) => (
+          <div
+            key={index}
+            className="position-relative border rounded"
+            style={{
+              width: "80px",
+              height: "80px",
+              overflow: "hidden",
+            }}
+          >
+            <img
+              src={file.preview}
+              alt="preview"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+            {/* Remove Button */}
+            <button
+              type="button"
+              onClick={() => removeImage(file)}
+              className="btn btn-sm btn-danger rounded-circle position-absolute"
+              style={{
+                top: "5px",
+                right: "5px",
+                width: "20px",
+                height: "20px",
+                padding: "0",
+                fontSize: "12px",
+                lineHeight: "18px",
+              }}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const EditProfile = ({ onBack }) => {
   const navigate = useNavigate();
 
@@ -589,14 +702,25 @@ const EditProfile = ({ onBack }) => {
             {errors.email}
           </Form.Control.Feedback>
 
-          <label>Phone Number</label>
-
-          <div style={{ maxWidth: "400px", margin: "20px auto" }}>
-            <div style={{ marginTop: "20px" }}>
+          <div style={{ maxWidth: "300px" }} className="inp-login">
+            <label>Phone Number</label>
+            <div
+              style={{
+                // marginTop: "20px",
+                border: "2px solid #dee2e6",
+                borderRadius: "0.375rem",
+                paddingLeft: "10px",
+                marginRight: "10px",
+              }}
+            >
               <PhoneInput
                 placeholder="Enter phone number"
-                value={value}
-                onChange={setValue}
+                style={{ height: "40px", overflow: "hidden" }}
+                // value={value}
+                // onChange={setValue}
+                name="phone"
+                value={formData.phone}
+                onChange={handleTextChange}
                 defaultCountry="US" // Set a default country
                 international // Enable international input
                 countryCallingCodeEditable={false}
@@ -605,7 +729,7 @@ const EditProfile = ({ onBack }) => {
           </div>
 
           <InputGroup className="inp-login" style={{ width: "94%" }}>
-            <InputGroup.Text
+            {/* <InputGroup.Text
               className="inter-font bg-transparent"
               style={{ fontSize: "16px" }}
             >
@@ -630,64 +754,11 @@ const EditProfile = ({ onBack }) => {
                 borderTopRightRadius: "5px",
                 borderBottomRightRadius: "5px",
               }}
-            />
+            /> */}
             <Form.Control.Feedback type="invalid">
               {errors.phone}
             </Form.Control.Feedback>
           </InputGroup>
-
-          <div style={{ maxWidth: "400px", margin: "20px auto" }}>
-            <label className="mb-2">Phone Number</label>
-
-            <PhoneInput
-              value={value}
-              // onChange={handlePhoneChange}
-              defaultCountry="AE"
-              international
-              countryCallingCodeEditable={false}
-              style={{ display: "none" }} // Hide default UI
-            />
-
-            <InputGroup className="inp-login" style={{ width: "100%" }}>
-              <InputGroup.Text
-                className="inter-font bg-transparent"
-                style={{ fontSize: "16px" }}
-              >
-                <img
-                  // src={flagUAE}
-                  alt="flag"
-                  width="25"
-                  className="me-2 rounded-1"
-                />
-                <span className="custom-input inter-font"> +971 </span>
-              </InputGroup.Text>
-
-              <Form.Control
-                type="tel"
-                value={
-                  value
-                    ? value.replace(/^\+971/, "") // Remove country code for display
-                    : ""
-                }
-                onChange={(e) => {
-                  const newValue = "+971" + e.target.value;
-                  // handlePhoneChange(newValue);
-                }}
-                // isInvalid={!!error}
-                className="inter-font px-3"
-                style={{
-                  borderTopLeftRadius: "0px",
-                  borderBottomLeftRadius: "0px",
-                  borderTopRightRadius: "5px",
-                  borderBottomRightRadius: "5px",
-                }}
-              />
-
-              <Form.Control.Feedback type="invalid">
-                {/* {error} */}
-              </Form.Control.Feedback>
-            </InputGroup>
-          </div>
         </Col>
       </Row>
 
@@ -698,7 +769,7 @@ const EditProfile = ({ onBack }) => {
           <div style={{ position: "relative" }}>
             <Form.Control
               as="textarea"
-              rows={20}
+              rows={40}
               style={{ height: "100px" }}
               name="about"
               value={formData.about}
@@ -712,8 +783,8 @@ const EditProfile = ({ onBack }) => {
             <span
               style={{
                 position: "absolute",
-                bottom: "8px",
-                right: "12px",
+                bottom: "4px",
+                right: "15px",
                 fontSize: "15px",
                 color: "#6c757d", // Bootstrap muted color
               }}
@@ -862,7 +933,7 @@ const EditProfile = ({ onBack }) => {
       </Row> */}
 
       <Row>
-        <Col md={6}>
+        <Col md={4}>
           <h4 className="inter-font" style={{ fontSize: "18px" }}>
             Add Photo
             <span
@@ -882,7 +953,7 @@ const EditProfile = ({ onBack }) => {
             <div className="text-danger small mt-1">{errors.photos}</div>
           )}
         </Col>
-        <Col md={6}>
+        <Col md={4}>
           <h4 className="inter-font" style={{ fontSize: "18px" }}>
             Upload Video
             <span
@@ -897,6 +968,24 @@ const EditProfile = ({ onBack }) => {
             onUpload={(files) => {
               console.log("Uploaded videos:", files);
               handleVideoUpload(files);
+            }}
+          />
+          {errors.videos && (
+            <div className="text-danger small mt-1">{errors.videos}</div>
+          )}
+        </Col>
+        <Col md={4}>
+          <h4 className="inter-font" style={{ fontSize: "18px" }}>
+            Upload Resume
+            <span className="mx-2" title="Please upload pdf">
+              <BsInfoCircleFill />
+            </span>
+          </h4>
+          {/* <ImageDropzone2 onUpload={handleVideoUpload} /> */}
+          <ResumeDropzone
+            onUpload={(files) => {
+              console.log("Uploaded resume:", files);
+              // handleVideoUpload(files);
             }}
           />
           {errors.videos && (

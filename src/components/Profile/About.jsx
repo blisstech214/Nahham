@@ -4,20 +4,30 @@ import { Modal, Button } from "react-bootstrap";
 const About = ({ profileData, skillsData }) => {
   const [showModal, setShowModal] = useState(false);
 
+  console.log("profileData --- , ", profileData);
+
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
-  const aboutText = profileData?.about || "No About Data.";
+  const aboutText =
+    profileData?.about +
+      "Vel quasi provident Vel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi provident" ||
+    "No About Data.";
   const displayText =
-    aboutText.length > 150 ? `${aboutText.substring(0, 150)}...` : aboutText;
+    aboutText.length > 150 ? `${aboutText?.substring(0, 150)}...` : aboutText;
 
   const experience = profileData?.year_experience || "0";
-  const activeJob = profileData?.active_job || "No Job";
+  // const activeJob = profileData?.active_job || "No Job";
+  const activeJob = `${
+    profileData?.active_job[0]
+      ? `${profileData?.active_job[0]?.title} | ${profileData?.active_job[0]?.joining_date} ${profileData?.active_job[0]?.company}`
+      : "No Job"
+  }`;
   const education = profileData?.education || "Masters in Art and Filming"; // You can replace this if dynamic
 
   const skills =
     skillsData && skillsData.length > 0
-      ? skillsData.map((skill) => skill.title).join(", ")
+      ? skillsData.map((skill) => skill?.title).join(", ")
       : "No data";
 
   return (
@@ -27,7 +37,7 @@ const About = ({ profileData, skillsData }) => {
         style={{ fontSize: "15px", marginTop: "4rem", color: "#939393" }}
       >
         {displayText}
-        {aboutText.length > 150 && (
+        {aboutText?.length > 150 && (
           <span
             className="text-danger inter-font"
             style={{ cursor: "pointer" }}

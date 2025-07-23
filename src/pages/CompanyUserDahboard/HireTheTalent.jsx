@@ -8,6 +8,16 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import dashboardTalent2 from "../../assets/images/dashboardTalent2.png";
 import Sidebar from "./Sidebar";
+import { Button, Col, Form, Image, Row } from "react-bootstrap";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+// import { format } from "date-fns";
+// import { DateRange } from "react-date-range";
+// import "react-date-range/dist/styles.css";
+// import "react-date-range/dist/theme/default.css";
+
+import DateRangePicker from "react-bootstrap-daterangepicker";
+import "bootstrap-daterangepicker/daterangepicker.css";
 
 const USE_API = false;
 
@@ -136,174 +146,174 @@ const viewQuote = async (formData) => {
 };
 
 // Custom Date Range Picker Component
-const CustomDateRangePicker = ({
-  startDate,
-  endDate,
-  onDateChange,
-  onClose,
-}) => {
-  const [tempStartDate, setTempStartDate] = useState(startDate);
-  const [tempEndDate, setTempEndDate] = useState(endDate);
+// const CustomDateRangePicker = ({
+//   startDate,
+//   endDate,
+//   onDateChange,
+//   onClose,
+// }) => {
+//   const [tempStartDate, setTempStartDate] = useState(startDate);
+//   const [tempEndDate, setTempEndDate] = useState(endDate);
 
-  const formatDate = (date) => {
-    return date.toISOString().split("T")[0];
-  };
+//   const formatDate = (date) => {
+//     return date.toISOString().split("T")[0];
+//   };
 
-  const formatDisplayDate = (date) => {
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
+//   const formatDisplayDate = (date) => {
+//     return date.toLocaleDateString("en-US", {
+//       month: "short",
+//       day: "numeric",
+//       year: "numeric",
+//     });
+//   };
 
-  const handleStartDateChange = (e) => {
-    const newStartDate = new Date(e.target.value);
-    setTempStartDate(newStartDate);
+//   const handleStartDateChange = (e) => {
+//     const newStartDate = new Date(e.target.value);
+//     setTempStartDate(newStartDate);
 
-    // If start date is after end date, adjust end date
-    if (newStartDate > tempEndDate) {
-      const newEndDate = new Date(newStartDate);
-      newEndDate.setDate(newEndDate.getDate() + 7);
-      setTempEndDate(newEndDate);
-    }
-  };
+//     // If start date is after end date, adjust end date
+//     if (newStartDate > tempEndDate) {
+//       const newEndDate = new Date(newStartDate);
+//       newEndDate.setDate(newEndDate.getDate() + 7);
+//       setTempEndDate(newEndDate);
+//     }
+//   };
 
-  const handleEndDateChange = (e) => {
-    const newEndDate = new Date(e.target.value);
-    setTempEndDate(newEndDate);
-  };
+//   const handleEndDateChange = (e) => {
+//     const newEndDate = new Date(e.target.value);
+//     setTempEndDate(newEndDate);
+//   };
 
-  const handleProceed = () => {
-    onDateChange(tempStartDate, tempEndDate);
-    onClose();
-  };
+//   const handleProceed = () => {
+//     onDateChange(tempStartDate, tempEndDate);
+//     onClose();
+//   };
 
-  const handleToday = () => {
-    const today = new Date();
-    const nextWeek = new Date();
-    nextWeek.setDate(today.getDate() + 7);
-    setTempStartDate(today);
-    setTempEndDate(nextWeek);
-  };
+//   const handleToday = () => {
+//     const today = new Date();
+//     const nextWeek = new Date();
+//     nextWeek.setDate(today.getDate() + 7);
+//     setTempStartDate(today);
+//     setTempEndDate(nextWeek);
+//   };
 
-  return (
-    <div
-      style={{
-        position: "fixed",
-        zIndex: 1000,
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: 800,
-        maxWidth: "150%",
-        background: "#fff",
-        borderRadius: 18,
-        boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-        padding: 32,
-        maxHeight: "90vh",
-        overflowY: "auto",
-      }}
-    >
-      <div className="mb-4">
-        <h5 className="fw-bold mb-3">Select Date Range</h5>
+//   return (
+//     <div
+//       style={{
+//         position: "fixed",
+//         zIndex: 1000,
+//         top: "50%",
+//         left: "50%",
+//         transform: "translate(-50%, -50%)",
+//         width: 800,
+//         maxWidth: "150%",
+//         background: "#fff",
+//         borderRadius: 18,
+//         boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+//         padding: 32,
+//         maxHeight: "90vh",
+//         overflowY: "auto",
+//       }}
+//     >
+//       <div className="mb-4">
+//         <h5 className="fw-bold mb-3">Select Date Range</h5>
 
-        <div className="row mb-3">
-          <div className="col">
-            <label className="form-label fw-semibold">Start Date</label>
-            <input
-              type="date"
-              className="form-control"
-              value={formatDate(tempStartDate)}
-              onChange={handleStartDateChange}
-              style={{
-                borderRadius: 8,
-                padding: "10px 12px",
-                fontSize: 16,
-              }}
-            />
-          </div>
-          <div className="col">
-            <label className="form-label fw-semibold">End Date</label>
-            <input
-              type="date"
-              className="form-control"
-              value={formatDate(tempEndDate)}
-              onChange={handleEndDateChange}
-              min={formatDate(tempStartDate)}
-              style={{
-                borderRadius: 8,
-                padding: "10px 12px",
-                fontSize: 16,
-              }}
-            />
-          </div>
-        </div>
+//         <div className="row mb-3">
+//           <div className="col">
+//             <label className="form-label fw-semibold">Start Date</label>
+//             <input
+//               type="date"
+//               className="form-control"
+//               value={formatDate(tempStartDate)}
+//               onChange={handleStartDateChange}
+//               style={{
+//                 borderRadius: 8,
+//                 padding: "10px 12px",
+//                 fontSize: 16,
+//               }}
+//             />
+//           </div>
+//           <div className="col">
+//             <label className="form-label fw-semibold">End Date</label>
+//             <input
+//               type="date"
+//               className="form-control"
+//               value={formatDate(tempEndDate)}
+//               onChange={handleEndDateChange}
+//               min={formatDate(tempStartDate)}
+//               style={{
+//                 borderRadius: 8,
+//                 padding: "10px 12px",
+//                 fontSize: 16,
+//               }}
+//             />
+//           </div>
+//         </div>
 
-        <div className="mb-3 p-3 bg-light rounded">
-          <strong>Selected Range:</strong>
-          <br />
-          {formatDisplayDate(tempStartDate)} - {formatDisplayDate(tempEndDate)}
-          <br />
-          <small className="text-muted">
-            Duration:{" "}
-            {Math.ceil((tempEndDate - tempStartDate) / (1000 * 60 * 60 * 24))}{" "}
-            days
-          </small>
-        </div>
-      </div>
+//         <div className="mb-3 p-3 bg-light rounded">
+//           <strong>Selected Range:</strong>
+//           <br />
+//           {formatDisplayDate(tempStartDate)} - {formatDisplayDate(tempEndDate)}
+//           <br />
+//           <small className="text-muted">
+//             Duration:{" "}
+//             {Math.ceil((tempEndDate - tempStartDate) / (1000 * 60 * 60 * 24))}{" "}
+//             days
+//           </small>
+//         </div>
+//       </div>
 
-      <div className="d-flex justify-content-between align-items-center">
-        <button
-          type="button"
-          className="btn btn-light"
-          style={{
-            borderRadius: 8,
-            fontWeight: 500,
-            fontSize: 16,
-            padding: "8px 24px",
-          }}
-          onClick={handleToday}
-        >
-          Today
-        </button>
+//       <div className="d-flex justify-content-between align-items-center">
+//         <button
+//           type="button"
+//           className="btn btn-light"
+//           style={{
+//             borderRadius: 8,
+//             fontWeight: 500,
+//             fontSize: 16,
+//             padding: "8px 24px",
+//           }}
+//           onClick={handleToday}
+//         >
+//           Today
+//         </button>
 
-        <div className="d-flex gap-2">
-          <button
-            type="button"
-            className="btn btn-secondary"
-            style={{
-              borderRadius: 8,
-              fontWeight: 500,
-              fontSize: 16,
-              padding: "8px 24px",
-            }}
-            onClick={onClose}
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="btn"
-            style={{
-              background: "#FF6B35",
-              color: "#fff",
-              border: "none",
-              borderRadius: 12,
-              fontSize: 18,
-              padding: "10px 32px",
-              minWidth: 120,
-              fontWeight: 600,
-            }}
-            onClick={handleProceed}
-          >
-            Proceed
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+//         <div className="d-flex gap-2">
+//           <button
+//             type="button"
+//             className="btn btn-secondary"
+//             style={{
+//               borderRadius: 8,
+//               fontWeight: 500,
+//               fontSize: 16,
+//               padding: "8px 24px",
+//             }}
+//             onClick={onClose}
+//           >
+//             Cancel
+//           </button>
+//           <button
+//             type="button"
+//             className="btn"
+//             style={{
+//               background: "#FF6B35",
+//               color: "#fff",
+//               border: "none",
+//               borderRadius: 12,
+//               fontSize: 18,
+//               padding: "10px 32px",
+//               minWidth: 120,
+//               fontWeight: 600,
+//             }}
+//             onClick={handleProceed}
+//           >
+//             Proceed
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 // Stepper Section (interactive)
 const HorizontalStepper = ({ step, setStep }) => (
@@ -436,6 +446,7 @@ const ProjectInfoScreen = ({
   durationOptions,
   jobTypeOptions,
   selectedTalents = [],
+  selectedTalentData,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -463,6 +474,29 @@ const ProjectInfoScreen = ({
       )}`,
     });
     if (setErrors) setErrors((prev) => ({ ...prev, dateSlot: undefined }));
+  };
+
+  const [data, setData] = useState(
+    selectedTalentData.map((person) => ({
+      ...person,
+      job_type: "",
+      duration: "",
+      start_date: null,
+      end_date: null,
+    }))
+  );
+
+  const [dateRange, setDateRange] = useState({
+    startDate: null,
+    endDate: null,
+  });
+
+  const handleApply = (event, picker) => {
+    const start = picker.startDate.format("YYYY-MM-DD");
+    const end = picker.endDate.format("YYYY-MM-DD");
+    setDateRange({ startDate: start, endDate: end });
+    console.log("datepicker ---- ", start, end);
+    // onChange({ from: start, to: end });
   };
 
   return (
@@ -531,6 +565,63 @@ const ProjectInfoScreen = ({
         </div>
         {/* Form */}
         <form>
+          <div style={{ maxWidth: "800px", margin: "", padding: "20px" }}>
+            {/* <Form.Group className="mb-3 inter-font">
+              <Form.Label>Project Title</Form.Label>
+              <Form.Control
+                type="text"
+                // value={projectTitle}
+                // onChange={(e) => setProjectTitle(e.target.value)}
+              />
+            </Form.Group> */}
+
+            {/* <Form.Group className="mb-4 inter-font">
+              <Form.Label>Project Description</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                // value={projectDescription}
+                // onChange={(e) => setProjectDescription(e.target.value)}
+              />
+            </Form.Group> */}
+
+            {/* <p className="mb-3 text-muted ">
+              Select your project duration and work dates
+            </p> */}
+
+            {/* <Button
+                  // onClick={handleSubmit}
+                  style={{
+                    backgroundColor: "#FF6B2C",
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "8px 25px",
+                    fontWeight: "500",
+                    marginTop: "20px",
+                  }}
+                >
+                  Proceed
+                </Button> */}
+          </div>
+
+          <div className="mb-2">
+            {/* <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+              Enter your Project Information
+            </label> */}
+            <Form.Group className="mb-3 inter-font">
+              <Form.Label>Project Title</Form.Label>
+              <Form.Control
+                type="text"
+                // value={projectTitle}
+                // onChange={(e) => setProjectTitle(e.target.value)}
+              />
+            </Form.Group>
+            {errors.projectInfo && (
+              <div style={{ color: "red", fontSize: 13, marginTop: 2 }}>
+                {errors.projectInfo}
+              </div>
+            )}
+          </div>
           <div className="mb-2">
             <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
               Enter your Project Information
@@ -554,25 +645,203 @@ const ProjectInfoScreen = ({
                 {errors.projectInfo}
               </div>
             )}
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg"
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  projectAttachment: e.target.files[0],
-                })
-              }
-              style={{ marginTop: 8 }}
-            />
-            {formData.projectAttachment && (
-              <div style={{ marginTop: 8, fontSize: 14, color: "#4B2E2B" }}>
-                Attached: {formData.projectAttachment.name}
-              </div>
-            )}
           </div>
+
+          {data.map((person, index) => (
+            <Row
+              key={person._id}
+              className="align-items-center mb-4 inter-font"
+              style={{
+                borderBottom: "1px solid #eee",
+                paddingBottom: "15px",
+              }}
+            >
+              <Col
+                xs={12}
+                md={3}
+                className="d-flex align-items-center mb-2 mb-md-0"
+                style={{ justifyContent: "center" }}
+              >
+                <img
+                  src={dashboardTalent2}
+                  alt="Talent"
+                  style={{
+                    width: "44px",
+                    height: "44px",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                    border: "2px solid #ddd",
+                  }}
+                />
+                <div>
+                  <h5
+                    className="mb-1 fw-bold inter-font"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {person.first_name} {person.last_name}
+                  </h5>
+                  <p
+                    className="mb-2 text-muted d-flex align-items-center inter-font"
+                    style={{ fontSize: "11px" }}
+                  >
+                    {person.city}, {person.country}
+                  </p>
+                </div>
+                {/* <div>
+                        <div style={{ fontWeight: "600" }}>
+                          {person.first_name} {person.last_name}
+                        </div>
+                        <div
+                          className="text-muted"
+                          style={{ fontSize: "12px" }}
+                        >
+                          Casting Actor
+                        </div>
+                      </div> */}
+              </Col>
+
+              <Col xs={12} md={3} className="mb-2 mb-md-0">
+                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                  Duration
+                </label>
+                <Form.Select
+                  value={person.duration}
+                  // onChange={(e) =>
+                  //   handleChange(index, "duration", e.target.value)
+                  // }
+                >
+                  <option value="">Duration</option>
+                  <option value="1 Day">1 Day</option>
+                  <option value="1 Week">1 Week</option>
+                  <option value="1 Month">1 Month</option>
+                </Form.Select>
+              </Col>
+
+              <Col xs={12} md={3} className="mb-2 mb-md-0">
+                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                  Job Type
+                </label>
+                <Form.Select
+                  value={person.job_type}
+                  // onChange={(e) =>
+                  //   handleChange(index, "job_type", e.target.value)
+                  // }
+                >
+                  <option value="">Job Type</option>
+                  <option value="Shooting">Shooting</option>
+                  <option value="Editing">Editing</option>
+                  <option value="Direction">Direction</option>
+                </Form.Select>
+              </Col>
+
+              <Col xs={12} md={3} className="mb-2 mb-md-0">
+                <div className="col">
+                  <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                    Select Date Slot
+                  </label>
+                  <div style={{ position: "relative" }}>
+                    {/* <input
+                      className="form-control"
+                      placeholder="Select Date Slot"
+                      type="text"
+                      name="dateSlot"
+                      value={formData.dateSlot}
+                      readOnly
+                      onClick={() => setShowCalendar(true)}
+                      style={{
+                        cursor: "pointer",
+                        background: "#fff",
+                        fontSize: 18,
+                        borderRadius: 10,
+                        borderColor: "#E6E6E6",
+                        height: 54,
+                        paddingRight: 44,
+                      }}
+                    /> */}
+                    <DateRangePicker
+                      onApply={handleApply}
+                      autoUpdateInput={false}
+                    >
+                      <Form.Control
+                        type="text"
+                        placeholder="Select date"
+                        value={
+                          dateRange.startDate && dateRange.endDate
+                            ? `${dateRange.startDate} to ${dateRange.endDate}`
+                            : ""
+                        }
+                        readOnly
+                        style={{
+                          maxWidth: "300px",
+                          maxHeight: "40px",
+                          borderRadius: "5px",
+                        }}
+                        className="inter-font"
+                      />
+                    </DateRangePicker>
+                    {errors.dateSlot && (
+                      <div style={{ color: "red", fontSize: 13, marginTop: 2 }}>
+                        {errors.dateSlot}
+                      </div>
+                    )}
+                    <span
+                      style={{
+                        position: "absolute",
+                        right: 16,
+                        top: 8,
+                        pointerEvents: "none",
+                      }}
+                    >
+                      <svg
+                        width="22"
+                        height="22"
+                        fill="none"
+                        stroke="#B0B0B0"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <rect x="3" y="4" width="18" height="18" rx="4" />
+                        <path d="M16 2v4M8 2v4M3 10h18" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              </Col>
+
+              {/* <Col xs={12} md={3}>
+                      
+
+                      <Row className="inter-font">
+                        <Col md={12}>
+                          <DateRangePicker
+                            onApply={handleApply}
+                            autoUpdateInput={false}
+                          >
+                            <Form.Control
+                              type="text"
+                              placeholder="Select date range"
+                              value={
+                                dateRange.startDate && dateRange.endDate
+                                  ? `${dateRange.startDate} to ${dateRange.endDate}`
+                                  : ""
+                              }
+                              readOnly
+                              style={{
+                                maxWidth: "300px",
+                                maxHeight: "40px",
+                                borderRadius: "5px",
+                              }}
+                              className="inter-font"
+                            />
+                          </DateRangePicker>
+                        </Col>
+                      </Row>
+                    </Col> */}
+            </Row>
+          ))}
+
           <div className="row mb-4">
-            <div className="col">
+            {/* <div className="col">
               <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Required Duration
               </label>
@@ -600,8 +869,8 @@ const ProjectInfoScreen = ({
                   {errors.duration}
                 </div>
               )}
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Job Type
               </label>
@@ -629,8 +898,8 @@ const ProjectInfoScreen = ({
                   {errors.jobType}
                 </div>
               )}
-            </div>
-            <div className="col">
+            </div> */}
+            {/* <div className="col">
               <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Select Date Slot
               </label>
@@ -653,6 +922,24 @@ const ProjectInfoScreen = ({
                     paddingRight: 44,
                   }}
                 />
+                <DateRangePicker onApply={handleApply} autoUpdateInput={false}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Select date range"
+                    value={
+                      dateRange.startDate && dateRange.endDate
+                        ? `${dateRange.startDate} to ${dateRange.endDate}`
+                        : ""
+                    }
+                    readOnly
+                    style={{
+                      maxWidth: "300px",
+                      maxHeight: "40px",
+                      borderRadius: "5px",
+                    }}
+                    className="inter-font"
+                  />
+                </DateRangePicker>
                 {errors.dateSlot && (
                   <div style={{ color: "red", fontSize: 13, marginTop: 2 }}>
                     {errors.dateSlot}
@@ -678,18 +965,18 @@ const ProjectInfoScreen = ({
                     <path d="M16 2v4M8 2v4M3 10h18" />
                   </svg>
                 </span>
-                {/* Custom Date Range Picker */}
-                {showCalendar && (
+              </div>
+            </div> */}
+          </div>
+          {/* Custom Date Range Picker */}
+          {/* {showCalendar && (
                   <CustomDateRangePicker
                     startDate={formData.startDate}
                     endDate={formData.endDate}
                     onDateChange={handleDateChange}
                     onClose={() => setShowCalendar(false)}
                   />
-                )}
-              </div>
-            </div>
-          </div>
+                )} */}
           <button
             className="fw-bold mt-2"
             style={{
@@ -984,7 +1271,7 @@ const StatusScreen = ({
   </div>
 );
 
-const HireTheTalent = () => {
+const HireTheTalent = ({ selectedTalentData }) => {
   const [step, setStep] = React.useState(1);
   const [formData, setFormData] = React.useState({
     projectInfo: "",
@@ -1025,25 +1312,34 @@ const HireTheTalent = () => {
   return (
     <div className="main-bg" style={{ minHeight: "100vh" }}>
       {/* <div className="container-fluid"> */}
-        <div className="row" style={{ height: "100vh", overflow: "auto", width:'100%', justifyContent:'center' }}>
-          {/* <div className="col-md-2 p-0">
+      <div
+        className="row"
+        style={{
+          height: "100vh",
+          overflow: "auto",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
+        {/* <div className="col-md-2 p-0">
             <Sidebar activeTab={"talents"} setActiveTab={() => {}} />
           </div> */}
-          <div
-            className="col-md-10 content px-4 py-3"
-            style={{
-              height: "100vh",
-              width: "100%",
-              overflowY: "scroll",
-              overflowX: "hidden",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            {/* <Navbar /> */}
-            {/* Stepper */}
-            <HorizontalStepper step={step} setStep={setStep} />
-            {step === 1 && (
+        <div
+          className="col-md-10 content px-4 py-3"
+          style={{
+            height: "100vh",
+            width: "100%",
+            overflowY: "scroll",
+            overflowX: "hidden",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {/* <Navbar /> */}
+          {/* Stepper */}
+          <HorizontalStepper step={step} setStep={setStep} />
+          {step === 1 && (
+            <>
               <ProjectInfoScreen
                 formData={formData}
                 setFormData={setFormData}
@@ -1062,33 +1358,35 @@ const HireTheTalent = () => {
                 durationOptions={durationOptions}
                 jobTypeOptions={jobTypeOptions}
                 selectedTalents={selectedTalents}
+                selectedTalentData={selectedTalentData}
               />
-            )}
-            {step === 2 && (
-              <ProjectSummaryScreen
-                formData={formData}
-                setFormData={setFormData}
-                onNext={async () => {
-                  const ok = await requestQuote(formData);
-                  if (ok) setStep(3);
-                }}
-                onBack={() => setStep(1)}
-                selectedTalents={selectedTalents}
-              />
-            )}
-            {step === 3 && (
-              <StatusScreen
-                formData={formData}
-                setFormData={setFormData}
-                onBack={() => setStep(2)}
-                onViewQuote={async () => {
-                  await viewQuote(formData);
-                }}
-                selectedTalents={selectedTalents}
-              />
-            )}
-            {/* Footer */}
-            {/* <div>
+            </>
+          )}
+          {step === 2 && (
+            <ProjectSummaryScreen
+              formData={formData}
+              setFormData={setFormData}
+              onNext={async () => {
+                const ok = await requestQuote(formData);
+                if (ok) setStep(3);
+              }}
+              onBack={() => setStep(1)}
+              selectedTalents={selectedTalents}
+            />
+          )}
+          {step === 3 && (
+            <StatusScreen
+              formData={formData}
+              setFormData={setFormData}
+              onBack={() => setStep(2)}
+              onViewQuote={async () => {
+                await viewQuote(formData);
+              }}
+              selectedTalents={selectedTalents}
+            />
+          )}
+          {/* Footer */}
+          {/* <div>
               <DashboardFooter />
             </div> */}
           {/* </div> */}

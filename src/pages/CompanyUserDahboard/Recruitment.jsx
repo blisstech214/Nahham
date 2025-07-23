@@ -162,7 +162,7 @@ const Recruitment = () => {
 
       {/* Recruitment Table */}
       <Container
-        className="bg-white rounded-4 mt-4 p-0 overflow-hidden"
+        className="bg-white rounded-4 mt-4 p-0 overflow-hidden scrollable-list flex-grow-1"
         style={{ marginTop: "30px" }}
       >
         {data.map((person, idx) => (

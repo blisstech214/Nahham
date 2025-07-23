@@ -67,6 +67,7 @@ const Talents = () => {
   const [subCategoryOptions, setSubCategoryOptions] = useState([]);
   const [formData, setFormData] = useState({ category: null, subCategory: [] });
   const [selectedTalentIds, setSelectedTalentIds] = useState([]);
+  const [selectedTalentData, setSelectedTalentData] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -152,11 +153,16 @@ const Talents = () => {
     );
   };
 
-  const toggleTalent = (id) => {
+  const toggleTalent = (id, talent) => {
     setSelectedTalentIds((prev) =>
       prev.includes(id) ? prev.filter((tid) => tid !== id) : [...prev, id]
     );
+    setSelectedTalentData((prev) =>
+      prev.includes(id) ? prev.filter((tid) => tid !== id) : [...prev, talent]
+    );
   };
+
+  console.log(" -selectedTalentIds--- ", selectedTalentIds, selectedTalentData);
 
   const yearOptions = [
     { value: "", label: "Year of Exp" },
@@ -224,7 +230,7 @@ const Talents = () => {
   return (
     <div className="py-4 inter-font">
       {activeTab === "hire" ? (
-        <HireTheTalent />
+        <HireTheTalent selectedTalentData={selectedTalentData} />
       ) : (
         <Container fluid className="px-4">
           {/* Search & Filter */}
@@ -362,47 +368,40 @@ const Talents = () => {
             </Col>
           </Row>
 
-          
-
           <Row className="gx-3 inter-font">
             {talents.map((talent) => (
               <Col xs={12} key={talent._id} className="mb-3">
-                <div className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between align-items-start position-relative shadow-sm">
-                  {/* Checkbox in top right */}
-                  <input
-                    type="checkbox"
-                    checked={selectedTalentIds.includes(talent._id)}
-                    onChange={() => toggleTalent(talent._id)}
-                    style={{
-                      position: "absolute",
-                      top: "15px",
-                      right: "15px",
-                      width: "20px",
-                      height: "20px",
-                    }}
-                  />
-
-                  {/* Left Side: Image + Name + Location + Tags */}
-                  <div className="d-flex inter-font">
-                    <img
-                      src={dashboardTalent2}
-                      alt="Talent"
-                      style={{
-                        width: "88px",
-                        height: "88px",
-                        objectFit: "cover",
-                        borderRadius: "50%",
-                        border: "2px solid #ddd",
-                      }}
-                    />
-                    <div className="ms-3">
-                      <h5 className="mb-1 fw-bold inter-font">
-                        {talent.first_name} {talent.last_name}
-                      </h5>
-                      <p className="mb-2 text-muted d-flex align-items-center inter-font">
-                        <FaLocationDot className="me-1" />
-                        {talent.city}, {talent.country}
-                        {/* <img
+                <div
+                  className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm"
+                  style={{ width: "100%" }}
+                >
+                  <div
+                    className="d-flex flex-column flex-md-row gap-3"
+                    style={{ width: "100%" }}
+                  >
+                    <div>
+                      <img
+                        src={dashboardTalent2}
+                        alt="Talent"
+                        style={{
+                          width: "88px",
+                          height: "88px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                          border: "2px solid #ddd",
+                        }}
+                      />
+                    </div>
+                    <div style={{ width: "100%" }}>
+                      <div className="d-flex flex-column flex-md-row gap-5 justify-content-between align-items-start">
+                        <div>
+                          <h5 className="mb-1 fw-bold inter-font">
+                            {talent.first_name} {talent.last_name}
+                          </h5>
+                          <p className="mb-2 text-muted d-flex align-items-center inter-font">
+                            <FaLocationDot className="me-1" />
+                            {talent.city}, {talent.country}
+                            {/* <img
                           src={flagUAE}
                           alt="Flag"
                           style={{
@@ -411,58 +410,211 @@ const Talents = () => {
                             marginLeft: "8px",
                           }}
                         /> */}
-                      </p>
-                      <div className="d-flex gap-2 flex-wrap inter-font">
-                        {talent.skills?.map((skill, index) => (
-                          <span
-                            key={index}
-                            className="bg-light px-2 py-1 rounded small text-muted border inter-font"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
-                          {talent.year_experience} Y Ex
-                        </span>
+                          </p>
+                        </div>
+                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                          <div style={{ width: "500px" }}>
+                            {talent.about && (
+                              <p style={{ maxWidth: "100%", fontSize: "14px" }}>
+                                {talent.about?.slice(0, 90)}...
+                                <span
+                                  className="text-danger fw-semibold inter-font"
+                                  style={{ cursor: "pointer" }}
+                                >
+                                  {" "}
+                                  Read More...
+                                </span>
+                              </p>
+                            )}
+                          </div>
+                          <div>
+                            <input
+                              type="checkbox"
+                              checked={selectedTalentIds.includes(talent._id)}
+                              onChange={() => toggleTalent(talent._id, talent)}
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                borderRadius: "50%",
+                                border: "2px solid #ccc",
+                                appearance: "none",
+                                WebkitAppearance: "none",
+                                MozAppearance: "none",
+                                outline: "none",
+                                cursor: "pointer",
+                                backgroundColor: selectedTalentIds.includes(
+                                  talent._id
+                                )
+                                  ? "#6d5e2b"
+                                  : "#fff",
+                                backgroundImage: selectedTalentIds.includes(
+                                  talent._id
+                                )
+                                  ? `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='white'><path d='M20.285 6.709l-11.401 11.401-5.285-5.287 1.414-1.414 3.871 3.873 9.987-9.989z'/></svg>")`
+                                  : "none",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                                backgroundSize: "12px 12px",
+                                transition: "0.2s",
+                              }}
+                              // style={{
+                              //   // position: "absolute",
+                              //   // top: "15px",
+                              //   // right: "15px",
+                              //   width: "20px",
+                              //   height: "20px",
+                              //   borderRadius: "50%",
+                              //   border: "2px solid #ccc",
+                              //   appearance: "none",
+                              //   WebkitAppearance: "none",
+                              //   MozAppearance: "none",
+                              //   outline: "none",
+                              //   cursor: "pointer",
+                              //   backgroundColor: selectedTalentIds.includes(
+                              //     talent._id
+                              //   )
+                              //     ? "#6d5e2b"
+                              //     : "#fff", // FILL WHEN CHECKED
+                              //   transition: "0.2s",
+                              // }}
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                  {/* Right Side: About + Buttons */}
-                  <div className="mt-3 mt-md-0 d-flex flex-column justify-content-between inter-font">
-                    <p style={{ maxWidth: "600px", fontSize: "14px" }}>
-                      {talent.about?.slice(0, 90)}...
-                      <span
-                        className="text-danger fw-semibold inter-font"
-                        style={{ cursor: "pointer" }}
-                      >
-                        {" "}
-                        Read More...
-                      </span>
-                    </p>
-                    <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
-                      <Button
-                        size="sm"
-                        style={{
-                          background: "#522a30",
-                          color: "#fff",
-                          radius: "5px",
-                        }}
-                        className="inter-font"
-                      >
-                        <LiaDownloadSolid /> Download
-                      </Button>
-                      <Button
-                        size="sm"
-                        style={{ background: "#522a30", color: "#fff" }}
-                        className="inter-font"
-                      >
-                        View Profile
-                      </Button>
+                      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                        <div className="d-flex" style={{}}>
+                          <div className="d-flex gap-2 flex-wrap inter-font">
+                            {talent.skills?.map((skill, index) => (
+                              <span
+                                key={index}
+                                className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                            <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
+                              {"talent.year_experience"} Y Ex
+                            </span>
+                          </div>
+                        </div>
+                        <div>
+                          <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
+                            <Button
+                              size="sm"
+                              style={{
+                                background: "#522a30",
+                                color: "#fff",
+                                borderRadius: "5px",
+                              }}
+                              className="inter-font"
+                            >
+                              <LiaDownloadSolid /> Download
+                            </Button>
+                            <Button
+                              size="sm"
+                              style={{
+                                background: "#522a30",
+                                color: "#fff",
+                                borderRadius: "5px",
+                              }}
+                              className="inter-font"
+                            >
+                              View Profile
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </Col>
+              // <Col xs={12} key={talent._id} className="mb-3">
+              //   <div className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between align-items-start position-relative shadow-sm">
+
+              //     <input
+              //       type="checkbox"
+              //       checked={selectedTalentIds.includes(talent._id)}
+              //       onChange={() => toggleTalent(talent._id)}
+              //       style={{
+              //         position: "absolute",
+              //         top: "15px",
+              //         right: "15px",
+              //         width: "20px",
+              //         height: "20px",
+              //       }}
+              //     />
+
+              //     <div className="d-flex inter-font">
+              //       <img
+              //         src={dashboardTalent2}
+              //         alt="Talent"
+              //         style={{
+              //           width: "88px",
+              //           height: "88px",
+              //           objectFit: "cover",
+              //           borderRadius: "50%",
+              //           border: "2px solid #ddd",
+              //         }}
+              //       />
+              //       <div className="ms-3">
+              //         <h5 className="mb-1 fw-bold inter-font">
+              //           {talent.first_name} {talent.last_name}
+              //         </h5>
+              //         <p className="mb-2 text-muted d-flex align-items-center inter-font">
+              //           <FaLocationDot className="me-1" />
+              //           {talent.city}, {talent.country}
+
+              //         </p>
+              //         <div className="d-flex gap-2 flex-wrap inter-font">
+              //           {talent.skills?.map((skill, index) => (
+              //             <span
+              //               key={index}
+              //               className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+              //             >
+              //               {skill}
+              //             </span>
+              //           ))}
+              //           <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
+              //             {talent.year_experience} Y Ex
+              //           </span>
+              //         </div>
+              //       </div>
+              //     </div>
+
+              //     <div className="mt-3 mt-md-0 d-flex flex-column justify-content-between inter-font">
+              //       <p style={{ maxWidth: "600px", fontSize: "14px" }}>
+              //         {talent.about?.slice(0, 90)}...
+              //         <span
+              //           className="text-danger fw-semibold inter-font"
+              //           style={{ cursor: "pointer" }}
+              //         >
+              //           {" "}
+              //           Read More...
+              //         </span>
+              //       </p>
+              //       <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
+              //         <Button
+              //           size="sm"
+              //           style={{
+              //             background: "#522a30",
+              //             color: "#fff",
+              //             radius: "5px",
+              //           }}
+              //           className="inter-font"
+              //         >
+              //           <LiaDownloadSolid /> Download
+              //         </Button>
+              //         <Button
+              //           size="sm"
+              //           style={{ background: "#522a30", color: "#fff" }}
+              //           className="inter-font"
+              //         >
+              //           View Profile
+              //         </Button>
+              //       </div>
+              //     </div>
+              //   </div>
+              // </Col>
             ))}
           </Row>
 
