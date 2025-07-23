@@ -456,6 +456,12 @@ const EditProfile = ({ onBack }) => {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: null }));
   };
 
+  const handlePhoneNumberChange = (value, key) => {
+    console.log("fffififiif --- ", value);
+    setFormData((prev) => ({ ...prev, [key]: value }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: null }));
+  };
+
   const handleCountryChange = (selectedOption) =>
     setFormData((prev) => ({ ...prev, country: selectedOption }));
 
@@ -716,11 +722,11 @@ const EditProfile = ({ onBack }) => {
               <PhoneInput
                 placeholder="Enter phone number"
                 style={{ height: "40px", overflow: "hidden" }}
-                // value={value}
-                // onChange={setValue}
-                name="phone"
-                value={formData.phone}
-                onChange={handleTextChange}
+                value={value}
+                onChange={(value) => handlePhoneNumberChange(value, "phone")}
+                // name="phone"
+                // value={formData?.phone}
+                // onChange={handleTextChange}
                 defaultCountry="US" // Set a default country
                 international // Enable international input
                 countryCallingCodeEditable={false}
