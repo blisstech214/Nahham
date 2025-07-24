@@ -71,7 +71,7 @@ const Footer = () => {
 
           <div className="col-md-4 col-2 col-sm-12 text-white social-icons-main">
             <div className="social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
-              <a
+              {/* <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,7 +84,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
               >
                 <img src={x} alt="Twitter / X" className="mx-1" />
-              </a>
+              </a> */}
               <a
                 href="https://www.instagram.com/nahhamuae?igsh=cjdvNjljbXcza2sw"
                 target="_blank"
@@ -92,7 +92,7 @@ const Footer = () => {
               >
                 <img src={instagram} alt="Instagram" className="mx-1" />
               </a>
-              <a
+              {/* <a
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -105,7 +105,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
               >
                 <img src={yt} alt="YouTube" className="mx-1" />
-              </a>
+              </a> */}
               <a
                 href="https://www.tiktok.com/@nahhamuae?_t=ZS-8y6OUT4PWkM&_r=1"
                 target="_blank"
@@ -113,13 +113,13 @@ const Footer = () => {
               >
                 <img src={tiktok} alt="TikTok" className="mx-1" />
               </a>
-              <a
+              {/* <a
                 href="https://www.snapchat.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img src={snapchat} alt="Snapchat" className="mx-1" />
-              </a>
+              </a> */}
             </div>
             {/* <ul className="list-unstyled d-flex social-icons">
               <li>
