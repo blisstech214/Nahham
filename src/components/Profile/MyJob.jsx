@@ -5,6 +5,8 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
+import { Button, Col, Row } from "react-bootstrap";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 
 const MyJob = () => {
   const [jobData, setJobData] = useState([]);
@@ -17,7 +19,13 @@ const MyJob = () => {
 
   const [confirmDeleteJob, setConfirmDeleteJob] = useState(null);
   const [editJobData, setEditJobData] = useState(null);
+  const [createJobData, setCreateJobData] = useState(false);
   const [editForm, setEditForm] = useState({
+    title: "",
+    company: "",
+    location: "",
+  });
+  const [createForm, setCreateForm] = useState({
     title: "",
     company: "",
     location: "",
@@ -92,6 +100,29 @@ const MyJob = () => {
     }
   };
 
+  const handleCreateJob = async () => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.request({
+        method: "POST",
+        url: `jobs/createOrUpdate`,
+        data: createForm,
+      });
+
+      if (res.data.status) {
+        setCreateJobData(false);
+        await fetchJobData(1);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      console.error("Edit Error:", err);
+      toast.error("Failed to update job.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleEditJob = async () => {
     try {
       setIsLoading(true);
@@ -116,70 +147,118 @@ const MyJob = () => {
     }
   };
 
-  const renderJobCard = (job) => (
-    <div
-      key={job._id}
-      className="d-flex justify-content-between align-items-center my-3 border-bottom pb-3"
-    >
-      <div className="d-flex align-items-start">
-        <img
-          src={profile}
-          className="rounded-circle mt-1"
-          style={{ width: 54, height: 54, objectFit: "cover" }}
-          alt="Profile"
-        />
-        <div className="mt-1 ms-3">
-          <h5 className="inter-font mb-1" style={{ fontSize: "17px" }}>
-            {job.title}
-          </h5>
-          <p className="m-0 mb-1 inter-font" style={{ fontSize: "16px" }}>
-            {job.company}
-          </p>
-          <p className="inter-font m-0 text-muted">
-            <FaLocationDot className="me-1 text-dark" />
-            {job.location}
-          </p>
+  const renderJobCard = (job) => {
+    console.log("job ---- ", job);
+    return (
+      <div
+        key={job._id}
+        className="d-flex justify-content-between align-items-center my-3 border-bottom pb-3"
+      >
+        <div className="d-flex align-items-start">
+          <img
+            src={profile}
+            className="rounded-circle mt-1"
+            style={{ width: 54, height: 54, objectFit: "cover" }}
+            alt="Profile"
+          />
+          <div className="mt-1 ms-3">
+            <h5 className="inter-font mb-1" style={{ fontSize: "17px" }}>
+              {job.title}
+            </h5>
+            <p className="m-0 mb-1 inter-font" style={{ fontSize: "16px" }}>
+              {job.company}
+            </p>
+            <p className="inter-font m-0 text-muted">
+              <FaLocationDot className="me-1 text-dark" />
+              {job.location}
+            </p>
+          </div>
+        </div>
+        <div className="position-relative">
+          <HiOutlineDotsVertical
+            fontSize={23}
+            className="cursor-pointer"
+            onClick={() =>
+              setOpenMenuId(openMenuId === job._id ? null : job._id)
+            }
+          />
+          {openMenuId === job._id && (
+            <div
+              className="position-absolute bg-white shadow rounded p-2"
+              style={{ top: "30px", right: 0, zIndex: 10 }}
+            >
+              <div
+                className="d-flex align-items-center mb-2 cursor-pointer"
+                onClick={() => {
+                  setEditJobData(job);
+                  setEditForm({
+                    title: job.title,
+                    company: job.company,
+                    location: job.location,
+                  });
+                }}
+              >
+                <FaEdit className="me-2 text-primary" />
+                <span>Edit</span>
+              </div>
+              <div
+                className="d-flex align-items-center cursor-pointer"
+                onClick={() =>
+                  setConfirmDeleteJob({ id: job._id, title: job.title })
+                }
+              >
+                <FaTrash className="me-2 text-danger" />
+                <span>Delete</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-      <div className="position-relative">
-        <HiOutlineDotsVertical
-          fontSize={23}
-          className="cursor-pointer"
-          onClick={() => setOpenMenuId(openMenuId === job._id ? null : job._id)}
-        />
-        {openMenuId === job._id && (
-          <div
-            className="position-absolute bg-white shadow rounded p-2"
-            style={{ top: "30px", right: 0, zIndex: 10 }}
-          >
-            <div
-              className="d-flex align-items-center mb-2 cursor-pointer"
-              onClick={() => {
-                setEditJobData(job);
-                setEditForm({
-                  title: job.title,
-                  company: job.company,
-                  location: job.location,
-                });
-              }}
-            >
-              <FaEdit className="me-2 text-primary" />
-              <span>Edit</span>
-            </div>
-            <div
-              className="d-flex align-items-center cursor-pointer"
-              onClick={() =>
-                setConfirmDeleteJob({ id: job._id, title: job.title })
-              }
-            >
-              <FaTrash className="me-2 text-danger" />
-              <span>Delete</span>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+    );
+  };
+
+  // const handlePageChange = (newPage) => {
+  //   if (
+  //     newPage >= 1 &&
+  //     newPage <= pagination.total_pages &&
+  //     newPage !== pagination.current_page
+  //   ) {
+  //     fetchProjectData(newPage);
+  //   }
+  // };
+
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
 
   return (
     <div className="container">
@@ -187,6 +266,22 @@ const MyJob = () => {
         <p>Loading…</p>
       ) : (
         <>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "end",
+            }}
+          >
+            <button
+              className="btn inter-font"
+              style={{ backgroundColor: "#e15d4f", color: "#fff" }}
+              onClick={() => setCreateJobData(true)}
+            >
+              Create Job
+            </button>
+          </div>
           <div style={{ maxHeight: "400px", overflowY: "auto" }}>
             {jobData.length === 0 ? (
               <p className="text-center text-muted mt-4">No job data found.</p>
@@ -194,6 +289,88 @@ const MyJob = () => {
               jobData.map(renderJobCard)
             )}
           </div>
+
+          <Row className="mt-4">
+            <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+              {/* Pagination Numbers */}
+              <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === 1}
+                onClick={() => handlePageChange(current_page - 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                <ChevronLeft size={18} />
+              </Button>
+
+              {pages.map((page, index) => (
+                <Button
+                  key={index}
+                  size="sm"
+                  variant={page === current_page ? "danger" : "link"}
+                  style={{
+                    borderRadius: "50%",
+                    width: "36px",
+                    height: "36px",
+                    padding: 0,
+                    backgroundColor:
+                      page === current_page ? "#E46D54" : "transparent",
+                    color: page === current_page ? "#fff" : "#666",
+                    fontWeight: page === current_page ? "600" : "400",
+                    border: "none",
+                    fontSize: "14px",
+                  }}
+                  disabled={page === "..."}
+                  onClick={() => page !== "..." && handlePageChange(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+
+              {/* Next Arrow */}
+              <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === total_pages}
+                onClick={() => handlePageChange(current_page + 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                <ChevronRight size={18} />
+              </Button>
+
+              {/* View All Button */}
+              <Button
+                size="sm"
+                style={{
+                  backgroundColor: "#E46D54",
+                  border: "none",
+                  padding: "6px 20px",
+                  borderRadius: "10px",
+                  color: "#fff",
+                  marginLeft: "10px",
+                }}
+                // onClick={handleViewAll}
+              >
+                View All
+              </Button>
+            </Col>
+          </Row>
 
           {/* Pagination */}
           {pagination.total_pages > 1 && (
@@ -289,10 +466,10 @@ const MyJob = () => {
         </div>
       )}
 
-      {/* Edit Job Modal */}
-      {editJobData && (
+      {/* create Job Modal */}
+      {createJobData && (
         <div
-          className="modal fade show d-block"
+          className="modal fade show d-block inter-font"
           tabIndex="-1"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
@@ -302,7 +479,72 @@ const MyJob = () => {
               style={{ backgroundColor: "#fff6f1" }}
             >
               <div className="modal-header border-0">
-                <h5 className="modal-title fw-bold">Edit Job</h5>
+                <h5 className="modal-title fw-bold inter-font">Create Job</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => {
+                    setCreateJobData(false);
+                  }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                {["title", "company", "location"].map((field) => (
+                  <div className="mb-3" key={field}>
+                    <label className="form-label inter-font">
+                      {field.charAt(0).toUpperCase() + field.slice(1)}
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={createForm?.[field]}
+                      onChange={(e) =>
+                        setCreateForm({
+                          ...createForm,
+                          [field]: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="modal-footer border-0">
+                <button
+                  className="btn btn-light inter-font"
+                  onClick={() => {
+                    setCreateJobData(false);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn inter-font"
+                  style={{ backgroundColor: "#e15d4f", color: "#fff" }}
+                  onClick={handleCreateJob}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Saving..." : "Save Changes"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Job Modal */}
+      {editJobData && (
+        <div
+          className="modal fade show d-block inter-font"
+          tabIndex="-1"
+          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div
+              className="modal-content border-0 shadow-lg rounded-4"
+              style={{ backgroundColor: "#fff6f1" }}
+            >
+              <div className="modal-header border-0">
+                <h5 className="modal-title fw-bold inter-font">Edit Job</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -315,15 +557,15 @@ const MyJob = () => {
               <div className="modal-body">
                 {["title", "company", "location"].map((field) => (
                   <div className="mb-3" key={field}>
-                    <label className="form-label">
+                    <label className="form-label inter-font">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      value={editForm.location}
+                      value={editForm?.[field]}
                       onChange={(e) =>
-                        setEditForm({ ...editForm, location: e.target.value })
+                        setEditForm({ ...editForm, [field]: e.target.value })
                       }
                     />
                   </div>
@@ -331,7 +573,7 @@ const MyJob = () => {
               </div>
               <div className="modal-footer border-0">
                 <button
-                  className="btn btn-light"
+                  className="btn btn-light inter-font"
                   onClick={() => {
                     setEditJobData(null);
                     setOpenMenuId(null);
@@ -340,7 +582,7 @@ const MyJob = () => {
                   Cancel
                 </button>
                 <button
-                  className="btn"
+                  className="btn inter-font"
                   style={{ backgroundColor: "#e15d4f", color: "#fff" }}
                   onClick={handleEditJob}
                   disabled={isLoading}

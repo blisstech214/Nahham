@@ -218,7 +218,7 @@ const HomePage = () => {
   filteredTalents = filteredTalents.slice(0, 4);
 
   return (
-    <div className="layout-wrapper">
+    <div className="layout-wrapper inter-font">
       <div className="left-strip">
         {[...Array(25)].map((_, i) => (
           <img
@@ -243,7 +243,7 @@ const HomePage = () => {
             style={{ paddingTop: "140px" }}
           >
             <h1
-              className="text-center fw-bolder res-size"
+              className="text-center fw-bolder res-size inter-font"
               style={{ fontFamily: "auto", fontSize: "70px" }}
             >
               Unlock the Power <br className="break" /> of Talent

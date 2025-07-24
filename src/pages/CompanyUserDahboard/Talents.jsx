@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { MultiSelect } from "react-multi-select-component";
 import { useLocation, useNavigate } from "react-router-dom";
 import HireTheTalent from "./HireTheTalent";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const STATIC_TALENTS = [
   {
@@ -268,7 +268,7 @@ const Talents = () => {
                 style={{ marginLeft: "12px" }}
               >
                 <Button
-                  className="btn btn-base border-0 inter-font dashboard-btn"
+                  className="btn btn-base border-0 inter-font dashboard-btn inter-font"
                   style={{
                     outline: "none",
                     width: "88px",
@@ -339,7 +339,7 @@ const Talents = () => {
           <Row className="mt-3">
             <Col className="px-0 d-flex justify-content-end align-items-center gap-2 mb-4">
               <Button
-                className="bg-transparent border inter-font clear-btn"
+                className="bg-transparent border inter-font clear-btn inter-font"
                 style={{
                   color: "rgba(82, 42, 48, 1)",
                   width: "88px",
@@ -349,7 +349,7 @@ const Talents = () => {
                 Clear
               </Button>
               <Button
-                className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1"
+                className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1 inter-font"
                 style={{
                   background: "rgba(82, 42, 48, 1)",
                   color: "white",
@@ -372,11 +372,11 @@ const Talents = () => {
             {talents.map((talent) => (
               <Col xs={12} key={talent._id} className="mb-3">
                 <div
-                  className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm"
+                  className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm inter-font"
                   style={{ width: "100%" }}
                 >
                   <div
-                    className="d-flex flex-column flex-md-row gap-3"
+                    className="d-flex flex-column flex-md-row gap-3 inter-font"
                     style={{ width: "100%" }}
                   >
                     <div>
@@ -412,10 +412,10 @@ const Talents = () => {
                         /> */}
                           </p>
                         </div>
-                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
+                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start inter-font">
                           <div style={{ width: "500px" }}>
                             {talent.about && (
-                              <p style={{ maxWidth: "100%", fontSize: "14px" }}>
+                              <p style={{ maxWidth: "100%", fontSize: "14px" }} className="inter-font">
                                 {talent.about?.slice(0, 90)}...
                                 <span
                                   className="text-danger fw-semibold inter-font"
@@ -621,6 +621,25 @@ const Talents = () => {
           <Row className="mt-4">
             <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap">
               {/* Pagination Numbers */}
+
+  <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === 1}
+                onClick={() => handlePageChange(current_page - 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                <ChevronLeft size={18} />
+              </Button>
+
               {pages.map((page, index) => (
                 <Button
                   key={index}

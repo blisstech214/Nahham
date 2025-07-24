@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import DashboardFooter from "./DashboardFooter";
 import { FaLocationDot } from "react-icons/fa6";
 import profile from "../../assets/images/star-profile-img.png";
+import ApiService from "../../services/ApiService";
+import { toast } from "react-toastify";
+import { Button, Col, Row } from "react-bootstrap";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HistoryCard = ({ item }) => {
   const statusStyles = {
@@ -12,8 +16,40 @@ const HistoryCard = ({ item }) => {
     "Up Coming": { color: "#CD496D", bg: "#FCE1E8" },
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const { color, bg } =
     statusStyles[item.paymentStatus] || statusStyles["Pending"];
+
+  const handleUpdateStatus = async (id, status) => {
+    try {
+      setIsLoading(true);
+
+      const formdata = new FormData();
+      formdata.append("project_id", id);
+      formdata.append("status", status);
+
+      const res = await ApiService.request({
+        method: "POST",
+        url: `projects/updateStatus`,
+        data: formdata,
+      });
+
+      if (res.data.status) {
+        // setCreateJobData(false);
+        // await fetchJobData(1);
+
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      console.error("Edit Error:", err);
+      toast.error("Failed to update job.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="row border-bottom">
@@ -29,12 +65,12 @@ const HistoryCard = ({ item }) => {
             {item.title}
           </h5>
           <p className="m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
-            {item.company}
+            {item.description}
           </p>
-          <p className="inter-font" style={{ color: "gray" }}>
+          {/* <p className="inter-font" style={{ color: "gray" }}>
             <FaLocationDot className="me-1 text-dark" />
             {item.location}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="col-md-2 my-3">
@@ -45,10 +81,10 @@ const HistoryCard = ({ item }) => {
           className="inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.dates}
+          {item.start_date} - {item.end_date}
         </p>
       </div>
-      <div className="col-md-2 my-3">
+      <div className="col-md-1 my-3">
         <h5 className="inter-font" style={{ fontSize: "18px" }}>
           Earnings
         </h5>
@@ -56,12 +92,12 @@ const HistoryCard = ({ item }) => {
           className="inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.earnings}
+          {item.total_amount}
         </p>
       </div>
-      <div className="col-md-1 my-3">
+      <div className="col-md-2 my-3">
         <h5 className="inter-font" style={{ fontSize: "18px" }}>
-          Payment
+          Status
         </h5>
         <button
           className="btn border-0 inter-font"
@@ -73,8 +109,41 @@ const HistoryCard = ({ item }) => {
             fontSize: "12px",
           }}
         >
-          {item.paymentStatus}
+          {item.status}
         </button>
+      </div>
+      <div className="col-md-2 my-3">
+        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+          Action
+        </h5>
+        <div className="d-flex gap-2">
+          <button
+            onClick={() => handleUpdateStatus(item?._id, "Accepted")}
+            className="btn border-0 inter-font"
+            style={{
+              color: "#5F8D73",
+              backgroundColor: "#D3FDEA",
+              width: "85px",
+              height: "27px",
+              fontSize: "12px",
+            }}
+          >
+            Accept
+          </button>
+          <button
+            onClick={() => handleUpdateStatus(item?._id, "Rejected")}
+            className="btn border-0 inter-font"
+            style={{
+              color: "#CD496D",
+              backgroundColor: "#FCE1E8",
+              width: "85px",
+              height: "27px",
+              fontSize: "12px",
+            }}
+          >
+            Decline
+          </button>
+        </div>
       </div>
       {/* <div className="col-md-2 my-3 text-end pe-5">
         <div className="mt-4">
@@ -274,6 +343,84 @@ const History = () => {
 
   const totalPages = 5;
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    total_pages: 1,
+    current_page: 1,
+  });
+  const [projectData, setProjectData] = useState([]);
+
+  const fetchProjectData = async (page = 1) => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.request({
+        method: "GET",
+        url: `getProjectQuotes?page=${page}`,
+      });
+
+      const data = res.data;
+      if (data.status) {
+        console.log("data -", data);
+        setProjectData(data.data.projects);
+        setPagination(data.data.pagination);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      console.error("Fetch Job Error:", err);
+      toast.error("Failed to fetch jobs.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (
+      newPage >= 1 &&
+      newPage <= pagination.total_pages &&
+      newPage !== pagination.current_page
+    ) {
+      fetchProjectData(newPage);
+    }
+  };
+
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
+
+  useEffect(() => {
+    fetchProjectData(1);
+  }, []);
+
   return (
     <div className="main-bg" style={{ minHeight: "100vh" }}>
       <div
@@ -287,10 +434,93 @@ const History = () => {
         </div>
 
         <div className="scrollable-list flex-grow-1">
-          {historyData.map((item, index) => (
+          {projectData.map((item, index) => (
             <HistoryCard key={index} item={item} />
           ))}
         </div>
+
+        <Row className="mt-4">
+          <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap">
+            {/* Pagination Numbers */}
+
+            <Button
+              size="sm"
+              variant="link"
+              disabled={current_page === 1}
+              onClick={() => handlePageChange(current_page - 1)}
+              style={{
+                width: "36px",
+                height: "36px",
+                padding: 0,
+                borderRadius: "50%",
+                backgroundColor: "#E46D54",
+                color: "#fff",
+                border: "none",
+              }}
+            >
+              <ChevronLeft size={18} />
+            </Button>
+
+            {pages.map((page, index) => (
+              <Button
+                key={index}
+                size="sm"
+                variant={page === current_page ? "danger" : "link"}
+                style={{
+                  borderRadius: "50%",
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  backgroundColor:
+                    page === current_page ? "#E46D54" : "transparent",
+                  color: page === current_page ? "#fff" : "#666",
+                  fontWeight: page === current_page ? "600" : "400",
+                  border: "none",
+                  fontSize: "14px",
+                }}
+                disabled={page === "..."}
+                onClick={() => page !== "..." && handlePageChange(page)}
+              >
+                {page}
+              </Button>
+            ))}
+
+            {/* Next Arrow */}
+            <Button
+              size="sm"
+              variant="link"
+              disabled={current_page === total_pages}
+              onClick={() => handlePageChange(current_page + 1)}
+              style={{
+                width: "36px",
+                height: "36px",
+                padding: 0,
+                borderRadius: "50%",
+                backgroundColor: "#E46D54",
+                color: "#fff",
+                border: "none",
+              }}
+            >
+              <ChevronRight size={18} />
+            </Button>
+
+            {/* View All Button */}
+            <Button
+              size="sm"
+              style={{
+                backgroundColor: "#E46D54",
+                border: "none",
+                padding: "6px 20px",
+                borderRadius: "10px",
+                color: "#fff",
+                marginLeft: "10px",
+              }}
+              // onClick={handleViewAll}
+            >
+              View All
+            </Button>
+          </Col>
+        </Row>
 
         <div className="d-flex justify-content-center mt-4">
           <ul className="pagination-custom">
