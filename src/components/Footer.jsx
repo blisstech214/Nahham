@@ -1,33 +1,32 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { t } from "i18next";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import footer_decoration from "../assets/images/footer-bottom-border.png"
+import footer_decoration from "../assets/images/footer-bottom-border.png";
 
-import logo from "../assets/images/footer-img.png"
+import logo from "../assets/images/footer-img.png";
 
-import fb from "../assets/images/fb.png"
-import x from "../assets/images/x.png"
-import instagram from "../assets/images/instagram.png"
-import linkedIn from "../assets/images/linkedIn.png"
-import yt from "../assets/images/yt.png"
-import tiktok from "../assets/images/tiktok.png"
-import snapchat from "../assets/images/snapchat.png"
+import fb from "../assets/images/fb.png";
+import x from "../assets/images/x.png";
+import instagram from "../assets/images/instagram.png";
+import linkedIn from "../assets/images/linkedIn.png";
+import yt from "../assets/images/yt.png";
+import tiktok from "../assets/images/tiktok.png";
+import snapchat from "../assets/images/snapchat.png";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
 
-   const { t, i18n } = useTranslation();
+  useEffect(() => {
+    const currentLang = i18n.language;
+    const direction = currentLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.setAttribute("dir", direction);
+    document.documentElement.setAttribute("lang", currentLang);
+  }, [i18n.language]);
 
-   useEffect(() => {
-     const currentLang = i18n.language;
-     const direction = currentLang === "ar" ? "rtl" : "ltr";
-     document.documentElement.setAttribute("dir", direction);
-     document.documentElement.setAttribute("lang", currentLang);
-   }, [i18n.language]);
-  
   return (
     <div
       className="container footer-main position-relative"
@@ -71,7 +70,58 @@ const Footer = () => {
           </div>
 
           <div className="col-md-4 col-2 col-sm-12 text-white social-icons-main">
-            <ul className="list-unstyled d-flex social-icons">
+            <div className="social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={fb} alt="Facebook" className="mx-1" />
+              </a>
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={x} alt="Twitter / X" className="mx-1" />
+              </a>
+              <a
+                href="https://www.instagram.com/nahhamuae?igsh=cjdvNjljbXcza2sw"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={instagram} alt="Instagram" className="mx-1" />
+              </a>
+              <a
+                href="https://www.linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={linkedIn} alt="LinkedIn" className="mx-1" />
+              </a>
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={yt} alt="YouTube" className="mx-1" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@nahhamuae?_t=ZS-8y6OUT4PWkM&_r=1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={tiktok} alt="TikTok" className="mx-1" />
+              </a>
+              <a
+                href="https://www.snapchat.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={snapchat} alt="Snapchat" className="mx-1" />
+              </a>
+            </div>
+            {/* <ul className="list-unstyled d-flex social-icons">
               <li>
                 <img src={fb} />
               </li>
@@ -93,7 +143,7 @@ const Footer = () => {
               <li>
                 <img src={snapchat} />
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

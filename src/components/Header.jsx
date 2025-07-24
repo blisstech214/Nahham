@@ -115,7 +115,27 @@ const Navbar = () => {
             <li>
               <div className="d-flex align-items-center btns-navbar ms-auto">
                 <div className="lang-border shadow mx-3">
-                  {languages.map((lang) => (
+                  <div
+                    onClick={() =>
+                      handleLanguageChange(i18n.language === "en" ? "ar" : "en")
+                    }
+                    // className={`lang-item ${
+                    //   i18n.language === lang.code ? "active-lang" : ""
+                    // }`}
+                    style={{
+                      cursor: "pointer",
+                      padding: "8px 15px",
+                      borderRadius: "10px",
+                      backgroundColor: "#181515",
+                      color: "#fff",
+                      fontWeight: "bold",
+                      fontSize: "15px",
+                    }}
+                  >
+                    {i18n.language === "en" ? "العربية" : "English"}
+                  </div>
+
+                  {/* {languages.map((lang) => (
                     <div
                       key={lang.code}
                       onClick={() => handleLanguageChange(lang.code)}
@@ -137,7 +157,7 @@ const Navbar = () => {
                     >
                       {lang.name}
                     </div>
-                  ))}
+                  ))} */}
                 </div>
 
                 <Link

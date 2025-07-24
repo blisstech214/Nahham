@@ -486,17 +486,72 @@ const ProjectInfoScreen = ({
     }))
   );
 
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+
+  const handleChange = (index, field, value) => {
+    const newData = [...data];
+    newData[index][field] = value;
+    setData(newData);
+  };
+
+  const handleSubmit = () => {
+    console.log("Project Title:", projectTitle);
+    console.log("Project Description:", projectDescription);
+    console.log("Full Data:", data);
+    // You can send this data to backend here
+  };
+
   const [dateRange, setDateRange] = useState({
     startDate: null,
     endDate: null,
   });
 
-  const handleApply = (event, picker) => {
+  const handleApply = (event, picker, index) => {
     const start = picker.startDate.format("YYYY-MM-DD");
     const end = picker.endDate.format("YYYY-MM-DD");
     setDateRange({ startDate: start, endDate: end });
     console.log("datepicker ---- ", start, end);
+
+    handleChange(index, "start_date", start);
+    handleChange(index, "end_date", end);
     // onChange({ from: start, to: end });
+  };
+
+  const calculateDuration = (startStr, endStr) => {
+    // const [startStr, endStr] = dateRange.split(" - ");
+    const startDate = new Date(startStr);
+    const endDate = new Date(endStr);
+
+    let years = endDate.getFullYear() - startDate.getFullYear();
+    let months = endDate.getMonth() - startDate.getMonth();
+    let days = endDate.getDate() - startDate.getDate();
+
+    if (days < 0) {
+      months--;
+      const prevMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    const parts = [];
+    if (years) parts.push(`${years} year${years > 1 ? "s" : ""}`);
+    if (months) parts.push(`${months} month${months > 1 ? "s" : ""}`);
+    if (days) parts.push(`${days} day${days > 1 ? "s" : ""}`);
+
+    return `${parts.join(", ")}`;
+
+    // // Calculate the difference in milliseconds
+    // const diffTime = endDate - startDate;
+
+    // // Convert milliseconds to days
+    // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    // return diffDays;
   };
 
   return (
@@ -513,7 +568,7 @@ const ProjectInfoScreen = ({
         style={{ width: 800, maxWidth: "100%" }}
       >
         {/* Selected Talents List (inside card) */}
-        {selectedTalents.length > 0 && (
+        {/* {selectedTalents.length > 0 && (
           <div style={{ marginBottom: 24 }}>
             <div style={{ fontWeight: 600, fontSize: 18, marginBottom: 8 }}>
               Selected Talent list
@@ -553,7 +608,7 @@ const ProjectInfoScreen = ({
               ))}
             </div>
           </div>
-        )}
+        )} */}
 
         <div className="mb-4" style={{ paddingRight: 260 }}>
           {/* <div className="fw-bold" style={{ fontSize: 30, marginBottom: 2 }}>
@@ -565,8 +620,8 @@ const ProjectInfoScreen = ({
         </div>
         {/* Form */}
         <form>
-          <div style={{ maxWidth: "800px", margin: "", padding: "20px" }}>
-            {/* <Form.Group className="mb-3 inter-font">
+          {/* <div style={{ maxWidth: "800px", margin: "", padding: "20px" }}> */}
+          {/* <Form.Group className="mb-3 inter-font">
               <Form.Label>Project Title</Form.Label>
               <Form.Control
                 type="text"
@@ -575,7 +630,7 @@ const ProjectInfoScreen = ({
               />
             </Form.Group> */}
 
-            {/* <Form.Group className="mb-4 inter-font">
+          {/* <Form.Group className="mb-4 inter-font">
               <Form.Label>Project Description</Form.Label>
               <Form.Control
                 as="textarea"
@@ -585,11 +640,11 @@ const ProjectInfoScreen = ({
               />
             </Form.Group> */}
 
-            {/* <p className="mb-3 text-muted ">
+          {/* <p className="mb-3 text-muted ">
               Select your project duration and work dates
             </p> */}
 
-            {/* <Button
+          {/* <Button
                   // onClick={handleSubmit}
                   style={{
                     backgroundColor: "#FF6B2C",
@@ -602,7 +657,7 @@ const ProjectInfoScreen = ({
                 >
                   Proceed
                 </Button> */}
-          </div>
+          {/* </div> */}
 
           <div className="mb-2">
             {/* <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
@@ -623,11 +678,14 @@ const ProjectInfoScreen = ({
             )}
           </div>
           <div className="mb-2">
-            <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+            <label
+              className="fw-semibold mb-2 inter-font"
+              style={{ fontSize: 16 }}
+            >
               Enter your Project Information
             </label>
             <textarea
-              className="form-control"
+              className="form-control inter-font"
               name="projectInfo"
               value={formData.projectInfo}
               onChange={handleInputChange}
@@ -660,7 +718,6 @@ const ProjectInfoScreen = ({
                 xs={12}
                 md={3}
                 className="d-flex align-items-center mb-2 mb-md-0"
-                style={{ justifyContent: "center" }}
               >
                 <img
                   src={dashboardTalent2}
@@ -681,40 +738,12 @@ const ProjectInfoScreen = ({
                     {person.first_name} {person.last_name}
                   </h5>
                   <p
-                    className="mb-2 text-muted d-flex align-items-center inter-font"
+                    className="mb-0 text-muted d-flex align-items-center inter-font"
                     style={{ fontSize: "11px" }}
                   >
                     {person.city}, {person.country}
                   </p>
                 </div>
-                {/* <div>
-                        <div style={{ fontWeight: "600" }}>
-                          {person.first_name} {person.last_name}
-                        </div>
-                        <div
-                          className="text-muted"
-                          style={{ fontSize: "12px" }}
-                        >
-                          Casting Actor
-                        </div>
-                      </div> */}
-              </Col>
-
-              <Col xs={12} md={3} className="mb-2 mb-md-0">
-                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
-                  Duration
-                </label>
-                <Form.Select
-                  value={person.duration}
-                  // onChange={(e) =>
-                  //   handleChange(index, "duration", e.target.value)
-                  // }
-                >
-                  <option value="">Duration</option>
-                  <option value="1 Day">1 Day</option>
-                  <option value="1 Week">1 Week</option>
-                  <option value="1 Month">1 Month</option>
-                </Form.Select>
               </Col>
 
               <Col xs={12} md={3} className="mb-2 mb-md-0">
@@ -723,9 +752,9 @@ const ProjectInfoScreen = ({
                 </label>
                 <Form.Select
                   value={person.job_type}
-                  // onChange={(e) =>
-                  //   handleChange(index, "job_type", e.target.value)
-                  // }
+                  onChange={(e) =>
+                    handleChange(index, "job_type", e.target.value)
+                  }
                 >
                   <option value="">Job Type</option>
                   <option value="Shooting">Shooting</option>
@@ -759,7 +788,7 @@ const ProjectInfoScreen = ({
                       }}
                     /> */}
                     <DateRangePicker
-                      onApply={handleApply}
+                      onApply={(e, piker) => handleApply(e, piker, index)}
                       autoUpdateInput={false}
                     >
                       <Form.Control
@@ -784,28 +813,64 @@ const ProjectInfoScreen = ({
                         {errors.dateSlot}
                       </div>
                     )}
-                    <span
-                      style={{
-                        position: "absolute",
-                        right: 16,
-                        top: 8,
-                        pointerEvents: "none",
-                      }}
-                    >
-                      <svg
-                        width="22"
-                        height="22"
-                        fill="none"
-                        stroke="#B0B0B0"
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
+                    {dateRange.startDate && dateRange.endDate ? (
+                      ""
+                    ) : (
+                      <span
+                        style={{
+                          position: "absolute",
+                          right: 16,
+                          top: 8,
+                          pointerEvents: "none",
+                        }}
                       >
-                        <rect x="3" y="4" width="18" height="18" rx="4" />
-                        <path d="M16 2v4M8 2v4M3 10h18" />
-                      </svg>
-                    </span>
+                        <svg
+                          width="22"
+                          height="22"
+                          fill="none"
+                          stroke="#B0B0B0"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <rect x="3" y="4" width="18" height="18" rx="4" />
+                          <path d="M16 2v4M8 2v4M3 10h18" />
+                        </svg>
+                      </span>
+                    )}
                   </div>
                 </div>
+              </Col>
+
+              <Col xs={12} md={3} className="mb-2 mb-md-0">
+                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                  Duration
+                </label>
+                <Form.Control
+                  type="text"
+                  value={calculateDuration(
+                    person?.start_date,
+                    person?.end_date
+                  )}
+                  disabled
+                  onChange={(e) =>
+                    handleChange(
+                      index,
+                      "duration",
+                      calculateDuration(person?.start_date, person?.end_date)
+                    )
+                  }
+                />
+                {/* <Form.Select
+                  value={person.duration}
+                  // onChange={(e) =>
+                  //   handleChange(index, "duration", e.target.value)
+                  // }
+                >
+                  <option value="">Duration</option>
+                  <option value="1 Day">1 Day</option>
+                  <option value="1 Week">1 Week</option>
+                  <option value="1 Month">1 Month</option>
+                </Form.Select> */}
               </Col>
 
               {/* <Col xs={12} md={3}>
