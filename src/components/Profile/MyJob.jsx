@@ -373,7 +373,7 @@ const MyJob = () => {
           </Row>
 
           {/* Pagination */}
-          {pagination.total_pages > 1 && (
+          {/* {pagination.total_pages > 1 && (
             <div className="d-flex justify-content-center mt-4">
               <ul className="list-unstyled d-flex gap-2">
                 <li
@@ -411,7 +411,7 @@ const MyJob = () => {
                 </li>
               </ul>
             </div>
-          )}
+          )} */}
         </>
       )}
 

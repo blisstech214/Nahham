@@ -701,7 +701,7 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="mt-4">
+          {/* <Row className="mt-4">
             <Col className="d-flex justify-content-center gap-3">
               <Button
                 variant="outline-dark"
@@ -723,7 +723,7 @@ const Talents = () => {
                 Next
               </Button>
             </Col>
-          </Row>
+          </Row> */}
         </Container>
       )}
     </div>

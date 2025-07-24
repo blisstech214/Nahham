@@ -523,7 +523,7 @@ const History = () => {
         </Row>
 
         <div className="d-flex justify-content-center mt-4">
-          <ul className="pagination-custom">
+          {/* <ul className="pagination-custom">
             {[...Array(totalPages)].map((_, idx) => (
               <li key={idx}>
                 <button
@@ -546,7 +546,7 @@ const History = () => {
                 {`>`}
               </button>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
 
