@@ -11,6 +11,7 @@ import ProfileContent from "./CompanyUserDahboard/Profile";
 import RecruitmentContent from "./CompanyUserDahboard/Recruitment";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./CompanyUserDahboard/Navbar";
+import Qutations from "./CompanyUserDahboard/Qutations";
 
 const UserDashboard = () => {
   const location = useLocation();
@@ -50,6 +51,8 @@ const UserDashboard = () => {
         return <ProfileContent />;
       case "recruitment":
         return <RecruitmentContent />;
+      case "qutations":
+        return <Qutations />;
       default:
         return <DashboardContent />;
     }

@@ -5,7 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { LiaDownloadSolid } from "react-icons/lia";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import dashboardTalent2 from "../../assets/images/dashboardTalent2.png";
 import Sidebar from "./Sidebar";
 import { Button, Col, Form, Image, Row } from "react-bootstrap";
@@ -447,6 +447,7 @@ const ProjectInfoScreen = ({
   jobTypeOptions,
   selectedTalents = [],
   selectedTalentData,
+  setSelectedTalentsUpdatedData,
 }) => {
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -479,12 +480,16 @@ const ProjectInfoScreen = ({
   const [data, setData] = useState(
     selectedTalentData.map((person) => ({
       ...person,
+      title: "",
+      description: "",
       job_type: "",
       duration: "",
       start_date: null,
       end_date: null,
     }))
   );
+
+  const [isLoadingCreateQuotes, setIsLoadingCreateQuotes] = useState(false);
 
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
@@ -544,14 +549,62 @@ const ProjectInfoScreen = ({
     if (days) parts.push(`${days} day${days > 1 ? "s" : ""}`);
 
     return `${parts.join(", ")}`;
+  };
 
-    // // Calculate the difference in milliseconds
-    // const diffTime = endDate - startDate;
+  const handleCreateQuotes = async (data) => {
+    try {
+      setIsLoadingCreateQuotes(true);
+      const res = await ApiService.request({
+        method: "POST",
+        url: `company/postProject`,
+        data: { projects: data },
+      });
 
-    // // Convert milliseconds to days
-    // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      if (res.data.status) {
+        // setCreateJobData(false);
+        // await fetchJobData(1);
+        toast.success(res.data.message);
+        return res.data;
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err) {
+      console.error("Edit Error:", err);
+      toast.error("Failed to update job.");
+    } finally {
+      setIsLoadingCreateQuotes(false);
+    }
+  };
 
-    // return diffDays;
+  const handleProceed = async () => {
+    if (projectTitle !== "" && projectDescription !== "") {
+      const mergedData = data.map((person) => ({
+        // ...person,
+        title: projectTitle,
+        description: projectDescription,
+        job_type: person?.job_type,
+        duration: calculateDuration(person?.start_date, person?.end_date),
+        start_date: person?.start_date,
+        end_date: person?.end_date,
+        talent_id: person?._id,
+      }));
+      console.log("data ------- ", data, mergedData);
+      const resData = await handleCreateQuotes(mergedData);
+      if (resData?.status) {
+        const mergedData = data.map((person) => ({
+          ...person,
+          title: projectTitle,
+          description: projectDescription,
+          job_type: person?.job_type,
+          duration: calculateDuration(person?.start_date, person?.end_date),
+          start_date: person?.start_date,
+          end_date: person?.end_date,
+          talent_id: person?._id,
+        }));
+        setSelectedTalentsUpdatedData(mergedData);
+        onNext();
+      }
+    }
   };
 
   return (
@@ -667,8 +720,8 @@ const ProjectInfoScreen = ({
               <Form.Label>Project Title</Form.Label>
               <Form.Control
                 type="text"
-                // value={projectTitle}
-                // onChange={(e) => setProjectTitle(e.target.value)}
+                value={projectTitle}
+                onChange={(e) => setProjectTitle(e.target.value)}
               />
             </Form.Group>
             {errors.projectInfo && (
@@ -687,8 +740,10 @@ const ProjectInfoScreen = ({
             <textarea
               className="form-control inter-font"
               name="projectInfo"
-              value={formData.projectInfo}
-              onChange={handleInputChange}
+              value={projectDescription}
+              onChange={(e) => setProjectDescription(e.target.value)}
+              // value={formData.projectInfo}
+              // onChange={handleInputChange}
               style={{
                 minHeight: 80,
                 fontSize: 18,
@@ -747,7 +802,10 @@ const ProjectInfoScreen = ({
               </Col>
 
               <Col xs={12} md={3} className="mb-2 mb-md-0">
-                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                <label
+                  className="fw-semibold mb-2 inter-font"
+                  style={{ fontSize: 16 }}
+                >
                   Job Type
                 </label>
                 <Form.Select
@@ -808,11 +866,11 @@ const ProjectInfoScreen = ({
                         className="inter-font"
                       />
                     </DateRangePicker>
-                    {errors.dateSlot && (
+                    {/* {errors.dateSlot && (
                       <div style={{ color: "red", fontSize: 13, marginTop: 2 }}>
                         {errors.dateSlot}
                       </div>
-                    )}
+                    )} */}
                     {dateRange.startDate && dateRange.endDate ? (
                       ""
                     ) : (
@@ -842,11 +900,16 @@ const ProjectInfoScreen = ({
               </Col>
 
               <Col xs={12} md={3} className="mb-2 mb-md-0">
-                <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+                <label
+                  className="fw-semibold mb-2 inter-font"
+                  style={{ fontSize: 16 }}
+                >
                   Duration
                 </label>
                 <Form.Control
+                  className="fw-semibold  inter-font"
                   type="text"
+                  placeholder="Duration"
                   value={calculateDuration(
                     person?.start_date,
                     person?.end_date
@@ -1054,9 +1117,10 @@ const ProjectInfoScreen = ({
               minWidth: 160,
             }}
             type="button"
-            onClick={onNext}
+            onClick={handleProceed}
+            disabled={isLoadingCreateQuotes}
           >
-            Proceed
+            {isLoadingCreateQuotes ? "Loading..." : "Proceed"}
           </button>
         </form>
       </div>
@@ -1070,6 +1134,7 @@ const ProjectSummaryScreen = ({
   onNext,
   onBack,
   selectedTalents = [],
+  selectedTalentsUpdatedData,
 }) => (
   <div
     className="d-flex justify-content-center"
@@ -1084,7 +1149,7 @@ const ProjectSummaryScreen = ({
       style={{ width: 700, maxWidth: "100%" }}
     >
       {/* Selected Talents List (inside card) */}
-      {selectedTalents.length > 0 && (
+      {/* {selectedTalents.length > 0 && (
         <div style={{ marginBottom: 24 }}>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             {selectedTalents.map((t) => (
@@ -1136,45 +1201,68 @@ const ProjectSummaryScreen = ({
             ))}
           </div>
         </div>
-      )}
+      )} */}
       {/* Project Info */}
+      <div className="mb-3 fw-semibold" style={{ fontSize: 20 }}>
+        Project Title
+      </div>
+      <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+        {selectedTalentsUpdatedData[0]?.title || (
+          <span style={{ color: "#ccc" }}>
+            No project information provided.
+          </span>
+        )}
+      </div>
       <div className="mb-3 fw-semibold" style={{ fontSize: 20 }}>
         Project Information
       </div>
       <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
-        {formData.projectInfo || (
+        {selectedTalentsUpdatedData[0]?.description || (
           <span style={{ color: "#ccc" }}>
             No project information provided.
           </span>
         )}
       </div>
       {/* Details Row */}
-      <div className="row mb-4" style={{ fontSize: 16 }}>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
-            Required Duration
+      {selectedTalentsUpdatedData?.map((item, index) => {
+        return (
+          <div className="row mb-4" style={{ fontSize: 16 }}>
+            <div className="col">
+              <div
+                className="fw-semibold text-secondary"
+                style={{ fontSize: 15 }}
+              >
+                Required Duration
+              </div>
+              <div style={{ color: "#111", fontWeight: 500 }}>
+                {item.duration || "-"}
+              </div>
+            </div>
+            <div className="col">
+              <div
+                className="fw-semibold text-secondary"
+                style={{ fontSize: 15 }}
+              >
+                Job Type
+              </div>
+              <div style={{ color: "#111", fontWeight: 500 }}>
+                {item.job_type || "-"}
+              </div>
+            </div>
+            <div className="col">
+              <div
+                className="fw-semibold text-secondary"
+                style={{ fontSize: 15 }}
+              >
+                Date Slot
+              </div>
+              <div style={{ color: "#111", fontWeight: 500 }}>
+                {item.start_date || "-"} - {item.end_date || "-"}
+              </div>
+            </div>
           </div>
-          <div style={{ color: "#111", fontWeight: 500 }}>
-            {formData.duration || "-"}
-          </div>
-        </div>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
-            Job Type
-          </div>
-          <div style={{ color: "#111", fontWeight: 500 }}>
-            {formData.jobType || "-"}
-          </div>
-        </div>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
-            Date Slot
-          </div>
-          <div style={{ color: "#111", fontWeight: 500 }}>
-            {formData.dateSlot || "-"}
-          </div>
-        </div>
-      </div>
+        );
+      })}
       <div className="d-flex justify-content-between mt-4">
         <button
           className="btn"
@@ -1189,7 +1277,7 @@ const ProjectSummaryScreen = ({
           }}
           onClick={onNext}
         >
-          Request For Quote
+          Back to List
         </button>
       </div>
     </div>
@@ -1353,9 +1441,20 @@ const HireTheTalent = ({ selectedTalentData }) => {
     projectId: "demoProjectId", // For viewQuote
   });
   const [errors, setErrors] = React.useState({});
+  const navigate = useNavigate();
   const { durationOptions, jobTypeOptions } = useFormOptions();
   const location = useLocation();
   const selectedTalents = location.state?.selectedTalents || [];
+
+  const [selectedTalentsUpdatedData, setSelectedTalentsUpdatedData] = useState(
+    []
+  );
+
+  console.log("selectedTalentsUpdatedData - ", selectedTalentsUpdatedData);
+
+  useEffect(() => {
+    navigate("/company-dashboard?tab=talents");
+  }, []);
 
   const validateStep1 = () => {
     const newErrors = {};
@@ -1368,9 +1467,9 @@ const HireTheTalent = ({ selectedTalentData }) => {
     if (!formData.jobType) {
       newErrors.jobType = "Job type is required.";
     }
-    if (!formData.dateSlot) {
-      newErrors.dateSlot = "Date slot is required.";
-    }
+    // if (!formData.startDate) {
+    //   newErrors.startDate = "Date slot is required.";
+    // }
     return newErrors;
   };
 
@@ -1411,19 +1510,21 @@ const HireTheTalent = ({ selectedTalentData }) => {
                 errors={errors}
                 setErrors={setErrors}
                 onNext={async () => {
-                  const validationErrors = validateStep1();
-                  if (Object.keys(validationErrors).length > 0) {
-                    setErrors(validationErrors);
-                  } else {
-                    setErrors({});
-                    const ok = await postFormData(formData);
-                    if (ok) setStep(2);
-                  }
+                  setStep(2);
+                  // const validationErrors = validateStep1();
+                  // if (Object.keys(validationErrors).length > 0) {
+                  //   setErrors(validationErrors);
+                  // } else {
+                  //   setErrors({});
+                  //   const ok = await postFormData(formData);
+                  //   if (ok) setStep(2);
+                  // }
                 }}
                 durationOptions={durationOptions}
                 jobTypeOptions={jobTypeOptions}
                 selectedTalents={selectedTalents}
                 selectedTalentData={selectedTalentData}
+                setSelectedTalentsUpdatedData={setSelectedTalentsUpdatedData}
               />
             </>
           )}
@@ -1435,8 +1536,9 @@ const HireTheTalent = ({ selectedTalentData }) => {
                 const ok = await requestQuote(formData);
                 if (ok) setStep(3);
               }}
-              onBack={() => setStep(1)}
+              onBack={() => navigate("/company-dashboard?tab=talents")}
               selectedTalents={selectedTalents}
+              selectedTalentsUpdatedData={selectedTalentsUpdatedData}
             />
           )}
           {step === 3 && (

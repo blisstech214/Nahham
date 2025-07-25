@@ -25,6 +25,11 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       label: "Recruitment History",
     },
     {
+      id: "qutations",
+      icon: <GoChecklist size={20} />,
+      label: "Qutations",
+    },
+    {
       id: "transactions",
       icon: <BsGraphUp size={20} />,
       label: "Transactions",
