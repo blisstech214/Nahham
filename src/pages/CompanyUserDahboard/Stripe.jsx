@@ -1,250 +1,115 @@
-// CheckoutForm.js
-import React, { useEffect, useState } from "react";
-import {
-  Elements,
-  PaymentRequestButtonElement,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { useState } from 'react';
+import ApiService from '../../services/ApiService';
 
-const stripePromise = loadStripe("pk_test_...");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeForm = () => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [succeeded, setSucceeded] = useState(false);
 
-  const [paymentRequest, setPaymentRequest] = useState('yes');
-  const [message, setMessage] = useState("");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
 
-  useEffect(() => {
-    if (!stripe) return;
-
-    const pr = stripe.paymentRequest({
-      country: "IN",
-      currency: "inr",
-      total: {
-        label: "Total",
-        amount: 1000,
-      },
-      requestPayerName: true,
-      requestPayerEmail: true,
-    });
-
-    pr.canMakePayment().then((result) => {
-      if (result) {
-        setPaymentRequest(pr);
-      }
-    });
-  }, [stripe]);
-
-  useEffect(() => {
-    if (paymentRequest) {
-      paymentRequest.on("paymentmethod", async (ev) => {
-        const res = await fetch("http://localhost:4242/create-payment-intent", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ amount: 1000 }),
-        });
-
-        const { clientSecret } = await res.json();
-
-        const { error: confirmError } = await stripe.confirmCardPayment(
-          clientSecret,
-          {
-            payment_method: ev.paymentMethod.id,
-          }
-        );
-
-        if (confirmError) {
-          ev.complete("fail");
-          setMessage(confirmError.message);
-        } else {
-          ev.complete("success");
-          setMessage("✅ Payment successful!");
-        }
-      });
+    if (!stripe || !elements) {
+      return;
     }
-  }, [paymentRequest, stripe]);
+    const formData = new FormData();
+    formData.append("amount", 10);
+
+    try {
+      const response = await ApiService.request({
+        method: "POST",
+        url: `company/stripePayment`,
+        data: formData,
+      });
+      const data = response.data;
+
+
+      const { clientSecret } = data;
+
+      // 2. Confirm the payment
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: 'Customer Name', // You can collect this from a form
+          },
+        },
+      });
+
+      if (stripeError) {
+        setError(stripeError.message);
+        setLoading(false);
+      } else if (paymentIntent.status === 'succeeded') {
+        setSucceeded(true);
+        setLoading(false);
+      }
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "auto" }}>
-      <h3>Stripe Payment</h3>
-
-      {paymentRequest ? (
-        <PaymentRequestButtonElement options={{ paymentRequest }} />
-      ) : (
-        <>
-          <CardElement />
-          <button style={{ marginTop: "20px" }} disabled={!stripe}>
-            Pay by Card
-          </button>
-        </>
-      )}
-
-      {message && <p>{message}</p>}
+    <div style={{ maxWidth: '500px', margin: '0 auto', padding: '20px' }}>
+      <h2>Complete Payment</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ margin: '20px 0' }}>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: '16px',
+                  color: '#424770',
+                  '::placeholder': {
+                    color: '#aab7c4',
+                  },
+                },
+                invalid: {
+                  color: '#9e2146',
+                },
+              },
+            }}
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={!stripe || loading}
+          style={{
+            background: '#556cd6',
+            color: 'white',
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          {loading ? 'Processing...' : 'Pay ₹10.00'}
+        </button>
+        {error && <div style={{ color: 'red', marginTop: '12px' }}>{error}</div>}
+        {succeeded && (
+          <div style={{ color: 'green', marginTop: '12px' }}>
+            Payment succeeded! Thank you for your purchase.
+          </div>
+        )}
+      </form>
     </div>
   );
 };
 
-const CheckoutForm = () => {
+const StripePaymentPage = () => {
   return (
     <Elements stripe={stripePromise}>
-      <StripeForm />
+      <CheckoutForm />
     </Elements>
   );
 };
 
-export default CheckoutForm;
-
-// import React, { useState } from "react";
-// import {
-//   CardElement,
-//   useStripe,
-//   useElements,
-//   Elements,
-// } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
-
-// // ✅ Load stripePromise outside any component
-// const stripePromise = loadStripe(
-//   "pk_test_51LrcmFGPzB0sOwRzdcRcprUgiQzJrkEaFWw383VvTvT6Yqj6czO4gnP1DP9E7luumRVEJwjssK6uTOWVWGMlrSz5003iMd9vR1"
-// );
-
-// // ✅ Component that uses Stripe hooks (MUST be inside <Elements>)
-// const StripeForm = () => {
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const [loading, setLoading] = useState(false);
-//   const [message, setMessage] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     if (!stripe || !elements) {
-//       setLoading(false);
-//       return;
-//     }
-
-//     const res = await fetch("http://localhost:4242/create-payment-intent", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ amount: 1000 }),
-//     });
-
-//     const { clientSecret } = await res.json();
-
-//     const result = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: elements.getElement(CardElement),
-//       },
-//     });
-
-//     if (result.error) {
-//       setMessage(result.error.message);
-//     } else if (result.paymentIntent.status === "succeeded") {
-//       setMessage("✅ Payment successful!");
-//     }
-
-//     setLoading(false);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "auto" }}>
-//       <h3>Stripe Payment</h3>
-//       <CardElement />
-//       <button
-//         type="submit"
-//         disabled={!stripe || loading}
-//         style={{ marginTop: "20px" }}
-//       >
-//         {loading ? "Processing..." : "Pay Now"}
-//       </button>
-//       {message && <p>{message}</p>}
-//     </form>
-//   );
-// };
-
-// // ✅ Wrapper component that provides the Stripe context
-// const CheckoutForm = () => {
-//   return (
-//     <Elements stripe={stripePromise}>
-//       <StripeForm />
-//     </Elements>
-//   );
-// };
-
-// export default CheckoutForm;
-
-// // CheckoutForm.js
-// import React, { useState } from "react";
-// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
-// import { loadStripe } from "@stripe/stripe-js";
-
-// const StripeCheckoutForm = () => {
-//   // ⚠️ Use your own Stripe publishable key here
-//   const stripePromise = loadStripe(
-//     "pk_test_51LrcmFGPzB0sOwRzdcRcprUgiQzJrkEaFWw383VvTvT6Yqj6czO4gnP1DP9E7luumRVEJwjssK6uTOWVWGMlrSz5003iMd9vR1"
-//   );
-
-//   const stripe = useStripe();
-//   const elements = useElements();
-//   const [loading, setLoading] = useState(false);
-//   const [message, setMessage] = useState("");
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-
-//     if (!stripe || !elements) return;
-
-//     // 1. Get client secret from your backend
-//     const res = await fetch("http://localhost:4242/create-payment-intent", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ amount: 1000 }), // $10
-//     });
-
-//     const { clientSecret } = await res.json();
-
-//     // 2. Confirm the payment
-//     const result = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: elements.getElement(CardElement),
-//       },
-//     });
-
-//     if (result.error) {
-//       setMessage(result.error.message);
-//     } else if (result.paymentIntent.status === "succeeded") {
-//       setMessage("Payment Successful!");
-//     }
-
-//     setLoading(false);
-//   };
-
-//   return (
-//     <Elements stripe={stripePromise}>
-//       <form
-//         onSubmit={handleSubmit}
-//         style={{ maxWidth: "400px", margin: "auto" }}
-//       >
-//         <h3>Stripe Payment</h3>
-//         <CardElement />
-//         <button
-//           type="submit"
-//           disabled={!stripe || loading}
-//           style={{ marginTop: "20px" }}
-//         >
-//           {loading ? "Processing..." : "Pay Now"}
-//         </button>
-//         {message && <p>{message}</p>}
-//       </form>
-//     </Elements>
-//   );
-// };
-
-// export default StripeCheckoutForm;
+export default StripePaymentPage;
