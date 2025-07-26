@@ -11,6 +11,7 @@ import ApiService from "../../services/ApiService";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import SelectedQuoteTalent from "./SelectedQuoteTalent";
+import SelectedTalentsOfQuotes from "./SelectedTalentsOfQuotes";
 
 const Qutations = () => {
   const yearOptions = [
@@ -108,6 +109,10 @@ const Qutations = () => {
   });
 
   const [selectedTalentData, setSelectedTalentData] = useState([]);
+  const [selectedTalentByProjectData, setSelectedTalentByProjectData] =
+    useState([]);
+
+  console.log("selectedTalentByProjectData - - ", selectedTalentByProjectData);
 
   const fetchQutationData = async (page = 1) => {
     try {
@@ -392,7 +397,7 @@ const Qutations = () => {
                             navigate(
                               "/company-dashboard?tab=qutations&subTab=selectedOuoteTalent"
                             );
-                            setSelectedTalentData(item?.talents || []);
+                            setSelectedTalentData(item);
                           }}
                           fontSize={20}
                           style={{ cursor: "pointer", color: "gray" }}
@@ -492,7 +497,17 @@ const Qutations = () => {
         )}
 
         {activeTab === "selectedOuoteTalent" && (
-          <SelectedQuoteTalent selectedTalent={selectedTalentData} />
+          <SelectedQuoteTalent
+            selectedTalent={selectedTalentData}
+            setSelectedTalentByProjectData={setSelectedTalentByProjectData}
+          />
+        )}
+
+        {activeTab === "selectedTalentsOfQuotes" && (
+          <SelectedTalentsOfQuotes
+            selectedTalentData={selectedTalentData}
+            selectedTalentByProjectData={selectedTalentByProjectData}
+          />
         )}
 
         {/* Footer */}
