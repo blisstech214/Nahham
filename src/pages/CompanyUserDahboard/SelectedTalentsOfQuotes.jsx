@@ -1308,6 +1308,7 @@ const StatusScreen = ({
   onBack,
   onViewQuote,
   selectedTalents = [],
+  paymentInfo
 }) => {
   const navigate = useNavigate();
   return (
@@ -1407,7 +1408,7 @@ const StatusScreen = ({
           className="mb-4 inter-font"
           style={{
             fontSize: 16,
-            width: "60%",
+            width: "80%",
             textAlign: "center",
             alignItems: "center",
             display: "flex",
@@ -1454,7 +1455,7 @@ const StatusScreen = ({
               style={{ fontWeight: 500 }}
               className="fw-semibold text-secondary inter-font"
             >
-              1200,00
+              {paymentInfo.amount / 100} AED
             </div>
           </div>
           <div
@@ -1477,7 +1478,7 @@ const StatusScreen = ({
               style={{ fontWeight: 500 }}
               className="fw-semibold text-secondary inter-font"
             >
-              Master Card
+              {paymentInfo.payment_method_types[0]}
             </div>
           </div>
           <div
@@ -1501,7 +1502,7 @@ const StatusScreen = ({
               style={{ fontWeight: 500 }}
               className="fw-semibold text-secondary inter-font"
             >
-              123456
+              {paymentInfo.id}
             </div>
           </div>
         </div>
@@ -1558,9 +1559,8 @@ const SelectedTalentsOfQuotes = ({
   const location = useLocation();
   const selectedTalents = location.state?.selectedTalents || [];
 
-  const [selectedTalentsUpdatedData, setSelectedTalentsUpdatedData] = useState(
-    []
-  );
+  const [selectedTalentsUpdatedData, setSelectedTalentsUpdatedData] = useState([]);
+  const [paymentInfo, setPaymentInfo] = useState();
 
   console.log(
     "selectedTalentsUpdatedData - ",
@@ -1606,9 +1606,7 @@ const SelectedTalentsOfQuotes = ({
           justifyContent: "center",
         }}
       >
-        {/* <div className="col-md-2 p-0">
-            <Sidebar activeTab={"talents"} setActiveTab={() => {}} />
-          </div> */}
+
         <div
           className="col-md-10 content px-4 py-3"
           style={{
@@ -1620,33 +1618,10 @@ const SelectedTalentsOfQuotes = ({
             msOverflowStyle: "none",
           }}
         >
-          {/* <Navbar /> */}
-          {/* Stepper */}
+
           <HorizontalStepper step={step} setStep={setStep} />
           {step === 1 && (
             <>
-              {/* <ProjectInfoScreen
-                formData={formData}
-                setFormData={setFormData}
-                errors={errors}
-                setErrors={setErrors}
-                onNext={async () => {
-                  setStep(2);
-                  // const validationErrors = validateStep1();
-                  // if (Object.keys(validationErrors).length > 0) {
-                  //   setErrors(validationErrors);
-                  // } else {
-                  //   setErrors({});
-                  //   const ok = await postFormData(formData);
-                  //   if (ok) setStep(2);
-                  // }
-                }}
-                durationOptions={durationOptions}
-                jobTypeOptions={jobTypeOptions}
-                selectedTalents={selectedTalents}
-                selectedTalentData={selectedTalentData}
-                setSelectedTalentsUpdatedData={setSelectedTalentsUpdatedData}
-              /> */}
 
               <ProjectSummaryScreen
                 formData={formData}
@@ -1665,18 +1640,15 @@ const SelectedTalentsOfQuotes = ({
             step === 2 &&
           
             // <StripeCheckoutForm />
-            <CheckoutForm  />
-            // <ProjectSummaryScreen
-            //   formData={formData}
-            //   setFormData={setFormData}
-            //   onNext={async () => {
-            //     const ok = await requestQuote(formData);
-            //     if (ok) setStep(3);
-            //   }}
-            //   onBack={() => navigate("/company-dashboard?tab=talents")}
-            //   selectedTalents={selectedTalents}
-            //   selectedTalentsUpdatedData={selectedTalentsUpdatedData}
-            // />
+            <CheckoutForm
+              onNext={async () => {
+                // const ok = await requestQuote(formData);
+                setStep(3);
+              }}
+              selectedTalentData={selectedTalentData}
+              setPaymentInfo={setPaymentInfo}
+            />
+
           }
           {step === 3 && (
             <StatusScreen
@@ -1687,13 +1659,9 @@ const SelectedTalentsOfQuotes = ({
                 await viewQuote(formData);
               }}
               selectedTalents={selectedTalents}
+              paymentInfo={paymentInfo}
             />
           )}
-          {/* Footer */}
-          {/* <div>
-              <DashboardFooter />
-            </div> */}
-          {/* </div> */}
         </div>
       </div>
     </div>
