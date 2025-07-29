@@ -218,105 +218,108 @@ const HomePage = () => {
   filteredTalents = filteredTalents.slice(0, 4);
 
   return (
-    <div className="layout-wrapper inter-font">
-      <div className="left-strip">
+    <div className="inter-font layout-wrapper inter-font">
+      <div className="inter-font left-strip" style={{ marginLeft: "2%" }}>
         {[...Array(25)].map((_, i) => (
           <img
             key={i}
             src={decoration}
             alt="Decoration"
-            className="strip-icon"
+            className="inter-font strip-icon"
           />
         ))}
       </div>
       <div
-        className="main-bg"
+        className="inter-font main-bg"
         style={{
           minHeight: "100vh",
         }}
       >
         <Header />
         {/* Banner Sec */}
-        <div className="header-banner" id="home">
+        <div className="inter-font header-banner" id="home">
           <div
-            className="container-fluid banner-txt"
+            className="inter-font container-fluid banner-txt"
             style={{ paddingTop: "140px" }}
           >
             <h1
-              className="text-center fw-bolder res-size inter-font"
+              className="inter-font text-center fw-bolder res-size inter-font"
               style={{ fontFamily: "auto", fontSize: "70px" }}
             >
-              Unlock the Power <br className="break" /> of Talent
+              Unlock the Power <br className="inter-font break" /> of Talent
               <img
                 src={rocket}
-                className="ms-2 rocket-animation"
+                className="inter-font ms-2 rocket-animation"
                 style={{ width: "35px" }}
                 alt="rocket"
               />
             </h1>
-            <p className="text-center fw-bold p-size">
+            <p className="inter-font text-center fw-bold p-size">
               Whether you're building a team or building a career — we’ve
-              <br className="break" />
+              <br className="inter-font break" />
               got you covered.
             </p>
-            <div className="banner-btn d-flex justify-content-center">
-              <button className="btn btn-base fw-bold me-2 mt-3">
+            <div className="inter-font banner-btn d-flex justify-content-center">
+              <button className="inter-font btn btn-base fw-bold me-2 mt-3">
                 Hire Talent <MdArrowOutward fontSize={20} />
               </button>
-              <button className="btn btn-op-base fw-bold mt-3">
+              <button className="inter-font btn btn-op-base fw-bold mt-3">
                 Become a Talent <MdArrowOutward fontSize={20} />
               </button>
             </div>
           </div>
 
-          <div className="d-flex flex-wrap justify-content-center align-items-center mt-5">
-            <div className="p-2" style={{ maxWidth: "200px" }}>
-              <img src={banner1} className="img-fluid" />
+          <div className="inter-font d-flex flex-wrap justify-content-center align-items-center mt-5">
+            <div className="inter-font p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner1} className="inter-font img-fluid" />
             </div>
-            <div className="p-2" style={{ maxWidth: "200px" }}>
-              <img src={banner2} className="img-fluid" />
+            <div className="inter-font p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner2} className="inter-font img-fluid" />
             </div>
-            <div className="p-2" style={{ maxWidth: "200px" }}>
-              <img src={banner3} className="img-fluid" />
+            <div className="inter-font p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner3} className="inter-font img-fluid" />
             </div>
-            <div className="p-2" style={{ maxWidth: "200px" }}>
-              <img src={banner4} className="img-fluid" />
+            <div className="inter-font p-2" style={{ maxWidth: "200px" }}>
+              <img src={banner4} className="inter-font img-fluid" />
             </div>
           </div>
         </div>
       </div>
 
       {/* Who Are We */}
-      <div className="border-layer1 container rounded-5 bg-white" id="about">
-        <div className="top border-layer2 p-3 rounded-5 position-relative pt-5">
-          <div className="text-start">
-            <h1 className="fw-bold res-size">
+      <div
+        className="inter-font border-layer1 container rounded-5 bg-white"
+        id="about"
+      >
+        <div className="inter-font top border-layer2 p-3 rounded-5 position-relative pt-5">
+          <div className="inter-font text-start">
+            <h1 className="inter-font fw-bold res-size">
               Who We Are and What We Stand For
             </h1>
           </div>
-          <div className="row my-5" data-aos="zoom-out">
-            <div className="col-md-6 col-sm-12">
-              <div className="">
+          <div className="inter-font row my-5" data-aos="zoom-out">
+            <div className="inter-font col-md-6 col-sm-12">
+              <div className="inter-font ">
                 <img
                   src={whoAreWeImg}
-                  className="rounded-5 whoAreWe-img-size"
+                  className="inter-font rounded-5 whoAreWe-img-size"
                 />
               </div>
             </div>
-            <div className="col-md-6 col-sm-12 d-flex align-items-center">
-              <div className="fw-bold">
-                <p className="mt-4 p-size">
+            <div className="inter-font col-md-6 col-sm-12 d-flex align-items-center">
+              <div className="inter-font fw-bold">
+                <p className="inter-font mt-4 p-size">
                   We are a team of passionate innovators, designers, and
                   strategists committed to helping businesses grow and succeed.
                   With years of industry experience, we blend creativity with
                   technology to deliver solutions that truly make a difference
                   process.
                 </p>
-                <p className="p-size">
+                <p className="inter-font p-size">
                   The point of using Lorem Ipsum is that it has a more-or-less
                   normal distribution
                 </p>
-                <button className="btn btn-base fw-bold me-2 mt-3">
+                <button className="inter-font btn btn-base fw-bold me-2 mt-3">
                   Hire Talent <MdArrowOutward fontSize={20} />
                 </button>
               </div>
@@ -327,25 +330,25 @@ const HomePage = () => {
 
       {/* Talents */}
 
-      <div className="container position-relative" id="talents">
+      <div className="inter-font container position-relative" id="talents">
         <div
-          className="top places-main rounded-5 p-4"
+          className="inter-font top places-main rounded-5 p-4"
           style={{ backgroundColor: "#411318", minHeight: "500px" }}
           id="places"
         >
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
+          <div className="inter-font d-flex flex-column flex-md-row justify-content-between align-items-center mb-5">
             <div
-              className="places-text mb-3 mb-md-0"
+              className="inter-font places-text mb-3 mb-md-0"
               style={{ marginTop: "60px" }}
               data-aos="zoom-out"
             >
-              <h1 className="text-white fw-bold">Our Talents</h1>
+              <h1 className="inter-font text-white fw-bold">Our Talents</h1>
             </div>
 
             {/* Categories Bar */}
-            <div className="bar mt-5">
+            <div className="inter-font bar mt-5">
               <ul
-                className="d-flex flex-wrap gap-2 list-unstyled m-0 p-2"
+                className="inter-font d-flex flex-wrap gap-2 list-unstyled m-0 p-2"
                 style={{
                   borderRadius: "50px",
                 }}
@@ -353,7 +356,7 @@ const HomePage = () => {
                 {tabs.map((tab, index) => (
                   <li
                     key={tab}
-                    className={`fw-bold tabs-size d-flex justify-content-center align-items-center rounded-pill ${
+                    className={`inter-font fw-bold tabs-size d-flex justify-content-center align-items-center rounded-pill ${
                       index > 2 ? "d-none d-sm-block" : ""
                     }`}
                     style={{
@@ -372,19 +375,19 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="row g-4">
+          <div className="inter-font row g-4">
             <Slider {...imageSliderSettings}>
               {filteredTalents.map((talent, index) => (
-                <div key={index} className="px-3">
-                  <div className="text-center">
+                <div key={index} className="inter-font px-3">
+                  <div className="inter-font text-center">
                     <div
-                      className="rounded-circle overflow-hidden mx-auto mb-2"
+                      className="inter-font rounded-circle overflow-hidden mx-auto mb-2"
                       style={{ width: "150px", height: "150px" }}
                     >
                       <img
                         src={talent.img}
                         alt={talent.name}
-                        className="img-fluid"
+                        className="inter-font img-fluid"
                         style={{
                           objectFit: "cover",
                           width: "100%",
@@ -392,61 +395,67 @@ const HomePage = () => {
                         }}
                       />
                     </div>
-                    <h6 className="text-white mb-0 talent-name-size">
+                    <h6 className="inter-font text-white mb-0 talent-name-size">
                       {talent.name}
                     </h6>
-                    <small className="text-white">{talent.role}</small>
+                    <small className="inter-font text-white">
+                      {talent.role}
+                    </small>
                   </div>
                 </div>
               ))}
             </Slider>
           </div>
         </div>
-        <div className="design-i">
+        <div className="inter-font design-i">
           <img src={design} />
         </div>
       </div>
 
       <div
-        className="container top rounded-5"
+        className="inter-font container top rounded-5"
         id="howItWorks"
         style={{
           height: "auto",
         }}
       >
-        <div className="row p-3">
-          <div className="col-md-3">
-            <h2 className="fw-bold" style={{ fontSize: "2.4rem" }}>
+        <div className="inter-font row p-3">
+          <div className="inter-font col-md-3">
+            <h2 className="inter-font fw-bold" style={{ fontSize: "2.4rem" }}>
               How it Works?
             </h2>
           </div>
-          <div className="col-md-5" style={{ marginTop: "50px" }}>
-            <div className="d-flex">
+          <div className="inter-font col-md-5" style={{ marginTop: "50px" }}>
+            <div className="inter-font d-flex">
               <img src={num1} style={{ width: "50px", height: "50px" }} />
-              <div className="ms-4">
-                <h3 className="fw-bold mt-2">Select Talent</h3>
-                <p className="me-4 p-size">
+              <div className="inter-font ms-4">
+                <h3 className="inter-font fw-bold mt-2">Select Talent</h3>
+                <p className="inter-font me-4 p-size">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its
                   layout...
                 </p>
               </div>
             </div>
-            <div className="d-flex flex-column flex-md-row">
-              <img src={works1} className="img-fluid d-block d-md-none mb-3" />
+            <div className="inter-font d-flex flex-column flex-md-row">
               <img
                 src={works1}
-                className="d-none d-md-block"
-                style={{ width: "90%" }}
+                className="inter-font img-fluid d-block d-md-none mb-3"
+                style={{ width: "100%", height: "50px" }}
               />
+              {/* <img
+                src={works1}
+                className="inter-font d-none d-md-block"
+                style={{ width: "90%" }}
+              /> */}
             </div>
             <br />
 
-            <div className="d-flex">
+            <div className="inter-font d-flex">
               <img src={num2} style={{ width: "50px", height: "50px" }} />
-              <div className="ms-4">
-                <h3 className="fw-bold mt-2">Sign Up</h3>
-                <p className="me-4 p-size">
+              <div className="inter-font ms-4">
+                <h3 className="inter-font fw-bold mt-2">Sign Up</h3>
+                <p className="inter-font me-4 p-size">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its
                   layout...
@@ -455,23 +464,23 @@ const HomePage = () => {
             </div>
             <img
               src={works2}
-              className="d-block d-md-none mt-3"
+              className="inter-font d-block d-md-none mt-3"
               style={{ width: "100%" }}
             />
             <br />
             <img
               src={line}
-              className="ms-4 line"
-              style={{ marginTop: "-96px" }}
+              className="inter-font ms-4 line"
+              // style={{ marginTop: "-96px" }}
             />
             <br />
 
             {/* Step 3 */}
-            <div className="d-flex">
+            <div className="inter-font d-flex">
               <img src={num3} style={{ width: "50px", height: "50px" }} />
-              <div className="ms-4">
-                <h3 className="fw-bold mt-2">Request for Talent</h3>
-                <p className="me-4 p-size">
+              <div className="inter-font ms-4">
+                <h3 className="inter-font fw-bold mt-2">Request for Talent</h3>
+                <p className="inter-font me-4 p-size">
                   It is a long established fact that a reader will be distracted
                   by the readable content of a page when looking at its
                   layout...
@@ -481,24 +490,32 @@ const HomePage = () => {
             {/* Mobile Only Image */}
             <img
               src={works3}
-              className="d-block d-md-none mt-3"
+              className="inter-font d-block d-md-none mt-3"
               style={{ width: "100%" }}
             />
             <br />
           </div>
 
           {/* Desktop Side Images */}
-          <div className="col-md-4 d-none d-md-block">
-            <img src={works1} style={{ width: "90%" }} />
-            <img src={works2} className="mt-5" style={{ width: "90%" }} />
-            <img src={works3} className="mt-5" style={{ width: "90%" }} />
+          <div className="inter-font col-md-4 d-none d-md-block">
+            <img src={works1} style={{ width: "60%" }} />
+            <img
+              src={works2}
+              className="inter-font mt-5"
+              style={{ width: "60%" }}
+            />
+            <img
+              src={works3}
+              className="inter-font mt-5"
+              style={{ width: "60%" }}
+            />
           </div>
         </div>
       </div>
 
       {/* FAQs */}
       <div
-        className="container top rounded-5 faq"
+        className="inter-font container top rounded-5 faq"
         id="faq"
         data-aos="zoom-in"
         style={{
@@ -506,31 +523,31 @@ const HomePage = () => {
           height: "690px",
         }}
       >
-        <div className="row">
-          <div className="col-md-4">
-            <div className="text-start text-white p-3">
-              <h1 className="fw-bold pt-5 faq-heading">
+        <div className="inter-font row">
+          <div className="inter-font col-md-4">
+            <div className="inter-font text-start text-white p-3">
+              <h1 className="inter-font fw-bold pt-5 faq-heading">
                 Frequently Asked Questions
               </h1>
             </div>
           </div>
-          <div className="col-md-8">
+          <div className="inter-font col-md-8">
             <div
-              className="bg-white mt-5 rounded-5 main-faq p-3 p-md-5"
+              className="inter-font bg-white mt-5 rounded-5 main-faq p-3 p-md-5"
               style={{ maxWidth: "800px" }}
             >
               <div
-                className="accordion border-bottom-0"
+                className="inter-font accordion border-bottom-0"
                 style={{ border: "1.5px solid" }}
               >
                 {faqs.map((faq, index) => (
                   <div
                     key={index}
-                    className="mb-3 "
+                    className="inter-font mb-3 "
                     style={{ borderBottom: "1.5px solid" }}
                   >
                     <button
-                      className="d-flex justify-content-between align-items-center w-100 p-3 bg-transparent border-0"
+                      className="inter-font d-flex justify-content-between align-items-center w-100 p-3 bg-transparent border-0"
                       onClick={() => toggleFAQ(index)}
                       style={{
                         cursor: "pointer",
@@ -541,7 +558,7 @@ const HomePage = () => {
                             : "transparent",
                       }}
                     >
-                      <h5 className="mb-0 text-start fw-bolder text-dark">
+                      <h5 className="inter-font mb-0 text-start fw-bolder text-dark">
                         {index + 1}. {faq.question}
                       </h5>
                       {activeIndex === index ? (
@@ -552,7 +569,7 @@ const HomePage = () => {
                     </button>
 
                     {activeIndex === index && (
-                      <div className="p-3 pt-0">
+                      <div className="inter-font p-3 pt-0">
                         <p style={{ color: "#555" }}>
                           {faq.answer || "Details coming soon..."}
                         </p>
@@ -567,52 +584,56 @@ const HomePage = () => {
       </div>
 
       {/* Get In Touch */}
-      <div className="container top" id="contact" data-aos="zoom-in">
-        <div className="row">
-          <div className="col-md-4 left-space">
-            <h1 className="fw-bolder">Get In Touch</h1>
-            <ul className="list-unstyled">
+      <div className="inter-font container top" id="contact" data-aos="zoom-in">
+        <div className="inter-font row">
+          <div className="inter-font col-md-4 left-space">
+            <h1 className="inter-font fw-bolder">Get In Touch</h1>
+            <ul className="inter-font list-unstyled">
               <li>
                 <FaLocationDot fontSize={17} />
-                <span className="ms-2 fw-bolder">
+                <span className="inter-font ms-2 fw-bolder">
                   Dubai, United Arab Emirates
                 </span>
               </li>
-              <li className="my-2">
+              <li className="inter-font my-2">
                 <FaEnvelope fontSize={17} />
-                <span className="ms-2 fw-bolder">info@nahham.ae</span>
+                <span className="inter-font ms-2 fw-bolder">
+                  info@nahham.ae
+                </span>
               </li>
               <li>
                 <MdCall fontSize={20} />
-                <span className="ms-1 fw-bolder">(+971) 54 365 5595</span>
+                <span className="inter-font ms-1 fw-bolder">
+                  (+971) 54 365 5595
+                </span>
               </li>
             </ul>
           </div>
-          <div className="col-md-8 left-space">
-            <Form className="bg-white p-3 rounded-5">
-              <Form.Group className="mb-3">
+          <div className="inter-font col-md-8 left-space">
+            <Form className="inter-font bg-white p-3 rounded-5">
+              <Form.Group className="inter-font mb-3">
                 <Form.Label>
-                  <strong className="fw-bold">Your Name</strong>
+                  <strong className="inter-font fw-bold">Your Name</strong>
                 </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Name...."
-                  className="rounded-2 bg-light border shadow-sm"
+                  className="inter-font rounded-2 bg-light border shadow-sm"
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="inter-font mb-3">
                 <Form.Label>
                   <strong>Email</strong>
                 </Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Email..."
-                  className="rounded-2 bg-light border shadow-sm"
+                  className="inter-font rounded-2 bg-light border shadow-sm"
                 />
               </Form.Group>
 
-              <Form.Group className="mb-3">
+              <Form.Group className="inter-font mb-3">
                 <Form.Label>
                   <strong>Message</strong>
                 </Form.Label>
@@ -620,11 +641,11 @@ const HomePage = () => {
                   as="textarea"
                   rows={5}
                   placeholder="Text here..."
-                  className="rounded-2 bg-light border shadow-sm fw-bold"
+                  className="inter-font rounded-2 bg-light border shadow-sm fw-bold"
                 />
               </Form.Group>
 
-              <button className="btn btn-base fw-bold me-2 mt-3">
+              <button className="inter-font btn btn-base fw-bold me-2 mt-3">
                 Submit <MdArrowOutward fontSize={20} />
               </button>
             </Form>
@@ -634,7 +655,7 @@ const HomePage = () => {
 
       {/* Want To Hire */}
       <div
-        className="container top want-hire p-4 d-flex justify-content-center align-items-center position-relative text-white"
+        className="inter-font container top want-hire p-4 d-flex justify-content-center align-items-center position-relative text-white"
         style={{
           backgroundColor: "#411318",
           minHeight: "404px",
@@ -644,31 +665,33 @@ const HomePage = () => {
         id="places"
       >
         <div
-          className="text-center w-100"
+          className="inter-font text-center w-100 mt-5" 
           style={{ padding: "2rem", minHeight: "auto" }}
         >
-          <h1 className="fw-bold display-6 d-md-none">Want To Hire Talent?</h1>
-          <h1 className="fw-bold display-3 d-none d-md-block">
+          <h1 className="inter-font fw-bold display-6 d-md-none">
+            Want To Hire Talent?
+          </h1>
+          <h1 className="inter-font fw-bold display-3 d-none d-md-block">
             Want To Hire Talent?
           </h1>
         </div>
 
-        <button className="btn btn-base fw-bold me-2 mt-3">
+        <button className="inter-font btn btn-base fw-bold me-2 mt-3">
           Sign Up Now <MdArrowOutward fontSize={20} />
         </button>
-        <div className="design-i">
+        <div className="inter-font design-i">
           <img src={design} />
         </div>
 
-        <div className="talents">
-          <img src={person1} className="person1" />
-          <img src={person2} className="person2" />
-          <img src={person3} className="person3" />
+        <div className="inter-font talents">
+          <img src={person1} className="inter-font person1" />
+          <img src={person2} className="inter-font person2" />
+          <img src={person3} className="inter-font person3" />
         </div>
-        <div className="hireTalents">
-          <img src={person5} className="person1" />
-          <img src={person5} className="person2" />
-          <img src={person6} className="person3" />
+        <div className="inter-font hireTalents">
+          <img src={person5} className="inter-font person1" />
+          <img src={person5} className="inter-font person2" />
+          <img src={person6} className="inter-font person3" />
         </div>
       </div>
 

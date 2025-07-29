@@ -25,6 +25,7 @@ import "bootstrap-daterangepicker/daterangepicker.css";
 import StripeCheckoutForm from "./Stripe";
 import { Check, CheckCircle } from "lucide-react";
 import CheckoutForm from "./Stripe";
+import CombinedStripeCheckout from "./Stripe";
 
 const USE_API = false;
 
@@ -1160,7 +1161,7 @@ const ProjectSummaryScreen = ({
     >
       <div
         className="bg-white rounded-4 shadow p-5 position-relative"
-        style={{ width: 700, maxWidth: "100%" }}
+        style={{ width: 900, maxWidth: "100%" }}
       >
         <div className="mb-4" style={{ width: "100%" }}>
           {/* <div className="fw-bold" style={{ fontSize: 30, marginBottom: 2 }}>
@@ -1199,88 +1200,92 @@ const ProjectSummaryScreen = ({
           )}
         </div>
         {/* Details Row */}
-        {selectedTalentsUpdatedData?.map((item, index) => {
-          return (
-            <div className="row mb-4" style={{ fontSize: 16 }} key={index}>
-              <Col
-                xs={12}
-                md={3}
-                className="d-flex align-items-center mb-2 mb-md-0"
-              >
-                <img
-                  src={item?.talent_id?.picture}
-                  alt="Talent"
-                  style={{
-                    width: "33px",
-                    height: "33px",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                    border: "2px solid #ddd",
-                  }}
-                />
-                <div>
-                  <h5
-                    className="mb-1 fw-bold inter-font"
-                    style={{ fontSize: "14px" }}
+        {selectedTalents?.talents?.length !== 0 ? (
+          selectedTalents?.talents?.map((item, index) => {
+            return (
+              <div className="row mb-4" style={{ fontSize: 16 }} key={index}>
+                <Col
+                  xs={12}
+                  md={3}
+                  className="d-flex align-items-center mb-2 mb-md-0"
+                >
+                  <img
+                    src={item?.talent_id?.picture}
+                    alt="Talent"
+                    style={{
+                      width: "33px",
+                      height: "33px",
+                      objectFit: "cover",
+                      borderRadius: "50%",
+                      border: "2px solid #ddd",
+                    }}
+                  />
+                  <div>
+                    <h5
+                      className="mb-1 fw-bold inter-font"
+                      style={{ fontSize: "14px" }}
+                    >
+                      {item?.talent_id?.first_name} {item?.talent_id?.last_name}
+                    </h5>
+                    <p
+                      className="mb-0 text-muted d-flex align-items-center inter-font"
+                      style={{ fontSize: "11px" }}
+                    >
+                      {item?.talent_id?.phone}
+                    </p>
+                  </div>
+                </Col>
+                <div className="col">
+                  <div
+                    className="fw-semibold text-secondary"
+                    style={{ fontSize: 15 }}
                   >
-                    {item?.talent_id?.first_name} {item?.talent_id?.last_name}
-                  </h5>
-                  <p
-                    className="mb-0 text-muted d-flex align-items-center inter-font"
-                    style={{ fontSize: "11px" }}
+                    Duration
+                  </div>
+                  <div style={{ color: "#111", fontWeight: 500 }}>
+                    {item?.duration || "-"}
+                  </div>
+                </div>
+                <div className="col">
+                  <div
+                    className="fw-semibold text-secondary"
+                    style={{ fontSize: 15 }}
                   >
-                    {item?.talent_id?.phone}
-                  </p>
+                    Job Type
+                  </div>
+                  <div style={{ color: "#111", fontWeight: 500 }}>
+                    {item?.job_type || "-"}
+                  </div>
                 </div>
-              </Col>
-              <div className="col">
-                <div
-                  className="fw-semibold text-secondary"
-                  style={{ fontSize: 15 }}
-                >
-                  Duration
+                <div className="col">
+                  <div
+                    className="fw-semibold text-secondary"
+                    style={{ fontSize: 15 }}
+                  >
+                    Date Slot
+                  </div>
+                  <div style={{ color: "#111", fontWeight: 500 }}>
+                    {formatSingleDate(item?.start_date) || "-"} -{" "}
+                    {formatSingleDate(item?.end_date) || "-"}
+                  </div>
                 </div>
-                <div style={{ color: "#111", fontWeight: 500 }}>
-                  {item?.duration || "-"}
-                </div>
-              </div>
-              <div className="col">
-                <div
-                  className="fw-semibold text-secondary"
-                  style={{ fontSize: 15 }}
-                >
-                  Job Type
-                </div>
-                <div style={{ color: "#111", fontWeight: 500 }}>
-                  {item?.job_type || "-"}
-                </div>
-              </div>
-              <div className="col">
-                <div
-                  className="fw-semibold text-secondary"
-                  style={{ fontSize: 15 }}
-                >
-                  Date Slot
-                </div>
-                <div style={{ color: "#111", fontWeight: 500 }}>
-                  {formatSingleDate(item?.start_date) || "-"} -{" "}
-                  {formatSingleDate(item?.end_date) || "-"}
+                <div className="col">
+                  <div
+                    className="fw-semibold text-secondary"
+                    style={{ fontSize: 15 }}
+                  >
+                    Total
+                  </div>
+                  <div style={{ color: "#111", fontWeight: 500 }}>
+                    {selectedTalents?.total_amount || "-"}
+                  </div>
                 </div>
               </div>
-              <div className="col">
-                <div
-                  className="fw-semibold text-secondary"
-                  style={{ fontSize: 15 }}
-                >
-                  Total
-                </div>
-                <div style={{ color: "#111", fontWeight: 500 }}>
-                  {selectedTalents?.total_amount || "-"}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>Data not found</div>
+        )}
         <div className="d-flex justify-content-between mt-4">
           <button
             className="btn"
@@ -1308,7 +1313,7 @@ const StatusScreen = ({
   onBack,
   onViewQuote,
   selectedTalents = [],
-  paymentInfo
+  paymentInfo,
 }) => {
   const navigate = useNavigate();
   return (
@@ -1559,7 +1564,9 @@ const SelectedTalentsOfQuotes = ({
   const location = useLocation();
   const selectedTalents = location.state?.selectedTalents || [];
 
-  const [selectedTalentsUpdatedData, setSelectedTalentsUpdatedData] = useState([]);
+  const [selectedTalentsUpdatedData, setSelectedTalentsUpdatedData] = useState(
+    []
+  );
   const [paymentInfo, setPaymentInfo] = useState();
 
   console.log(
@@ -1568,11 +1575,11 @@ const SelectedTalentsOfQuotes = ({
     selectedTalentByProjectData
   );
   useEffect(() => {
-    if (selectedTalentByProjectData?.length === 0) {
+    if (selectedTalentData?.length === 0) {
       navigate("/company-dashboard?tab=qutations");
       window.location.reload();
     }
-  }, [selectedTalentByProjectData]);
+  }, [selectedTalentData]);
   // useEffect(() => {
   //   navigate("/company-dashboard?tab=talents");
   // }, []);
@@ -1606,7 +1613,6 @@ const SelectedTalentsOfQuotes = ({
           justifyContent: "center",
         }}
       >
-
         <div
           className="col-md-10 content px-4 py-3"
           style={{
@@ -1618,11 +1624,9 @@ const SelectedTalentsOfQuotes = ({
             msOverflowStyle: "none",
           }}
         >
-
           <HorizontalStepper step={step} setStep={setStep} />
           {step === 1 && (
             <>
-
               <ProjectSummaryScreen
                 formData={formData}
                 setFormData={setFormData}
@@ -1636,20 +1640,114 @@ const SelectedTalentsOfQuotes = ({
               />
             </>
           )}
-          {
-            step === 2 &&
-          
+          {step === 2 && (
             // <StripeCheckoutForm />
-            <CheckoutForm
-              onNext={async () => {
-                // const ok = await requestQuote(formData);
-                setStep(3);
+            // <StripePaymentPage
+            <div
+              className="d-flex justify-content-center bg-white rounded-4 shadow p-5"
+              style={{
+                paddingTop: 40,
+                paddingBottom: 120,
+                boxSizing: "border-box",
               }}
-              selectedTalentData={selectedTalentData}
-              setPaymentInfo={setPaymentInfo}
-            />
+            >
+              <div className="" style={{ width: 400, maxWidth: "100%" }}>
+                <div className="mb-4" style={{ width: "100%" }}>
+                  {/* <div className="fw-bold" style={{ fontSize: 30, marginBottom: 2 }}>
+            Hire the talent
+          </div> */}
+                  <div
+                    style={{
+                      color: "#000",
+                      fontSize: 25,
+                      fontWeight: 500,
+                      textAlign: "start",
+                    }}
+                    className="mb-5"
+                  >
+                    NGI Film
+                  </div>
+                </div>
+                {/* Project Info */}
+                <div
+                  className="mb-2 fw-semibold d-flex"
+                  style={{
+                    fontSize: 20,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  Leading Role Plus Singer
+                  <span className="text-secondary">4000.00</span>
+                </div>
+                <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+                  <span style={{ color: "#ccc" }}>lipsum dummy text.</span>
+                </div>
+                <div
+                  className="mb-2 fw-semibold d-flex"
+                  style={{
+                    fontSize: 20,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  Leading Role Plus Singer
+                  <span className="text-secondary">4000.00</span>
+                </div>
+                <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+                  <span style={{ color: "#ccc" }}>lipsum dummy text.</span>
+                </div>
+                <div
+                  className="mb-2 fw-semibold d-flex"
+                  style={{
+                    fontSize: 20,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  Leading Role Plus Singer
+                  <span className="text-secondary">4000.00</span>
+                </div>
+                <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+                  <span style={{ color: "#ccc" }}>lipsum dummy text.</span>
+                </div>
+                
 
-          }
+                <div className=" mt-4" style={{borderTop :'1px solid gray'}}>
+              <div
+                  className="mb-2 fw-semibold d-flex"
+                  style={{
+                    fontSize: 22,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  VAT 5%
+                  <span className="text-secondary">1200.00</span>
+                </div><div
+                  className="mb-2 fw-semibold d-flex"
+                  style={{
+                    fontSize: 22,
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  Total
+                  <span className="text-secondary">12000.00</span>
+                </div>
+                </div>
+              </div>
+
+              <CombinedStripeCheckout
+                onNext={async () => {
+                  // const ok = await requestQuote(formData);
+                  setStep(3);
+                }}
+                selectedTalentData={selectedTalentData}
+                setPaymentInfo={setPaymentInfo}
+              />
+            </div>
+          )}
           {step === 3 && (
             <StatusScreen
               formData={formData}

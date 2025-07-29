@@ -51,20 +51,20 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`navbar navbar-expand-lg sticky ${
-        scrolled ? "navbar-light md-bg-white bg-white shadow" : "bg-transparent"
+      className={`inter-font navbar navbar-expand-lg sticky ${
+        scrolled ? "navbar-light md-bg-white bg-white shadow" : " bg-white"
       }`}
     >
-      <div className="container">
+      <div className="inter-font container">
         <a
-          className="navbar-brand d-flex align-items-center justify-content-center mx-0"
+          className="inter-font navbar-brand d-flex align-items-center justify-content-center mx-0"
           href="#"
         >
-          <img src={logo} alt="My Guide" className="logo" />
+          <img src={logo} alt="My Guide" className="inter-font logo" />
         </a>
 
         <button
-          className="navbar-toggler"
+          className="inter-font navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -72,61 +72,61 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="inter-font navbar-toggler-icon"></span>
         </button>
 
         {/* Navbar Links */}
         <div
-          className="collapse navbar-collapse justify-content-end custom-collapse"
+          className="inter-font collapse navbar-collapse justify-content-end custom-collapse"
           id="navbarNav"
         >
-          <ul className="navbar-nav nav-res">
+          <ul className="inter-font navbar-nav nav-res">
             <Link to={"/"}>
-              <li className="nav-item">
-                <a className="nav-link active">{t("home")}</a>
+              <li className="inter-font nav-item">
+                <a className="inter-font nav-link active">{t("home")}</a>
               </li>
             </Link>
             <Link to={"/aboutus"}>
-              <li className="nav-item">
-                <a className="nav-link">{t("about_us")}</a>
+              <li className="inter-font nav-item">
+                <a className="inter-font nav-link">{t("about_us")}</a>
               </li>
             </Link>
-            <li className="nav-item">
-              <a className="nav-link" href="#talents">
+            <li className="inter-font nav-item">
+              <a className="inter-font nav-link" href="#talents">
                 {t("why_choose_us")}
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#howItWorks">
+            <li className="inter-font nav-item">
+              <a className="inter-font nav-link" href="#howItWorks">
                 {t("contact_us")}
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#faq">
+            <li className="inter-font nav-item">
+              <a className="inter-font nav-link" href="#faq">
                 {t("faqs")}
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#contact">
+            <li className="inter-font nav-item">
+              <a className="inter-font nav-link" href="#contact">
                 {t("screenshot")}
               </a>
             </li>
 
             <li>
-              <div className="d-flex align-items-center btns-navbar ms-auto">
-                <div className="lang-border shadow mx-3">
+              <div className="inter-font d-flex align-items-center btns-navbar ms-auto">
+                <div className="inter-font lang-border shadow mx-3">
                   <div
                     onClick={() =>
                       handleLanguageChange(i18n.language === "en" ? "ar" : "en")
                     }
-                    // className={`lang-item ${
+                    // className={inter-font `lang-item ${
                     //   i18n.language === lang.code ? "active-lang" : ""
                     // }`}
                     style={{
                       cursor: "pointer",
                       padding: "8px 15px",
                       borderRadius: "10px",
-                      backgroundColor: "#181515",
+                      backgroundColor: "#6d5f27",
                       color: "#fff",
                       fontWeight: "bold",
                       fontSize: "15px",
@@ -139,7 +139,7 @@ const Navbar = () => {
                     <div
                       key={lang.code}
                       onClick={() => handleLanguageChange(lang.code)}
-                      className={`lang-item ${
+                      className={inter-font `lang-item ${
                         i18n.language === lang.code ? "active-lang" : ""
                       }`}
                       style={{
@@ -161,23 +161,23 @@ const Navbar = () => {
                 </div>
 
                 <Link
-                  className="btn btn-base btn-lg partner-btn ms-2 mt-0"
+                  className="inter-font btn btn-base btn-lg partner-btn ms-2 mt-0"
                   to="/register"
                 >
-                  <i className="fas fa-user-circle"></i>
+                  <i className="inter-font fas fa-user-circle"></i>
                   {t("become_partner")}
                 </Link>
               </div>
             </li>
           </ul>
         </div>
-        {/* <div className="d-flex align-items-center btns-navbar ms-auto">
-          <div className="lang-border shadow mx-3">
+        {/* <div className="inter-font d-flex align-items-center btns-navbar ms-auto">
+          <div className="inter-font lang-border shadow mx-3">
             {languages.map((lang) => (
               <div
                 key={lang.code}
                 onClick={() => handleLanguageChange(lang.code)}
-                className={`lang-item ${
+                className={inter-font `lang-item ${
                   i18n.language === lang.code ? "active-lang" : ""
                 }`}
                 style={{
@@ -197,10 +197,10 @@ const Navbar = () => {
           </div>
 
           <Link
-            className="btn btn-base btn-lg partner-btn ms-2 mt-0"
+            className="inter-font btn btn-base btn-lg partner-btn ms-2 mt-0"
             to="/BecomePartner"
           >
-            <i className="fas fa-user-circle"></i>
+            <i className="inter-font fas fa-user-circle"></i>
             {t("become_partner")}
           </Link>
         </div> */}

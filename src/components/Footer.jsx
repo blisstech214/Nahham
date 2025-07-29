@@ -29,99 +29,99 @@ const Footer = () => {
 
   return (
     <div
-      className="container footer-main position-relative"
+      className="inter-font container footer-main position-relative"
       style={{ background: "#6D5F27", height: "410px" }}
     >
-      <div className="container pt-5">
-        <div className="row">
-          <div className="col-md-4 col-sm-5 text-white footer-left">
-            <div className="d-flex align-items-center">
+      <div className="inter-font container pt-5">
+        <div className="inter-font row">
+          <div className="inter-font col-md-4 col-sm-5 text-white footer-left">
+            <div className="inter-font d-flex align-items-center">
               <img
                 alt="Logo"
                 src={logo}
-                className="footer-logo"
+                className="inter-font footer-logo"
                 width={"300px"}
               />
             </div>
           </div>
-          <div className="col-md-4 col-8 col-sm-2 text-white footer-right">
-            <div className="d-flex footer-res">
-              <nav className="nav footer-nav flex-column py-3">
+          <div className="inter-font col-md-4 col-8 col-sm-2 text-white footer-right">
+            <div className="inter-font d-flex footer-res">
+              <nav className="inter-font nav footer-nav flex-column py-3">
                 <Link to={"/"}>
-                  <a className="nav-link text-white">{t("home")}</a>
+                  <a className="inter-font nav-link text-white">{t("home")}</a>
                 </Link>
                 <Link to="/aboutus">
-                  <a className="nav-link text-white">{t("about_us")}</a>
+                  <a className="inter-font nav-link text-white">{t("about_us")}</a>
                 </Link>
-                <a className="nav-link text-white" href="#talents">
+                <a className="inter-font nav-link text-white" href="#talents">
                   {t("why_choose_us")}
                 </a>
-                <a className="nav-link text-white" href="#howItWorks">
+                <a className="inter-font nav-link text-white" href="#howItWorks">
                   {t("contact_us")}
                 </a>
-                <a className="nav-link text-white" href="#faq">
+                <a className="inter-font nav-link text-white" href="#faq">
                   {t("faqs")}
                 </a>
-                <a className="nav-link text-white" href="#contact">
+                <a className="inter-font nav-link text-white" href="#contact">
                   {t("screenshot")}
                 </a>
               </nav>
             </div>
           </div>
 
-          <div className="col-md-4 col-2 col-sm-12 text-white social-icons-main">
-            <div className="social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
+          <div className="inter-font col-md-4 col-2 col-sm-12 text-white social-icons-main">
+            <div className="inter-font social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
               {/* <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={fb} alt="Facebook" className="mx-1" />
+                <img src={fb} alt="Facebook" className="inter-font mx-1" />
               </a>
               <a
                 href="https://twitter.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={x} alt="Twitter / X" className="mx-1" />
+                <img src={x} alt="Twitter / X" className="inter-font mx-1" />
               </a> */}
               <a
                 href="https://www.instagram.com/nahhamuae?igsh=cjdvNjljbXcza2sw"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={instagram} alt="Instagram" className="mx-1" />
+                <img src={instagram} alt="Instagram" className="inter-font mx-1" />
               </a>
               {/* <a
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={linkedIn} alt="LinkedIn" className="mx-1" />
+                <img src={linkedIn} alt="LinkedIn" className="inter-font mx-1" />
               </a>
               <a
                 href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={yt} alt="YouTube" className="mx-1" />
+                <img src={yt} alt="YouTube" className="inter-font mx-1" />
               </a> */}
               <a
                 href="https://www.tiktok.com/@nahhamuae?_t=ZS-8y6OUT4PWkM&_r=1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={tiktok} alt="TikTok" className="mx-1" />
+                <img src={tiktok} alt="TikTok" className="inter-font mx-1" />
               </a>
               {/* <a
                 href="https://www.snapchat.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={snapchat} alt="Snapchat" className="mx-1" />
+                <img src={snapchat} alt="Snapchat" className="inter-font mx-1" />
               </a> */}
             </div>
-            {/* <ul className="list-unstyled d-flex social-icons">
+            {/* <ul className="inter-font list-unstyled d-flex social-icons">
               <li>
                 <img src={fb} />
               </li>
@@ -153,15 +153,15 @@ const Footer = () => {
             <span>{t("copyright")}</span>
           </div>
           <div>
-            <ul className="list-unstyled footer-list d-flex text-white fw-bolder">
+            <ul className="inter-font list-unstyled footer-list d-flex text-white fw-bolder">
               <li>Privacy Policy</li>
-              <li className="mx-4 second-list">Clients Privacy Policy</li>
+              <li className="inter-font mx-4 second-list">Clients Privacy Policy</li>
               <li>Terms & Condition</li>
             </ul>
           </div>
         </div>
       </div>
-      <div className="footer-img">
+      <div className="inter-font footer-img">
         <img src={footer_decoration} />
       </div>
     </div>

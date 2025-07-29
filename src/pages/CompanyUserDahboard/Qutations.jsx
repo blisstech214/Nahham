@@ -172,7 +172,7 @@ const Qutations = () => {
     if (months) parts.push(`${months} month${months > 1 ? "s" : ""}`);
     if (days) parts.push(`${days} day${days > 1 ? "s" : ""}`);
 
-    return parts.length ? `Duration: ${parts.join(", ")}` : "Duration: 0 days";
+    return parts.length ? ` ${parts.join(", ")}` : "Duration: 0 days";
   }
 
   const handlePageChange = (page) => {
@@ -310,7 +310,7 @@ const Qutations = () => {
                     className="align-items-center py-3 px-3 border-bottom"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
                       <div className="fw-semibold">Date</div>
                       <div>
                         {item.talents[0]?.start_date
@@ -329,7 +329,7 @@ const Qutations = () => {
                       <div>{item.title}</div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
                       <div className="fw-semibold">Duration</div>
                       <div style={{ fontSize: "14px", color: "#999" }}>
                         {item.talents[0]?.start_date
@@ -341,7 +341,7 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
+                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
                       <div className="fw-semibold">Amount</div>
                       <div style={{ fontSize: "14px", color: "#999" }}>
                         {item.total_amount} AED
@@ -370,7 +370,7 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
+                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
                       {/* <div className="fw-semibold">Duration</div> */}
                       <span
                         style={{
@@ -395,7 +395,7 @@ const Qutations = () => {
                         <FaEye
                           onClick={() => {
                             navigate(
-                              "/company-dashboard?tab=qutations&subTab=selectedOuoteTalent"
+                              "/company-dashboard?tab=qutations&subTab=selectedTalentsOfQuotes"
                             );
                             setSelectedTalentData(item);
                           }}
