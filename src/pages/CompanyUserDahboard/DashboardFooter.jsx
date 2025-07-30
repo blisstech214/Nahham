@@ -10,74 +10,74 @@ import snapchat from "../../assets/images/snapchat.png";
 const DashboardFooter = () => {
   return (
     <footer
-      className=" text-white px-3 py-2"
+      className="inter-font  text-white px-3 py-2"
       style={{
         background: "#7B6E43",
       }}
     >
-      <div className="container-fluid">
-        <div className="row align-items-center text-center text-md-start">
+      <div className="inter-font container-fluid">
+        <div className="inter-font row align-items-center text-center text-md-start">
           {/* Left: Copyright */}
-          <div className="col-12 col-md-4 mb-2 mb-md-0">
+          <div className="inter-font col-12 col-md-4 mb-2 mb-md-0">
             <div>@2025 Nahham, All rights reserved.</div>
           </div>
 
           {/* Center: Links */}
-          <div className="col-12 col-md-4 mb-2 mb-md-0">
+          <div className="inter-font col-12 col-md-4 mb-2 mb-md-0">
             <div>Privacy Policy | Terms and Conditions</div>
           </div>
 
           {/* Right: Social Icons */}
-          <div className="col-12 col-md-4">
-            <div className="social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
+          <div className="inter-font col-12 col-md-4">
+            <div className="inter-font social-icons-dashboard d-flex justify-content-center align-items-center d-flex justify-content-center justify-content-md-end align-items-center flex-wrap">
               {/* <a
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={fb} alt="Facebook" className="mx-1" />
+                <img src={fb} alt="Facebook" className="inter-font mx-1" />
               </a>
               <a
                 href="https://twitter.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={x} alt="Twitter / X" className="mx-1" />
+                <img src={x} alt="Twitter / X" className="inter-font mx-1" />
               </a> */}
               <a
                 href="https://www.instagram.com/nahhamuae?igsh=cjdvNjljbXcza2sw"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={instagram} alt="Instagram" className="mx-1" />
+                <img src={instagram} alt="Instagram" className="inter-font mx-1" />
               </a>
               {/* <a
                 href="https://www.linkedin.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={linkedIn} alt="LinkedIn" className="mx-1" />
+                <img src={linkedIn} alt="LinkedIn" className="inter-font mx-1" />
               </a>
               <a
                 href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={yt} alt="YouTube" className="mx-1" />
+                <img src={yt} alt="YouTube" className="inter-font mx-1" />
               </a> */}
               <a
                 href="https://www.tiktok.com/@nahhamuae?_t=ZS-8y6OUT4PWkM&_r=1"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={tiktok} alt="TikTok" className="mx-1" />
+                <img src={tiktok} alt="TikTok" className="inter-font mx-1" />
               </a>
               {/* <a
                 href="https://www.snapchat.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img src={snapchat} alt="Snapchat" className="mx-1" />
+                <img src={snapchat} alt="Snapchat" className="inter-font mx-1" />
               </a> */}
             </div>
           </div>

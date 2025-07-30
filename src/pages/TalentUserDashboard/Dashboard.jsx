@@ -9,7 +9,7 @@ import dashboard_users from "../../assets/images/dashboard-users.png";
 
 import person_profile from "../../assets/images/person-profile.png";
 
-import { Table } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 
 import dollar from "../../assets/images/dollar.png";
 
@@ -29,6 +29,9 @@ import yt from "../../assets/images/yt.png";
 import tiktok from "../../assets/images/tiktok.png";
 import snapchat from "../../assets/images/snapchat.png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ApiService from "../../services/ApiService";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -69,15 +72,98 @@ const Dashboard = () => {
     },
   ];
 
+
+  const [dashboardData, setDashboardData] = useState([]);
+  const [dashboardCountData, setDashboardCountData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    total_pages: 1,
+    current_page: 1,
+  });
+
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoadingHireProjects(false);
-    }, 2000);
+    fetchDashboardData(1);
   }, []);
+
+  console.log("Dashboard Data:", dashboardData);
+
+  const fetchDashboardData = async (page = 1) => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.request({
+        method: "GET",
+        url: `getDashboard?page=${page}`,
+      });
+
+      const data = res.data;
+      if (data.status) {
+        setDashboardData(data?.data?.active_hires);
+        setDashboardCountData(data?.data?.stats);
+        setPagination(data?.data?.pagination ? data?.data?.pagination : 1);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      console.error("Fetch Job Error:", err);
+      toast.error("Failed to fetch jobs.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePageChange = (page) => {
+    if (
+      page !== pagination.current_page &&
+      page >= 1 &&
+      page <= pagination.total_pages
+    ) {
+      fetchDashboardData(page);
+    }
+  };
+
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
+
+  function formatSingleDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
+    return `${day} ${month}`;
+  }
 
   return (
     <div
-      className=""
+      className="inter-font "
       style={
         {
           // height: "100vh",
@@ -88,17 +174,17 @@ const Dashboard = () => {
         }
       }
     >
-      <div className="flex-grow-1 px-3 px-md-5 main-bg inp-login">
+      <div className="inter-font flex-grow-1 px-3 px-md-5 main-bg inp-login">
         {/* Search Input */}
-        <div className="position-relative my-3">
+        <div className="inter-font position-relative my-3">
           <input
             type="text"
             placeholder="Search by Keywords"
-            className="w-100 p-2 rounded-3 ps-5 inter-font"
+            className="inter-font w-100 p-2 rounded-3 ps-5 inter-font"
             style={{ paddingLeft: "2.5rem", border: "none", fontSize: "14px" }}
           />
           <CiSearch
-            className="position-absolute"
+            className="inter-font position-absolute"
             style={{
               left: "12px",
               top: "50%",
@@ -110,11 +196,11 @@ const Dashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="row my-4">
-          <div className="col-12 col-md-4 mb-3">
-            <h4 className="inter-font card-heading mb-3">Views</h4>
+        <div className="inter-font row my-4">
+          <div className="inter-font col-12 col-md-4 mb-3">
+            <h4 className="inter-font inter-font card-heading mb-3">Views</h4>
             <div
-              className="card border-0 shadow-sm p-3 rounded-3 "
+              className="inter-font card border-0 shadow-sm p-3 rounded-3 "
               style={{
                 background: "#6D5E2B",
                 color: "white",
@@ -122,9 +208,9 @@ const Dashboard = () => {
               }}
               onClick={() => navigate("/talent/dashboard?tab=talents")}
             >
-              <div className="d-flex align-items-center gap-3">
+              <div className="inter-font d-flex align-items-center gap-3">
                 <div
-                  className="rounded-circle bg-white d-flex align-items-center justify-content-center"
+                  className="inter-font rounded-circle bg-white d-flex align-items-center justify-content-center"
                   style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
@@ -139,13 +225,13 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <h6
-                    className="mb-1 inter-font"
+                    className="inter-font mb-1 inter-font"
                     style={{ fontSize: "15px", fontWeight: 500 }}
                   >
                     Total Views
                   </h6>
                   <h2
-                    className="fw-bold mb-0 inter-font"
+                    className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
                     5
@@ -155,10 +241,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="col-12 col-md-4 mb-3">
-            <h4 className="inter-font card-heading mb-3">Job History</h4>
+          <div className="inter-font col-12 col-md-4 mb-3">
+            <h4 className="inter-font inter-font card-heading mb-3">Job History</h4>
             <div
-              className="card border-0 shadow-sm p-3 rounded-3"
+              className="inter-font card border-0 shadow-sm p-3 rounded-3"
               style={{
                 background: "#E26A52",
                 color: "white",
@@ -166,9 +252,9 @@ const Dashboard = () => {
               }}
               onClick={() => navigate("/talent/dashboard?tab=transactions")}
             >
-              <div className="d-flex align-items-center gap-3">
+              <div className="inter-font d-flex align-items-center gap-3">
                 <div
-                  className="rounded-circle bg-white d-flex align-items-center justify-content-center"
+                  className="inter-font rounded-circle bg-white d-flex align-items-center justify-content-center"
                   style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
@@ -183,13 +269,13 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <h6
-                    className="mb-1 inter-font"
+                    className="inter-font mb-1 inter-font"
                     style={{ fontSize: "15px", fontWeight: 500 }}
                   >
                     Total Jobs
                   </h6>
                   <h2
-                    className="fw-bold mb-0 inter-font"
+                    className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
                     5
@@ -199,10 +285,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="col-12 col-md-4 mb-3">
-            <h4 className="inter-font card-heading mb-3">Earnings</h4>
+          <div className="inter-font col-12 col-md-4 mb-3">
+            <h4 className="inter-font inter-font card-heading mb-3">Earnings</h4>
             <div
-              className="card border-0 shadow-sm p-3 rounded-3"
+              className="inter-font card border-0 shadow-sm p-3 rounded-3"
               style={{
                 background: "#AF516F",
                 color: "white",
@@ -210,9 +296,9 @@ const Dashboard = () => {
               }}
               onClick={() => navigate("/talent/dashboard?tab=recruitment")}
             >
-              <div className="d-flex align-items-center gap-3">
+              <div className="inter-font d-flex align-items-center gap-3">
                 <div
-                  className="rounded-circle bg-white d-flex align-items-center justify-content-center"
+                  className="inter-font rounded-circle bg-white d-flex align-items-center justify-content-center"
                   style={{ width: "50px", height: "50px", minWidth: "50px" }}
                 >
                   <img
@@ -227,13 +313,13 @@ const Dashboard = () => {
                 </div>
                 <div>
                   <h6
-                    className="mb-1 inter-font"
+                    className="inter-font mb-1 inter-font"
                     style={{ fontSize: "15px", fontWeight: 500 }}
                   >
                     Total Earnings
                   </h6>
                   <h2
-                    className="fw-bold mb-0 inter-font"
+                    className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
                     5
@@ -246,19 +332,19 @@ const Dashboard = () => {
 
         {/* Hire Projects Table */}
         <div>
-          <h5 className="mb-3 inter-font" style={{ fontSize: "16px" }}>
+          <h5 className="inter-font mb-3 inter-font" style={{ fontSize: "16px" }}>
             Hire Projects
           </h5>
           <div
-            className="bg-white rounded-3 p-3 shadow"
+            className="inter-font bg-white rounded-3 p-3 shadow"
             style={{ overflowX: "auto", width: "100%" }}
           >
-            {isLoadingHireProjects ? (
-              <div className="d-flex justify-content-center py-5">
-                <div className="spinner-border" role="status"></div>
+            {isLoading ? (
+              <div className="inter-font d-flex justify-content-center py-5">
+                <div className="inter-font spinner-border" role="status"></div>
               </div>
-            ) : hireProjects?.length !== 0 ? (
-              <table className="table align-middle mb-0">
+            ) : dashboardData?.length !== 0 ? (
+              <table className="inter-font table align-middle mb-0">
                 <thead>
                   <tr>
                     <th>Employe Company</th>
@@ -271,12 +357,12 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {hireProjects.map((item, index) => (
+                  {dashboardData.map((item, index) => (
                     <tr key={index}>
                       <td>
-                        <div className="d-flex align-items-center gap-2">
+                        <div className="inter-font d-flex align-items-center gap-2">
                           <img
-                            src={item.logo}
+                            src={item?.receipt}
                             alt="logo"
                             style={{
                               width: "40px",
@@ -286,16 +372,16 @@ const Dashboard = () => {
                             }}
                           />
                           <span
-                            className="inter-font"
+                            className="inter-font inter-font"
                             style={{ color: "#959595" }}
                           >
                             {item.company}
                           </span>
                         </div>
                       </td>
-                      <td style={{ color: "#959595" }}>{item.job}</td>
-                      <td style={{ color: "#959595" }}>{item.start}</td>
-                      <td style={{ color: "#959595" }}>{item.end}</td>
+                      <td style={{ color: "#959595" }}>{item.job_type}</td>
+                      <td style={{ color: "#959595" }}>{formatSingleDate(item.start_date)}</td>
+                      <td style={{ color: "#959595" }}>{formatSingleDate(item.end_date)}</td>
                       <td
                         style={{
                           color: "rgba(54, 190, 92, 1)",
@@ -305,33 +391,101 @@ const Dashboard = () => {
                         {item.status}
                       </td>
                       <td style={{ color: "#959595" }}>{item.project}</td>
-                      <td style={{ color: "#959595" }}>{item.amount}</td>
+                      <td style={{ color: "#959595" }}>{item.total_amount}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             ) : (
-              <div className="text-center py-5">Data not found</div>
+              <div className="inter-font text-center py-5">Data not found</div>
             )}
           </div>
         </div>
 
         {/* Pagination */}
-        {hireProjects?.length !== 0 && (
-          <div className="d-flex flex-column align-items-center my-4">
-            <ul className="pagination justify-content-center flex-wrap mb-2">
-              <li className="page-item active inter-font mx-1">1</li>
-              <li className="page-item inter-font mx-1">2</li>
-              <li className="page-item inter-font mx-1">3</li>
-              <li className="page-item inter-font mx-1">4</li>
-              <li className="page-item inter-font mx-1">5</li>
-              <li className="page-item inter-font mx-1">...</li>
-              <li className="page-item inter-font mx-1">26</li>
-              <li className="page-item inter-font mx-1">{">"}</li>
-            </ul>
-            <button className="btn btn-outline-secondary inter-font fw-light py-2 px-4">
-              View All
-            </button>
+        {dashboardData?.length !== 0 && (
+          <div className="inter-font d-flex justify-content-center my-5">
+            <Row className="inter-font mt-4">
+              <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+                {/* Pagination Numbers */}
+                <Button
+                  size="sm"
+                  variant="link"
+                  disabled={current_page === 1}
+                  onClick={() => handlePageChange(current_page - 1)}
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    padding: 0,
+                    borderRadius: "50%",
+                    backgroundColor: "#E46D54",
+                    color: "#fff",
+                    border: "none",
+                  }}
+                >
+                  <ChevronLeft size={18} />
+                </Button>
+
+                {pages.map((page, index) => (
+                  <Button
+                    key={index}
+                    size="sm"
+                    variant={page === current_page ? "danger" : "link"}
+                    style={{
+                      borderRadius: "50%",
+                      width: "36px",
+                      height: "36px",
+                      padding: 0,
+                      backgroundColor:
+                        page === current_page ? "#E46D54" : "transparent",
+                      color: page === current_page ? "#fff" : "#666",
+                      fontWeight: page === current_page ? "600" : "400",
+                      border: "none",
+                      fontSize: "14px",
+                    }}
+                    disabled={page === "..."}
+                    onClick={() => page !== "..." && handlePageChange(page)}
+                  >
+                    {page}
+                  </Button>
+                ))}
+
+                {/* Next Arrow */}
+                <Button
+                  size="sm"
+                  variant="link"
+                  disabled={current_page === total_pages}
+                  onClick={() => handlePageChange(current_page + 1)}
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    padding: 0,
+                    borderRadius: "50%",
+                    backgroundColor: "#E46D54",
+                    color: "#fff",
+                    border: "none",
+                  }}
+                >
+                  <ChevronRight size={18} />
+                </Button>
+
+                {/* View All Button */}
+                <Button
+                  size="sm"
+                  style={{
+                    backgroundColor: "#E46D54",
+                    border: "none",
+                    padding: "6px 20px",
+                    borderRadius: "10px",
+                    color: "#fff",
+                    marginLeft: "10px",
+                  }}
+                // onClick={handleViewAll}
+                >
+                  View All
+                </Button>
+              </Col>
+            </Row>
           </div>
         )}
 

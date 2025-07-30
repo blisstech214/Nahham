@@ -77,13 +77,13 @@ const Video = () => {
 
     if (startPage > 1) {
       pages.push(
-        <li key={1} className="page-item" onClick={() => handlePageChange(1)}>
+        <li key={1} className="inter-font page-item" onClick={() => handlePageChange(1)}>
           1
         </li>
       );
       if (startPage > 2) {
         pages.push(
-          <li key="ellipsis-start" className="page-item">
+          <li key="ellipsis-start" className="inter-font page-item">
             ...
           </li>
         );
@@ -94,7 +94,7 @@ const Video = () => {
       pages.push(
         <li
           key={i}
-          className={`page-item ${currentPage === i ? "active" : ""}`}
+          className={ `inter-font page-item ${currentPage === i ? "active" : ""}`}
           onClick={() => handlePageChange(i)}
         >
           {i}
@@ -105,7 +105,7 @@ const Video = () => {
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         pages.push(
-          <li key="ellipsis-end" className="page-item">
+          <li key="ellipsis-end" className="inter-font page-item">
             ...
           </li>
         );
@@ -113,7 +113,7 @@ const Video = () => {
       pages.push(
         <li
           key={totalPages}
-          className="page-item"
+          className="inter-font page-item"
           onClick={() => handlePageChange(totalPages)}
         >
           {totalPages}
@@ -125,24 +125,24 @@ const Video = () => {
   };
 
   return (
-    <div className="container">
+    <div className="inter-font container">
       {isLoading ? (
         <p>Loading Videos…</p>
       ) : (
         <>
-          <div className="row g-3">
+          <div className="inter-font row g-3">
             {mediaFiles.length === 0 && (
-              <p className="text-center">No videos found.</p>
+              <p className="inter-font text-center">No videos found.</p>
             )}
 
             {mediaFiles.map((m, index) => (
-              <div key={m._id} className="col-md-4">
-                <div className="card border-0 shadow-sm position-relative rounded-3 overflow-hidden">
-                  <div className="ratio ratio-16x9">
+              <div key={m._id} className="inter-font col-md-4">
+                <div className="inter-font card border-0 shadow-sm position-relative rounded-3 overflow-hidden">
+                  <div className="inter-font ratio ratio-16x9">
                     <video
                       id={`video-${m._id}`}
                       src={m.file}
-                      className="w-100 h-100"
+                      className="inter-font w-100 h-100"
                       style={{ objectFit: "cover", borderRadius: "12px" }}
                       controls={false}
                       onError={(e) =>
@@ -152,7 +152,7 @@ const Video = () => {
                   </div>
 
                   <div
-                    className="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
+                    className="inter-font position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
                     onClick={() => openModal(index)}
                     style={{
                       background: "rgba(0, 0, 0, 0.3)",
@@ -174,10 +174,10 @@ const Video = () => {
           </div>
 
           {totalPages > 1 && (
-            <div className="pagination-container mt-4 d-flex justify-content-center">
-              <ul className="pagination-list d-flex gap-2 list-unstyled">
+            <div className="inter-font pagination-container mt-4 d-flex justify-content-center">
+              <ul className="inter-font pagination-list d-flex gap-2 list-unstyled">
                 <li
-                  className="page-item arrow"
+                  className="inter-font page-item arrow"
                   onClick={() => handlePageChange(currentPage - 1)}
                   style={{ cursor: "pointer" }}
                 >
@@ -185,7 +185,7 @@ const Video = () => {
                 </li>
                 {renderPagination()}
                 <li
-                  className="page-item arrow"
+                  className="inter-font page-item arrow"
                   onClick={() => handlePageChange(currentPage + 1)}
                   style={{ cursor: "pointer" }}
                 >
@@ -200,7 +200,7 @@ const Video = () => {
       {/* Modal */}
       {isModalOpen && (
         <div
-          className="modal-backdrop"
+          className="inter-font modal-backdrop"
           style={{
             position: "fixed",
             top: 0,

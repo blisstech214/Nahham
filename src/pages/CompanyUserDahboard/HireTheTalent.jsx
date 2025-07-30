@@ -215,15 +215,15 @@ const viewQuote = async (formData) => {
 //         overflowY: "auto",
 //       }}
 //     >
-//       <div className="mb-4">
-//         <h5 className="fw-bold mb-3">Select Date Range</h5>
+//       <div className="inter-font mb-4">
+//         <h5 className="inter-font fw-bold mb-3">Select Date Range</h5>
 
-//         <div className="row mb-3">
-//           <div className="col">
-//             <label className="form-label fw-semibold">Start Date</label>
+//         <div className="inter-font row mb-3">
+//           <div className="inter-font col">
+//             <label className="inter-font form-label fw-semibold">Start Date</label>
 //             <input
 //               type="date"
-//               className="form-control"
+//               className="inter-font form-control"
 //               value={formatDate(tempStartDate)}
 //               onChange={handleStartDateChange}
 //               style={{
@@ -233,11 +233,11 @@ const viewQuote = async (formData) => {
 //               }}
 //             />
 //           </div>
-//           <div className="col">
-//             <label className="form-label fw-semibold">End Date</label>
+//           <div className="inter-font col">
+//             <label className="inter-font form-label fw-semibold">End Date</label>
 //             <input
 //               type="date"
-//               className="form-control"
+//               className="inter-font form-control"
 //               value={formatDate(tempEndDate)}
 //               onChange={handleEndDateChange}
 //               min={formatDate(tempStartDate)}
@@ -250,12 +250,12 @@ const viewQuote = async (formData) => {
 //           </div>
 //         </div>
 
-//         <div className="mb-3 p-3 bg-light rounded">
+//         <div className="inter-font mb-3 p-3 bg-light rounded">
 //           <strong>Selected Range:</strong>
 //           <br />
 //           {formatDisplayDate(tempStartDate)} - {formatDisplayDate(tempEndDate)}
 //           <br />
-//           <small className="text-muted">
+//           <small className="inter-font text-muted">
 //             Duration:{" "}
 //             {Math.ceil((tempEndDate - tempStartDate) / (1000 * 60 * 60 * 24))}{" "}
 //             days
@@ -263,10 +263,10 @@ const viewQuote = async (formData) => {
 //         </div>
 //       </div>
 
-//       <div className="d-flex justify-content-between align-items-center">
+//       <div className="inter-font d-flex justify-content-between align-items-center">
 //         <button
 //           type="button"
-//           className="btn btn-light"
+//           className="inter-font btn btn-light"
 //           style={{
 //             borderRadius: 8,
 //             fontWeight: 500,
@@ -278,10 +278,10 @@ const viewQuote = async (formData) => {
 //           Today
 //         </button>
 
-//         <div className="d-flex gap-2">
+//         <div className="inter-font d-flex gap-2">
 //           <button
 //             type="button"
-//             className="btn btn-secondary"
+//             className="inter-font btn btn-secondary"
 //             style={{
 //               borderRadius: 8,
 //               fontWeight: 500,
@@ -294,7 +294,7 @@ const viewQuote = async (formData) => {
 //           </button>
 //           <button
 //             type="button"
-//             className="btn"
+//             className="inter-font btn"
 //             style={{
 //               background: "#FF6B35",
 //               color: "#fff",
@@ -318,11 +318,11 @@ const viewQuote = async (formData) => {
 // Stepper Section (interactive)
 const HorizontalStepper = ({ step, setStep }) => (
   <div
-    className="d-flex justify-content-center align-items-center mb-5"
+    className="inter-font d-flex justify-content-center align-items-center mb-5"
     style={{ marginTop: 20 }}
   >
     {/* Step 1 */}
-    <div className="d-flex align-items-center">
+    <div className="inter-font d-flex align-items-center">
       <div
         onClick={() => step > 1 && setStep(1)}
         style={{
@@ -361,7 +361,7 @@ const HorizontalStepper = ({ step, setStep }) => (
       &#8594;
     </span>
     {/* Step 2 */}
-    <div className="d-flex align-items-center">
+    <div className="inter-font d-flex align-items-center">
       <div
         onClick={() => step > 2 && setStep(2)}
         style={{
@@ -400,7 +400,7 @@ const HorizontalStepper = ({ step, setStep }) => (
       &#8594;
     </span>
     {/* Step 3 */}
-    <div className="d-flex align-items-center">
+    <div className="inter-font d-flex align-items-center">
       <div
         onClick={() => step > 3 && setStep(3)}
         style={{
@@ -609,7 +609,7 @@ const ProjectInfoScreen = ({
 
   return (
     <div
-      className="d-flex justify-content-center"
+      className="inter-font d-flex justify-content-center"
       style={{
         paddingTop: 30,
         paddingBottom: 40,
@@ -617,7 +617,7 @@ const ProjectInfoScreen = ({
       }}
     >
       <div
-        className="bg-white rounded-4 shadow p-3 position-relative"
+        className="inter-font bg-white rounded-4 shadow p-3 position-relative"
         style={{ width: 800, maxWidth: "100%" }}
       >
         {/* Selected Talents List (inside card) */}
@@ -663,8 +663,8 @@ const ProjectInfoScreen = ({
           </div>
         )} */}
 
-        <div className="mb-4" style={{ paddingRight: 260 }}>
-          {/* <div className="fw-bold" style={{ fontSize: 30, marginBottom: 2 }}>
+        <div className="inter-font mb-4" style={{ paddingRight: 260 }}>
+          {/* <div className="inter-font fw-bold" style={{ fontSize: 30, marginBottom: 2 }}>
             Hire the talent
           </div> */}
           <div style={{ color: "#B0B0B0", fontSize: 18, fontWeight: 500 }}>
@@ -674,7 +674,7 @@ const ProjectInfoScreen = ({
         {/* Form */}
         <form>
           {/* <div style={{ maxWidth: "800px", margin: "", padding: "20px" }}> */}
-          {/* <Form.Group className="mb-3 inter-font">
+          {/* <Form.Group className="inter-font mb-3 inter-font">
               <Form.Label>Project Title</Form.Label>
               <Form.Control
                 type="text"
@@ -683,7 +683,7 @@ const ProjectInfoScreen = ({
               />
             </Form.Group> */}
 
-          {/* <Form.Group className="mb-4 inter-font">
+          {/* <Form.Group className="inter-font mb-4 inter-font">
               <Form.Label>Project Description</Form.Label>
               <Form.Control
                 as="textarea"
@@ -693,7 +693,7 @@ const ProjectInfoScreen = ({
               />
             </Form.Group> */}
 
-          {/* <p className="mb-3 text-muted ">
+          {/* <p className="inter-font mb-3 text-muted ">
               Select your project duration and work dates
             </p> */}
 
@@ -712,11 +712,11 @@ const ProjectInfoScreen = ({
                 </Button> */}
           {/* </div> */}
 
-          <div className="mb-2">
-            {/* <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+          <div className="inter-font mb-2">
+            {/* <label className="inter-font fw-semibold mb-2" style={{ fontSize: 16 }}>
               Enter your Project Information
             </label> */}
-            <Form.Group className="mb-3 inter-font">
+            <Form.Group className="inter-font mb-3 inter-font">
               <Form.Label>Project Title</Form.Label>
               <Form.Control
                 type="text"
@@ -730,15 +730,15 @@ const ProjectInfoScreen = ({
               </div>
             )}
           </div>
-          <div className="mb-2">
+          <div className="inter-font mb-2">
             <label
-              className="fw-semibold mb-2 inter-font"
+              className="inter-font fw-semibold mb-2 inter-font"
               style={{ fontSize: 16 }}
             >
               Enter your Project Information
             </label>
             <textarea
-              className="form-control inter-font"
+              className="inter-font form-control inter-font"
               name="projectInfo"
               value={projectDescription}
               onChange={(e) => setProjectDescription(e.target.value)}
@@ -763,7 +763,7 @@ const ProjectInfoScreen = ({
           {data.map((person, index) => (
             <Row
               key={person._id}
-              className="align-items-center mb-4 inter-font"
+              className="inter-font align-items-center mb-4 inter-font"
               style={{
                 borderBottom: "1px solid #eee",
                 paddingBottom: "15px",
@@ -772,7 +772,7 @@ const ProjectInfoScreen = ({
               <Col
                 xs={12}
                 md={3}
-                className="d-flex align-items-center mb-2 mb-md-0"
+                className="inter-font d-flex align-items-center mb-2 mb-md-0"
               >
                 <img
                   src={dashboardTalent2}
@@ -787,13 +787,13 @@ const ProjectInfoScreen = ({
                 />
                 <div>
                   <h5
-                    className="mb-1 fw-bold inter-font"
+                    className="inter-font mb-1 fw-bold inter-font"
                     style={{ fontSize: "14px" }}
                   >
                     {person.first_name} {person.last_name}
                   </h5>
                   <p
-                    className="mb-0 text-muted d-flex align-items-center inter-font"
+                    className="inter-font mb-0 text-muted d-flex align-items-center inter-font"
                     style={{ fontSize: "11px" }}
                   >
                     {person.city}, {person.country}
@@ -801,9 +801,9 @@ const ProjectInfoScreen = ({
                 </div>
               </Col>
 
-              <Col xs={12} md={3} className="mb-2 mb-md-0">
+              <Col xs={12} md={3} className="inter-font mb-2 mb-md-0">
                 <label
-                  className="fw-semibold mb-2 inter-font"
+                  className="inter-font fw-semibold mb-2 inter-font"
                   style={{ fontSize: 16 }}
                 >
                   Job Type
@@ -821,14 +821,14 @@ const ProjectInfoScreen = ({
                 </Form.Select>
               </Col>
 
-              <Col xs={12} md={3} className="mb-2 mb-md-0">
-                <div className="col">
-                  <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+              <Col xs={12} md={3} className="inter-font mb-2 mb-md-0">
+                <div className="inter-font col">
+                  <label className="inter-font fw-semibold mb-2" style={{ fontSize: 16 }}>
                     Select Date Slot
                   </label>
                   <div style={{ position: "relative" }}>
                     {/* <input
-                      className="form-control"
+                      className="inter-font form-control"
                       placeholder="Select Date Slot"
                       type="text"
                       name="dateSlot"
@@ -863,7 +863,7 @@ const ProjectInfoScreen = ({
                           maxHeight: "40px",
                           borderRadius: "5px",
                         }}
-                        className="inter-font"
+                        className="inter-font inter-font"
                       />
                     </DateRangePicker>
                     {/* {errors.dateSlot && (
@@ -899,15 +899,15 @@ const ProjectInfoScreen = ({
                 </div>
               </Col>
 
-              <Col xs={12} md={3} className="mb-2 mb-md-0">
+              <Col xs={12} md={3} className="inter-font mb-2 mb-md-0">
                 <label
-                  className="fw-semibold mb-2 inter-font"
+                  className="inter-font fw-semibold mb-2 inter-font"
                   style={{ fontSize: 16 }}
                 >
                   Duration
                 </label>
                 <Form.Control
-                  className="fw-semibold  inter-font"
+                  className="inter-font fw-semibold  inter-font"
                   type="text"
                   placeholder="Duration"
                   value={calculateDuration(
@@ -939,7 +939,7 @@ const ProjectInfoScreen = ({
               {/* <Col xs={12} md={3}>
                       
 
-                      <Row className="inter-font">
+                      <Row className="inter-font inter-font">
                         <Col md={12}>
                           <DateRangePicker
                             onApply={handleApply}
@@ -959,7 +959,7 @@ const ProjectInfoScreen = ({
                                 maxHeight: "40px",
                                 borderRadius: "5px",
                               }}
-                              className="inter-font"
+                              className="inter-font inter-font"
                             />
                           </DateRangePicker>
                         </Col>
@@ -968,13 +968,13 @@ const ProjectInfoScreen = ({
             </Row>
           ))}
 
-          <div className="row mb-4">
-            {/* <div className="col">
-              <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+          <div className="inter-font row mb-4">
+            {/* <div className="inter-font col">
+              <label className="inter-font fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Required Duration
               </label>
               <select
-                className="form-select"
+                className="inter-font form-select"
                 name="duration"
                 value={formData.duration}
                 onChange={handleInputChange}
@@ -998,12 +998,12 @@ const ProjectInfoScreen = ({
                 </div>
               )}
             </div> */}
-            {/* <div className="col">
-              <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+            {/* <div className="inter-font col">
+              <label className="inter-font fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Job Type
               </label>
               <select
-                className="form-select"
+                className="inter-font form-select"
                 name="jobType"
                 value={formData.jobType}
                 onChange={handleInputChange}
@@ -1027,13 +1027,13 @@ const ProjectInfoScreen = ({
                 </div>
               )}
             </div> */}
-            {/* <div className="col">
-              <label className="fw-semibold mb-2" style={{ fontSize: 16 }}>
+            {/* <div className="inter-font col">
+              <label className="inter-font fw-semibold mb-2" style={{ fontSize: 16 }}>
                 Select Date Slot
               </label>
               <div style={{ position: "relative" }}>
                 <input
-                  className="form-control"
+                  className="inter-font form-control"
                   placeholder="Select Date Slot"
                   type="text"
                   name="dateSlot"
@@ -1065,7 +1065,7 @@ const ProjectInfoScreen = ({
                       maxHeight: "40px",
                       borderRadius: "5px",
                     }}
-                    className="inter-font"
+                    className="inter-font inter-font"
                   />
                 </DateRangePicker>
                 {errors.dateSlot && (
@@ -1106,7 +1106,7 @@ const ProjectInfoScreen = ({
                   />
                 )} */}
           <button
-            className="fw-bold mt-2"
+            className="inter-font fw-bold mt-2"
             style={{
               background: "#FF6B35",
               color: "#fff",
@@ -1137,7 +1137,7 @@ const ProjectSummaryScreen = ({
   selectedTalentsUpdatedData,
 }) => (
   <div
-    className="d-flex justify-content-center"
+    className="inter-font d-flex justify-content-center"
     style={{
       paddingTop: 40,
       paddingBottom: 120,
@@ -1145,7 +1145,7 @@ const ProjectSummaryScreen = ({
     }}
   >
     <div
-      className="bg-white rounded-4 shadow p-5 position-relative"
+      className="inter-font bg-white rounded-4 shadow p-5 position-relative"
       style={{ width: 700, maxWidth: "100%" }}
     >
       {/* Selected Talents List (inside card) */}
@@ -1155,7 +1155,7 @@ const ProjectSummaryScreen = ({
             {selectedTalents.map((t) => (
               <div
                 key={t._id}
-                className="d-flex align-items-center bg-light rounded-3 px-3 py-2"
+                className="inter-font d-flex align-items-center bg-light rounded-3 px-3 py-2"
                 style={{
                   background: "#F8F3F0",
                   minWidth: 200,
@@ -1163,7 +1163,7 @@ const ProjectSummaryScreen = ({
                   justifyContent: "space-between",
                 }}
               >
-                <div className="d-flex align-items-center">
+                <div className="inter-font d-flex align-items-center">
                   <img
                     src={dashboardTalent2}
                     alt="profile"
@@ -1175,7 +1175,7 @@ const ProjectSummaryScreen = ({
                     }}
                   />
                   <div>
-                    <div className="fw-bold" style={{ fontSize: 18 }}>
+                    <div className="inter-font fw-bold" style={{ fontSize: 18 }}>
                       {t.first_name} {t.last_name}
                     </div>
                     <div style={{ fontSize: 14, color: "#7A7A7A" }}>
@@ -1184,7 +1184,7 @@ const ProjectSummaryScreen = ({
                   </div>
                 </div>
                 <button
-                  className="btn ms-3"
+                  className="inter-font btn ms-3"
                   style={{
                     background: "#4B2E2B",
                     color: "#fff",
@@ -1203,20 +1203,20 @@ const ProjectSummaryScreen = ({
         </div>
       )} */}
       {/* Project Info */}
-      <div className="mb-3 fw-semibold" style={{ fontSize: 20 }}>
+      <div className="inter-font mb-3 fw-semibold" style={{ fontSize: 20 }}>
         Project Title
       </div>
-      <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+      <div className="inter-font text-secondary mb-4" style={{ fontSize: 15 }}>
         {selectedTalentsUpdatedData[0]?.title || (
           <span style={{ color: "#ccc" }}>
             No project information provided.
           </span>
         )}
       </div>
-      <div className="mb-3 fw-semibold" style={{ fontSize: 20 }}>
+      <div className="inter-font mb-3 fw-semibold" style={{ fontSize: 20 }}>
         Project Information
       </div>
-      <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+      <div className="inter-font text-secondary mb-4" style={{ fontSize: 15 }}>
         {selectedTalentsUpdatedData[0]?.description || (
           <span style={{ color: "#ccc" }}>
             No project information provided.
@@ -1226,10 +1226,10 @@ const ProjectSummaryScreen = ({
       {/* Details Row */}
       {selectedTalentsUpdatedData?.map((item, index) => {
         return (
-          <div className="row mb-4" style={{ fontSize: 16 }}>
-            <div className="col">
+          <div className="inter-font row mb-4" style={{ fontSize: 16 }}>
+            <div className="inter-font col">
               <div
-                className="fw-semibold text-secondary"
+                className="inter-font fw-semibold text-secondary"
                 style={{ fontSize: 15 }}
               >
                 Required Duration
@@ -1238,9 +1238,9 @@ const ProjectSummaryScreen = ({
                 {item.duration || "-"}
               </div>
             </div>
-            <div className="col">
+            <div className="inter-font col">
               <div
-                className="fw-semibold text-secondary"
+                className="inter-font fw-semibold text-secondary"
                 style={{ fontSize: 15 }}
               >
                 Job Type
@@ -1249,9 +1249,9 @@ const ProjectSummaryScreen = ({
                 {item.job_type || "-"}
               </div>
             </div>
-            <div className="col">
+            <div className="inter-font col">
               <div
-                className="fw-semibold text-secondary"
+                className="inter-font fw-semibold text-secondary"
                 style={{ fontSize: 15 }}
               >
                 Date Slot
@@ -1263,9 +1263,9 @@ const ProjectSummaryScreen = ({
           </div>
         );
       })}
-      <div className="d-flex justify-content-between mt-4">
+      <div className="inter-font d-flex justify-content-between mt-4">
         <button
-          className="btn"
+          className="inter-font btn"
           style={{
             background: "#FF6B35",
             color: "#fff",
@@ -1291,7 +1291,7 @@ const StatusScreen = ({
   selectedTalents = [],
 }) => (
   <div
-    className="d-flex justify-content-center"
+    className="inter-font d-flex justify-content-center"
     style={{
       paddingTop: 40,
       paddingBottom: 120,
@@ -1299,7 +1299,7 @@ const StatusScreen = ({
     }}
   >
     <div
-      className="bg-white rounded-4 shadow p-5 position-relative"
+      className="inter-font bg-white rounded-4 shadow p-5 position-relative"
       style={{ width: 700, maxWidth: "100%" }}
     >
       {/* Selected Talents List (inside card) */}
@@ -1309,7 +1309,7 @@ const StatusScreen = ({
             {selectedTalents.map((t) => (
               <div
                 key={t._id}
-                className="d-flex align-items-center bg-light rounded-3 px-3 py-2"
+                className="inter-font d-flex align-items-center bg-light rounded-3 px-3 py-2"
                 style={{
                   background: "#F8F3F0",
                   minWidth: 200,
@@ -1317,7 +1317,7 @@ const StatusScreen = ({
                   justifyContent: "space-between",
                 }}
               >
-                <div className="d-flex align-items-center">
+                <div className="inter-font d-flex align-items-center">
                   <img
                     src={dashboardTalent2}
                     alt="profile"
@@ -1329,7 +1329,7 @@ const StatusScreen = ({
                     }}
                   />
                   <div>
-                    <div className="fw-bold" style={{ fontSize: 18 }}>
+                    <div className="inter-font fw-bold" style={{ fontSize: 18 }}>
                       {t.first_name} {t.last_name}
                     </div>
                     <div style={{ fontSize: 14, color: "#7A7A7A" }}>
@@ -1338,7 +1338,7 @@ const StatusScreen = ({
                   </div>
                 </div>
                 <button
-                  className="btn ms-3"
+                  className="inter-font btn ms-3"
                   style={{
                     background: "#4B2E2B",
                     color: "#fff",
@@ -1357,10 +1357,10 @@ const StatusScreen = ({
         </div>
       )}
       {/* Project Info */}
-      <div className="mb-3 fw-semibold" style={{ fontSize: 20 }}>
+      <div className="inter-font mb-3 fw-semibold" style={{ fontSize: 20 }}>
         Project Information
       </div>
-      <div className="text-secondary mb-4" style={{ fontSize: 15 }}>
+      <div className="inter-font text-secondary mb-4" style={{ fontSize: 15 }}>
         {formData.projectInfo || (
           <span style={{ color: "#ccc" }}>
             No project information provided.
@@ -1368,25 +1368,25 @@ const StatusScreen = ({
         )}
       </div>
       {/* Details Row */}
-      <div className="row mb-4" style={{ fontSize: 16 }}>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
+      <div className="inter-font row mb-4" style={{ fontSize: 16 }}>
+        <div className="inter-font col">
+          <div className="inter-font fw-semibold text-secondary" style={{ fontSize: 15 }}>
             Required Duration
           </div>
           <div style={{ color: "#111", fontWeight: 500 }}>
             {formData.duration || "-"}
           </div>
         </div>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
+        <div className="inter-font col">
+          <div className="inter-font fw-semibold text-secondary" style={{ fontSize: 15 }}>
             Job Type
           </div>
           <div style={{ color: "#111", fontWeight: 500 }}>
             {formData.jobType || "-"}
           </div>
         </div>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
+        <div className="inter-font col">
+          <div className="inter-font fw-semibold text-secondary" style={{ fontSize: 15 }}>
             Date Slot
           </div>
           <div style={{ color: "#111", fontWeight: 500 }}>
@@ -1395,16 +1395,16 @@ const StatusScreen = ({
         </div>
       </div>
       {/* Status Row */}
-      <div className="row mb-4" style={{ fontSize: 16 }}>
-        <div className="col">
-          <div className="fw-semibold text-secondary" style={{ fontSize: 15 }}>
+      <div className="inter-font row mb-4" style={{ fontSize: 16 }}>
+        <div className="inter-font col">
+          <div className="inter-font fw-semibold text-secondary" style={{ fontSize: 15 }}>
             Status
           </div>
           <div style={{ color: "#111", fontWeight: 500 }}>Quoted</div>
         </div>
-        <div className="col d-flex justify-content-end align-items-end">
+        <div className="inter-font col d-flex justify-content-end align-items-end">
           <button
-            className="btn"
+            className="inter-font btn"
             style={{
               background: "#85712B",
               color: "white",
@@ -1474,10 +1474,10 @@ const HireTheTalent = ({ selectedTalentData }) => {
   };
 
   return (
-    <div className="main-bg" style={{ minHeight: "100vh" }}>
-      {/* <div className="container-fluid"> */}
+    <div className="inter-font main-bg" style={{ minHeight: "100vh" }}>
+      {/* <div className="inter-font container-fluid"> */}
       <div
-        className="row"
+        className="inter-font row"
         style={{
           height: "100vh",
           overflow: "auto",
@@ -1485,11 +1485,11 @@ const HireTheTalent = ({ selectedTalentData }) => {
           justifyContent: "center",
         }}
       >
-        {/* <div className="col-md-2 p-0">
+        {/* <div className="inter-font col-md-2 p-0">
             <Sidebar activeTab={"talents"} setActiveTab={() => {}} />
           </div> */}
         <div
-          className="col-md-10 content px-4 py-3"
+          className="inter-font col-md-10 content px-4 py-3"
           style={{
             height: "100vh",
             width: "100%",

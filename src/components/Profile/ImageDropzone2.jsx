@@ -39,35 +39,35 @@ const ImageDropzone = ({ oldImages = [], setFiles, updateOldImages }) => {
     <div>
       <div
         {...getRootProps()}
-        className="dropzone d-flex justify-content-center align-items-center flex-column rounded-2"
+        className=" dropzone d-flex justify-content-center align-items-center flex-column rounded-2"
         style={{ border: "1px solid #D7D7D7" }}
       >
         <input {...getInputProps()} />
-        <p className="plus-img">
+        <p className=" plus-img">
           {isDragActive ? (
             "Drop the files here ..."
           ) : (
-            <img src={plus} className="plus" />
+            <img src={plus} className=" plus" />
           )}
         </p>
-        <h5 className="inter-font doc-font custom-input fw-light">Upload Videos</h5>
+        <h5 className=" inter-font doc-font custom-input fw-light">Upload Videos</h5>
         <Button
-          className="inter-font"
+          className=" inter-font"
           style={{ background: "#522A30", border: "none", fontSize: "13px" }}
         >
           Browse Files
         </Button>
       </div>
 
-      <div className="previews bg-light">
+      <div className=" previews bg-light">
         {/* Display old images */}
         {oldImages.map((image, index) => (
-          <div key={index} className="preview-item">
-            <img src={image} alt="Preview" className="preview-image" />
+          <div key={index} className=" preview-item">
+            <img src={image} alt="Preview" className=" preview-image" />
             <button
               type="button"
               onClick={() => removeDBFile(image)}
-              className="remove-button"
+              className=" remove-button"
             >
               X
             </button>
@@ -76,12 +76,12 @@ const ImageDropzone = ({ oldImages = [], setFiles, updateOldImages }) => {
 
         {/* Display newly accepted files (without preview) */}
         {acceptedFiles.map((file, index) => (
-          <div key={index} className="preview-item">
-            <img src={file.preview} alt="Preview" className="preview-image" />
+          <div key={index} className=" preview-item">
+            <img src={file.preview} alt="Preview" className=" preview-image" />
             <button
               type="button"
               onClick={() => removeFile(index)}
-              className="remove-button"
+              className=" remove-button"
             >
               X
             </button>

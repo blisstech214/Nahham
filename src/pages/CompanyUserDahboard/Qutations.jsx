@@ -141,12 +141,12 @@ const Qutations = () => {
     fetchQutationData(1);
   }, []);
 
-  function formatSingleDate(isoDate) {
-    const date = new Date(isoDate);
-    const day = date.getDate();
-    const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
-    return `${day} ${month}`;
-  }
+    function formatSingleDate(isoDate) {
+      const date = new Date(isoDate);
+      const day = date.getDate();
+      const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
+      return `${day} ${month}`;
+    }
 
   function calculateDurationDetailsISO(startISO, endISO) {
     const startDate = new Date(startISO);
@@ -233,25 +233,25 @@ const Qutations = () => {
 
   return (
     <>
-      <div className="" style={{ minHeight: "100vh" }}>
+      <div className="inter-font " style={{ minHeight: "100vh" }}>
         {activeTab === "" && (
           <>
-            <div className="d-flex justify-content-between align-items-center flex-wrap px-3">
-              <h2 className="inter-font" style={{ fontSize: "19px" }}>
+            <div className="inter-font d-flex justify-content-between align-items-center flex-wrap px-3">
+              <h2 className="inter-font inter-font" style={{ fontSize: "19px" }}>
                 My Qutations
               </h2>
             </div>
 
             {/* Search */}
-            <div className="position-relative mb-3">
+            <div className="inter-font position-relative mb-3">
               <input
                 type="text"
                 placeholder="Search by Keywords"
-                className="w-100 p-2 rounded-3 ps-5 py-3 inter-font"
+                className="inter-font w-100 p-2 rounded-3 ps-5 py-3 inter-font"
                 style={{ paddingLeft: "2.5rem", border: "none" }}
               />
               <CiSearch
-                className="position-absolute"
+                className="inter-font position-absolute"
                 style={{
                   left: "12px",
                   top: "50%",
@@ -263,7 +263,7 @@ const Qutations = () => {
             </div>
 
             {/* Filters */}
-            <div className="d-flex flex-wrap gap-2 px-3">
+            <div className="inter-font d-flex flex-wrap gap-2 px-3">
               <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
                 <Select options={yearOptions} />
               </div>
@@ -281,7 +281,7 @@ const Qutations = () => {
               </div>
 
               <button
-                className="btn inter-font d-flex align-items-center justify-content-center gap-1"
+                className="inter-font btn inter-font d-flex align-items-center justify-content-center gap-1"
                 style={{
                   background: "rgba(205, 73, 109, 1)",
                   color: "white",
@@ -296,22 +296,22 @@ const Qutations = () => {
             </div>
 
             {/* Table */}
-            <Container className="bg-white rounded-4 mt-4 p-0 px-0 overflow-hidden">
+            <Container className="inter-font bg-white rounded-4 mt-4 p-0 px-0 overflow-hidden">
               {isLoading ? (
                 <p>Loading…</p>
               ) : qutationData?.length === 0 ? (
-                <p className="text-center text-muted mt-4">
+                <p className="inter-font text-center text-muted mt-4">
                   No job data found.
                 </p>
               ) : (
                 qutationData.map((item, idx) => (
                   <Row
                     key={idx}
-                    className="align-items-center py-3 px-3 border-bottom"
+                    className="inter-font align-items-center py-3 px-3 border-bottom"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
-                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-                      <div className="fw-semibold">Date</div>
+                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                      <div className="inter-font fw-semibold">Date</div>
                       <div>
                         {item.talents[0]?.start_date
                           ? formatSingleDate(item.talents[0]?.start_date)
@@ -319,18 +319,18 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-                      <div className="fw-semibold">Quote No</div>
+                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                      <div className="inter-font fw-semibold">Quote No</div>
                       <div>{item.project_code}</div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-                      <div className="fw-semibold">Project</div>
+                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                      <div className="inter-font fw-semibold">Project</div>
                       <div>{item.title}</div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-                      <div className="fw-semibold">Duration</div>
+                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                      <div className="inter-font fw-semibold">Duration</div>
                       <div style={{ fontSize: "14px", color: "#999" }}>
                         {item.talents[0]?.start_date
                           ? calculateDurationDetailsISO(
@@ -341,19 +341,19 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-                      <div className="fw-semibold">Amount</div>
+                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                      <div className="inter-font fw-semibold">Amount</div>
                       <div style={{ fontSize: "14px", color: "#999" }}>
                         {item.total_amount} AED
                       </div>
                     </Col>
 
                     <Col xs={12} sm={6} md={1}>
-                      <div className="fw-semibold">Status</div>
-                      <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
+                      <div className="inter-font fw-semibold">Status</div>
+                      <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2 inter-font">
                         <span
                           style={{
-                            background: "#12CB71",
+                            background: "#CC496D",
                             fontWeight: 500,
                             width: "50px",
                             height: "22px",
@@ -370,8 +370,8 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-                      {/* <div className="fw-semibold">Duration</div> */}
+                      {/* <div className="inter-font fw-semibold">Duration</div> */}
+                    {/* <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
                       <span
                         style={{
                           background: "#CC496D",
@@ -388,10 +388,10 @@ const Qutations = () => {
                       >
                         Paid
                       </span>
-                    </Col>
+                    </Col> */}
 
                     <Col xs={12} sm={6} md={1}>
-                      <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
+                      <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2">
                         <FaEye
                           onClick={() => {
                             navigate(
@@ -410,9 +410,9 @@ const Qutations = () => {
             </Container>
 
             {/* Pagination */}
-            <div className="d-flex justify-content-center my-5">
-              <Row className="mt-4">
-                <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+            <div className="inter-font d-flex justify-content-center my-5">
+              <Row className="inter-font mt-4">
+                <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
                   {/* Pagination Numbers */}
                   <Button
                     size="sm"

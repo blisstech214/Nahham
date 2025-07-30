@@ -52,55 +52,55 @@ const HistoryCard = ({ item }) => {
   };
 
   return (
-    <div className="row border-bottom">
-      <div className="col-md-5 d-flex my-3">
+    <div className="inter-font row border-bottom">
+      <div className="inter-font col-md-5 d-flex my-3">
         <img
           src={item.image}
-          className="rounded-circle mt-3 ms-4"
+          className="inter-font rounded-circle mt-3 ms-4"
           style={{ width: "54px", height: "54px", objectFit: "cover" }}
           alt="Profile"
         />
-        <div className="mt-3 ms-3">
-          <h5 className="inter-font" style={{ fontSize: "17px" }}>
+        <div className="inter-font mt-3 ms-3">
+          <h5 className="inter-font inter-font" style={{ fontSize: "17px" }}>
             {item.title}
           </h5>
-          <p className="m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
+          <p className="inter-font m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
             {item.description}
           </p>
-          {/* <p className="inter-font" style={{ color: "gray" }}>
-            <FaLocationDot className="me-1 text-dark" />
+          {/* <p className="inter-font inter-font" style={{ color: "gray" }}>
+            <FaLocationDot className="inter-font me-1 text-dark" />
             {item.location}
           </p> */}
         </div>
       </div>
-      <div className="col-md-2 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-2 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Project Dates
         </h5>
         <p
-          className="inter-font"
+          className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
           {item.start_date} - {item.end_date}
         </p>
       </div>
-      <div className="col-md-1 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-1 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Earnings
         </h5>
         <p
-          className="inter-font"
+          className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
           {item.total_amount}
         </p>
       </div>
-      <div className="col-md-2 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-2 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Status
         </h5>
         <button
-          className="btn border-0 inter-font"
+          className="inter-font btn border-0 inter-font"
           style={{
             color: color,
             backgroundColor: bg,
@@ -112,14 +112,14 @@ const HistoryCard = ({ item }) => {
           {item.status}
         </button>
       </div>
-      <div className="col-md-2 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-2 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Action
         </h5>
-        <div className="d-flex gap-2">
+        <div className="inter-font d-flex gap-2">
           <button
             onClick={() => handleUpdateStatus(item?._id, "Accepted")}
-            className="btn border-0 inter-font"
+            className="inter-font btn border-0 inter-font"
             style={{
               color: "#5F8D73",
               backgroundColor: "#D3FDEA",
@@ -132,7 +132,7 @@ const HistoryCard = ({ item }) => {
           </button>
           <button
             onClick={() => handleUpdateStatus(item?._id, "Rejected")}
-            className="btn border-0 inter-font"
+            className="inter-font btn border-0 inter-font"
             style={{
               color: "#CD496D",
               backgroundColor: "#FCE1E8",
@@ -145,10 +145,10 @@ const HistoryCard = ({ item }) => {
           </button>
         </div>
       </div>
-      {/* <div className="col-md-2 my-3 text-end pe-5">
-        <div className="mt-4">
+      {/* <div className="inter-font col-md-2 my-3 text-end pe-5">
+        <div className="inter-font mt-4">
           <button
-            className="rounded-3 inter-font"
+            className="inter-font rounded-3 inter-font"
             style={{
               color: item.projectStatusColor,
               background: item.projectStatusBg,
@@ -422,25 +422,25 @@ const History = () => {
   }, []);
 
   return (
-    <div className="main-bg" style={{ minHeight: "100vh" }}>
+    <div className="inter-font main-bg" style={{ minHeight: "100vh" }}>
       <div
-        className="bg-white rounded-3 m-5 d-flex flex-column"
+        className="inter-font bg-white rounded-3 m-5 d-flex flex-column"
         style={{ minHeight: "79vh", overflow: "hidden" }}
       >
-        <div className="border-bottom py-3 ms-4">
-          <h3 className="inter-font pb-1" style={{ fontSize: "20px" }}>
-            My History
+        <div className="inter-font border-bottom py-3 ms-4">
+          <h3 className="inter-font inter-font pb-1" style={{ fontSize: "20px" }}>
+            My Projects
           </h3>
         </div>
 
-        <div className="scrollable-list flex-grow-1">
+        <div className="inter-font scrollable-list flex-grow-1">
           {projectData.map((item, index) => (
             <HistoryCard key={index} item={item} />
           ))}
         </div>
 
-        <Row className="mt-4">
-          <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap">
+        <Row className="inter-font mt-4">
+          <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap">
             {/* Pagination Numbers */}
 
             <Button
@@ -522,12 +522,12 @@ const History = () => {
           </Col>
         </Row>
 
-        <div className="d-flex justify-content-center mt-4">
-          {/* <ul className="pagination-custom">
+        <div className="inter-font d-flex justify-content-center mt-4">
+          {/* <ul className="inter-font pagination-custom">
             {[...Array(totalPages)].map((_, idx) => (
               <li key={idx}>
                 <button
-                  className={`page-btn ${
+                  className={inter-font `page-btn ${
                     currentPage === idx + 1 ? "active" : ""
                   }`}
                   onClick={() => setCurrentPage(idx + 1)}
@@ -538,7 +538,7 @@ const History = () => {
             ))}
             <li>
               <button
-                className="page-btn"
+                className="inter-font page-btn"
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }

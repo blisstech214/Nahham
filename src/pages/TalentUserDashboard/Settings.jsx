@@ -70,24 +70,24 @@ const Settings = () => {
   };
 
   return (
-    <div className="mb-5" style={{ minHeight: "100vh" }}>
+    <div className="inter-font mb-5" style={{ minHeight: "100vh" }}>
       <div
-        className="container pb-4 ps-4 bg-white rounded-2 shadow mt-4"
+        className="inter-font container pb-4 ps-4 bg-white rounded-2 shadow mt-4"
         style={{ maxWidth: "900px" }}
       >
-        <div className="row align-items-start">
+        <div className="inter-font row align-items-start">
           {/* Sidebar */}
           <div
-            className="col-md-3 pt-5 pe-0"
+            className="inter-font col-md-3 pt-5 pe-0"
             style={{ borderRight: "1.5px solid rgb(229, 229, 229)" }}
           >
-            <h5 className="inter-font pt-4">Settings</h5>
-            <div className="mb-3">
+            <h5 className="inter-font inter-font pt-4">Settings</h5>
+            <div className="inter-font mb-3">
               {tabs.map((tab) => (
                 <div
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`my-5 border-bottom w-100 pb-4 ${
+                  className={ `inter-font my-5 border-bottom w-100 pb-4 ${
                     activeTab === tab.id
                       ? "text-dark fw-semibold"
                       : "text-muted"
@@ -105,8 +105,8 @@ const Settings = () => {
           </div>
 
           {/* Content */}
-          <div className="col-md-9">
-            <div className="tab-content mt-4">{renderContent()}</div>
+          <div className="inter-font col-md-9">
+            <div className="inter-font tab-content mt-4">{renderContent()}</div>
           </div>
         </div>
       </div>

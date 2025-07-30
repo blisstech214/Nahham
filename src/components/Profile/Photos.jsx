@@ -80,7 +80,7 @@ const Photos = () => {
         <li
           key={i}
           onClick={() => handlePageChange(i)}
-          className={i === currentPage ? "active" : ""}
+          className={ i === currentPage ? "active" : ""}
           style={{ cursor: "pointer" }}
         >
           {i}
@@ -97,21 +97,21 @@ const Photos = () => {
   };
 
   return (
-    <div className="container">
+    <div className="inter-font container">
       {isLoading ? (
         <p>Loading Photos…</p>
       ) : (
         <>
-          <div className="row g-2">
+          <div className="inter-font row g-2">
             {mediaFiles.length === 0 && <p>No photos found.</p>}
 
             {mediaFiles.map((m, index) => (
-              <div key={m._id} className="col-md-4">
+              <div key={m._id} className="inter-font col-md-4">
                 <img
                   src={m.file || "/placeholder.png"}
                   alt={m.name || "photo"}
                   crossOrigin="anonymous"
-                  className="rounded-3 mb-2"
+                  className="inter-font rounded-3 mb-2"
                   style={{
                     width: 220,
                     height: 200,
@@ -126,8 +126,8 @@ const Photos = () => {
           </div>
 
           {totalPages > 1 && (
-            <div className="pagination-container mt-3 d-flex justify-content-center">
-              <ul className="pagination d-flex gap-2 list-unstyled">
+            <div className="inter-font pagination-container mt-3 d-flex justify-content-center">
+              <ul className="inter-font pagination d-flex gap-2 list-unstyled">
                 <li
                   onClick={() => handlePageChange(currentPage - 1)}
                   style={{ cursor: "pointer" }}
@@ -149,7 +149,7 @@ const Photos = () => {
 
       {isModalOpen && (
         <div
-          className="modal-backdrop"
+          className="inter-font modal-backdrop"
           style={{
             position: "fixed",
             top: 0,

@@ -44,13 +44,13 @@ const Navbar = () => {
 
   return (
     <nav
-      className="py-2 px-3 bg-transparent"
+      className="inter-font py-2 px-3 bg-transparent"
       // style={{ zIndex: 10000 }}
     >
-      <ul className="list-unstyled d-flex justify-content-end align-items-center m-0">
+      <ul className="inter-font list-unstyled d-flex justify-content-end align-items-center m-0">
         {/* Language Selector */}
-        <li className="mx-3">
-          <div className="d-flex border rounded-3 shadow-sm bg-white">
+        <li className="inter-font mx-3">
+          <div className="inter-font d-flex border rounded-3 shadow-sm bg-white">
             {languages.map((lang) => (
               <div
                 key={lang.code}
@@ -74,7 +74,7 @@ const Navbar = () => {
 
         {/* Home Link */}
         <li
-          className="mx-2 inter-font"
+          className="inter-font mx-2 inter-font"
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/talent/dashboard?tab=dashboard")}
         >
@@ -83,7 +83,7 @@ const Navbar = () => {
 
         {/* Jobs Link */}
         <li
-          className="mx-2 inter-font"
+          className="inter-font mx-2 inter-font"
           style={{ cursor: "pointer" }}
           onClick={() => navigate("/talent/dashboard?tab=profile&subTab=jobs")}
         >
@@ -92,7 +92,7 @@ const Navbar = () => {
 
         {/* Notification Bell */}
         <li
-          className="mx-3 position-relative"
+          className="inter-font mx-3 position-relative"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={() =>
@@ -108,7 +108,7 @@ const Navbar = () => {
             }}
           />
           <span
-            className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            className="inter-font position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
             style={{ fontSize: "10px", padding: "2px 6px" }}
           >
             3
@@ -116,7 +116,7 @@ const Navbar = () => {
         </li>
 
         {/* Profile Dropdown */}
-        <li className="position-relative">
+        <li className="inter-font position-relative">
           <img
             src={profile}
             alt="Profile"
@@ -131,35 +131,35 @@ const Navbar = () => {
 
           {showDropdown && (
             <div
-              className="position-absolute top-100 end-0 mt-2 bg-white shadow rounded-3 p-3"
+              className="inter-font position-absolute top-100 end-0 mt-2 bg-white shadow rounded-3 p-3"
               style={{ width: "230px", zIndex: 2000 }}
             >
-              <div className="d-flex align-items-center mb-3">
+              <div className="inter-font d-flex align-items-center mb-3">
                 <img
                   src={profile}
                   alt="Profile"
                   style={{ width: "50px", height: "50px", borderRadius: "50%" }}
                 />
-                <div className="ms-3">
-                  <div className="fw-bold">Movie Center</div>
-                  <div className="text-muted" style={{ fontSize: "13px" }}>
+                <div className="inter-font ms-3">
+                  <div className="inter-font fw-bold">Movie Center</div>
+                  <div className="inter-font text-muted" style={{ fontSize: "13px" }}>
                     Production House
                   </div>
                 </div>
               </div>
 
               <button
-                className="btn btn-sm w-100 text-white mb-3"
+                className="inter-font btn btn-sm w-100 text-white mb-3"
                 style={{ backgroundColor: "rgb(231, 142, 123)" }}
                 onClick={() => navigate("/talent/dashboard?tab=profile")}
               >
                 View Profile
               </button>
 
-              <div className="mb-2">
-                <div className="fw-bold mb-1">Account</div>
+              <div className="inter-font mb-2">
+                <div className="inter-font fw-bold mb-1">Account</div>
                 <div
-                  className="text-muted inter-font"
+                  className="inter-font text-muted inter-font"
                   style={{ fontSize: "14px", cursor: "pointer" }}
                   onClick={() => navigate("/talent/dashboard?tab=settings")}
                 >
@@ -168,7 +168,7 @@ const Navbar = () => {
               </div>
 
               <div
-                className="text-danger mt-2"
+                className="inter-font text-danger mt-2"
                 style={{ fontSize: "14px", cursor: "pointer" }}
                 onClick={onTalentSignOut}
               >

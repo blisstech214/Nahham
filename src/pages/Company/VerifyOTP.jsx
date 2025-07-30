@@ -152,37 +152,37 @@ const VerifyOTP = () => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -50 }}
         transition={{ duration: 0.5 }}
-        className="main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center"
+        className="inter-font main-bg min-vh-100 d-flex flex-column justify-content-center align-items-center"
       >
-        <Container className="position-absolute top-0 mt-3">
-          <Row className="align-items-start">
-            <Col xs={12} className="text-center text-md-start mb-2 mb-md-0">
+        <Container className="inter-font position-absolute top-0 mt-3">
+          <Row className="inter-font align-items-start">
+            <Col xs={12} className="inter-font text-center text-md-start mb-2 mb-md-0">
               <img src={logo} alt="Logo" style={{ height: "50px" }} />
             </Col>
           </Row>
         </Container>
 
         <div
-          className="container upload-doc-coontainer bg-white p-4 d-flex flex-column justify-content-center align-items-center rounded-4"
+          className="inter-font container upload-doc-coontainer bg-white p-4 d-flex flex-column justify-content-center align-items-center rounded-4"
           style={{ width: "90%", maxWidth: "700px" }}
         >
-          <h2 className="fw-bold inter-font mt-4 fs-4 fs-md-3">Verify OTP</h2>
+          <h2 className="inter-font fw-bold inter-font mt-4 fs-4 fs-md-3">Verify OTP</h2>
           <p
-            className="inter-font text-center"
+            className="inter-font inter-font text-center"
             style={{ color: "rgba(0, 0, 0, 0.3)" }}
           >
             Enter the 6‑digit code we just sent you.
           </p>
 
           <Form onSubmit={handleSubmit}>
-            <div className="d-flex flex-column align-items-center">
-              <div className="d-flex gap-2 gap-md-4 mb-3 flex-wrap justify-content-center">
+            <div className="inter-font d-flex flex-column align-items-center">
+              <div className="inter-font d-flex gap-2 gap-md-4 mb-3 flex-wrap justify-content-center">
                 {[...Array(6)].map((_, i) => (
                   <Form.Control
                     key={i}
                     type="text"
                     maxLength="1"
-                    className="text-center fs-4 inter-font my-2"
+                    className="inter-font text-center fs-4 inter-font my-2"
                     style={{
                       width: "50px",
                       height: "50px",
@@ -199,10 +199,10 @@ const VerifyOTP = () => {
                 ))}
               </div>
 
-              <p className="mb-0 text-center inter-font">
+              <p className="inter-font mb-0 text-center inter-font">
                 Didn’t receive it?
                 <span
-                  className="inter-font ms-2"
+                  className="inter-font inter-font ms-2"
                   style={{
                     color: resendTimer ? "gray" : "#5e4b00",
                     fontWeight: 500,
@@ -217,7 +217,7 @@ const VerifyOTP = () => {
 
             <Button
               type="submit"
-              className="btn btn-base mt-4 inter-font border-0"
+              className="inter-font btn btn-base mt-4 inter-font border-0"
               style={{ width: "100%", maxWidth: "200px", height: "55px" }}
               disabled={isLoader}
             >

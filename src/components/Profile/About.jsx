@@ -11,18 +11,17 @@ const About = ({ profileData, skillsData }) => {
 
   const aboutText =
     profileData?.about +
-      "Vel quasi provident Vel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi provident" ||
+    "Vel quasi provident Vel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi provident" ||
     "No About Data.";
   const displayText =
     aboutText.length > 150 ? `${aboutText?.substring(0, 150)}...` : aboutText;
 
   const experience = profileData?.year_experience || "0";
   // const activeJob = profileData?.active_job || "No Job";
-  const activeJob = `${
-    profileData?.active_job[0]
+  const activeJob = `${profileData?.active_job !== null
       ? `${profileData?.active_job[0]?.title} | ${profileData?.active_job[0]?.joining_date} ${profileData?.active_job[0]?.company}`
       : "No Job"
-  }`;
+    }`;
   const education = profileData?.education || "Masters in Art and Filming"; // You can replace this if dynamic
 
   const skills =

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Settings = () => {
   return (
-    <div className='ms-5'>
+    <div className='inter-font ms-5'>
       Settings
     </div>
   );

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import DashboardFooter from "../CompanyUserDahboard/DashboardFooter";
 import { CiSearch } from "react-icons/ci";
 import Select from "react-select";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { LuDownload } from "react-icons/lu";
 import { FaEye } from "react-icons/fa";
+import { toast } from "react-toastify";
+import ApiService from "../../services/ApiService";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const Transaction = () => {
   const yearOptions = [
@@ -95,24 +98,110 @@ const Transaction = () => {
     },
   ];
 
+  const [transactionData, setTransactionData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    total_pages: 1,
+    current_page: 1,
+  });
+
+  useEffect(() => {
+    fetchTransactionData(1);
+  }, []);
+
+  console.log("Dashboard Data:", transactionData);
+
+  const fetchTransactionData = async (page = 1) => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.request({
+        method: "GET",
+        url: `company/getTransactions?page=${page}`,
+      });
+
+      const data = res.data;
+      if (data.status) {
+        setTransactionData(data?.data?.projects);
+        setPagination(data?.data?.pagination ? data?.data?.pagination : 1);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      console.error("Fetch Job Error:", err);
+      toast.error("Failed to fetch jobs.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePageChange = (page) => {
+    if (
+      page !== pagination.current_page &&
+      page >= 1 &&
+      page <= pagination.total_pages
+    ) {
+      fetchTransactionData(page);
+    }
+  };
+
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
+
+  function formatSingleDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
+    return `${day} ${month}`;
+  }
+
   return (
-    <div className="" style={{ minHeight: "100vh" }}>
-      <div className="d-flex justify-content-between align-items-center flex-wrap px-3">
-        <h2 className="inter-font" style={{ fontSize: "19px" }}>
+    <div className="inter-font " style={{ minHeight: "100vh" }}>
+      <div className="inter-font d-flex justify-content-between align-items-center flex-wrap px-3">
+        <h2 className="inter-font inter-font" style={{ fontSize: "19px" }}>
           Transactions History
         </h2>
       </div>
 
       {/* Search */}
-      <div className="position-relative mb-3">
+      <div className="inter-font position-relative mb-3">
         <input
           type="text"
           placeholder="Search by Keywords"
-          className="w-100 p-2 rounded-3 ps-5 py-3 inter-font"
+          className="inter-font w-100 p-2 rounded-3 ps-5 py-3 inter-font"
           style={{ paddingLeft: "2.5rem", border: "none" }}
         />
         <CiSearch
-          className="position-absolute"
+          className="inter-font position-absolute"
           style={{
             left: "12px",
             top: "50%",
@@ -124,7 +213,7 @@ const Transaction = () => {
       </div>
 
       {/* Filters */}
-      <div className="d-flex flex-wrap gap-2 px-3">
+      <div className="inter-font d-flex flex-wrap gap-2 px-3">
         <div style={{ flex: "1 1 100px", minWidth: "150px" }}>
           <Select options={yearOptions} />
         </div>
@@ -142,7 +231,7 @@ const Transaction = () => {
         </div>
 
         <button
-          className="btn inter-font d-flex align-items-center justify-content-center gap-1"
+          className="inter-font btn inter-font d-flex align-items-center justify-content-center gap-1"
           style={{
             background: "rgba(205, 73, 109, 1)",
             color: "white",
@@ -157,114 +246,197 @@ const Transaction = () => {
       </div>
 
       {/* Table */}
-      <Container className="bg-white rounded-4 mt-4 p-0 px-0 overflow-hidden">
-        {data.map((item, idx) => (
-          <Row
-            key={idx}
-            className="align-items-center py-3 px-3 border-bottom"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Date</div>
-              <div>{item.date}</div>
-            </Col>
+      <Container className="inter-font bg-white rounded-4 mt-4 p-0 px-0 overflow-hidden">
+        {isLoading ? (
+          <p>Loading…</p>
+        ) : transactionData?.length === 0 ? (
+          <p className="inter-font text-center text-muted mt-4">
+            No data found.
+          </p>
+        ) : transactionData.map((item, idx) => {
+          return (
+            item?.talents?.map((talent) => {
+              return (
 
-            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Invoice No</div>
-              <div>{item.invoiceNo}</div>
-            </Col>
-
-            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Talent Name</div>
-              <div>{item.name}</div>
-            </Col>
-
-            <Col xs={12} sm={6} md={2} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Contract</div>
-              <span
-                style={{
-                  background:
-                    item.contract === "Active" ? "#00C25F" : "#E97B6E",
-                  color: "white",
-                  borderRadius: "10px",
-                  padding: "4px 12px",
-                  fontSize: "13px",
-                }}
-              >
-                {item.contract === "Active" ? "Active" : "Expired/Closed"}
-              </span>
-            </Col>
-
-            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Project</div>
-              <div>{item.project}</div>
-            </Col>
-
-            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Duration</div>
-              <div>{item.duration}</div>
-            </Col>
-
-            <Col xs={12} sm={6} md={1} className="mb-3 mb-md-0">
-              <div className="fw-semibold">Amount</div>
-              <div style={{ fontSize: "14px", color: "#999" }}>
-                {item.amount}
-              </div>
-            </Col>
-
-            <Col xs={12} sm={6} md={1}>
-              <div className="fw-semibold">Status</div>
-              <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
-                <span
-                  style={{
-                    background: "#00C25F",
-                    fontWeight: 500,
-                    width: "50px",
-                    height: "22px",
-                    fontSize: "10px",
-                    color: "white",
-                    borderRadius: "4px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
+                <Row
+                  key={idx}
+                  className="inter-font align-items-center py-3 px-3 border-bottom"
+                  style={{ fontFamily: "Inter, sans-serif" }}
                 >
-                  {item.status}
-                </span>
-              </div>
-            </Col>
+                  <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Date</div>
+                    <div>{formatSingleDate(talent?.start_date)}</div>
+                  </Col>
 
-            <Col xs={12} sm={6} md={1}>
-              <div className="d-flex flex-wrap align-items-center gap-2 mt-2">
-                <LuDownload
-                  fontSize={20}
-                  style={{ cursor: "pointer", color: "gray" }}
-                />
-                <FaEye
-                  fontSize={20}
-                  style={{ cursor: "pointer", color: "gray" }}
-                />
-              </div>
-            </Col>
-          </Row>
-        ))}
+                  <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Invoice No</div>
+                    <div>{item.project_code}</div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Talent Name</div>
+                    <div>{talent?.talent_id?.first_name}{" "}
+                      {talent?.talent_id?.last_name}</div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Contract</div>
+                    <span
+                      style={{
+                        background:
+                          item.contract === "Active" ? "#00C25F" : "#E97B6E",
+                        color: "white",
+                        borderRadius: "10px",
+                        padding: "4px 12px",
+                        fontSize: "13px",
+                      }}
+                    >
+                      {item.status === "Accepted" ? "Active" : "Expired/Closed"}
+                    </span>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Project</div>
+                    <div>{item.title}</div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Duration</div>
+                    <div>{talent?.duration}</div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
+                    <div className="inter-font fw-semibold">Amount</div>
+                    <div style={{ fontSize: "14px", color: "#999" }}>
+                      {item.total_amount}
+                    </div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={1}>
+                    <div className="inter-font fw-semibold">Status</div>
+                    <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2">
+                      <span
+                        style={{
+                          background: "#00C25F",
+                          fontWeight: 500,
+                          width: "50px",
+                          height: "22px",
+                          fontSize: "10px",
+                          color: "white",
+                          borderRadius: "4px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {talent.status}
+                      </span>
+                    </div>
+                  </Col>
+
+                  <Col xs={12} sm={6} md={1}>
+                    <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2">
+                      <LuDownload
+                        fontSize={20}
+                        style={{ cursor: "pointer", color: "gray" }}
+                      />
+                      <FaEye
+                        fontSize={20}
+                        style={{ cursor: "pointer", color: "gray" }}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              )
+            })
+          )
+        })}
       </Container>
 
       {/* Pagination */}
-      <div className="d-flex justify-content-center my-5">
-        <ul className="pagination-list d-flex gap-2 list-unstyled">
-          <li className="page-item active inter-font">1</li>
-          <li className="page-item inter-font">2</li>
-          <li className="page-item inter-font">3</li>
-          <li className="page-item inter-font">4</li>
-          <li className="page-item inter-font">5</li>
-          <li className="page-item inter-font">...</li>
-          <li className="page-item inter-font">26</li>
-          <li className="page-item inter-font">{">"}</li>
-        </ul>
-      </div>
+      <div className="inter-font d-flex justify-content-center my-5">
+        <Row className="inter-font mt-4">
+          <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+            {/* Pagination Numbers */}
+            <Button
+              size="sm"
+              variant="link"
+              disabled={current_page === 1}
+              onClick={() => handlePageChange(current_page - 1)}
+              style={{
+                width: "36px",
+                height: "36px",
+                padding: 0,
+                borderRadius: "50%",
+                backgroundColor: "#E46D54",
+                color: "#fff",
+                border: "none",
+              }}
+            >
+              <ChevronLeft size={18} />
+            </Button>
 
-      {/* Footer */}
+            {pages.map((page, index) => (
+              <Button
+                key={index}
+                size="sm"
+                variant={page === current_page ? "danger" : "link"}
+                style={{
+                  borderRadius: "50%",
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  backgroundColor:
+                    page === current_page ? "#E46D54" : "transparent",
+                  color: page === current_page ? "#fff" : "#666",
+                  fontWeight: page === current_page ? "600" : "400",
+                  border: "none",
+                  fontSize: "14px",
+                }}
+                disabled={page === "..."}
+                onClick={() => page !== "..." && handlePageChange(page)}
+              >
+                {page}
+              </Button>
+            ))}
+
+            {/* Next Arrow */}
+            <Button
+              size="sm"
+              variant="link"
+              disabled={current_page === total_pages}
+              onClick={() => handlePageChange(current_page + 1)}
+              style={{
+                width: "36px",
+                height: "36px",
+                padding: 0,
+                borderRadius: "50%",
+                backgroundColor: "#E46D54",
+                color: "#fff",
+                border: "none",
+              }}
+            >
+              <ChevronRight size={18} />
+            </Button>
+
+            {/* View All Button */}
+            <Button
+              size="sm"
+              style={{
+                backgroundColor: "#E46D54",
+                border: "none",
+                padding: "6px 20px",
+                borderRadius: "10px",
+                color: "#fff",
+                marginLeft: "10px",
+              }}
+            // onClick={handleViewAll}
+            >
+              View All
+            </Button>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 };

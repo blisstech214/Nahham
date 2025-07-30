@@ -37,27 +37,27 @@ const ImageDropzone = ({ oldImages = [], setFiles, updateOldImages }) => {
 
   return (
     <div>
-      <div {...getRootProps()} className="dropzone">
+      <div {...getRootProps()} className="inter-font dropzone">
         <input {...getInputProps()} />
         <p>
           {isDragActive ? (
             "Drop the files here ..."
           ) : (
-            <img src={document} className="docImg" />
+            <img src={document} className="inter-font docImg" />
           )}
         </p>
-        <h5 className="inter-font doc-font">VAT Certificate</h5>
+        <h5 className="inter-font inter-font doc-font">VAT Certificate</h5>
       </div>
 
-      <div className="previews bg-light">
+      <div className="inter-font previews bg-light">
         {/* Display old images */}
         {oldImages.map((image, index) => (
-          <div key={index} className="preview-item">
-            <img src={image} alt="Preview" className="preview-image" />
+          <div key={index} className="inter-font preview-item">
+            <img src={image} alt="Preview" className="inter-font preview-image" />
             <button
               type="button"
               onClick={() => removeDBFile(image)}
-              className="remove-button"
+              className="inter-font remove-button"
             >
               X
             </button>
@@ -66,12 +66,12 @@ const ImageDropzone = ({ oldImages = [], setFiles, updateOldImages }) => {
 
         {/* Display newly accepted files (without preview) */}
         {acceptedFiles.map((file, index) => (
-          <div key={index} className="preview-item">
-            <img src={file.preview} alt="Preview" className="preview-image" />
+          <div key={index} className="inter-font preview-item">
+            <img src={file.preview} alt="Preview" className="inter-font preview-image" />
             <button
               type="button"
               onClick={() => removeFile(index)}
-              className="remove-button"
+              className="inter-font remove-button"
             >
               X
             </button>

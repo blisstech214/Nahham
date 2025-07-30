@@ -50,7 +50,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   // Sidebar content as a function to reuse in both offcanvas and desktop
   const SidebarContent = () => (
     <div
-      className=""
+      className="inter-font "
       style={{
         background: "rgba(231, 142, 123, 1)",
         width: "100%",
@@ -61,20 +61,20 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     >
       {/* Decoration strips (only show on desktop) */}
 
-      <div className="d-flex" style={{ height: "100%" }}>
-        <div className="py-4">
+      <div className="inter-font d-flex" style={{ height: "100%" }}>
+        <div className="inter-font py-4">
           {/* Logo */}
-          <div className="text-center mb-5">
-            <img src={logo} className="w-50" alt="Company Logo" />
+          <div className="inter-font text-center mb-5">
+            <img src={logo} className="inter-font w-50" alt="Company Logo" />
           </div>
 
           {/* Navigation */}
-          <nav className="flex-grow-1">
-            <ul className="list-unstyled">
+          <nav className="inter-font flex-grow-1">
+            <ul className="inter-font list-unstyled">
               {navItems.map((item) => (
-                <li key={item.id} className="mb-4">
+                <li key={item.id} className="inter-font mb-4">
                   <div
-                    className={`d-flex align-items-center position-relative cursor-pointer ${
+                    className={ `inter-font d-flex align-items-center position-relative cursor-pointer ${
                       activeTab === item.id ? "active-nav-item" : ""
                     }`}
                     onClick={() => {
@@ -84,12 +84,12 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                     style={{ padding: "8px 0" }}
                   >
                     <span
-                      className="icon-wrapper "
+                      className="inter-font icon-wrapper "
                       style={{ width: "24px", color: "white" }}
                     >
                       {item.icon}
                     </span>
-                    <span className="ms-3 inter-font fw-light">
+                    <span className="inter-font ms-3 inter-font fw-light">
                       {item.label}
                     </span>
 
@@ -112,7 +112,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
           </nav>
         </div>
         <div
-          className="d-none d-md-block"
+          className="inter-font d-none d-md-block"
           style={
             {
               // width: "20%",
@@ -146,7 +146,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     <>
       {/* Mobile Toggle Button */}
       <button
-        className="btn d-lg-none text-white"
+        className="inter-font btn d-lg-none text-white"
         style={{
           position: "fixed",
           top: "15px",
@@ -160,7 +160,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       </button>
 
       {/* Desktop Sidebar */}
-      <div className="d-none d-lg-block">
+      <div className="inter-font d-none d-lg-block">
         <SidebarContent />
       </div>
 
@@ -171,7 +171,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
         placement="start"
         backdrop={true}
       >
-        <Offcanvas.Body className="p-0">
+        <Offcanvas.Body className="inter-font p-0">
           <SidebarContent />
         </Offcanvas.Body>
       </Offcanvas>

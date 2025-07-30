@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import DashboardFooter from "./DashboardFooter";
 import { FaLocationDot } from "react-icons/fa6";
 import profile from "../../assets/images/star-profile-img.png";
+import { toast } from "react-toastify";
+import ApiService from "../../services/ApiService";
+import { Button, Col, Row } from "react-bootstrap";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HistoryCard = ({ item }) => {
   const statusStyles = {
@@ -15,56 +19,63 @@ const HistoryCard = ({ item }) => {
   const { color, bg } =
     statusStyles[item.paymentStatus] || statusStyles["Pending"];
 
+  function formatSingleDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
+    return `${day} ${month}`;
+  }
+
   return (
-    <div className="row border-bottom">
-      <div className="col-md-5 d-flex my-3">
+    <div className="inter-font row border-bottom">
+      <div className="inter-font col-md-5 d-flex my-3">
         <img
-          src={item.image}
-          className="rounded-circle mt-3 ms-4"
+          src={item.receipt}
+          className="inter-font rounded-circle mt-3 ms-4"
           style={{ width: "54px", height: "54px", objectFit: "cover" }}
           alt="Profile"
         />
-        <div className="mt-3 ms-3">
-          <h5 className="inter-font" style={{ fontSize: "17px" }}>
-            {item.title}
+        <div className="inter-font mt-3 ms-3">
+          <h5 className="inter-font inter-font" style={{ fontSize: "17px" }}>
+            {item?.title || "N/A"}
           </h5>
-          <p className="m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
-            {item.company}
+          <p className="inter-font m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
+            {item?.company || "N/A"}
           </p>
-          <p className="inter-font" style={{ color: "gray" }}>
-            <FaLocationDot className="me-1 text-dark" />
-            {item.location}
+          <p className="inter-font inter-font" style={{ color: "gray" }}>
+            <FaLocationDot className="inter-font me-1 text-dark" />
+            {item?.location || "N/A"}
           </p>
         </div>
       </div>
-      <div className="col-md-2 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-2 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Project Dates
         </h5>
         <p
-          className="inter-font"
+          className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.dates}
+          {formatSingleDate(item.start_date)} - {formatSingleDate(item.end_date)}
         </p>
       </div>
-      <div className="col-md-2 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-2 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Earnings
         </h5>
         <p
-          className="inter-font"
+          className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.earnings}
+          {item.total_amount}
         </p>
       </div>
-      <div className="col-md-1 my-3">
-        <h5 className="inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-1 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Payment
         </h5>
         <button
-          className="btn border-0 inter-font"
+          className="inter-font btn border-0 inter-font"
           style={{
             color: color,
             backgroundColor: bg,
@@ -73,13 +84,13 @@ const HistoryCard = ({ item }) => {
             fontSize: "12px",
           }}
         >
-          {item.paymentStatus}
+          {item.status || "N/A"}
         </button>
       </div>
-      {/* <div className="col-md-2 my-3 text-end pe-5">
-        <div className="mt-4">
+      {/* <div className="inter-font col-md-2 my-3 text-end pe-5">
+        <div className="inter-font mt-4">
           <button
-            className="rounded-3 inter-font"
+            className="inter-font rounded-3 inter-font"
             style={{
               color: item.projectStatusColor,
               background: item.projectStatusBg,
@@ -100,223 +111,362 @@ const HistoryCard = ({ item }) => {
 const History = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const historyData = [
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Pending",
-      projectStatus: "In Progress",
-      projectStatusColor: "#5F8D73",
-      projectStatusBg: "#D3FDEA",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Pending",
-      projectStatus: "Up Coming",
-      projectStatusColor: "#CD496D",
-      projectStatusBg: "#FCE1E8",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    {
-      image: profile,
-      title: "Web Series Leading Role plus Singer",
-      company: "Movie Center Company",
-      location: "Sharjah, UAE",
-      dates: "10 May - 15 May",
-      earnings: "AED 85000",
-      paymentStatus: "Completed",
-      projectStatus: "Completed",
-      projectStatusColor: "#E26A52",
-      projectStatusBg: "#FFE7E2",
-    },
-    // Add more as needed
-  ];
+  // const historyData = [
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Pending",
+  //     projectStatus: "In Progress",
+  //     projectStatusColor: "#5F8D73",
+  //     projectStatusBg: "#D3FDEA",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Pending",
+  //     projectStatus: "Up Coming",
+  //     projectStatusColor: "#CD496D",
+  //     projectStatusBg: "#FCE1E8",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   {
+  //     image: profile,
+  //     title: "Web Series Leading Role plus Singer",
+  //     company: "Movie Center Company",
+  //     location: "Sharjah, UAE",
+  //     dates: "10 May - 15 May",
+  //     earnings: "AED 85000",
+  //     paymentStatus: "Completed",
+  //     projectStatus: "Completed",
+  //     projectStatusColor: "#E26A52",
+  //     projectStatusBg: "#FFE7E2",
+  //   },
+  //   // Add more as needed
+  // ];
+
+
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = useState({
+    total_pages: 1,
+    current_page: 1,
+  });
+  const [historyData, setHistoryData] = useState([]);
+
+  const fetchHistoryData = async (page = 1) => {
+    try {
+      setIsLoading(true);
+      const res = await ApiService.request({
+        method: "GET",
+        url: `getHistory?page=${page}`,
+      });
+
+      const data = res.data;
+      if (data.status) {
+        console.log("data -", data.data.projects);
+        setHistoryData(data.data.projects);
+        setPagination(data.data.pagination);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      console.error("Fetch Job Error:", err);
+      toast.error("Failed to fetch jobs.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handlePageChange = (newPage) => {
+    if (
+      newPage >= 1 &&
+      newPage <= pagination.total_pages &&
+      newPage !== pagination.current_page
+    ) {
+      fetchHistoryData(newPage);
+    }
+  };
+
+  const { current_page, total_pages } = pagination;
+
+  // Generate page numbers (for large datasets show 1,2,3,...,last)
+  const getPages = () => {
+    const pages = [];
+
+    if (total_pages <= 5) {
+      for (let i = 1; i <= total_pages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      if (current_page > 3) {
+        pages.push("...");
+      }
+      for (
+        let i = Math.max(2, current_page - 1);
+        i <= Math.min(total_pages - 1, current_page + 1);
+        i++
+      ) {
+        pages.push(i);
+      }
+      if (current_page < total_pages - 2) {
+        pages.push("...");
+      }
+      pages.push(total_pages);
+    }
+
+    return pages;
+  };
+
+  const pages = getPages();
+
+  useEffect(() => {
+    fetchHistoryData(1);
+  }, []);
+
+
 
   const totalPages = 5;
 
   return (
-    <div className="main-bg" style={{ minHeight: "100vh" }}>
+    <div className="inter-font main-bg" style={{ minHeight: "100vh" }}>
       <div
-        className="bg-white rounded-3 m-5 d-flex flex-column"
+        className="inter-font bg-white rounded-3 m-5 d-flex flex-column"
         style={{ minHeight: "79vh", overflow: "hidden" }}
       >
-        <div className="border-bottom py-3 ms-4">
-          <h3 className="inter-font pb-1" style={{ fontSize: "20px" }}>
+        <div className="inter-font border-bottom py-3 ms-4">
+          <h3 className="inter-font inter-font pb-1" style={{ fontSize: "20px" }}>
             My History
           </h3>
         </div>
 
-        <div className="scrollable-list flex-grow-1">
+        <div className="inter-font scrollable-list flex-grow-1">
           {historyData.map((item, index) => (
             <HistoryCard key={index} item={item} />
           ))}
         </div>
 
-        <div className="d-flex justify-content-center mt-4">
-          <ul className="pagination-custom">
-            {[...Array(totalPages)].map((_, idx) => (
-              <li key={idx}>
-                <button
-                  className={`page-btn ${
-                    currentPage === idx + 1 ? "active" : ""
-                  }`}
-                  onClick={() => setCurrentPage(idx + 1)}
-                >
-                  {idx + 1}
-                </button>
-              </li>
-            ))}
-            <li>
-              <button
-                className="page-btn"
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
+        <div className="inter-font d-flex justify-content-center my-5">
+          <Row className="inter-font mt-4">
+            <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+              {/* Pagination Numbers */}
+              <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === 1}
+                onClick={() => handlePageChange(current_page - 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
               >
-                {`>`}
-              </button>
-            </li>
-          </ul>
+                <ChevronLeft size={18} />
+              </Button>
+
+              {pages.map((page, index) => (
+                <Button
+                  key={index}
+                  size="sm"
+                  variant={page === current_page ? "danger" : "link"}
+                  style={{
+                    borderRadius: "50%",
+                    width: "36px",
+                    height: "36px",
+                    padding: 0,
+                    backgroundColor:
+                      page === current_page ? "#E46D54" : "transparent",
+                    color: page === current_page ? "#fff" : "#666",
+                    fontWeight: page === current_page ? "600" : "400",
+                    border: "none",
+                    fontSize: "14px",
+                  }}
+                  disabled={page === "..."}
+                  onClick={() => page !== "..." && handlePageChange(page)}
+                >
+                  {page}
+                </Button>
+              ))}
+
+              {/* Next Arrow */}
+              <Button
+                size="sm"
+                variant="link"
+                disabled={current_page === total_pages}
+                onClick={() => handlePageChange(current_page + 1)}
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  padding: 0,
+                  borderRadius: "50%",
+                  backgroundColor: "#E46D54",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
+                <ChevronRight size={18} />
+              </Button>
+
+              {/* View All Button */}
+              <Button
+                size="sm"
+                style={{
+                  backgroundColor: "#E46D54",
+                  border: "none",
+                  padding: "6px 20px",
+                  borderRadius: "10px",
+                  color: "#fff",
+                  marginLeft: "10px",
+                }}
+              // onClick={handleViewAll}
+              >
+                View All
+              </Button>
+            </Col>
+          </Row>
         </div>
       </div>
 

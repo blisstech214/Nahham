@@ -60,20 +60,20 @@ const SelectedQuoteTalent = ({
 
   return (
     <>
-      <div className="py-4 inter-font">
+      <div className="inter-font py-4 inter-font">
         {activeTab === "selectedTalentsOfQuotes" ? (
           // <SelectedTalentsOfQuotes />
           "Hello"
         ) : (
           //   <HireTheTalent selectedTalentData={selectedTalentData} />
 
-          <Container fluid className="px-4">
+          <Container fluid className="inter-font px-4">
             {/* Search & Filter */}
 
-            <Row className="mt-3">
-              <Col className="px-0 d-flex justify-content-end align-items-center gap-2 mb-4">
+            <Row className="inter-font mt-3">
+              <Col className="inter-font px-0 d-flex justify-content-end align-items-center gap-2 mb-4">
                 <Button
-                  className="bg-transparent border inter-font clear-btn inter-font"
+                  className="inter-font bg-transparent border inter-font clear-btn inter-font"
                   style={{
                     color: "rgba(82, 42, 48, 1)",
                     width: "88px",
@@ -83,7 +83,7 @@ const SelectedQuoteTalent = ({
                   Clear
                 </Button>
                 <Button
-                  className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1 inter-font"
+                  className="inter-font btn border-0 inter-font d-flex align-items-center justify-content-center gap-1 inter-font"
                   style={{
                     background: "rgba(82, 42, 48, 1)",
                     color: "white",
@@ -104,18 +104,18 @@ const SelectedQuoteTalent = ({
               </Col>
             </Row>
 
-            <Row className="gx-3 inter-font">
+            <Row className="inter-font gx-3 inter-font">
               {talents?.length === 0 ? (
                 <div>Data not found</div>
               ) : (
                 talents.map((talent) => (
-                  <Col xs={12} key={talent._id} className="mb-3">
+                  <Col xs={12} key={talent._id} className="inter-font mb-3">
                     <div
-                      className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm inter-font"
+                      className="inter-font p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm inter-font"
                       style={{ width: "100%" }}
                     >
                       <div
-                        className="d-flex flex-column flex-md-row gap-3 inter-font"
+                        className="inter-font d-flex flex-column flex-md-row gap-3 inter-font"
                         style={{ width: "100%" }}
                       >
                         <div>
@@ -132,14 +132,14 @@ const SelectedQuoteTalent = ({
                           />
                         </div>
                         <div style={{ width: "100%" }}>
-                          <div className="d-flex flex-column flex-md-row gap-5 justify-content-between align-items-start">
+                          <div className="inter-font d-flex flex-column flex-md-row gap-5 justify-content-between align-items-start">
                             <div>
-                              <h5 className="mb-1 fw-bold inter-font">
+                              <h5 className="inter-font mb-1 fw-bold inter-font">
                                 {talent?.talent_id?.first_name}{" "}
                                 {talent?.talent_id?.last_name}
                               </h5>
-                              <p className="mb-2 text-muted d-flex align-items-center inter-font">
-                                <FaLocationDot className="me-1" />
+                              <p className="inter-font mb-2 text-muted d-flex align-items-center inter-font">
+                                <FaLocationDot className="inter-font me-1" />
                                 {talent?.talent_id?.phone}
                                 {/* <img
                                 src={flagUAE}
@@ -152,16 +152,16 @@ const SelectedQuoteTalent = ({
                               /> */}
                               </p>
                             </div>
-                            <div className="d-flex flex-column flex-md-row justify-content-between align-items-start inter-font">
+                            <div className="inter-font d-flex flex-column flex-md-row justify-content-between align-items-start inter-font">
                               {/* <div style={{ width: "500px" }}>
                               {talent.about && (
                                 <p
                                   style={{ maxWidth: "100%", fontSize: "14px" }}
-                                  className="inter-font"
+                                  className="inter-font inter-font"
                                 >
                                   {talent.about?.slice(0, 90)}...
                                   <span
-                                    className="text-danger fw-semibold inter-font"
+                                    className="inter-font text-danger fw-semibold inter-font"
                                     style={{ cursor: "pointer" }}
                                   >
                                     {" "}
@@ -228,24 +228,24 @@ const SelectedQuoteTalent = ({
                               </div>
                             </div>
                           </div>
-                          <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
-                            <div className="d-flex" style={{}}>
-                              <div className="d-flex gap-2 flex-wrap inter-font">
+                          <div className="inter-font d-flex flex-column flex-md-row justify-content-between align-items-start">
+                            <div className="inter-font d-flex" style={{}}>
+                              <div className="inter-font d-flex gap-2 flex-wrap inter-font">
                                 {/* {talent.skills?.map((skill, index) => (
                                 <span
                                   key={index}
-                                  className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+                                  className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font"
                                 >
                                   {skill}
                                 </span>
                               ))} */}
-                                <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
+                                <span className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font">
                                   {talent?.duration}
                                 </span>
                               </div>
                             </div>
                             <div>
-                              {/* <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
+                              {/* <div className="inter-font d-flex gap-2 justify-content-md-end flex-wrap inter-font">
                               <Button
                                 size="sm"
                                 style={{
@@ -253,7 +253,7 @@ const SelectedQuoteTalent = ({
                                   color: "#fff",
                                   borderRadius: "5px",
                                 }}
-                                className="inter-font"
+                                className="inter-font inter-font"
                               >
                                 <LiaDownloadSolid /> Download
                               </Button>
@@ -264,7 +264,7 @@ const SelectedQuoteTalent = ({
                                   color: "#fff",
                                   borderRadius: "5px",
                                 }}
-                                className="inter-font"
+                                className="inter-font inter-font"
                               >
                                 View Profile
                               </Button>

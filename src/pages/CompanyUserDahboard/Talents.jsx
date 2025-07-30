@@ -228,22 +228,22 @@ const Talents = () => {
   const pages = getPages();
 
   return (
-    <div className="py-4 inter-font">
+    <div className="inter-font py-4 inter-font">
       {activeTab === "hire" ? (
         <HireTheTalent selectedTalentData={selectedTalentData} />
       ) : (
-        <Container fluid className="px-4">
+        <Container fluid className="inter-font px-4">
           {/* Search & Filter */}
           <Row
-            className="mb-4 align-items-center gx-3 d-flex flex-wrap"
+            className="inter-font mb-4 align-items-center gx-3 d-flex flex-wrap"
             style={{ justifyContent: "center" }}
           >
             <Col xs={12} md={10}>
-              <div className="position-relative" style={{ width: "100%" }}>
+              <div className="inter-font position-relative" style={{ width: "100%" }}>
                 <input
                   type="text"
                   placeholder="Search by Keywords"
-                  className="w-100 p-2 rounded-3 ps-5 inter-font"
+                  className="inter-font w-100 p-2 rounded-3 ps-5 inter-font"
                   style={{
                     paddingLeft: "2.5rem",
                     border: "none",
@@ -251,7 +251,7 @@ const Talents = () => {
                   }}
                 />
                 <CiSearch
-                  className="position-absolute"
+                  className="inter-font position-absolute"
                   style={{
                     left: "25px",
                     top: "50%",
@@ -262,13 +262,13 @@ const Talents = () => {
                 />
               </div>
             </Col>
-            <Col xs={12} md={2} className="mt-3 mt-md-0 text-md-end">
+            <Col xs={12} md={2} className="inter-font mt-3 mt-md-0 text-md-end">
               <div
-                className="d-flex justify-content-end align-items-center"
+                className="inter-font d-flex justify-content-end align-items-center"
                 style={{ marginLeft: "12px" }}
               >
                 <Button
-                  className="btn btn-base border-0 inter-font dashboard-btn inter-font"
+                  className="inter-font btn btn-base border-0 inter-font dashboard-btn inter-font"
                   style={{
                     outline: "none",
                     width: "88px",
@@ -282,7 +282,7 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="mb-4 gx-3 flex-wrap inter-font">
+          <Row className="inter-font mb-4 gx-3 flex-wrap inter-font">
             <Col xs={6} md={2}>
               <Select options={yearOptions} placeholder="Year Exp" />
             </Col>
@@ -297,7 +297,7 @@ const Talents = () => {
                 placeholder="Category"
               />
             </Col>
-            <Col xs={12} md={2} className="mt-3 mt-md-0">
+            <Col xs={12} md={2} className="inter-font mt-3 mt-md-0">
               <MultiSelect
                 options={subCategoryOptions}
                 value={subCategoryOptions.filter((o) =>
@@ -309,19 +309,19 @@ const Talents = () => {
                 labelledBy="Sub Category"
               />
             </Col>
-            <Col xs={6} md={2} className="mt-3 mt-md-0">
+            <Col xs={6} md={2} className="inter-font mt-3 mt-md-0">
               <Select options={ageOptions} placeholder="Age" />
             </Col>
-            <Col xs={6} md={2} className="mt-3 mt-md-0">
+            <Col xs={6} md={2} className="inter-font mt-3 mt-md-0">
               <Select
                 options={availabilityOptions}
                 placeholder="Availability"
               />
             </Col>
-            <Col xs={12} md={2} className="mt-3 mt-md-0 text-md-end ">
-              {/* <div className="d-flex align-items-center position-relative"> */}
+            <Col xs={12} md={2} className="inter-font mt-3 mt-md-0 text-md-end ">
+              {/* <div className="inter-font d-flex align-items-center position-relative"> */}
               <Button
-                className="btn inter-font px-2 d-flex align-items-center justify-content-center"
+                className="inter-font btn inter-font px-2 d-flex align-items-center justify-content-center"
                 style={{
                   background: "#cd496d",
                   color: "white",
@@ -336,10 +336,10 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="mt-3">
-            <Col className="px-0 d-flex justify-content-end align-items-center gap-2 mb-4">
+          <Row className="inter-font mt-3">
+            <Col className="inter-font px-0 d-flex justify-content-end align-items-center gap-2 mb-4">
               <Button
-                className="bg-transparent border inter-font clear-btn inter-font"
+                className="inter-font bg-transparent border inter-font clear-btn inter-font"
                 style={{
                   color: "rgba(82, 42, 48, 1)",
                   width: "88px",
@@ -349,7 +349,7 @@ const Talents = () => {
                 Clear
               </Button>
               <Button
-                className="btn border-0 inter-font d-flex align-items-center justify-content-center gap-1 inter-font"
+                className="inter-font btn border-0 inter-font d-flex align-items-center justify-content-center gap-1 inter-font"
                 style={{
                   background: "rgba(82, 42, 48, 1)",
                   color: "white",
@@ -368,15 +368,15 @@ const Talents = () => {
             </Col>
           </Row>
 
-          <Row className="gx-3 inter-font">
+          <Row className="inter-font gx-3 inter-font">
             {talents.map((talent) => (
-              <Col xs={12} key={talent._id} className="mb-3">
+              <Col xs={12} key={talent._id} className="inter-font mb-3">
                 <div
-                  className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm inter-font"
+                  className="inter-font p-3 bg-white rounded-4 d-flex flex-column flex-md-row shadow-sm inter-font"
                   style={{ width: "100%" }}
                 >
                   <div
-                    className="d-flex flex-column flex-md-row gap-3 inter-font"
+                    className="inter-font d-flex flex-column flex-md-row gap-3 inter-font"
                     style={{ width: "100%" }}
                   >
                     <div>
@@ -393,13 +393,13 @@ const Talents = () => {
                       />
                     </div>
                     <div style={{ width: "100%" }}>
-                      <div className="d-flex flex-column flex-md-row gap-5 justify-content-between align-items-start">
+                      <div className="inter-font d-flex flex-column flex-md-row gap-5 justify-content-between align-items-start">
                         <div>
-                          <h5 className="mb-1 fw-bold inter-font">
+                          <h5 className="inter-font mb-1 fw-bold inter-font">
                             {talent.first_name} {talent.last_name}
                           </h5>
-                          <p className="mb-2 text-muted d-flex align-items-center inter-font">
-                            <FaLocationDot className="me-1" />
+                          <p className="inter-font mb-2 text-muted d-flex align-items-center inter-font">
+                            <FaLocationDot className="inter-font me-1" />
                             {talent.city}, {talent.country}
                             {/* <img
                           src={flagUAE}
@@ -412,13 +412,13 @@ const Talents = () => {
                         /> */}
                           </p>
                         </div>
-                        <div className="d-flex flex-column flex-md-row justify-content-between align-items-start inter-font">
+                        <div className="inter-font d-flex flex-column flex-md-row justify-content-between align-items-start inter-font">
                           <div style={{ width: "500px" }}>
                             {talent.about && (
-                              <p style={{ maxWidth: "100%", fontSize: "14px" }} className="inter-font">
+                              <p style={{ maxWidth: "100%", fontSize: "14px" }} className="inter-font inter-font">
                                 {talent.about?.slice(0, 90)}...
                                 <span
-                                  className="text-danger fw-semibold inter-font"
+                                  className="inter-font text-danger fw-semibold inter-font"
                                   style={{ cursor: "pointer" }}
                                 >
                                   {" "}
@@ -481,24 +481,24 @@ const Talents = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start">
-                        <div className="d-flex" style={{}}>
-                          <div className="d-flex gap-2 flex-wrap inter-font">
+                      <div className="inter-font d-flex flex-column flex-md-row justify-content-between align-items-start">
+                        <div className="inter-font d-flex" style={{}}>
+                          <div className="inter-font d-flex gap-2 flex-wrap inter-font">
                             {talent.skills?.map((skill, index) => (
                               <span
                                 key={index}
-                                className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+                                className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font"
                               >
                                 {skill}
                               </span>
                             ))}
-                            <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
+                            <span className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font">
                               {"talent.year_experience"} Y Ex
                             </span>
                           </div>
                         </div>
                         <div>
-                          <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
+                          <div className="inter-font d-flex gap-2 justify-content-md-end flex-wrap inter-font">
                             <Button
                               size="sm"
                               style={{
@@ -506,7 +506,7 @@ const Talents = () => {
                                 color: "#fff",
                                 borderRadius: "5px",
                               }}
-                              className="inter-font"
+                              className="inter-font inter-font"
                             >
                               <LiaDownloadSolid /> Download
                             </Button>
@@ -517,7 +517,7 @@ const Talents = () => {
                                 color: "#fff",
                                 borderRadius: "5px",
                               }}
-                              className="inter-font"
+                              className="inter-font inter-font"
                             >
                               View Profile
                             </Button>
@@ -528,8 +528,8 @@ const Talents = () => {
                   </div>
                 </div>
               </Col>
-              // <Col xs={12} key={talent._id} className="mb-3">
-              //   <div className="p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between align-items-start position-relative shadow-sm">
+              // <Col xs={12} key={talent._id} className="inter-font mb-3">
+              //   <div className="inter-font p-3 bg-white rounded-4 d-flex flex-column flex-md-row justify-content-between align-items-start position-relative shadow-sm">
 
               //     <input
               //       type="checkbox"
@@ -544,7 +544,7 @@ const Talents = () => {
               //       }}
               //     />
 
-              //     <div className="d-flex inter-font">
+              //     <div className="inter-font d-flex inter-font">
               //       <img
               //         src={dashboardTalent2}
               //         alt="Talent"
@@ -556,43 +556,43 @@ const Talents = () => {
               //           border: "2px solid #ddd",
               //         }}
               //       />
-              //       <div className="ms-3">
-              //         <h5 className="mb-1 fw-bold inter-font">
+              //       <div className="inter-font ms-3">
+              //         <h5 className="inter-font mb-1 fw-bold inter-font">
               //           {talent.first_name} {talent.last_name}
               //         </h5>
-              //         <p className="mb-2 text-muted d-flex align-items-center inter-font">
-              //           <FaLocationDot className="me-1" />
+              //         <p className="inter-font mb-2 text-muted d-flex align-items-center inter-font">
+              //           <FaLocationDot className="inter-font me-1" />
               //           {talent.city}, {talent.country}
 
               //         </p>
-              //         <div className="d-flex gap-2 flex-wrap inter-font">
+              //         <div className="inter-font d-flex gap-2 flex-wrap inter-font">
               //           {talent.skills?.map((skill, index) => (
               //             <span
               //               key={index}
-              //               className="bg-light px-2 py-1 rounded small text-muted border inter-font"
+              //               className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font"
               //             >
               //               {skill}
               //             </span>
               //           ))}
-              //           <span className="bg-light px-2 py-1 rounded small text-muted border inter-font">
+              //           <span className="inter-font bg-light px-2 py-1 rounded small text-muted border inter-font">
               //             {talent.year_experience} Y Ex
               //           </span>
               //         </div>
               //       </div>
               //     </div>
 
-              //     <div className="mt-3 mt-md-0 d-flex flex-column justify-content-between inter-font">
+              //     <div className="inter-font mt-3 mt-md-0 d-flex flex-column justify-content-between inter-font">
               //       <p style={{ maxWidth: "600px", fontSize: "14px" }}>
               //         {talent.about?.slice(0, 90)}...
               //         <span
-              //           className="text-danger fw-semibold inter-font"
+              //           className="inter-font text-danger fw-semibold inter-font"
               //           style={{ cursor: "pointer" }}
               //         >
               //           {" "}
               //           Read More...
               //         </span>
               //       </p>
-              //       <div className="d-flex gap-2 justify-content-md-end flex-wrap inter-font">
+              //       <div className="inter-font d-flex gap-2 justify-content-md-end flex-wrap inter-font">
               //         <Button
               //           size="sm"
               //           style={{
@@ -600,14 +600,14 @@ const Talents = () => {
               //             color: "#fff",
               //             radius: "5px",
               //           }}
-              //           className="inter-font"
+              //           className="inter-font inter-font"
               //         >
               //           <LiaDownloadSolid /> Download
               //         </Button>
               //         <Button
               //           size="sm"
               //           style={{ background: "#522a30", color: "#fff" }}
-              //           className="inter-font"
+              //           className="inter-font inter-font"
               //         >
               //           View Profile
               //         </Button>
@@ -618,8 +618,8 @@ const Talents = () => {
             ))}
           </Row>
 
-          <Row className="mt-4">
-            <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap">
+          <Row className="inter-font mt-4">
+            <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap">
               {/* Pagination Numbers */}
 
   <Button
@@ -701,8 +701,8 @@ const Talents = () => {
             </Col>
           </Row>
 
-          {/* <Row className="mt-4">
-            <Col className="d-flex justify-content-center gap-3">
+          {/* <Row className="inter-font mt-4">
+            <Col className="inter-font d-flex justify-content-center gap-3">
               <Button
                 variant="outline-dark"
                 size="sm"

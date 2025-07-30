@@ -60,7 +60,7 @@ const UserDashboard = () => {
 
   return (
     <div
-      className="layout-wrapper inter-font"
+      className="inter-font layout-wrapper inter-font"
       style={{
         width: "100%",
         minHeight: "100vh",
@@ -107,11 +107,11 @@ const UserDashboard = () => {
             flexDirection: "column",
             minHeight: "100vh",
           }}
-          className="pt-3"
+          className="inter-font pt-3"
         >
           <Navbar />
           <div
-          className="px-5"
+          className="inter-font px-5"
             style={{
               flexGrow: 1,
             }}
@@ -123,7 +123,7 @@ const UserDashboard = () => {
 
         {/* Decoration Image (Right Side) */}
         <div
-          className="d-none d-lg-flex"
+          className="inter-font d-none d-lg-flex"
           style={{
             // width: "10%",
             // marginLeft: "10px",

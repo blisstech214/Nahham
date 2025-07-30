@@ -152,43 +152,43 @@ const MyJob = () => {
     return (
       <div
         key={job._id}
-        className="d-flex justify-content-between align-items-center my-3 border-bottom pb-3"
+        className="inter-font d-flex justify-content-between align-items-center my-3 border-bottom pb-3"
       >
-        <div className="d-flex align-items-start">
+        <div className="inter-font d-flex align-items-start">
           <img
             src={profile}
-            className="rounded-circle mt-1"
+            className="inter-font rounded-circle mt-1"
             style={{ width: 54, height: 54, objectFit: "cover" }}
             alt="Profile"
           />
-          <div className="mt-1 ms-3">
-            <h5 className="inter-font mb-1" style={{ fontSize: "17px" }}>
+          <div className="inter-font mt-1 ms-3">
+            <h5 className="inter-font inter-font mb-1" style={{ fontSize: "17px" }}>
               {job.title}
             </h5>
-            <p className="m-0 mb-1 inter-font" style={{ fontSize: "16px" }}>
+            <p className="inter-font m-0 mb-1 inter-font" style={{ fontSize: "16px" }}>
               {job.company}
             </p>
-            <p className="inter-font m-0 text-muted">
-              <FaLocationDot className="me-1 text-dark" />
+            <p className="inter-font inter-font m-0 text-muted">
+              <FaLocationDot className="inter-font me-1 text-dark" />
               {job.location}
             </p>
           </div>
         </div>
-        <div className="position-relative">
+        <div className="inter-font position-relative">
           <HiOutlineDotsVertical
             fontSize={23}
-            className="cursor-pointer"
+            className="inter-font cursor-pointer"
             onClick={() =>
               setOpenMenuId(openMenuId === job._id ? null : job._id)
             }
           />
           {openMenuId === job._id && (
             <div
-              className="position-absolute bg-white shadow rounded p-2"
+              className="inter-font position-absolute bg-white shadow rounded p-2"
               style={{ top: "30px", right: 0, zIndex: 10 }}
             >
               <div
-                className="d-flex align-items-center mb-2 cursor-pointer"
+                className="inter-font d-flex align-items-center mb-2 cursor-pointer"
                 onClick={() => {
                   setEditJobData(job);
                   setEditForm({
@@ -198,16 +198,16 @@ const MyJob = () => {
                   });
                 }}
               >
-                <FaEdit className="me-2 text-primary" />
+                <FaEdit className="inter-font me-2 text-primary" />
                 <span>Edit</span>
               </div>
               <div
-                className="d-flex align-items-center cursor-pointer"
+                className="inter-font d-flex align-items-center cursor-pointer"
                 onClick={() =>
                   setConfirmDeleteJob({ id: job._id, title: job.title })
                 }
               >
-                <FaTrash className="me-2 text-danger" />
+                <FaTrash className="inter-font me-2 text-danger" />
                 <span>Delete</span>
               </div>
             </div>
@@ -261,7 +261,7 @@ const MyJob = () => {
   const pages = getPages();
 
   return (
-    <div className="container">
+    <div className="inter-font container">
       {isLoading ? (
         <p>Loading…</p>
       ) : (
@@ -275,7 +275,7 @@ const MyJob = () => {
             }}
           >
             <button
-              className="btn inter-font"
+              className="inter-font btn inter-font"
               style={{ backgroundColor: "#e15d4f", color: "#fff" }}
               onClick={() => setCreateJobData(true)}
             >
@@ -284,14 +284,14 @@ const MyJob = () => {
           </div>
           <div style={{ maxHeight: "400px", overflowY: "auto" }}>
             {jobData.length === 0 ? (
-              <p className="text-center text-muted mt-4">No job data found.</p>
+              <p className="inter-font text-center text-muted mt-4">No job data found.</p>
             ) : (
               jobData.map(renderJobCard)
             )}
           </div>
 
-          <Row className="mt-4">
-            <Col className="d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
+          <Row className="inter-font mt-4">
+            <Col className="inter-font d-flex justify-content-center align-items-center gap-5 flex-wrap inter-font">
               {/* Pagination Numbers */}
               <Button
                 size="sm"
@@ -374,10 +374,10 @@ const MyJob = () => {
 
           {/* Pagination */}
           {/* {pagination.total_pages > 1 && (
-            <div className="d-flex justify-content-center mt-4">
-              <ul className="list-unstyled d-flex gap-2">
+            <div className="inter-font d-flex justify-content-center mt-4">
+              <ul className="inter-font list-unstyled d-flex gap-2">
                 <li
-                  className={`inter-font ${
+                  className={inter-font `inter-font ${
                     pagination.current_page === 1
                       ? "text-muted"
                       : "cursor-pointer"
@@ -389,7 +389,7 @@ const MyJob = () => {
                 {Array.from({ length: pagination.total_pages }, (_, i) => (
                   <li
                     key={i + 1}
-                    className={`inter-font px-2 py-1 rounded ${
+                    className={inter-font `inter-font px-2 py-1 rounded ${
                       pagination.current_page === i + 1
                         ? "bg-dark text-white"
                         : "cursor-pointer"
@@ -400,7 +400,7 @@ const MyJob = () => {
                   </li>
                 ))}
                 <li
-                  className={`inter-font ${
+                  className={inter-font `inter-font ${
                     pagination.current_page === pagination.total_pages
                       ? "text-muted"
                       : "cursor-pointer"
@@ -418,34 +418,34 @@ const MyJob = () => {
       {/* Delete Confirmation Modal */}
       {confirmDeleteJob && (
         <div
-          className="modal fade show d-block"
+          className="inter-font modal fade show d-block"
           tabIndex="-1"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="inter-font modal-dialog modal-dialog-centered">
             <div
-              className="modal-content border-0 shadow-lg rounded-4"
+              className="inter-font modal-content border-0 shadow-lg rounded-4"
               style={{ backgroundColor: "#fff6f1" }}
             >
-              <div className="modal-header border-0">
-                <h5 className="modal-title fw-bold text-danger">
+              <div className="inter-font modal-header border-0">
+                <h5 className="inter-font modal-title fw-bold text-danger">
                   Confirm Delete
                 </h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="inter-font btn-close"
                   onClick={() => {
                     setConfirmDeleteJob(null);
                     setOpenMenuId(null);
                   }}
                 ></button>
               </div>
-              <div className="modal-body">
-                <p className="mb-0 text-dark">{`Are you sure you want to delete the job: ${confirmDeleteJob.title}`}</p>
+              <div className="inter-font modal-body">
+                <p className="inter-font mb-0 text-dark">{`Are you sure you want to delete the job: ${confirmDeleteJob.title}`}</p>
               </div>
-              <div className="modal-footer border-0">
+              <div className="inter-font modal-footer border-0">
                 <button
-                  className="btn btn-light"
+                  className="inter-font btn btn-light"
                   onClick={() => {
                     setConfirmDeleteJob(null);
                     setOpenMenuId(null);
@@ -454,7 +454,7 @@ const MyJob = () => {
                   Cancel
                 </button>
                 <button
-                  className="btn"
+                  className="inter-font btn"
                   style={{ backgroundColor: "#e15d4f", color: "#fff" }}
                   onClick={handleDeleteJob}
                 >
@@ -469,34 +469,34 @@ const MyJob = () => {
       {/* create Job Modal */}
       {createJobData && (
         <div
-          className="modal fade show d-block inter-font"
+          className="inter-font modal fade show d-block inter-font"
           tabIndex="-1"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="inter-font modal-dialog modal-dialog-centered">
             <div
-              className="modal-content border-0 shadow-lg rounded-4"
+              className="inter-font modal-content border-0 shadow-lg rounded-4"
               style={{ backgroundColor: "#fff6f1" }}
             >
-              <div className="modal-header border-0">
-                <h5 className="modal-title fw-bold inter-font">Create Job</h5>
+              <div className="inter-font modal-header border-0">
+                <h5 className="inter-font modal-title fw-bold inter-font">Create Job</h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="inter-font btn-close"
                   onClick={() => {
                     setCreateJobData(false);
                   }}
                 ></button>
               </div>
-              <div className="modal-body">
+              <div className="inter-font modal-body">
                 {["title", "company", "location"].map((field) => (
-                  <div className="mb-3" key={field}>
-                    <label className="form-label inter-font">
+                  <div className="inter-font mb-3" key={field}>
+                    <label className="inter-font form-label inter-font">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="inter-font form-control"
                       value={createForm?.[field]}
                       onChange={(e) =>
                         setCreateForm({
@@ -508,9 +508,9 @@ const MyJob = () => {
                   </div>
                 ))}
               </div>
-              <div className="modal-footer border-0">
+              <div className="inter-font modal-footer border-0">
                 <button
-                  className="btn btn-light inter-font"
+                  className="inter-font btn btn-light inter-font"
                   onClick={() => {
                     setCreateJobData(false);
                   }}
@@ -518,7 +518,7 @@ const MyJob = () => {
                   Cancel
                 </button>
                 <button
-                  className="btn inter-font"
+                  className="inter-font btn inter-font"
                   style={{ backgroundColor: "#e15d4f", color: "#fff" }}
                   onClick={handleCreateJob}
                   disabled={isLoading}
@@ -534,35 +534,35 @@ const MyJob = () => {
       {/* Edit Job Modal */}
       {editJobData && (
         <div
-          className="modal fade show d-block inter-font"
+          className="inter-font modal fade show d-block inter-font"
           tabIndex="-1"
           style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
         >
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="inter-font modal-dialog modal-dialog-centered">
             <div
-              className="modal-content border-0 shadow-lg rounded-4"
+              className="inter-font modal-content border-0 shadow-lg rounded-4"
               style={{ backgroundColor: "#fff6f1" }}
             >
-              <div className="modal-header border-0">
-                <h5 className="modal-title fw-bold inter-font">Edit Job</h5>
+              <div className="inter-font modal-header border-0">
+                <h5 className="inter-font modal-title fw-bold inter-font">Edit Job</h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="inter-font btn-close"
                   onClick={() => {
                     setEditJobData(null);
                     setOpenMenuId(null);
                   }}
                 ></button>
               </div>
-              <div className="modal-body">
+              <div className="inter-font modal-body">
                 {["title", "company", "location"].map((field) => (
-                  <div className="mb-3" key={field}>
-                    <label className="form-label inter-font">
+                  <div className="inter-font mb-3" key={field}>
+                    <label className="inter-font form-label inter-font">
                       {field.charAt(0).toUpperCase() + field.slice(1)}
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="inter-font form-control"
                       value={editForm?.[field]}
                       onChange={(e) =>
                         setEditForm({ ...editForm, [field]: e.target.value })
@@ -571,9 +571,9 @@ const MyJob = () => {
                   </div>
                 ))}
               </div>
-              <div className="modal-footer border-0">
+              <div className="inter-font modal-footer border-0">
                 <button
-                  className="btn btn-light inter-font"
+                  className="inter-font btn btn-light inter-font"
                   onClick={() => {
                     setEditJobData(null);
                     setOpenMenuId(null);
@@ -582,7 +582,7 @@ const MyJob = () => {
                   Cancel
                 </button>
                 <button
-                  className="btn inter-font"
+                  className="inter-font btn inter-font"
                   style={{ backgroundColor: "#e15d4f", color: "#fff" }}
                   onClick={handleEditJob}
                   disabled={isLoading}

@@ -51,7 +51,7 @@ const CompanyForm = () => {
 
       const { status, message, data } = response.data;
       if (status) {
-        const company_id = data?.company?._id;
+        const company_id = data?._id;
         // console.log(data);
         localStorage.setItem("company_id", company_id);
 
@@ -77,37 +77,37 @@ const CompanyForm = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0.5 }}
-          className="main-bg min-vh-100 d-flex flex-column md:mt-5 justify-content-center align-items-center position-relative px-3"
+          className="inter-font main-bg min-vh-100 d-flex flex-column md:mt-5 justify-content-center align-items-center position-relative px-3"
         >
           {/* Header with logo and stepper */}
-          <Container fluid className="position-absolute top-0 mt-3">
-            <Row className="align-items-center">
+          <Container fluid className="inter-font position-absolute top-0 mt-3">
+            <Row className="inter-font align-items-center">
               <Col
                 xs={12}
                 md={1}
-                className="text-center text-md-start mb-3 mb-md-0"
+                className="inter-font text-center text-md-start mb-3 mb-md-0"
               >
                 <img src={logo} alt="Logo" style={{ height: "50px" }} />
               </Col>
-              <Col xs={12} md={11} className="text-center">
-                <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
-                  <div className="d-flex align-items-center justify-content-center">
+              <Col xs={12} md={11} className="inter-font text-center">
+                <div className="inter-font d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+                  <div className="inter-font d-flex align-items-center justify-content-center">
                     <Step>1</Step>
-                    <span className="sofia-font fs-count ms-2">
+                    <span className="inter-font sofia-font fs-count ms-2">
                       Select your company
                     </span>
                   </div>
                   <Arrow />
-                  <div className="d-flex align-items-center justify-content-center">
+                  <div className="inter-font d-flex align-items-center justify-content-center">
                     <Step>2</Step>
-                    <span className="sofia-font fs-count ms-2">
+                    <span className="inter-font sofia-font fs-count ms-2">
                       Add its information
                     </span>
                   </div>
                   <Arrow />
-                  <div className="d-flex align-items-center justify-content-center">
+                  <div className="inter-font d-flex align-items-center justify-content-center">
                     <Step active>3</Step>
-                    <span className="sofia-font fs-count ms-2">
+                    <span className="inter-font sofia-font fs-count ms-2">
                       Upload Documents
                     </span>
                   </div>
@@ -117,22 +117,22 @@ const CompanyForm = () => {
           </Container>
 
           <div
-            className="container upload-doc-coontainer bg-white p-4 d-flex flex-column justify-content-center align-items-center rounded-4"
+            className="inter-font container upload-doc-coontainer bg-white p-4 d-flex flex-column justify-content-center align-items-center rounded-4"
             style={{ width: "100%", maxWidth: "700px", marginTop: "300px" }}
           >
-            <h2 className="fw-bold inter-font text-center">
+            <h2 className="inter-font fw-bold inter-font text-center">
               Upload Company Documents
             </h2>
             <p
-              className="inter-font text-center"
+              className="inter-font inter-font text-center"
               style={{ color: "rgba(0, 0, 0, 0.3)" }}
             >
               Attach your company documents for verification
             </p>
 
-            <div className="d-flex flex-column flex-md-row justify-content-center align-items-center mt-3 gap-3 w-100">
+            <div className="inter-font d-flex flex-column flex-md-row justify-content-center align-items-center mt-3 gap-3 w-100">
               {/* Trade Licence */}
-              <div className="attachImg d-flex justify-content-center align-items-center w-100">
+              <div className="inter-font attachImg d-flex justify-content-center align-items-center w-100">
                 <ImageDropzone
                   title="Trade Licence"
                   setFiles={(files) => setTradeLicenseFile(files?.[0] || null)}
@@ -140,7 +140,7 @@ const CompanyForm = () => {
               </div>
 
               {/* VAT Certificate */}
-              <div className="attachImg d-flex justify-content-center align-items-center w-100">
+              <div className="inter-font attachImg d-flex justify-content-center align-items-center w-100">
                 <ImageDropzone1
                   title="VAT Certificate"
                   setFiles={(files) =>
@@ -151,7 +151,7 @@ const CompanyForm = () => {
             </div>
 
             <button
-              className="btn btn-base mt-4 inter-font"
+              className="inter-font btn btn-base mt-4 inter-font"
               onClick={handleUploadDocuments}
               disabled={isLoader}
             >
@@ -178,7 +178,7 @@ const CompanyForm = () => {
 
 const Step = ({ children, active }) => (
   <div
-    className={`rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${
+    className={ `inter-font rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${
       active ? "bg-dark text-white" : "bg-light text-muted"
     }`}
     style={{ width: "30px", height: "30px", fontSize: "14px" }}
@@ -187,6 +187,6 @@ const Step = ({ children, active }) => (
   </div>
 );
 
-const Arrow = () => <span className="text-muted">→</span>;
+const Arrow = () => <span className="inter-font text-muted">→</span>;
 
 export default CompanyForm;

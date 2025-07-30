@@ -58,7 +58,7 @@ const Profile = () => {
   if (!profileData) {
     return (
       <div
-        className="d-flex justify-content-center align-items-center"
+        className="inter-font d-flex justify-content-center align-items-center"
         style={{ height: "100vh" }}
       >
         <h4>Loading...</h4>
@@ -67,47 +67,47 @@ const Profile = () => {
   }
 
   return (
-    <div className="py-4 px-3" style={{ minHeight: "100vh" }}>
+    <div className="inter-font py-4 px-3" style={{ minHeight: "100vh" }}>
       <div
-        className="mx-auto bg-white rounded-4 shadow p-4"
+        className="inter-font mx-auto bg-white rounded-4 shadow p-4"
         style={{ maxWidth: "850px", width: "100%" }}
       >
-        <div className="row align-items-start">
+        <div className="inter-font row align-items-start">
           {/* Profile Image */}
-          <div className="col-12 col-md-2 text-center mb-3 mb-md-0">
+          <div className="inter-font col-12 col-md-2 text-center mb-3 mb-md-0">
             <img
               src={profile}
-              className="img-fluid rounded-circle"
+              className="inter-font img-fluid rounded-circle"
               alt="Profile"
             />
           </div>
 
           {/* Profile Info */}
-          <div className="col-12 col-md-10">
-            <h2 className="inter-font">{profileData?.company_name}</h2>
-            <p className="inter-font text-muted d-flex align-items-center flex-wrap">
-              <FaLocationDot className="me-2 text-dark" />
+          <div className="inter-font col-12 col-md-10">
+            <h2 className="inter-font inter-font">{profileData?.company_name}</h2>
+            <p className="inter-font inter-font text-muted d-flex align-items-center flex-wrap">
+              <FaLocationDot className="inter-font me-2 text-dark" />
               {profileData?.location}
               <img
                 src={UAE}
-                className="rounded-1 ms-2"
+                className="inter-font rounded-1 ms-2"
                 style={{ width: "30px", height: "20px" }}
                 alt="UAE"
               />
             </p>
 
-            <p className="inter-font text-muted" style={{ fontSize: "15px" }}>
+            <p className="inter-font inter-font text-muted" style={{ fontSize: "15px" }}>
               {profileData?.about}
-              <span className="text-danger"> Read More...</span>
+              <span className="inter-font text-danger"> Read More...</span>
             </p>
 
-            <div className="row">
+            <div className="inter-font row">
               {/* Left Column */}
-              <div className="col-12 col-md-6 mb-4">
+              <div className="inter-font col-12 col-md-6 mb-4">
                 <h6 style={{ color: "#595959" }}>Email Address</h6>
                 <p style={{ color: "#939393" }}>{profileData?.email}</p>
 
-                <h6 style={{ color: "#595959" }} className="mt-3">
+                <h6 style={{ color: "#595959" }} className="inter-font mt-3">
                   Address
                 </h6>
                 <p style={{ color: "#939393" }}>{locationName}</p>
@@ -125,32 +125,32 @@ const Profile = () => {
                   <LocationMarker setLocationName={setLocationName} />
                 </MapContainer>
 
-                <p className="mt-2 text-center">{locationName}</p>
+                <p className="inter-font mt-2 text-center">{locationName}</p>
 
-                <button className="btn btn-base inter-font w-100 mt-3">
+                <button className="inter-font btn btn-base inter-font w-100 mt-3">
                   Edit Profile
                 </button>
               </div>
 
               {/* Right Column */}
-              <div className="col-12 col-md-6">
+              <div className="inter-font col-12 col-md-6">
                 <h6 style={{ color: "#595959" }}>Phone Number</h6>
                 <p style={{ color: "#939393" }}>
                   +{profileData?.phone}
                   {profileData?.secondary_phone && (
                     <>
-                      <span className="mx-2">|</span> +
+                      <span className="inter-font mx-2">|</span> +
                       {profileData?.secondary_phone}
                     </>
                   )}
                 </p>
 
-                <h6 className="mt-3" style={{ color: "#595959" }}>
+                <h6 className="inter-font mt-3" style={{ color: "#595959" }}>
                   Type of Business
                 </h6>
                 <p style={{ color: "#939393" }}>Production House, Studio</p>
 
-                <h6 style={{ color: "#595959" }} className="mt-3">
+                <h6 style={{ color: "#595959" }} className="inter-font mt-3">
                   Categories
                 </h6>
                 <p style={{ color: "#939393" }}>Acting, Production, Casting</p>

@@ -185,35 +185,35 @@ const CompanyInfoForm = () => {
   };
 
   return (
-    <div className="sofia-font main-bg min-vh-100 d-flex flex-column align-items-center pt-4">
-      <Container className="position-absolute top-0 mt-3">
-        <Row className="align-items-center">
+    <div className="inter-font sofia-font main-bg min-vh-100 d-flex flex-column align-items-center pt-4">
+      <Container className="inter-font position-absolute top-0 mt-3">
+        <Row className="inter-font align-items-center">
           <Col
             xs={12}
             md={1}
-            className="text-center text-md-start mb-2 mb-md-0"
+            className="inter-font text-center text-md-start mb-2 mb-md-0"
           >
             <img src={logo} alt="Logo" style={{ height: "50px" }} />
           </Col>
-          <Col xs={12} md={11} className="text-center mt-4">
-            <div className="d-flex flex-md-row align-items-center justify-content-center gap-2">
-              <div className="d-flex align-items-center justify-content-center">
+          <Col xs={12} md={11} className="inter-font text-center mt-4">
+            <div className="inter-font d-flex flex-md-row align-items-center justify-content-center gap-2">
+              <div className="inter-font d-flex align-items-center justify-content-center">
                 <Step>1</Step>
-                <span className="sofia-font fs-count ms-2">
+                <span className="inter-font sofia-font fs-count ms-2">
                   Select your company
                 </span>
               </div>
               <Arrow />
-              <div className="d-flex align-items-center justify-content-center">
+              <div className="inter-font d-flex align-items-center justify-content-center">
                 <Step active>2</Step>
-                <span className="sofia-font fs-count ms-2">
+                <span className="inter-font sofia-font fs-count ms-2">
                   Add its information
                 </span>
               </div>
               <Arrow />
-              <div className="d-flex align-items-center justify-content-center">
+              <div className="inter-font d-flex align-items-center justify-content-center">
                 <Step>3</Step>
-                <span className="sofia-font fs-count ms-2">
+                <span className="inter-font sofia-font fs-count ms-2">
                   Upload Documents
                 </span>
               </div>
@@ -223,19 +223,19 @@ const CompanyInfoForm = () => {
       </Container>
 
       <div
-        className="bg-white p-4 shadow rounded-4 company-registration-form"
+        className="inter-font bg-white p-4 shadow rounded-4 company-registration-form"
         style={{ width: "90%", maxWidth: "677px", marginTop: "100px" }}
       >
-        <h4 className="fw-bold inter-font">
+        <h4 className="inter-font fw-bold inter-font">
           Welcome! Let’s configure your profile
         </h4>
-        <p className="fw-lighter text-muted inter-font">
+        <p className="inter-font fw-lighter text-muted inter-font">
           Define how your company will be seen on Sortlist.
         </p>
 
-        <h4 className="fw-bolder mt-5 inter-font">About</h4>
-        <p className="text-size sofia-font">Describe your company</p>
-        <Form.Group className="mb-3">
+        <h4 className="inter-font fw-bolder mt-5 inter-font">About</h4>
+        <p className="inter-font text-size sofia-font">Describe your company</p>
+        <Form.Group className="inter-font mb-3">
           <Form.Control
             as="textarea"
             rows={4}
@@ -244,7 +244,7 @@ const CompanyInfoForm = () => {
             name="about"
             onChange={handleTextChange}
             isInvalid={!!errors.about}
-            className="inp-bg text-size p-1 rounded-3 inp-login sofia-font"
+            className="inter-font inp-bg text-size p-1 rounded-3 inp-login sofia-font"
           />
           <Form.Control.Feedback type="invalid">
             {errors.about}
@@ -252,9 +252,9 @@ const CompanyInfoForm = () => {
         </Form.Group>
 
         <Row>
-          <Col md={6} className="mt-3">
+          <Col md={6} className="inter-font mt-3">
             <Form.Group>
-              <Form.Label className="text-size">Business Category</Form.Label>
+              <Form.Label className="inter-font text-size">Business Category</Form.Label>
               <Select
                 options={categoryOptions}
                 value={
@@ -265,17 +265,17 @@ const CompanyInfoForm = () => {
                 placeholder="Select category"
               />
               {errors.category && (
-                <div className="text-danger small mt-1">{errors.category}</div>
+                <div className="inter-font text-danger small mt-1">{errors.category}</div>
               )}
             </Form.Group>
           </Col>
 
-          <Col md={6} className="mt-3">
+          <Col md={6} className="inter-font mt-3">
             <Form.Group>
-              <Form.Label className="text-size">Select Sub Category</Form.Label>
+              <Form.Label className="inter-font text-size">Select Sub Category</Form.Label>
               {/* <pre>{JSON.stringify(formData.subCategory)}</pre> */}
               <MultiSelect
-                className="inter-font"
+                className="inter-font inter-font"
                 options={subCategoryOptions}
                 value={subCategoryOptions.filter((option) =>
                   formData.subCategory.includes(option.value)
@@ -288,7 +288,7 @@ const CompanyInfoForm = () => {
               />
 
               {errors.subCategory && (
-                <div className="text-danger small mt-1">
+                <div className="inter-font text-danger small mt-1">
                   {errors.subCategory}
                 </div>
               )}
@@ -296,10 +296,10 @@ const CompanyInfoForm = () => {
           </Col>
         </Row>
 
-        <h4 className="fw-bolder mt-4 inter-font">Signup Information</h4>
+        <h4 className="inter-font fw-bolder mt-4 inter-font">Signup Information</h4>
         <Row>
           <Col md={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="inter-font mb-3">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type="email"
@@ -308,7 +308,7 @@ const CompanyInfoForm = () => {
                 name="email"
                 onChange={handleTextChange}
                 isInvalid={!!errors.email}
-                className="inp-bg sofia-font inp-login"
+                className="inter-font inp-bg sofia-font inp-login"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.email}
@@ -316,7 +316,7 @@ const CompanyInfoForm = () => {
             </Form.Group>
           </Col>
           <Col md={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="inter-font mb-3">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -325,7 +325,7 @@ const CompanyInfoForm = () => {
                 name="password"
                 onChange={handleTextChange}
                 isInvalid={!!errors.password}
-                className="inp-bg sofia-font inp-login"
+                className="inter-font inp-bg sofia-font inp-login"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.password}
@@ -334,7 +334,7 @@ const CompanyInfoForm = () => {
           </Col>
         </Row>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="inter-font mb-3">
           <Form.Label>Location Address</Form.Label>
           <Form.Control
             type="text"
@@ -343,14 +343,14 @@ const CompanyInfoForm = () => {
             value={formData.location}
             onChange={handleTextChange}
             isInvalid={!!errors.location}
-            className="inp-bg sofia-font inp-login"
+            className="inter-font inp-bg sofia-font inp-login"
           />
           <Form.Control.Feedback type="invalid">
             {errors.location}
           </Form.Control.Feedback>
         </Form.Group>
 
-        <h6 className="mt-4 inter-font">Company phone number</h6>
+        <h6 className="inter-font mt-4 inter-font">Company phone number</h6>
         <Row>
           <Col md={6}>
             <InputGroupWithFlag
@@ -372,7 +372,7 @@ const CompanyInfoForm = () => {
           </Col>
         </Row>
 
-        <Form.Group className="mb-3">
+        <Form.Group className="inter-font mb-3">
           <Form.Label>Company website</Form.Label>
           <Form.Control
             type="text"
@@ -381,7 +381,7 @@ const CompanyInfoForm = () => {
             value={formData.website}
             onChange={handleTextChange}
             isInvalid={!!errors.website}
-            className="inp-bg sofia-font inp-login"
+            className="inter-font inp-bg sofia-font inp-login"
           />
           <Form.Control.Feedback type="invalid">
             {errors.website}
@@ -390,7 +390,7 @@ const CompanyInfoForm = () => {
 
         <Row>
           <Col md={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="inter-font mb-3">
               <Form.Label>Trade License No.</Form.Label>
               <Form.Control
                 type="text"
@@ -399,7 +399,7 @@ const CompanyInfoForm = () => {
                 value={formData.license_no}
                 onChange={handleTextChange}
                 isInvalid={!!errors.license_no}
-                className="inp-bg sofia-font inp-login"
+                className="inter-font inp-bg sofia-font inp-login"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.license_no}
@@ -407,7 +407,7 @@ const CompanyInfoForm = () => {
             </Form.Group>
           </Col>
           <Col md={6}>
-            <Form.Group className="mb-3">
+            <Form.Group className="inter-font mb-3">
               <Form.Label>Register Since</Form.Label>
               <Form.Control
                 type="text"
@@ -416,7 +416,7 @@ const CompanyInfoForm = () => {
                 value={formData.reg_year}
                 onChange={handleTextChange}
                 isInvalid={!!errors.reg_year}
-                className="inp-bg sofia-font inp-login"
+                className="inter-font inp-bg sofia-font inp-login"
               />
               <Form.Control.Feedback type="invalid">
                 {errors.reg_year}
@@ -425,9 +425,9 @@ const CompanyInfoForm = () => {
           </Col>
         </Row>
 
-        <div className="text-center mt-4">
+        <div className="inter-font text-center mt-4">
           <Button
-            className="px-5 btn btn-base border-0 inter-font"
+            className="inter-font px-5 btn btn-base border-0 inter-font"
             onClick={handleContinue}
             disabled={isLoader}
           >
@@ -441,7 +441,7 @@ const CompanyInfoForm = () => {
 
 const Step = ({ children, active }) => (
   <div
-    className={`rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${
+    className={ `inter-font rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${
       active ? "bg-dark text-white" : "bg-light text-muted"
     }`}
     style={{ width: "30px", height: "30px", fontSize: "14px" }}
@@ -450,7 +450,7 @@ const Step = ({ children, active }) => (
   </div>
 );
 
-const Arrow = () => <span className="text-muted">→</span>;
+const Arrow = () => <span className="inter-font text-muted">→</span>;
 
 const InputGroupWithFlag = ({
   placeholder,
@@ -460,7 +460,7 @@ const InputGroupWithFlag = ({
   isInvalid,
 }) => (
   <div
-    className={`d-flex align-items-center mb-3 border rounded px-2 ${
+    className={ `inter-font d-flex align-items-center mb-3 border rounded px-2 ${
       isInvalid ? "border-danger" : ""
     }`}
   >
@@ -469,7 +469,7 @@ const InputGroupWithFlag = ({
       alt="UAE"
       style={{ width: "25px", height: "18px", marginRight: "6px" }}
     />
-    <span className="text-muted pe-2 inter-font">(+971)</span>
+    <span className="inter-font text-muted pe-2 inter-font">(+971)</span>
     <Form.Control
       type="text"
       name={name}
@@ -477,7 +477,7 @@ const InputGroupWithFlag = ({
       value={value}
       onChange={onChange}
       isInvalid={isInvalid}
-      className="border-0 ps-1 sofia-font"
+      className="inter-font border-0 ps-1 sofia-font"
       style={{ boxShadow: "none" }}
     />
   </div>

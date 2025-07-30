@@ -22,18 +22,18 @@ const TermsAndCondition = () => {
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      <div className="inter-font privacy-bg from-top">
         <Header />
 
-        <div className="heading-policy">
+        <div className="inter-font heading-policy">
           <h1>{t("terms_conditions")}</h1>
         </div>
       </div>
 
-      <div className="container my-5">
-        <div className="page" title="Page 1">
-          <div className="layoutArea">
-            <div className="column">
+      <div className="inter-font container my-5">
+        <div className="inter-font page" title="Page 1">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p
                 style={{
                   color: "rgb(15, 71, 97)",
@@ -152,9 +152,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 2">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 2">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <ol start={5}>
                 <li>
                   <strong>"LastorderPlatform"</strong> – The digital marketplace
@@ -301,9 +301,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 3">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 3">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 No other rights are granted beyond what is explicitly stated
                 here. All rights not expressly provided in these Terms are{" "}
@@ -394,8 +394,8 @@ const TermsAndCondition = () => {
             </div>
           </div>
 
-          <div className="layoutArea" title="Page 4">
-            <div className="column">
+          <div className="inter-font layoutArea" title="Page 4">
+            <div className="inter-font column">
               <h4>Prohibited Conduct</h4>
               <ol>
                 <li>
@@ -496,9 +496,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
         </div>
-        <div className="page" title="Page 5">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 5">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 (ii) Initiation of legal proceedings to recover damages,
                 including but not limited to:
@@ -555,9 +555,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
 
-          <div className="page" title="Page 6">
-            <div className="layoutArea">
-              <div className="column">
+          <div className="inter-font page" title="Page 6">
+            <div className="inter-font layoutArea">
+              <div className="inter-font column">
                 <p
                   style={{
                     fontFamily: "Aptos",
@@ -652,9 +652,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 7">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 7">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   <i>
@@ -817,7 +817,7 @@ const TermsAndCondition = () => {
                 </span>
               </p>
             </div>
-            <div className="column">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Courier New", fontSize: "10pt" }}>
                   o{" "}
@@ -830,9 +830,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 8">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 8">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <ul>
                 <li>Utilized in full compliance with applicable laws</li>
                 <li>
@@ -936,9 +936,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
         </div>
-        <div className="page" title="Page 9">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 9">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 <strong>9. Donations</strong>
               </p>
@@ -1036,9 +1036,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 10">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 10">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>
                 •{" "}
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
@@ -1187,9 +1187,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
         </div>
-        <div className="page" title="Page 9">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 9">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 <strong>9. Donations</strong>
               </p>
@@ -1287,9 +1287,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 10">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 10">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>
                 •{" "}
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
@@ -1438,9 +1438,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
         </div>
-        <div className="page" title="Page 11">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 11">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>
                   •{" "}
@@ -1594,9 +1594,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 12">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 12">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   <strong>12. LIMITATION OF LIABILITY</strong>
@@ -1719,13 +1719,13 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 13">
-          <div className="layoutArea">
-            <div className="column">
-              <p className="text-title">
+        <div className="inter-font page" title="Page 13">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
+              <p className="inter-font text-title">
                 <strong>13. Indemnification</strong>
               </p>
-              <p className="text-body">
+              <p className="inter-font text-body">
                 You agree to{" "}
                 <strong>defend, indemnify, and hold harmless</strong> Lastorder
                 Platform, its Affiliates, and their respective officers,
@@ -1734,7 +1734,7 @@ const TermsAndCondition = () => {
                 (including reasonable legal and professional fees) that they may
                 suffer or incur, arising out of or in connection with:
               </p>
-              <ol className="text-body">
+              <ol className="inter-font text-body">
                 <li>
                   Your access to or use of the Lastorder Platform, including any
                   Products and Services ordered through it;
@@ -1747,12 +1747,12 @@ const TermsAndCondition = () => {
                 </li>
               </ol>
 
-              <p className="text-title">
+              <p className="inter-font text-title">
                 <strong>
                   14. Personal Belongings and Insurance Disclaimer
                 </strong>
               </p>
-              <p className="text-body">
+              <p className="inter-font text-body">
                 You acknowledge and agree that{" "}
                 <strong>
                   Lastorder Platform is not responsible for the loss, theft, or
@@ -1761,7 +1761,7 @@ const TermsAndCondition = () => {
                 under any circumstances. This includes, but is not limited to,
                 losses or damage caused by:
               </p>
-              <ol className="text-body">
+              <ol className="inter-font text-body">
                 <li>
                   <strong>Theft, snatching, or other criminal activity;</strong>
                 </li>
@@ -1776,16 +1776,16 @@ const TermsAndCondition = () => {
                 </li>
               </ol>
 
-              <p className="text-body">
+              <p className="inter-font text-body">
                 You are solely responsible for the safekeeping of your personal
                 property and are advised not to leave your belongings
                 unattended, especially when engaging a Partner to provide
                 services at your residence or any other premises.
               </p>
-              <p className="text-title">
+              <p className="inter-font text-title">
                 <strong>Assumption of Risk</strong>
               </p>
-              <p className="text-body">
+              <p className="inter-font text-body">
                 By using the Lastorder Platform and its services, you
                 acknowledge and accept all such risks. You agree that Lastorder
                 Platform shall not be held liable for any acts, omissions,
@@ -1793,15 +1793,15 @@ const TermsAndCondition = () => {
                 parties.
               </p>
 
-              <p className="text-title">
+              <p className="inter-font text-title">
                 <strong>Insurance Coverage Disclaimer</strong>
               </p>
-              <p className="text-body">
+              <p className="inter-font text-body">
                 Lastorder Platform may maintain its own insurance policies,
                 which in some instances could extend limited benefits to you. If
                 you are eligible to benefit from such coverage:
               </p>
-              <ul className="text-body">
+              <ul className="inter-font text-body">
                 <li>
                   You agree to comply with all claim reporting requirements;
                 </li>
@@ -1817,14 +1817,14 @@ const TermsAndCondition = () => {
                 </li>
               </ul>
 
-              <p className="text-title">
+              <p className="inter-font text-title">
                 <strong>15. Data Protection</strong>
               </p>
-              <p className="text-body">
+              <p className="inter-font text-body">
                 Our collection and use of personal information in connection
                 with the Lastorder Platform and the Products and Services is as
                 provided in our Privacy Policy that is located{" "}
-                <a href="/privacy-policy" className="text-link">
+                <a href="/privacy-policy" className="inter-font text-link">
                   <strong>here</strong>
                 </a>
                 .
@@ -1833,9 +1833,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 14">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 14">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 <strong>16. Communications</strong>
               </p>
@@ -1987,8 +1987,8 @@ const TermsAndCondition = () => {
               </ul>
             </div>
           </div>
-          <div className="layoutArea">
-            <div className="column">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>• </p>
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 Winners will be selected in accordance with the specific terms
@@ -1998,9 +1998,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 15">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 15">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <ul style={{ listStyleType: "disc" }}>
                 <li style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>
                   <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
@@ -2048,9 +2048,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 16">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 16">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "SymbolMT", fontSize: "10pt" }}>
                   •{" "}
@@ -2203,9 +2203,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 17">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 17">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   You further agree that the rights and benefits granted to{" "}
@@ -2284,9 +2284,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 18">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 18">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 <strong>h) Entire Agreement</strong>
               </p>
@@ -2367,9 +2367,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 19">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 19">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 Supermarket will proceed to fulfill the remaining available
                 items in the order. Users may also opt to cancel the entire
@@ -2439,9 +2439,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 20">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 20">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 on-delivery orders cannot be left unattended. Orders left in a
                 safe place are done so at the customer's own risk, and Lastorder
@@ -2492,9 +2492,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 21">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 21">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   Certain features of Lastorder Pay may be subject to Lastorder
@@ -2626,9 +2626,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 22">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 22">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   differ from official market rates. By confirming such
@@ -2738,9 +2738,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 23">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 23">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                 will be limited to your cards-on-file only and you will not be
                 able to use Lastorder Credits in relation to this feature. In
@@ -2831,9 +2831,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 24">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 24">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   provider that has issued the payment card. You acknowledge
@@ -2938,9 +2938,9 @@ const TermsAndCondition = () => {
             </div>
           </div>
         </div>
-        <div className="page" title="Page 25">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 25">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   Lastorder is not liable for any damages caused by the Loyalty
@@ -3037,9 +3037,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 26">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 26">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   SUBSCRIPTION PRICE WILL BE AUTOMATICALLY CHARGED TO A PAYMENT
@@ -3140,9 +3140,9 @@ const TermsAndCondition = () => {
           </div>
         </div>
 
-        <div className="page" title="Page 27">
-          <div className="layoutArea">
-            <div className="column">
+        <div className="inter-font page" title="Page 27">
+          <div className="inter-font layoutArea">
+            <div className="inter-font column">
               <p>
                 <span style={{ fontFamily: "Aptos", fontSize: "12pt" }}>
                   abuse involving any portion of Lastorder Plus; or (iv) action,

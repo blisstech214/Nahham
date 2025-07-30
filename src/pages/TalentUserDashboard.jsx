@@ -58,11 +58,11 @@ const UserDashboard = () => {
   return (
     <>
       {/* <div
-        className="layout-wrapper d-flex flex-column inter-font overflow-y-hidden overflow-x-hidden"
+        className="inter-font layout-wrapper d-flex flex-column inter-font overflow-y-hidden overflow-x-hidden"
         style={{ minHeight: "100vh" }}
       >
         <div
-          className="left-strip"
+          className="inter-font left-strip"
           style={{
             position: "absolute",
             right: "-12px",
@@ -77,22 +77,22 @@ const UserDashboard = () => {
               key={i}
               src={decoration}
               alt="Decoration"
-              className="strip-icon"
+              className="inter-font strip-icon"
               style={{ width: "30px" }}
             />
           ))}
         </div>
 
-        <div className="container-fluid">
+        <div className="inter-font container-fluid">
           <div
-            className="row"
+            className="inter-font row"
             // style={{ height: "100vh", overflow: "auto" }}
           >
-            <div className="col-md-2 p-0">
+            <div className="inter-font col-md-2 p-0">
               <Sidebar activeTab={activeTab} setActiveTab={handleTabChange} />
             </div>
             <div
-              className="col-md-10 content mt-2 d-flex flex-column inter-font overflow-y-auto overflow-x-hidden"
+              className="inter-font col-md-10 content mt-2 d-flex flex-column inter-font overflow-y-auto overflow-x-hidden"
               style={{
                 height: "100%",
                 // overflowY: "scroll",
@@ -110,7 +110,7 @@ const UserDashboard = () => {
       </div> */}
 
       <div
-        className="layout-wrapper inter-font"
+        className="inter-font layout-wrapper inter-font"
         style={{
           width: "100%",
           minHeight: "100vh",
@@ -157,10 +157,10 @@ const UserDashboard = () => {
               flexDirection: "column",
               minHeight: "100vh",
             }}
-            className="pt-3"
+            className="inter-font pt-3"
           >
             <Navbar />
-            <div style={{ flexGrow: 1 }} className="px-5">
+            <div style={{ flexGrow: 1 }} className="inter-font px-5">
               {renderContent()}
             </div>
             <DashboardFooter />
@@ -168,7 +168,7 @@ const UserDashboard = () => {
 
           {/* Decoration Image (Right Side) */}
           <div
-            className="d-none d-lg-flex"
+            className="inter-font d-none d-lg-flex"
             style={
               {
                 // width: "40px",

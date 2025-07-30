@@ -28,13 +28,13 @@ const ImageUpload = ({ name, onImageChange, defaultPreviewUrl }) => {
   }, [previewUrl, defaultPreviewUrl]);
 
   return (
-    <div className="image-upload">
+    <div className="inter-font image-upload">
       <div
-        className="image-input image-input-outline image-input-placeholder"
+        className="inter-font image-input image-input-outline image-input-placeholder"
         data-kt-image-input="true"
       >
         <div
-          className="image-input-wrapper w-100px h-100px"
+          className="inter-font image-input-wrapper w-100px h-100px"
           style={{
             backgroundImage: `url(${previewUrl || defaultPreviewUrl || blank})`,
             backgroundSize: "cover",
@@ -43,12 +43,12 @@ const ImageUpload = ({ name, onImageChange, defaultPreviewUrl }) => {
         ></div>
 
         <label
-          className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+          className="inter-font btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
           data-kt-image-input-action="change"
           data-bs-toggle="tooltip"
           aria-label="Change avatar"
         >
-          <i className="bi bi-pencil-fill fs-7"></i>
+          <i className="inter-font bi bi-pencil-fill fs-7"></i>
           <input
             type="file"
             accept=".png, .jpg, .jpeg"
@@ -58,14 +58,14 @@ const ImageUpload = ({ name, onImageChange, defaultPreviewUrl }) => {
 
         {(previewUrl || defaultPreviewUrl) && (
           <span
-            className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
+            className="inter-font btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
             data-kt-image-input-action="remove"
             data-bs-toggle="tooltip"
             aria-label="Remove avatar"
             onClick={handleRemoveImage}
             style={{ cursor: "pointer" }}
           >
-            <i className="bi bi-x-circle-fill fs-2"></i>
+            <i className="inter-font bi bi-x-circle-fill fs-2"></i>
           </span>
         )}
       </div>

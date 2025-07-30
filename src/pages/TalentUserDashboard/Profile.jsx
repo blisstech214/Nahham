@@ -93,24 +93,24 @@ const Profile = () => {
   };
 
   return (
-    <div className="" style={{ minHeight: "100vh" }}>
+    <div className="inter-font " style={{ minHeight: "100vh" }}>
       {isEditing ? (
         <EditProfile onBack={handleBack} />
       ) : (
         <div
-          className="container ps-5 py-4 bg-white rounded-4 shadow mt-4"
+          className="inter-font container ps-5 py-4 bg-white rounded-4 shadow mt-4"
           style={{ maxWidth: "900px" }}
         >
-          <div className="row align-items-start">
+          <div className="inter-font row align-items-start">
             {/* Left: Profile + Tabs */}
-            <div className="col-md-2 text-center">
+            <div className="inter-font col-md-2 text-center">
               <img
                 src={profile}
-                className="rounded-circle"
+                className="inter-font rounded-circle"
                 style={{ width: "100px", height: "100px", objectFit: "cover" }}
                 alt="Profile"
               />
-              <div className="mb-3">
+              <div className="inter-font mb-3">
                 {[
                   { id: "about", label: "About" },
                   { id: "jobs", label: "My Jobs" },
@@ -120,7 +120,7 @@ const Profile = () => {
                   <div
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`my-5 d-flex flex-column align-items-start ${
+                    className={ `inter-font my-5 d-flex flex-column align-items-start ${
                       activeTab === tab.id ? "text-dark" : "text-muted"
                     }`}
                     style={{
@@ -147,18 +147,18 @@ const Profile = () => {
             </div>
 
             {/* Right: Content */}
-            <div className="col-md-10">
-              <div className="d-flex align-items-start justify-content-between">
+            <div className="inter-font col-md-10">
+              <div className="inter-font d-flex align-items-start justify-content-between">
                 <div>
-                  <h3 className="fw-bold inter-font">
+                  <h3 className="inter-font fw-bold inter-font">
                     {profileData?.first_name} {profileData?.last_name}
                   </h3>
-                  <p className="inter-font" style={{ color: "gray" }}>
-                    <FaLocationDot className="me-1 text-dark" />
+                  <p className="inter-font inter-font" style={{ color: "gray" }}>
+                    <FaLocationDot className="inter-font me-1 text-dark" />
                     {profileData?.country}
                     <img
                       src={UAE}
-                      className="ms-2 rounded-1"
+                      className="inter-font ms-2 rounded-1"
                       style={{ width: "35px", objectFit: "cover" }}
                       alt="UAE Flag"
                     />
@@ -167,7 +167,7 @@ const Profile = () => {
 
                 {activeTab === "about" && (
                   <button
-                    className="btn text-white inter-font"
+                    className="inter-font btn text-white inter-font"
                     style={{
                       background: "#522A30",
                       borderRadius: "15px",
@@ -182,7 +182,7 @@ const Profile = () => {
                 )}
               </div>
 
-              <div className="tab-content mt-4">
+              <div className="inter-font tab-content mt-4">
                 {activeTab === "about" && (
                   <AboutTab profileData={profileData} skillsData={skillsData} />
                 )}

@@ -21,47 +21,47 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      <div className="inter-font privacy-bg from-top">
         <Header />
 
-        <div className="heading-policy">
+        <div className="inter-font heading-policy">
           <h1>{t("privacy_policy")}</h1>
         </div>
       </div>
 
-      <div className="container mt-5">
-        <div className="privacy-heading">
+      <div className="inter-font container mt-5">
+        <div className="inter-font privacy-heading">
           <h1>{t("privacy_policy")}</h1>
           <p>{t("privacy_policies_para_1")}</p>
-          <p className="mt-4 mb-5">{t("privacy_policies_para_2")}</p>
+          <p className="inter-font mt-4 mb-5">{t("privacy_policies_para_2")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading")}</h3>
           <p>{t("privacy_policies_para_3")}</p>
           <p>{t("privacy_policies_para_4")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading_2")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading_2")}</h3>
           <p>{t("privacy_policies_para_6")}</p>
           <p>{t("privacy_policies_para_7")}</p>
           <p>{t("privacy_policies_para_8")}</p>
           <p>{t("privacy_policies_para_9")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading_3")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading_3")}</h3>
           <p>{t("privacy_policies_para_10")}</p>
           <p>{t("privacy_policies_para_11")}</p>
           <p>{t("privacy_policies_para_12")}</p>
           <p>{t("privacy_policies_para_13")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading_4")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading_4")}</h3>
           <p>{t("privacy_policies_para_14")}</p>
           <p>{t("privacy_policies_para_15")}</p>
           <p>{t("privacy_policies_para_16")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading_5")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading_5")}</h3>
           <p>{t("privacy_policies_para_17")}</p>
           <p>{t("privacy_policies_para_18")}</p>
           <p>{t("privacy_policies_para_19")}</p>
 
-          <h3 className="mt-5">{t("privacy_policy_info_heading_6")}</h3>
+          <h3 className="inter-font mt-5">{t("privacy_policy_info_heading_6")}</h3>
           <p>{t("privacy_policies_para_20")}</p>
           <p>{t("privacy_policies_para_21")}</p>
           <p>{t("privacy_policies_para_22")}</p>

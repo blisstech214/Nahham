@@ -191,16 +191,16 @@ const Partner = () => {
 
   return (
     <>
-      <div className="privacy-bg from-top">
+      <div className="inter-font privacy-bg from-top">
         <Header />
-        <div className="heading-policy text-center py-5">
+        <div className="inter-font heading-policy text-center py-5">
           <h1>Become a Partner</h1>
         </div>
       </div>
 
-      <div className="container mt-5">
-        <div className="partner-heading">
-          <div className="partner-txt">
+      <div className="inter-font container mt-5">
+        <div className="inter-font partner-heading">
+          <div className="inter-font partner-txt">
             <h3>
               Register Your Business with MyGuideAI to unlock he global
               potential and visibility.
@@ -208,15 +208,15 @@ const Partner = () => {
             <p> We are Proud of our partners for joining us in our platform.</p>
           </div>
 
-          <div className="container mt-5">
+          <div className="inter-font container mt-5">
             <form onSubmit={handleSubmit}>
               {/* Business Information */}
-              <h5 className="mb-3">Contact Us Info</h5>
-              <div className="row">
-                <div className="col-md-6 mb-3">
+              <h5 className="inter-font mb-3">Contact Us Info</h5>
+              <div className="inter-font row">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="text"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Buisness Name *"
                     name="business_name"
                     value={formData.business_name}
@@ -224,7 +224,7 @@ const Partner = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="col-md-6 mb-3 position-relative">
+                <div className="inter-font col-md-6 mb-3 position-relative">
                   <Select
                     options={types}
                     isLoading={isLoadingTypes}
@@ -236,13 +236,13 @@ const Partner = () => {
                         ? "Loading types..."
                         : "Select business type"
                     }
-                    className="custom-react-select"
+                    className="inter-font custom-react-select"
                     styles={customStyles}
                     required
                   />
 
                   {/* <i
-                    className="bi bi-caret-down-fill position-absolute arrow-down-icon"
+                    className="inter-font bi bi-caret-down-fill position-absolute arrow-down-icon"
                     style={{
                       right: "20px",
                       top: "40%",
@@ -252,10 +252,10 @@ const Partner = () => {
                     }}
                   ></i> */}
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="text"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Address"
                     name="address"
                     value={formData.address}
@@ -263,10 +263,10 @@ const Partner = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="tel"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Phone Number *"
                     name="business_phone"
                     value={formData.business_phone}
@@ -274,10 +274,10 @@ const Partner = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="email"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Business Email *"
                     name="business_email"
                     value={formData.business_email}
@@ -285,10 +285,10 @@ const Partner = () => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="text"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Website"
                     name="website"
                     value={formData.website}
@@ -298,12 +298,12 @@ const Partner = () => {
               </div>
 
               {/* Personal Information */}
-              <h5 className="mb-3 mt-4">Personal Info</h5>
-              <div className="row">
-                <div className="col-md-6 mb-3">
+              <h5 className="inter-font mb-3 mt-4">Personal Info</h5>
+              <div className="inter-font row">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="text"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Full Name"
                     name="owner_name"
                     required
@@ -311,10 +311,10 @@ const Partner = () => {
                     value={formData.owner_name}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="email"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Personal Email"
                     name="email"
                     required
@@ -322,10 +322,10 @@ const Partner = () => {
                     value={formData.email}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="text"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Role"
                     name="role"
                     required
@@ -333,10 +333,10 @@ const Partner = () => {
                     value={formData.role}
                   />
                 </div>
-                <div className="col-md-6 mb-3">
+                <div className="inter-font col-md-6 mb-3">
                   <input
                     type="tel"
-                    className="form-control"
+                    className="inter-font form-control"
                     placeholder="Phone Number"
                     name="phone"
                     required
@@ -347,38 +347,38 @@ const Partner = () => {
               </div>
 
               {/* Trade License */}
-              <div className="row mt-5">
-                <div className="col-md-6 order-2 order-md-1">
+              <div className="inter-font row mt-5">
+                <div className="inter-font col-md-6 order-2 order-md-1">
                   <button
                     type="submit"
-                    className="btn w-100 regBtn"
+                    className="inter-font btn w-100 regBtn"
                     disabled={isLoader}
                   >
                     {isLoader ? (
-                      <div className="spinner-grow" role="status">
-                        <span className="sr-only">Registering....</span>
+                      <div className="inter-font spinner-grow" role="status">
+                        <span className="inter-font sr-only">Registering....</span>
                       </div>
                     ) : (
-                      <p className="text-white mb-0">Register</p>
+                      <p className="inter-font text-white mb-0">Register</p>
                     )}
                   </button>
 
                   <p
-                    className="mt-3 text-secondary"
+                    className="inter-font mt-3 text-secondary"
                     style={{ fontSize: "14px" }}
                   >
                     Copyright Site Protection <br />
-                    <a href="#" className="text-dark mx-1 fw-bold">
+                    <a href="#" className="inter-font text-dark mx-1 fw-bold">
                       Privacy Policy
                     </a>
                     and
-                    <a href="#" className="text-dark mx-1 fw-bold">
+                    <a href="#" className="inter-font text-dark mx-1 fw-bold">
                       Terms and Service
                     </a>
                     Apply
                   </p>
                 </div>
-                <div className="col-md-6 order-1 order-md-2 attachImg d-flex justify-content-center align-items-center">
+                <div className="inter-font col-md-6 order-1 order-md-2 attachImg d-flex justify-content-center align-items-center">
                   <ImageDropzone
                     title="files"
                     oldFiles={formData.files}
