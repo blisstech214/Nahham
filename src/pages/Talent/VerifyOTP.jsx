@@ -88,7 +88,7 @@ const VerifyOTP = () => {
         const talent = data.data.talent;
         talent.auth_token = data.data.auth_token;
         localStorage.setItem("user", JSON.stringify(talent));
-        navigate("/talent/dashboard");
+        navigate("/register");
       } else {
         setOtp(["", "", "", "", "", ""]);
         toast.error(data.message);

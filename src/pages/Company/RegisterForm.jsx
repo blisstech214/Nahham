@@ -103,15 +103,138 @@ const CompanyInfoForm = () => {
     }
   };
 
-  const handleSelectChange = (name, selectedOptions) => {
+  const handlePhoneNumberChange = (e) => {
+    const { name, value } = e.target;
+
+    // Phone number-specific validation
+    if (name === 'phone' || name === 'secondary_phone') {
+      // Remove non-digit characters
+      let digitsOnly = value.replace(/\D/g, '');
+
+      // Restrict to max 10 digits
+      if (digitsOnly.length > 10) {
+        digitsOnly = digitsOnly.slice(0, 10);
+      }
+
+      // Allow only if it starts with '5' or '05'
+      if (!/^5\d{0,9}$/.test(digitsOnly) && !/^05\d{0,8}$/.test(digitsOnly)) {
+        return; // Do not update state if not valid starting pattern
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: digitsOnly,
+      }));
+
+      if (errors[name]) {
+        setErrors((prev) => ({ ...prev, [name]: null }));
+      }
+
+      return;
+    }
+
+    // Generic handling for other fields
     setFormData((prev) => {
-      const next =
-        name === "category"
-          ? { ...prev, category: selectedOptions.value, subCategory: [] }
-          : { ...prev, subCategory: selectedOptions.map((o) => o.value) };
-      // persist(next);
+      const next = { ...prev, [name]: value };
       return next;
     });
+
+    if (errors[name]) {
+      setErrors((p) => ({ ...p, [name]: null }));
+    }
+  };
+
+  const handleWebsiteChange = (e) => {
+    const { name, value } = e.target;
+
+    // Allow only valid characters for URLs (basic check)
+    const urlPattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-z]{2,}(\S*)?$/;
+
+    // Optional: Auto-add 'https://' if user starts typing 'www.'
+    let updatedValue = value;
+    if (value.startsWith('www.')) {
+      updatedValue = 'https://' + value;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: updatedValue,
+    }));
+
+    // Remove previous error if input is valid or being corrected
+    if (errors[name] && urlPattern.test(updatedValue)) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const handleRegYearChange = (e) => {
+    const { name, value } = e.target;
+
+    // Remove non-digit characters and limit to 4 digits
+    let cleanedValue = value.replace(/\D/g, '').slice(0, 4);
+
+    const currentYear = new Date().getFullYear();
+    const minYear = 1900;
+
+    let errorMessage = null;
+
+    if (cleanedValue.length === 4) {
+      const year = parseInt(cleanedValue, 10);
+
+      if (year > currentYear) {
+        errorMessage = `Year cannot be in the future (max ${currentYear})`;
+      } else if (year < minYear) {
+        errorMessage = `Year must be after ${minYear}`;
+      }
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: cleanedValue,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: errorMessage,
+    }));
+  };
+
+
+
+
+  const handleSelectChange = (name, selectedOptions) => {
+    setFormData((prev) => {
+      let next;
+
+      if (name === "category") {
+        next = {
+          ...prev,
+          category: selectedOptions?.value || "",
+          subCategory: [], // Reset subcategory if category changes
+        };
+      } else if (name === "subCategory") {
+        next = {
+          ...prev,
+          subCategory: Array.isArray(selectedOptions)
+            ? selectedOptions.map((o) => o.value)
+            : [],
+        };
+      }
+
+      return next;
+    });
+
+    // Clear validation error if fixed
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
+    if (!formData.subCategory || formData.subCategory.length === 0) {
+      setErrors((prev) => ({
+        ...prev,
+        subCategory: "Please select at least one subcategory.",
+      }));
+      return;
+    }
   };
 
   const handleContinue = async () => {
@@ -279,10 +402,12 @@ const CompanyInfoForm = () => {
                 options={subCategoryOptions}
                 value={subCategoryOptions.filter((option) =>
                   formData.subCategory.includes(option.value)
-                )}
-                onChange={(selected) =>
-                  handleSelectChange("subCategory", selected || [])
-                }
+                ) || []}
+                // onChange={(selected) =>
+                //   handleSelectChange("subCategory", selected)
+                // }
+                onChange={(opt) => handleSelectChange("subCategory", opt)}
+
                 labelledBy="Select Sub Category"
                 isMulti
               />
@@ -357,8 +482,9 @@ const CompanyInfoForm = () => {
               placeholder="5-MOBILE NUMBER"
               name="phone"
               value={formData.phone}
-              onChange={handleTextChange}
+              onChange={handlePhoneNumberChange}
               isInvalid={!!errors.phone}
+
             />
           </Col>
           <Col md={6}>
@@ -366,7 +492,7 @@ const CompanyInfoForm = () => {
               placeholder="02 COMPANY PHONE"
               name="secondary_phone"
               value={formData.secondary_phone}
-              onChange={handleTextChange}
+              onChange={handlePhoneNumberChange}
               isInvalid={!!errors.secondary_phone}
             />
           </Col>
@@ -379,7 +505,7 @@ const CompanyInfoForm = () => {
             placeholder="www.example.com"
             name="website"
             value={formData.website}
-            onChange={handleTextChange}
+            onChange={handleWebsiteChange}
             isInvalid={!!errors.website}
             className="inter-font inp-bg sofia-font inp-login"
           />
@@ -414,7 +540,7 @@ const CompanyInfoForm = () => {
                 placeholder="Example 2025"
                 name="reg_year"
                 value={formData.reg_year}
-                onChange={handleTextChange}
+                onChange={handleRegYearChange}
                 isInvalid={!!errors.reg_year}
                 className="inter-font inp-bg sofia-font inp-login"
               />
@@ -441,9 +567,8 @@ const CompanyInfoForm = () => {
 
 const Step = ({ children, active }) => (
   <div
-    className={ `inter-font rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${
-      active ? "bg-dark text-white" : "bg-light text-muted"
-    }`}
+    className={`inter-font rounded-circle d-flex num-circle align-items-center justify-content-center fw-bold ${active ? "bg-dark text-white" : "bg-light text-muted"
+      }`}
     style={{ width: "30px", height: "30px", fontSize: "14px" }}
   >
     {children}
@@ -460,9 +585,8 @@ const InputGroupWithFlag = ({
   isInvalid,
 }) => (
   <div
-    className={ `inter-font d-flex align-items-center mb-3 border rounded px-2 ${
-      isInvalid ? "border-danger" : ""
-    }`}
+    className={`inter-font d-flex align-items-center mb-3 border rounded px-2 ${isInvalid ? "border-danger" : ""
+      }`}
   >
     <img
       src={flag}

@@ -6,11 +6,18 @@ import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
+import { Modal, Button } from "react-bootstrap";
+
 
 const Profile = () => {
   const [locationName, setLocationName] = useState("Abu Dhabi, UAE");
   const [profileData, setProfileData] = useState(null);
   const hasFetchedProfile = useRef(false);
+  const [showModal, setShowModal] = useState(false);
+
+
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   useEffect(() => {
     if (hasFetchedProfile.current) return;
@@ -66,6 +73,13 @@ const Profile = () => {
     );
   }
 
+  const aboutText =
+    profileData?.about +
+    "Vel quasi provident Vel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi providentVel quasi provident" ||
+    "No About Data.";
+  const displayText =
+    aboutText.length > 150 ? `${aboutText?.substring(0, 150)}...` : aboutText;
+
   return (
     <div className="inter-font py-4 px-3" style={{ minHeight: "100vh" }}>
       <div
@@ -97,9 +111,102 @@ const Profile = () => {
             </p>
 
             <p className="inter-font inter-font text-muted" style={{ fontSize: "15px" }}>
-              {profileData?.about}
-              <span className="inter-font text-danger"> Read More...</span>
+              {displayText}
+              {aboutText?.length > 150 && (
+                <span
+                  className="text-danger inter-font"
+                  style={{ cursor: "pointer" }}
+                  onClick={handleShow}
+                >
+                  {" "}
+                  Read More
+                </span>
+              )}
+              {/* <span className="inter-font text-danger"> Read More...</span> */}
             </p>
+
+            {/* Modal for full about section */}
+            <Modal show={showModal} onHide={handleClose} centered size="lg">
+              <Modal.Header closeButton>
+                <Modal.Title className="inter-font">About</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p
+                  className="inter-font"
+                  style={{ fontSize: "14px", color: "#595959" }}
+                >
+                  {aboutText}
+                </p>
+
+                <div className="row mt-4">
+                  <div className="col-md-6 mb-3">
+                    <strong className="inter-font" style={{ fontSize: "16px" }}>
+                      Email Address
+                    </strong>
+                    <p
+                      className="inter-font"
+                      style={{ fontSize: "14px", color: "#939393" }}
+                    >
+                      {profileData?.email}
+                    </p>
+                  </div>
+
+                  <div className="col-md-6 mb-3">
+                    <strong className="inter-font" style={{ fontSize: "16px" }}>
+                      Phone Number
+                    </strong>
+                    <p
+                      className="inter-font"
+                      style={{ fontSize: "14px", color: "#939393" }}
+                    >
+                      +{profileData?.phone}
+                      {profileData?.secondary_phone && (
+                        <>
+                          <span className="inter-font mx-2">|</span> +
+                          {profileData?.secondary_phone}
+                        </>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="col-md-6 mb-3">
+                    <strong className="inter-font" style={{ fontSize: "16px" }}>
+                      Type of Business
+                    </strong>
+                    <p
+                      className="inter-font"
+                      style={{ fontSize: "14px", color: "#939393" }}
+                    >
+                      Production House, St
+                    </p>
+                  </div>
+
+                  <div className="col-md-6 mb-3">
+                    <strong className="inter-font" style={{ fontSize: "16px" }}>
+                      Categories
+                    </strong>
+                    <p
+                      className="inter-font"
+                      style={{ fontSize: "14px", color: "#939393" }}
+                    >
+                      Acting, Production, Casting
+                    </p>
+                  </div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  style={{
+                    backgroundColor: "#e15d4f",
+                    color: "#fff",
+                    border: "none",
+                  }}
+                  onClick={handleClose}
+                >
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
 
             <div className="inter-font row">
               {/* Left Column */}

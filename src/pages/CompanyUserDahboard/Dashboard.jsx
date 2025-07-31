@@ -402,7 +402,7 @@ const Dashboard = () => {
                               {talent?.status}
                             </td>
                             <td style={{ color: "#959595", width: "150px" }}>{talent?.project_id.title}</td>
-                            <td style={{ color: "#959595" }}>{talent?.project_id.total_amount}</td>
+                            <td style={{ color: "#959595" }}>{talent.total_amount}</td>
                           </tr>
                     )
                   }))}

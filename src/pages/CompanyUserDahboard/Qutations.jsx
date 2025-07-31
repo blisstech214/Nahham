@@ -307,7 +307,7 @@ const Qutations = () => {
                 qutationData.map((item, idx) => (
                   <Row
                     key={idx}
-                    className="inter-font align-items-center py-3 px-3 border-bottom"
+                    className="inter-font align-items-start py-3 px-3 border-bottom"
                     style={{ fontFamily: "Inter, sans-serif" }}
                   >
                     <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
@@ -329,7 +329,7 @@ const Qutations = () => {
                       <div>{item.title}</div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                    {/* <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
                       <div className="inter-font fw-semibold">Duration</div>
                       <div style={{ fontSize: "14px", color: "#999" }}>
                         {item.talents[0]?.start_date
@@ -339,7 +339,7 @@ const Qutations = () => {
                             )
                           : "-"}
                       </div>
-                    </Col>
+                    </Col> */}
 
                     <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
                       <div className="inter-font fw-semibold">Amount</div>
@@ -348,7 +348,7 @@ const Qutations = () => {
                       </div>
                     </Col>
 
-                    <Col xs={12} sm={6} md={1}>
+                    <Col xs={12} sm={6} md={2}>
                       <div className="inter-font fw-semibold">Status</div>
                       <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2 inter-font">
                         <span
@@ -390,7 +390,7 @@ const Qutations = () => {
                       </span>
                     </Col> */}
 
-                    <Col xs={12} sm={6} md={1}>
+                    <Col xs={12} sm={6} md={2}>
                       <div className="inter-font d-flex flex-wrap align-items-center gap-2 mt-2">
                         <FaEye
                           onClick={() => {

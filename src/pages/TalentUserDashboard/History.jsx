@@ -6,7 +6,7 @@ import profile from "../../assets/images/star-profile-img.png";
 import { toast } from "react-toastify";
 import ApiService from "../../services/ApiService";
 import { Button, Col, Row } from "react-bootstrap";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 const HistoryCard = ({ item }) => {
   const statusStyles = {
@@ -29,23 +29,27 @@ const HistoryCard = ({ item }) => {
   return (
     <div className="inter-font row border-bottom">
       <div className="inter-font col-md-5 d-flex my-3">
-        <img
-          src={item.receipt}
-          className="inter-font rounded-circle mt-3 ms-4"
-          style={{ width: "54px", height: "54px", objectFit: "cover" }}
-          alt="Profile"
-        />
-        <div className="inter-font mt-3 ms-3">
+        {item?.receipt ?
+          <img
+            src={item?.receipt}
+            className="inter-font rounded-circle mt-3 ms-4"
+            style={{ width: "54px", height: "54px", objectFit: "cover" }}
+            alt="Profile"
+          />
+          :
+          <User className="inter-font rounded-circle mt-3 ms-4" />}
+
+        <div className="inter-font ms-3">
           <h5 className="inter-font inter-font" style={{ fontSize: "17px" }}>
-            {item?.title || "N/A"}
+            {item?.project_id?.title || "N/A"}
           </h5>
           <p className="inter-font m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
-            {item?.company || "N/A"}
+            {item?.project_id?.company_id?.company_name || "N/A"}
           </p>
-          <p className="inter-font inter-font" style={{ color: "gray" }}>
+          {/* <p className="inter-font inter-font" style={{ color: "gray" }}>
             <FaLocationDot className="inter-font me-1 text-dark" />
             {item?.location || "N/A"}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="inter-font col-md-2 my-3">
@@ -67,7 +71,7 @@ const HistoryCard = ({ item }) => {
           className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.total_amount}
+          {item.total_amount} AED
         </p>
       </div>
       <div className="inter-font col-md-1 my-3">

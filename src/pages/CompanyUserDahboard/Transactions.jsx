@@ -260,7 +260,7 @@ const Transaction = () => {
 
                 <Row
                   key={idx}
-                  className="inter-font align-items-center py-3 px-3 border-bottom"
+                  className="inter-font align-items-start py-3 px-3 border-bottom"
                   style={{ fontFamily: "Inter, sans-serif" }}
                 >
                   <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
@@ -308,7 +308,7 @@ const Transaction = () => {
                   <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
                     <div className="inter-font fw-semibold">Amount</div>
                     <div style={{ fontSize: "14px", color: "#999" }}>
-                      {item.total_amount}
+                      {item.total_amount} AED
                     </div>
                   </Col>
 

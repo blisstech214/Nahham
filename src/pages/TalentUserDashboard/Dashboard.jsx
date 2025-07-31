@@ -31,7 +31,7 @@ import snapchat from "../../assets/images/snapchat.png";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ApiService from "../../services/ApiService";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -234,7 +234,7 @@ const Dashboard = () => {
                     className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
-                    5
+                    {dashboardCountData?.total_views || 0}
                   </h2>
                 </div>
               </div>
@@ -278,7 +278,8 @@ const Dashboard = () => {
                     className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
-                    5
+                    {dashboardCountData?.total_jobs || 0}
+
                   </h2>
                 </div>
               </div>
@@ -322,7 +323,8 @@ const Dashboard = () => {
                     className="inter-font fw-bold mb-0 inter-font"
                     style={{ fontSize: "22px" }}
                   >
-                    5
+                    {dashboardCountData?.total_earnings || 0}
+
                   </h2>
                 </div>
               </div>
@@ -361,37 +363,42 @@ const Dashboard = () => {
                     <tr key={index}>
                       <td>
                         <div className="inter-font d-flex align-items-center gap-2">
-                          <img
-                            src={item?.receipt}
-                            alt="logo"
-                            style={{
-                              width: "40px",
-                              height: "40px",
-                              borderRadius: "50%",
-                              objectFit: "cover",
-                            }}
-                          />
+                          {item?.receipt ?
+                            <img
+                              src={item?.receipt}
+                              alt="logo"
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                borderRadius: "50%",
+                                objectFit: "cover",
+                              }}
+                            />
+                            :
+
+                            <User className="inter-font rounded-circle " />}
+
                           <span
                             className="inter-font inter-font"
                             style={{ color: "#959595" }}
                           >
-                            {item.company}
+                            {item.company ? item.company : "N/A"}
                           </span>
                         </div>
                       </td>
-                      <td style={{ color: "#959595" }}>{item.job_type}</td>
-                      <td style={{ color: "#959595" }}>{formatSingleDate(item.start_date)}</td>
-                      <td style={{ color: "#959595" }}>{formatSingleDate(item.end_date)}</td>
+                      <td style={{ color: "#959595" }}>{item.job_type ? item.job_type : "N/A"}</td>
+                      <td style={{ color: "#959595" }}>{item.start_date ? formatSingleDate(item.start_date) : "N/A"}</td>
+                      <td style={{ color: "#959595" }}>{item.end_date ? formatSingleDate(item.end_date) : "N/A" }</td>
                       <td
                         style={{
                           color: "rgba(54, 190, 92, 1)",
                           fontWeight: 500,
                         }}
                       >
-                        {item.status}
+                        {item.status ? item.status : "N/A"}
                       </td>
-                      <td style={{ color: "#959595" }}>{item.project}</td>
-                      <td style={{ color: "#959595" }}>{item.total_amount}</td>
+                      <td style={{ color: "#959595" }}>{item?.project_id?.title ? item?.project_id?.title : "N/A"}</td>
+                      <td style={{ color: "#959595" }}>{item.total_amount ? item.total_amount : "N/A"} AED</td>
                     </tr>
                   ))}
                 </tbody>

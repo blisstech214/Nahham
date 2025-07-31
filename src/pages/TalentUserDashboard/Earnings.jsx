@@ -877,7 +877,7 @@ const Earnings = () => {
                   <th style={{ fontSize: "16px", color: "#909090" }}>
                     Company Name
                   </th>
-                  <th style={{ fontSize: "16px", color: "#909090" }}>Project</th>
+                  <th style={{ fontSize: "16px", color: "#909090", textAlign: 'center' }}>Project</th>
                   <th style={{ fontSize: "16px", color: "#909090" }}>Category Type</th>
                   <th style={{ fontSize: "16px", color: "#909090" }}>Date</th>
                   <th style={{ fontSize: "16px", color: "#909090" }}>Payments</th>

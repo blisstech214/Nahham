@@ -6,7 +6,7 @@ import profile from "../../assets/images/star-profile-img.png";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { Button, Col, Row } from "react-bootstrap";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 const HistoryCard = ({ item }) => {
   const statusStyles = {
@@ -51,18 +51,29 @@ const HistoryCard = ({ item }) => {
     }
   };
 
+
+  function formatSingleDate(isoDate) {
+    const date = new Date(isoDate);
+    const day = date.getDate();
+    const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
+    return `${day} ${month}`;
+  }
+
   return (
     <div className="inter-font row border-bottom">
-      <div className="inter-font col-md-5 d-flex my-3">
-        <img
-          src={item.image}
-          className="inter-font rounded-circle mt-3 ms-4"
-          style={{ width: "54px", height: "54px", objectFit: "cover" }}
-          alt="Profile"
-        />
+      <div className="inter-font col-md-3 d-flex my-3">
+        {item.image ?
+          <img
+            src={item.image}
+            className="inter-font rounded-circle mt-3 ms-4"
+            style={{ width: "54px", height: "54px", objectFit: "cover" }}
+            alt="Profile"
+          />
+          :
+          <User className="inter-font rounded-circle mt-3 ms-4" />}
         <div className="inter-font mt-3 ms-3">
           <h5 className="inter-font inter-font" style={{ fontSize: "17px" }}>
-            {item.title}
+            {item?.project_id?.title || "N/A"}
           </h5>
           <p className="inter-font m-0 mb-2 inter-font" style={{ fontSize: "16px" }}>
             {item.description}
@@ -81,10 +92,10 @@ const HistoryCard = ({ item }) => {
           className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.start_date} - {item.end_date}
+          {item.start_date ? formatSingleDate(item.start_date) : "N/A"} - {item.end_date ? formatSingleDate(item.end_date) : "N/A"}
         </p>
       </div>
-      <div className="inter-font col-md-1 my-3">
+      <div className="inter-font col-md-2 my-3">
         <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
           Earnings
         </h5>
@@ -92,7 +103,7 @@ const HistoryCard = ({ item }) => {
           className="inter-font inter-font"
           style={{ fontSize: "14px", color: "#777474" }}
         >
-          {item.total_amount}
+          {item.total_amount} AED
         </p>
       </div>
       <div className="inter-font col-md-2 my-3">
@@ -112,8 +123,8 @@ const HistoryCard = ({ item }) => {
           {item.status}
         </button>
       </div>
-      <div className="inter-font col-md-2 my-3">
-        <h5 className="inter-font inter-font" style={{ fontSize: "18px" }}>
+      <div className="inter-font col-md-3 my-3">
+        <h5 className="inter-font inter-font" style={{ fontSize: "18px", textAlign: "center" }}>
           Action
         </h5>
         <div className="inter-font d-flex gap-2">
@@ -515,7 +526,7 @@ const History = () => {
                 color: "#fff",
                 marginLeft: "10px",
               }}
-              // onClick={handleViewAll}
+            // onClick={handleViewAll}
             >
               View All
             </Button>

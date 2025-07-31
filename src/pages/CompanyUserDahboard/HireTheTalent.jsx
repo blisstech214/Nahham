@@ -46,17 +46,17 @@ const useFormOptions = () => {
           setDurationOptions(
             Array.isArray(durationRes.data.data)
               ? durationRes.data.data.map((d) => ({
-                  value: d.value,
-                  label: d.label,
-                }))
+                value: d.value,
+                label: d.label,
+              }))
               : []
           );
           setJobTypeOptions(
             Array.isArray(jobTypeRes.data.data)
               ? jobTypeRes.data.data.map((j) => ({
-                  value: j.value,
-                  label: j.label,
-                }))
+                value: j.value,
+                label: j.label,
+              }))
               : []
           );
         } catch (err) {
@@ -128,7 +128,7 @@ const viewQuote = async (formData) => {
         `/company/viewQuote?projectId=${formData.projectId}`
       ); // Replace with actual param
       if (res.data.status) {
-        toast.success("Quote loaded!");
+        toast.succeonViewQuotess("Quote loaded!");
         // You can handle the quote data here
         return res.data.data;
       } else {
@@ -577,7 +577,7 @@ const ProjectInfoScreen = ({
   };
 
   const handleProceed = async () => {
-    if (projectTitle !== "" && projectDescription !== "") {
+    if (projectTitle !== "" && projectDescription !== "" ) {
       const mergedData = data.map((person) => ({
         // ...person,
         title: projectTitle,
@@ -1533,8 +1533,10 @@ const HireTheTalent = ({ selectedTalentData }) => {
               formData={formData}
               setFormData={setFormData}
               onNext={async () => {
-                const ok = await requestQuote(formData);
-                if (ok) setStep(3);
+                // const ok = await requestQuote(formData);
+                // if (ok) setStep(3);
+                navigate("/company-dashboard?tab=talents");
+                window.location.reload()
               }}
               onBack={() => navigate("/company-dashboard?tab=talents")}
               selectedTalents={selectedTalents}

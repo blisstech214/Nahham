@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profile from "../../assets/images/Abdulluah-Talent.png";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const onCompanySignOut = async () => {
     try {
@@ -26,10 +28,31 @@ const Navbar = () => {
     }
   };
 
+
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    // Attach the listener to the whole document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav
       className="inter-font navbar navbar-expand-md px-3 py-2 bg-transparent"
-      // style={{ background: "transparent" }}
+    // style={{ background: "transparent" }}
     >
       <button
         className="inter-font navbar-toggler"
@@ -39,7 +62,7 @@ const Navbar = () => {
         <span className="inter-font navbar-toggler-icon"></span>
       </button>
 
-      <div className={ `inter-font collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
+      <div className={`inter-font collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
         <ul className="inter-font navbar-nav ms-auto align-items-center">
           <li className="inter-font nav-item inter-font">
             <a className="inter-font nav-link" href="#">
@@ -68,6 +91,7 @@ const Navbar = () => {
 
             {showDropdown && (
               <div
+                ref={dropdownRef}
                 className="inter-font position-absolute top-100 end-0 mt-2 bg-white shadow rounded-3 p-2"
                 style={{ width: "230px", zIndex: 1000 }}
               >
@@ -89,6 +113,8 @@ const Navbar = () => {
                   <button
                     className="inter-font btn btn-sm mt-2 w-100 inter-font text-white py-2"
                     style={{ backgroundColor: "rgb(231, 142, 123)" }}
+                    onClick={() => navigate("/company-dashboard?tab=profile")}
+
                   >
                     View Profile
                   </button>

@@ -586,7 +586,7 @@ const ProjectSummaryScreen = ({
                     Total
                   </div>
                   <div style={{ color: "#111", fontWeight: 500 }}>
-                    {selectedTalents?.total_amount || "-"}
+                    {item?.total_amount || "-"}
                   </div>
                 </div>
               </div>
@@ -990,7 +990,7 @@ const SelectedTalentsOfQuotes = ({
                         {/* Leading Role Plus Singer */}
                         {talent?.talent_id?.first_name ? talent?.talent_id?.first_name : 'N/A'}{" "}
                         {talent?.talent_id?.last_name}
-                        <span className="inter-font text-secondary">{selectedTalentData?.total_amount} AED
+                        <span className="inter-font text-secondary">{talent?.total_amount} AED
                         </span>
                       </div>
                       <div className="inter-font text-secondary mb-4" style={{ fontSize: 15 }}>
@@ -1035,7 +1035,7 @@ const SelectedTalentsOfQuotes = ({
                   )
                 })}
                 <div className="inter-font  mt-4" style={{ borderTop: '1px solid gray' }}>
-                  <div
+                  {/* <div
                     className="inter-font mb-2 fw-semibold d-flex"
                     style={{
                       fontSize: 22,
@@ -1045,7 +1045,7 @@ const SelectedTalentsOfQuotes = ({
                   >
                     VAT 5%
                     <span className="inter-font text-secondary">1200.00</span>
-                  </div>
+                  </div> */}
                   <div
                     className="inter-font mb-2 fw-semibold d-flex"
                     style={{
@@ -1056,7 +1056,7 @@ const SelectedTalentsOfQuotes = ({
                   >
                     Total
                     <span className="inter-font text-secondary">
-                      {selectedTalentData?.total_amount}
+                      {selectedTalentData?.total_amount} AED
 
                     </span>
                   </div>

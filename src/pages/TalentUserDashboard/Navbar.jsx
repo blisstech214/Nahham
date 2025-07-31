@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineBell } from "react-icons/hi";
 import { useTranslation } from "react-i18next";
@@ -42,10 +42,31 @@ const Navbar = () => {
     }
   };
 
+
+  const dropdownRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    // Attach the listener to the whole document
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav
       className="inter-font py-2 px-3 bg-transparent"
-      // style={{ zIndex: 10000 }}
+    // style={{ zIndex: 10000 }}
     >
       <ul className="inter-font list-unstyled d-flex justify-content-end align-items-center m-0">
         {/* Language Selector */}
@@ -131,6 +152,8 @@ const Navbar = () => {
 
           {showDropdown && (
             <div
+              ref={dropdownRef}
+
               className="inter-font position-absolute top-100 end-0 mt-2 bg-white shadow rounded-3 p-3"
               style={{ width: "230px", zIndex: 2000 }}
             >

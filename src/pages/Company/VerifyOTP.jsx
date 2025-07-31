@@ -100,7 +100,7 @@ const VerifyOTP = () => {
         toast.success(message);
         const company = { ...data.company, auth_token: data.auth_token };
         localStorage.setItem("company", JSON.stringify(company));
-        navigate("/company-dashboard");
+        navigate("/register");
       } else {
         toast.error(message);
       }

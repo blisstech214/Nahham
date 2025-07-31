@@ -265,7 +265,7 @@ const Recruitment = () => {
           return (
             <Row
               key={idx}
-              className="inter-font align-items-center py-3 px-3 border-bottom"
+              className="inter-font align-items-start py-3 px-3 border-bottom"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
               <Col

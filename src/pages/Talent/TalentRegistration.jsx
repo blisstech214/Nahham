@@ -45,6 +45,43 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
     }));
   };
 
+  const handleTextChange = (e) => {
+  const { name, value } = e.target;
+
+  // Phone number-specific validation
+  if (name === 'phone') {
+    // Remove non-digit characters
+    let digitsOnly = value.replace(/\D/g, '');
+
+    // Restrict to max 10 digits
+    if (digitsOnly.length > 10) {
+      digitsOnly = digitsOnly.slice(0, 10);
+    }
+
+    // Allow only if it starts with '5' or '05'
+    if (!/^5\d{0,9}$/.test(digitsOnly) && !/^05\d{0,8}$/.test(digitsOnly)) {
+      return; // Do not update state if not valid starting pattern
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: digitsOnly,
+    }));
+
+   
+    return;
+  }
+
+  // Generic handling for other fields
+  setFormData((prev) => {
+    const next = { ...prev, [name]: value };
+    return next;
+  });
+
+ 
+};
+
+
   const handleCountryChange = (selectedOption) =>
     setFormData((prev) => ({ ...prev, country: selectedOption }));
 
@@ -189,7 +226,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
                 placeholder=""
                 name="phone"
                 value={formData.phone}
-                onChange={handleChange}
+                onChange={handleTextChange}
                 className="inter-font p-2 rounded-2 w-100"
               />
               {formErrors.phone && (
