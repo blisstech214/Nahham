@@ -25,7 +25,8 @@ import tiktok from "../../assets/images/tiktok.png";
 import snapchat from "../../assets/images/snapchat.png";
 import { toast } from "react-toastify";
 import ApiService from "../../services/ApiService";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -151,6 +152,15 @@ const Dashboard = () => {
     const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
     return `${day} ${month}`;
   }
+
+  const [isImageValid, setIsImageValid] = useState(false)
+
+
+    const checkImage = async (imageUrl) => {
+
+      const result = await validateImageUrl(imageUrl);
+      setIsImageValid(result);
+    };
 
   return (
     <div
@@ -283,7 +293,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="inter-font col-md-4">
-            <h4 className="inter-font inter-font card-heading mb-4">Tarnsactions</h4>
+            <h4 className="inter-font inter-font card-heading mb-4">Trnsactions</h4>
 
             <div
               className="inter-font card border-0 shadow-sm p-3 rounded-3"
@@ -364,9 +374,12 @@ const Dashboard = () => {
                 ) : (
                   dashboardData.map((talent, index) => {
                     return (
-                        <tr key={index}>
-                            <td>
-                              <div className="inter-font d-flex align-items-center gap-3">
+                      <tr key={index}>
+                        <td>
+                          <div className="inter-font d-flex align-items-center gap-3">
+
+                            {
+                              checkImage(talent?.talent_id?.picture) && isImageValid ?
                                 <img
                                   src={talent?.talent_id?.picture}
                                   alt="logo"
@@ -377,33 +390,37 @@ const Dashboard = () => {
                                     objectFit: "cover",
                                   }}
                                 />
-                              </div>
-                            </td>
-                            <td>
-                              <div className="inter-font d-flex align-items-center gap-3">
-                                <span
-                                  className="inter-font inter-font"
-                                  style={{ color: "#959595" }}
-                                >
-                                  {talent?.talent_id?.first_name}{" "}
-                                  {talent?.talent_id?.last_name}
-                                </span>
-                              </div>
-                            </td>
-                            <td style={{ color: "#959595" }}>
-                              {talent?.job_type}
+                                :
 
-                            </td>
-                            <td style={{ color: "#959595" }}>{formatSingleDate(talent?.start_date)}</td>
-                            <td style={{ color: "#959595" }}>{formatSingleDate(talent.end_date)}</td>
-                            <td
-                              style={{ color: "rgba(54, 190, 92, 1)", fontWeight: 500 }}
+                                <User className="inter-font rounded-circle " />
+                            }
+                          </div>
+                        </td>
+                        <td>
+                          <div className="inter-font d-flex align-items-center gap-3">
+                            <span
+                              className="inter-font inter-font"
+                              style={{ color: "#959595" }}
                             >
-                              {talent?.status}
-                            </td>
-                            <td style={{ color: "#959595", width: "150px" }}>{talent?.project_id.title}</td>
-                            <td style={{ color: "#959595" }}>{talent.total_amount}</td>
-                          </tr>
+                              {talent?.talent_id?.first_name}{" "}
+                              {talent?.talent_id?.last_name}
+                            </span>
+                          </div>
+                        </td>
+                        <td style={{ color: "#959595" }}>
+                          {talent?.job_type}
+
+                        </td>
+                        <td style={{ color: "#959595" }}>{formatSingleDate(talent?.start_date)}</td>
+                        <td style={{ color: "#959595" }}>{formatSingleDate(talent.end_date)}</td>
+                        <td
+                          style={{ color: "rgba(54, 190, 92, 1)", fontWeight: 500 }}
+                        >
+                          {talent?.status}
+                        </td>
+                        <td style={{ color: "#959595", width: "150px" }}>{talent?.project_id.title}</td>
+                        <td style={{ color: "#959595" }}>{talent.total_amount} AED</td>
+                      </tr>
                     )
                   }))}
               </tbody>

@@ -32,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ApiService from "../../services/ApiService";
 import { ChevronLeft, ChevronRight, User } from "lucide-react";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const Dashboard = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -81,11 +82,25 @@ const Dashboard = () => {
     current_page: 1,
   });
 
+  const [isImageValid, setIsImageValid] = useState(false)
+
+
+
   useEffect(() => {
     fetchDashboardData(1);
   }, []);
 
   console.log("Dashboard Data:", dashboardData);
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+    return result;
+    console.log("Image URL:", imageUrl);
+
+    console.log("Image URL validation result:", result);
+  };
 
   const fetchDashboardData = async (page = 1) => {
     try {
@@ -363,20 +378,22 @@ const Dashboard = () => {
                     <tr key={index}>
                       <td>
                         <div className="inter-font d-flex align-items-center gap-2">
-                          {item?.receipt ?
-                            <img
-                              src={item?.receipt}
-                              alt="logo"
-                              style={{
-                                width: "40px",
-                                height: "40px",
-                                borderRadius: "50%",
-                                objectFit: "cover",
-                              }}
-                            />
-                            :
+                          {
+                            checkImage(item?.receipt) && isImageValid ?
+                              <img
+                                src={item?.receipt}
+                                alt="logo"
+                                style={{
+                                  width: "40px",
+                                  height: "40px",
+                                  borderRadius: "50%",
+                                  objectFit: "cover",
+                                }}
+                              />
+                              :
 
-                            <User className="inter-font rounded-circle " />}
+                              <User className="inter-font rounded-circle " />
+                          }
 
                           <span
                             className="inter-font inter-font"
@@ -388,7 +405,7 @@ const Dashboard = () => {
                       </td>
                       <td style={{ color: "#959595" }}>{item.job_type ? item.job_type : "N/A"}</td>
                       <td style={{ color: "#959595" }}>{item.start_date ? formatSingleDate(item.start_date) : "N/A"}</td>
-                      <td style={{ color: "#959595" }}>{item.end_date ? formatSingleDate(item.end_date) : "N/A" }</td>
+                      <td style={{ color: "#959595" }}>{item.end_date ? formatSingleDate(item.end_date) : "N/A"}</td>
                       <td
                         style={{
                           color: "rgba(54, 190, 92, 1)",

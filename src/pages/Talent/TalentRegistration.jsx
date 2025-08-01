@@ -154,7 +154,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
 
             <div className="inter-font row w-100">
               <div className="inter-font col-12 col-md-6 d-flex flex-column pe-md-2 mb-3">
-                <label>First Name</label>
+                <label>First Name  <span className="text-danger">*</span></label>
                 <input
                   type="text"
                   name="first_name"
@@ -166,7 +166,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
                 />
               </div>
               <div className="inter-font col-12 col-md-6 d-flex flex-column ps-md-2 mb-3">
-                <label>Last Name</label>
+                <label>Last Name  <span className="text-danger">*</span></label>
                 <input
                   type="text"
                   name="last_name"
@@ -180,7 +180,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
             </div>
 
             <div className="inter-font mb-3 w-100">
-              <label>Email</label>
+              <label>Email  <span className="text-danger">*</span></label>
               <input
                 type="email"
                 name="email"
@@ -193,7 +193,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
             </div>
 
             <div className="inter-font mb-3 w-100">
-              <label>Password</label>
+              <label>Password  <span className="text-danger">*</span></label>
               <div className="inter-font position-relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -221,7 +221,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
             </div>
 
             <div className="inter-font mb-3 w-100">
-              <label>Phone Number</label>
+              <label>Phone Number  <span className="text-danger">*</span></label>
               <InputGroupWithFlag
                 placeholder=""
                 name="phone"
@@ -235,7 +235,7 @@ const TalentRegistration = ({ onSwitchToLogin }) => {
             </div>
 
             <div className="inter-font mb-3 w-100">
-              <label>Nationality</label>
+              <label>Nationality <span className="text-danger">*</span></label>
               <Select
                 options={countryOptions}
                 value={formData.country}

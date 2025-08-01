@@ -4,9 +4,10 @@ import DashboardFooter from "../CompanyUserDahboard/DashboardFooter";
 import { CiSearch } from "react-icons/ci";
 import Select from "react-select";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const Recruitment = () => {
   const yearOptions = [
@@ -188,6 +189,16 @@ const Recruitment = () => {
     return `${day} ${month}`;
   }
 
+
+  const [isImageValid, setIsImageValid] = useState(false)
+
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <div className="inter-font " style={{ minHeight: "100vh" }}>
       <div className="inter-font d-flex justify-content-between align-items-center flex-wrap px-3">
@@ -274,13 +285,21 @@ const Recruitment = () => {
                 md={3}
                 className="inter-font d-flex align-items-center gap-3 mb-3 mb-md-0"
               >
-                <Image
-                  src={talent?.talent_id?.picture}
-                  roundedCircle
-                  width={50}
-                  height={50}
-                  style={{ objectFit: "cover" }}
-                />
+                {
+                  checkImage(talent?.talent_id?.picture) && isImageValid ?
+                    <img
+                      src={talent?.talent_id?.picture}
+                      alt="logo"
+                      roundedCircle
+                      width={50}
+                      height={50}
+                      style={{ objectFit: "cover" }}
+                    />
+                    :
+
+                    <User className="inter-font rounded-circle " />
+                }
+
                 <div>
                   <div className="inter-font fw-semibold"> {talent?.talent_id?.first_name}{" "}
                     {talent?.talent_id?.last_name}</div>

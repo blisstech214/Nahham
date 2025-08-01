@@ -23,9 +23,10 @@ import { Button, Col, Form, Image, Row } from "react-bootstrap";
 import DateRangePicker from "react-bootstrap-daterangepicker";
 import "bootstrap-daterangepicker/daterangepicker.css";
 import StripeCheckoutForm from "./Stripe";
-import { Check, CheckCircle } from "lucide-react";
+import { Check, CheckCircle, User } from "lucide-react";
 import CheckoutForm from "./Stripe";
 import CombinedStripeCheckout from "./Stripe";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const USE_API = false;
 
@@ -459,6 +460,17 @@ const ProjectSummaryScreen = ({
     const month = date.toLocaleString("default", { month: "short" }); // or "long" for full month name
     return `${day} ${month}`;
   }
+
+  const [isImageValid, setIsImageValid] = useState(false)
+
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
+
   return (
     <div
       className="inter-font d-flex justify-content-center"
@@ -516,31 +528,38 @@ const ProjectSummaryScreen = ({
                 <Col
                   xs={12}
                   md={3}
-                  className="inter-font d-flex align-items-center mb-2 mb-md-0"
+                  className="inter-font d-flex align-items-center mb-2 mb-md-0 gap-2"
                 >
-                  <img
-                    src={item?.talent_id?.picture}
-                    alt="Talent"
-                    style={{
-                      width: "33px",
-                      height: "33px",
-                      objectFit: "cover",
-                      borderRadius: "50%",
-                      border: "2px solid #ddd",
-                    }}
-                  />
+                  {
+                    checkImage(item?.talent_id?.picture) && isImageValid ?
+                      <img
+                        src={item?.talent_id?.picture}
+                        alt="Talent"
+                        style={{
+                          width: "33px",
+                          height: "33px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                          border: "2px solid #ddd",
+                        }}
+                      />
+                      :
+
+                      <User className="inter-font rounded-circle " />
+                  }
+
                   <div>
                     <h5
                       className="inter-font mb-1 fw-bold inter-font"
                       style={{ fontSize: "14px" }}
                     >
-                      {item?.talent_id?.first_name} {item?.talent_id?.last_name}
+                      {item?.talent_id?.first_name ? item?.talent_id?.first_name : "N/A"} {item?.talent_id?.last_name ? item?.talent_id?.last_name : "N/A"}
                     </h5>
                     <p
                       className="inter-font mb-0 text-muted d-flex align-items-center inter-font"
                       style={{ fontSize: "11px" }}
                     >
-                      {item?.talent_id?.phone}
+                      {item?.talent_id?.phone ? item?.talent_id?.phone : "-"}
                     </p>
                   </div>
                 </Col>

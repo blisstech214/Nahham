@@ -273,11 +273,11 @@ const Transaction = () => {
                     <div>{item.project_code}</div>
                   </Col>
 
-                  <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
+                  {/* <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
                     <div className="inter-font fw-semibold">Talent Name</div>
                     <div>{talent?.talent_id?.first_name}{" "}
                       {talent?.talent_id?.last_name}</div>
-                  </Col>
+                  </Col> */}
 
                   <Col xs={12} sm={6} md={2} className="inter-font mb-3 mb-md-0">
                     <div className="inter-font fw-semibold">Contract</div>
@@ -300,10 +300,10 @@ const Transaction = () => {
                     <div>{item.title}</div>
                   </Col>
 
-                  <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
+                  {/* <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
                     <div className="inter-font fw-semibold">Duration</div>
                     <div>{talent?.duration}</div>
-                  </Col>
+                  </Col> */}
 
                   <Col xs={12} sm={6} md={1} className="inter-font mb-3 mb-md-0">
                     <div className="inter-font fw-semibold">Amount</div>

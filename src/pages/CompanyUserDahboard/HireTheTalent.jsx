@@ -18,6 +18,8 @@ import { Button, Col, Form, Image, Row } from "react-bootstrap";
 
 import DateRangePicker from "react-bootstrap-daterangepicker";
 import "bootstrap-daterangepicker/daterangepicker.css";
+import { User } from "lucide-react";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const USE_API = false;
 
@@ -577,7 +579,7 @@ const ProjectInfoScreen = ({
   };
 
   const handleProceed = async () => {
-    if (projectTitle !== "" && projectDescription !== "" ) {
+    if (projectTitle !== "" && projectDescription !== "") {
       const mergedData = data.map((person) => ({
         // ...person,
         title: projectTitle,
@@ -605,6 +607,13 @@ const ProjectInfoScreen = ({
         onNext();
       }
     }
+  };
+  const [isImageValid, setIsImageValid] = useState(false)
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
   };
 
   return (
@@ -772,19 +781,26 @@ const ProjectInfoScreen = ({
               <Col
                 xs={12}
                 md={3}
-                className="inter-font d-flex align-items-center mb-2 mb-md-0"
+                className="inter-font d-flex align-items-center mb-2 mb-md-0 gap-2"
               >
-                <img
-                  src={dashboardTalent2}
-                  alt="Talent"
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    objectFit: "cover",
-                    borderRadius: "50%",
-                    border: "2px solid #ddd",
-                  }}
-                />
+                {
+                  checkImage(person?.picture) && isImageValid ?
+                    <img
+                      src={person?.picture}
+                      alt="logo"
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        objectFit: "cover",
+                        borderRadius: "50%",
+                        border: "2px solid #ddd",
+                      }}
+                    />
+                    :
+
+                    <User className="inter-font rounded-circle " />
+                }
+
                 <div>
                   <h5
                     className="inter-font mb-1 fw-bold inter-font"

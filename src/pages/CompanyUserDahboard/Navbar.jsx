@@ -3,6 +3,8 @@ import profile from "../../assets/images/Abdulluah-Talent.png";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { User } from "lucide-react";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -49,6 +51,37 @@ const Navbar = () => {
     };
   }, []);
 
+  const fetchProfile = async () => {
+    try {
+      const response = await ApiService.request({
+        method: "GET",
+        url: `/company/getProfile`,
+      });
+      const data = response.data;
+      if (data.status) {
+        setProfileData(data.data.company);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const [isImageValid, setIsImageValid] = useState(false)
+  const [profileData, setProfileData] = useState(null);
+
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <nav
       className="inter-font navbar navbar-expand-md px-3 py-2 bg-transparent"
@@ -81,13 +114,20 @@ const Navbar = () => {
           </li>
 
           <li className="inter-font nav-item position-relative">
-            <img
-              src={profile}
-              style={{ width: "60px", cursor: "pointer" }}
-              onClick={() => setShowDropdown(!showDropdown)}
-              alt="Profile"
-              className="inter-font rounded-circle ms-2"
-            />
+
+            {checkImage(profileData?.logo) && isImageValid ?
+              <img
+                src={profileData?.logo}
+                style={{ width: "60px", cursor: "pointer" }}
+                onClick={() => setShowDropdown(!showDropdown)}
+                alt="Profile"
+                className="inter-font rounded-circle ms-2"
+              />
+              :
+              <User className="inter-font rounded-circle m-2"
+                onClick={() => setShowDropdown(!showDropdown)}
+              />
+            }
 
             {showDropdown && (
               <div
@@ -96,11 +136,18 @@ const Navbar = () => {
                 style={{ width: "230px", zIndex: 1000 }}
               >
                 <div className="inter-font d-flex">
-                  <img
-                    src={profile}
-                    alt="Profile"
-                    style={{ width: "50px", borderRadius: "50%" }}
-                  />
+                  {checkImage(profileData?.logo) && isImageValid ?
+                    <img
+                      src={profileData?.logo}
+                      style={{ width: "50px", borderRadius: "50%" }}
+                      alt="Profile"
+                    />
+                    :
+                    <User className="inter-font rounded-circle m-2"
+                      onClick={() => setShowDropdown(!showDropdown)}
+                    />
+                  }
+
                   <div className="inter-font ms-3">
                     <div className="inter-font fw-bold mt-2">Movie Center</div>
                     <div className="inter-font text-muted" style={{ fontSize: "14px" }}>

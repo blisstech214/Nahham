@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import ApiService from "../../services/ApiService";
 
 import profile from "../../assets/images/Abdulluah-Talent.png";
+import validateImageUrl from "../../utils/validateImageUrl";
+import { User } from "lucide-react";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -63,6 +65,39 @@ const Navbar = () => {
     };
   }, []);
 
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const fetchProfile = async () => {
+    try {
+      const response = await ApiService.request({
+        method: "GET",
+        url: `getProfile`,
+      });
+      const data = response.data;
+
+      if (data.status) {
+        setProfileData(data.data.talent);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
+
+  const [isImageValid, setIsImageValid] = useState(false)
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <nav
       className="inter-font py-2 px-3 bg-transparent"
@@ -71,7 +106,26 @@ const Navbar = () => {
       <ul className="inter-font list-unstyled d-flex justify-content-end align-items-center m-0">
         {/* Language Selector */}
         <li className="inter-font mx-3">
-          <div className="inter-font d-flex border rounded-3 shadow-sm bg-white">
+          <div
+            onClick={() =>
+              handleLanguageChange(i18n.language === "en" ? "ar" : "en")
+            }
+            // className={inter-font `lang-item ${
+            //   i18n.language === lang.code ? "active-lang" : ""
+            // }`}
+            style={{
+              cursor: "pointer",
+              padding: "8px 15px",
+              borderRadius: "10px",
+              backgroundColor: "#6d5f27",
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: "15px",
+            }}
+          >
+            {i18n.language === "en" ? "العربية" : "English"}
+          </div>
+          {/* <div className="inter-font d-flex border rounded-3 shadow-sm bg-white">
             {languages.map((lang) => (
               <div
                 key={lang.code}
@@ -90,7 +144,7 @@ const Navbar = () => {
                 {lang.name}
               </div>
             ))}
-          </div>
+          </div> */}
         </li>
 
         {/* Home Link */}
@@ -138,17 +192,26 @@ const Navbar = () => {
 
         {/* Profile Dropdown */}
         <li className="inter-font position-relative">
-          <img
-            src={profile}
-            alt="Profile"
-            style={{
-              width: "40px",
-              height: "40px",
-              cursor: "pointer",
-              borderRadius: "50%",
-            }}
-            onClick={() => setShowDropdown(!showDropdown)}
-          />
+
+
+          {checkImage(profileData?.picture) && isImageValid ?
+            <img
+              src={profileData?.picture}
+              className="inter-font rounded-circle"
+              alt="Profile"
+              style={{
+                width: "40px",
+                height: "40px",
+                cursor: "pointer",
+                borderRadius: "50%",
+              }}
+              onClick={() => setShowDropdown(!showDropdown)}
+            />
+            :
+            <User className="inter-font rounded-circle m-2"
+              onClick={() => setShowDropdown(!showDropdown)}
+            />
+          }
 
           {showDropdown && (
             <div
@@ -158,11 +221,18 @@ const Navbar = () => {
               style={{ width: "230px", zIndex: 2000 }}
             >
               <div className="inter-font d-flex align-items-center mb-3">
-                <img
-                  src={profile}
-                  alt="Profile"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                />
+                {checkImage(profileData?.picture) && isImageValid ?
+                  <img
+                    src={profileData?.picture}
+                    className="inter-font rounded-circle"
+                    style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                    alt="Profile"
+                  />
+                  :
+                  <User className="inter-font rounded-circle m-2"
+                  />
+                }
+
                 <div className="inter-font ms-3">
                   <div className="inter-font fw-bold">Movie Center</div>
                   <div className="inter-font text-muted" style={{ fontSize: "13px" }}>

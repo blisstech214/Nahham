@@ -7,6 +7,7 @@ import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { Button, Col, Row } from "react-bootstrap";
 import { ChevronLeft, ChevronRight, User } from "lucide-react";
+import validateImageUrl from "../../utils/validateImageUrl";
 
 const HistoryCard = ({ item }) => {
   const statusStyles = {
@@ -59,10 +60,17 @@ const HistoryCard = ({ item }) => {
     return `${day} ${month}`;
   }
 
+  const [isImageValid, setIsImageValid] = useState(false)
+
+  const checkImage = async (imageUrl) => {
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <div className="inter-font row border-bottom">
       <div className="inter-font col-md-3 d-flex my-3">
-        {item.image ?
+        {checkImage(item?.picture) && isImageValid ?
           <img
             src={item.image}
             className="inter-font rounded-circle mt-3 ms-4"

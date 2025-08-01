@@ -7,6 +7,8 @@ import "leaflet/dist/leaflet.css";
 import ApiService from "../../services/ApiService";
 import { toast } from "react-toastify";
 import { Modal, Button } from "react-bootstrap";
+import validateImageUrl from "../../utils/validateImageUrl";
+import { User } from "lucide-react";
 
 
 const Profile = () => {
@@ -61,6 +63,7 @@ const Profile = () => {
 
     return <Marker position={position} />;
   };
+  const [isImageValid, setIsImageValid] = useState(false)
 
   if (!profileData) {
     return (
@@ -80,6 +83,14 @@ const Profile = () => {
   const displayText =
     aboutText.length > 150 ? `${aboutText?.substring(0, 150)}...` : aboutText;
 
+
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <div className="inter-font py-4 px-3" style={{ minHeight: "100vh" }}>
       <div
@@ -89,11 +100,19 @@ const Profile = () => {
         <div className="inter-font row align-items-start">
           {/* Profile Image */}
           <div className="inter-font col-12 col-md-2 text-center mb-3 mb-md-0">
-            <img
-              src={profile}
-              className="inter-font img-fluid rounded-circle"
-              alt="Profile"
-            />
+            {checkImage(profileData?.logo) && isImageValid ?
+              <img
+                src={profileData?.logo}
+                alt="Profile"
+                style={{ width: "100px", cursor: "pointer" }}
+
+                className="inter-font rounded-circle ms-2"
+              />
+              :
+              <User className="inter-font rounded-circle m-2"
+              />
+            }
+
           </div>
 
           {/* Profile Info */}

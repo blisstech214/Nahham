@@ -16,6 +16,8 @@ import MyJob from "../../components/Profile/MyJob";
 import Photos from "../../components/Profile/Photos";
 import Videos from "../../components/Profile/Videos";
 import EditProfile from "../../components/Profile/Edit-Profile";
+import validateImageUrl from "../../utils/validateImageUrl";
+import { User } from "lucide-react";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -92,6 +94,14 @@ const Profile = () => {
     await fetchProfile();
   };
 
+  const [isImageValid, setIsImageValid] = useState(false)
+
+  const checkImage = async (imageUrl) => {
+
+    const result = await validateImageUrl(imageUrl);
+    setIsImageValid(result);
+  };
+
   return (
     <div className="inter-font " style={{ minHeight: "100vh" }}>
       {isEditing ? (
@@ -104,12 +114,17 @@ const Profile = () => {
           <div className="inter-font row align-items-start">
             {/* Left: Profile + Tabs */}
             <div className="inter-font col-md-2 text-center">
-              <img
-                src={profile}
-                className="inter-font rounded-circle"
-                style={{ width: "100px", height: "100px", objectFit: "cover" }}
-                alt="Profile"
-              />
+
+              {checkImage(profileData?.picture) && isImageValid ?
+                <img
+                  src={profileData?.picture}
+                  className="inter-font rounded-circle"
+                  style={{ width: "100px", height: "100px", objectFit: "cover" }}
+                  alt="Profile"
+                />
+                :
+                <User className="inter-font rounded-circle m-4" />
+              }
               <div className="inter-font mb-3">
                 {[
                   { id: "about", label: "About" },
@@ -120,9 +135,8 @@ const Profile = () => {
                   <div
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={ `inter-font my-5 d-flex flex-column align-items-start ${
-                      activeTab === tab.id ? "text-dark" : "text-muted"
-                    }`}
+                    className={`inter-font my-5 d-flex flex-column align-items-start ${activeTab === tab.id ? "text-dark" : "text-muted"
+                      }`}
                     style={{
                       cursor: "pointer",
                       width: "fit-content",

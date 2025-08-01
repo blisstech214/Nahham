@@ -145,27 +145,19 @@ const CompanyInfoForm = () => {
   };
 
   const handleWebsiteChange = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    // Allow only valid characters for URLs (basic check)
-    const urlPattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+\.[a-z]{2,}(\S*)?$/;
+    setFormData({ ...formData, website: value });
 
-    // Optional: Auto-add 'https://' if user starts typing 'www.'
-    let updatedValue = value;
-    if (value.startsWith('www.')) {
-      updatedValue = 'https://' + value;
-    }
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: updatedValue,
-    }));
-
-    // Remove previous error if input is valid or being corrected
-    if (errors[name] && urlPattern.test(updatedValue)) {
-      setErrors((prev) => ({ ...prev, [name]: null }));
+    if (!isValidWebsite(value)) {
+      setErrors({ ...errors, website: "Please enter a valid website URL (e.g., example.com)" });
+    } else {
+      const newErrors = { ...errors };
+      delete newErrors.website;
+      setErrors(newErrors);
     }
   };
+
 
   const handleRegYearChange = (e) => {
     const { name, value } = e.target;
@@ -200,6 +192,10 @@ const CompanyInfoForm = () => {
   };
 
 
+  const isValidWebsite = (url) => {
+    const pattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/.*)?$/;
+    return pattern.test(url);
+  };
 
 
   const handleSelectChange = (name, selectedOptions) => {
@@ -357,7 +353,10 @@ const CompanyInfoForm = () => {
         </p>
 
         <h4 className="inter-font fw-bolder mt-5 inter-font">About</h4>
-        <p className="inter-font text-size sofia-font">Describe your company</p>
+        <Form.Label>
+          Describe your company <span className="text-danger">*</span>
+        </Form.Label>
+
         <Form.Group className="inter-font mb-3">
           <Form.Control
             as="textarea"
@@ -377,7 +376,10 @@ const CompanyInfoForm = () => {
         <Row>
           <Col md={6} className="inter-font mt-3">
             <Form.Group>
-              <Form.Label className="inter-font text-size">Business Category</Form.Label>
+              <Form.Label>
+                Business Category <span className="text-danger">*</span>
+              </Form.Label>
+
               <Select
                 options={categoryOptions}
                 value={
@@ -395,7 +397,7 @@ const CompanyInfoForm = () => {
 
           <Col md={6} className="inter-font mt-3">
             <Form.Group>
-              <Form.Label className="inter-font text-size">Select Sub Category</Form.Label>
+              <Form.Label className="inter-font text-size">Select Sub Category <span className="text-danger">*</span></Form.Label>
               {/* <pre>{JSON.stringify(formData.subCategory)}</pre> */}
               <MultiSelect
                 className="inter-font inter-font"
@@ -425,7 +427,9 @@ const CompanyInfoForm = () => {
         <Row>
           <Col md={6}>
             <Form.Group className="inter-font mb-3">
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label>
+  Email Address <span className="text-danger">*</span>
+</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="example123@gmail.com"
@@ -442,7 +446,9 @@ const CompanyInfoForm = () => {
           </Col>
           <Col md={6}>
             <Form.Group className="inter-font mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>
+  Password <span className="text-danger">*</span>
+</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="eg.123456"
@@ -460,7 +466,10 @@ const CompanyInfoForm = () => {
         </Row>
 
         <Form.Group className="inter-font mb-3">
-          <Form.Label>Location Address</Form.Label>
+          <Form.Label>
+  Location Address <span className="text-danger">*</span>
+</Form.Label>
+
           <Form.Control
             type="text"
             placeholder="Location Address"
@@ -475,7 +484,9 @@ const CompanyInfoForm = () => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <h6 className="inter-font mt-4 inter-font">Company phone number</h6>
+        <Form.Label>
+  Company phone number <span className="text-danger">*</span>
+</Form.Label>
         <Row>
           <Col md={6}>
             <InputGroupWithFlag
@@ -499,9 +510,9 @@ const CompanyInfoForm = () => {
         </Row>
 
         <Form.Group className="inter-font mb-3">
-          <Form.Label>Company website</Form.Label>
+          <Form.Label>Company website <span className="text-danger">*</span></Form.Label>
           <Form.Control
-            type="text"
+            type="url"
             placeholder="www.example.com"
             name="website"
             value={formData.website}
@@ -517,7 +528,7 @@ const CompanyInfoForm = () => {
         <Row>
           <Col md={6}>
             <Form.Group className="inter-font mb-3">
-              <Form.Label>Trade License No.</Form.Label>
+              <Form.Label>Trade License No. <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 placeholder="TL12345"
@@ -534,7 +545,7 @@ const CompanyInfoForm = () => {
           </Col>
           <Col md={6}>
             <Form.Group className="inter-font mb-3">
-              <Form.Label>Register Since</Form.Label>
+              <Form.Label>Register Since <span className="text-danger">*</span></Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Example 2025"
@@ -595,7 +606,7 @@ const InputGroupWithFlag = ({
     />
     <span className="inter-font text-muted pe-2 inter-font">(+971)</span>
     <Form.Control
-      type="text"
+      type="number"
       name={name}
       placeholder={placeholder}
       value={value}
